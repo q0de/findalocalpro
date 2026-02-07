@@ -1,25 +1,16 @@
-import { Navbar } from './components/Navbar';
-import { Hero } from './components/Hero';
-import { TrustBar } from './components/TrustBar';
-import { ServicesGrid } from './components/ServicesGrid';
-import { HowItWorks } from './components/HowItWorks';
-import { About } from './components/About';
-import { Contact } from './components/Contact';
-import { FinalCTA } from './components/FinalCTA';
+import { useState } from 'react';
+import { Header } from './components/Header';
+import { ChatFlow } from './components/ChatFlow';
 import { Footer } from './components/Footer';
 
 function App() {
+  const [step, setStep] = useState(0);
+
   return (
     <>
-      <Navbar />
-      <main>
-        <Hero />
-        <TrustBar />
-        <ServicesGrid />
-        <HowItWorks />
-        <About />
-        <Contact />
-        <FinalCTA />
+      <Header step={step} totalSteps={3} />
+      <main className="flex-grow flex flex-col max-w-3xl mx-auto w-full px-6 py-12">
+        <ChatFlow onStepChange={setStep} />
       </main>
       <Footer />
     </>
