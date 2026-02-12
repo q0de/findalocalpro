@@ -25,8 +25,8 @@ export function Footer() {
             &copy; 2026 FindALocalPro. Making home care delightful! ✨
           </p>
           <div className="flex gap-8">
-            <a className="text-sm font-bold text-slate-400 hover:text-brand-purple transition-colors" href="#">Privacy</a>
-            <a className="text-sm font-bold text-slate-400 hover:text-brand-purple transition-colors" href="#">Terms</a>
+            <a className="text-sm font-bold text-slate-400 hover:text-brand-purple transition-colors" href="/privacy">Privacy</a>
+            <a className="text-sm font-bold text-slate-400 hover:text-brand-purple transition-colors" href="/terms">Terms</a>
             <a className="text-sm font-bold text-brand-pink hover:scale-110 transition-all" href="#">Become a Pro</a>
           </div>
         </div>

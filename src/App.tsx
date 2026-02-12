@@ -3,7 +3,7 @@ import { Header } from './components/Header';
 import { ChatFlow } from './components/ChatFlow';
 import { Footer } from './components/Footer';
 
-function App() {
+function HomePage() {
   const [step, setStep] = useState(0);
 
   return (
@@ -17,4 +17,4 @@ function App() {
   );
 }
 
-export default App;
+export default HomePage;
