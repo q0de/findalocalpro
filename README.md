@@ -48,3 +48,4 @@ Plumbing, HVAC, Electrician, Water Damage, Mold Removal, Roofing, Appliance Repa
 7. **Contact** — quote request form with service dropdown
 8. **Final CTA** — blue card with amber button
 9. **Footer** — logo, legal links, social icons
+
