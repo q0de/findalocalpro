@@ -96,21 +96,18 @@ interface ChatFlowProps {
 }
 
 // Visible "slots" that get revealed in sequence
-const enum Slot {
-  Greeting = 0,
-  Question = 1,
-  ServiceGrid = 2,
-  // -- user picks a service --
-  UserConfirm = 3,
-  BotMatch = 4,
-  TimingQuestion = 5,
-  TimingOptions = 6,
-  // -- user picks timing --
-  ZipQuestion = 7,
-  ZipInput = 8,
-  // -- user submits zip --
-  Celebration = 9,
-}
+const Slot = {
+  Greeting: 0,
+  Question: 1,
+  ServiceGrid: 2,
+  UserConfirm: 3,
+  BotMatch: 4,
+  TimingQuestion: 5,
+  TimingOptions: 6,
+  ZipQuestion: 7,
+  ZipInput: 8,
+  Celebration: 9,
+} as const;
 
 export function ChatFlow({ onStepChange }: ChatFlowProps) {
   const [visibleUpTo, setVisibleUpTo] = useState(-1); // nothing visible yet
