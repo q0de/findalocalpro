@@ -106,7 +106,9 @@ const Slot = {
   TimingOptions: 6,
   ZipQuestion: 7,
   ZipInput: 8,
-  Celebration: 9,
+  PhoneQuestion: 9,
+  PhoneInput: 10,
+  Celebration: 11,
 } as const;
 
 export function ChatFlow({ onStepChange }: ChatFlowProps) {
@@ -116,6 +118,8 @@ export function ChatFlow({ onStepChange }: ChatFlowProps) {
   const [showMore, setShowMore] = useState(false);
   const [selectedTiming, setSelectedTiming] = useState('');
   const [zipCode, setZipCode] = useState('');
+  const [phoneNumber, setPhoneNumber] = useState('');
+  const [submitting, setSubmitting] = useState(false);
   const [proCount] = useState(() => Math.floor(Math.random() * 30) + 20);
 
   // Reveal a slot after a delay, showing typing indicator in between
@@ -184,11 +188,55 @@ export function ChatFlow({ onStepChange }: ChatFlowProps) {
     }, 1600);
   };
 
-  const handleSubmit = () => {
+  const handleZipSubmit = () => {
     if (zipCode.length >= 3) {
       onStepChange(3);
-      setTimeout(() => revealSlot(Slot.Celebration, 1000), 200);
+      // Go to phone step instead of celebration
+      setTimeout(() => revealSlot(Slot.PhoneQuestion, 900), 200);
+      setTimeout(() => {
+        setTyping(false);
+        setVisibleUpTo(Slot.PhoneInput);
+      }, 1500);
     }
+  };
+
+  const formatPhone = (value: string) => {
+    const digits = value.replace(/\D/g, '').slice(0, 10);
+    if (digits.length <= 3) return digits;
+    if (digits.length <= 6) return `(${digits.slice(0, 3)}) ${digits.slice(3)}`;
+    return `(${digits.slice(0, 3)}) ${digits.slice(3, 6)}-${digits.slice(6)}`;
+  };
+
+  const handlePhoneChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setPhoneNumber(formatPhone(e.target.value));
+  };
+
+  const handleFinalSubmit = async () => {
+    const digits = phoneNumber.replace(/\D/g, '');
+    if (digits.length < 10) return;
+
+    setSubmitting(true);
+
+    try {
+      // Submit lead to backend
+      await fetch('https://hocipkeeikriqyojiboj.supabase.co/functions/v1/sms-webhook', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          source: 'website',
+          phone: `+1${digits}`,
+          service: selectedService,
+          timing: selectedTiming,
+          zip_code: zipCode,
+        }),
+      }).catch(() => {}); // Fire and forget — don't block the UI
+    } catch {
+      // Silent — we show celebration regardless
+    }
+
+    setSubmitting(false);
+    onStepChange(4);
+    setTimeout(() => revealSlot(Slot.Celebration, 1000), 200);
   };
 
   const submitted = visibleUpTo >= Slot.Celebration;
@@ -345,11 +393,11 @@ export function ChatFlow({ onStepChange }: ChatFlowProps) {
               type="text"
               value={zipCode}
               onChange={(e) => setZipCode(e.target.value)}
-              onKeyDown={(e) => e.key === 'Enter' && handleSubmit()}
+              onKeyDown={(e) => e.key === 'Enter' && handleZipSubmit()}
               autoFocus
             />
             <button
-              onClick={handleSubmit}
+              onClick={handleZipSubmit}
               className="absolute right-3 top-3 bottom-3 bg-brand-yellow hover:bg-brand-pink text-slate-900 hover:text-white px-6 rounded-2xl transition-all flex items-center gap-2 font-black shadow-lg cursor-pointer"
             >
               GO! <span className="material-symbols-outlined font-black">arrow_forward</span>
@@ -359,6 +407,57 @@ export function ChatFlow({ onStepChange }: ChatFlowProps) {
             <div className="flex items-center gap-2 text-xs font-bold text-slate-400 uppercase tracking-widest">
               <span className="material-symbols-outlined text-sm">lock</span>
               Private
+            </div>
+            <div className="flex items-center gap-2 text-xs font-bold text-slate-400 uppercase tracking-widest">
+              <span className="material-symbols-outlined text-sm">verified_user</span>
+              Secure
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* ---- Phone question ---- */}
+      {visible(Slot.PhoneQuestion) && !submitted && (
+        <div className="flex items-start gap-4 animate-fade-in-up">
+          <div className="avatar-container rotate-3">
+            <span className="material-symbols-outlined text-white text-3xl">call</span>
+          </div>
+          <div className="chat-bubble-bot border-l-4 border-l-brand-yellow">
+            <p className="text-lg font-bold">Almost there! What's the best number to reach you? 📱</p>
+            <p className="text-sm text-slate-500 mt-1">We'll have a pro call you directly — no spam, promise!</p>
+          </div>
+        </div>
+      )}
+
+      {/* ---- Phone input ---- */}
+      {visible(Slot.PhoneInput) && !submitted && (
+        <div className="max-w-md w-full self-center animate-fade-in-up">
+          <div className="relative group">
+            <input
+              className="w-full bg-white border-4 border-slate-100 rounded-3xl px-8 py-6 text-xl font-bold focus:ring-4 focus:ring-brand-purple/20 focus:border-brand-purple transition-all shadow-xl placeholder:text-slate-300"
+              placeholder="(555) 123-4567"
+              type="tel"
+              value={phoneNumber}
+              onChange={handlePhoneChange}
+              onKeyDown={(e) => e.key === 'Enter' && handleFinalSubmit()}
+              autoFocus
+            />
+            <button
+              onClick={handleFinalSubmit}
+              disabled={submitting || phoneNumber.replace(/\D/g, '').length < 10}
+              className="absolute right-3 top-3 bottom-3 bg-brand-yellow hover:bg-brand-pink text-slate-900 hover:text-white px-6 rounded-2xl transition-all flex items-center gap-2 font-black shadow-lg cursor-pointer disabled:opacity-40 disabled:cursor-not-allowed"
+            >
+              {submitting ? '...' : 'CALL ME!'} <span className="material-symbols-outlined font-black">phone_in_talk</span>
+            </button>
+          </div>
+          <div className="mt-6 flex justify-center gap-6">
+            <div className="flex items-center gap-2 text-xs font-bold text-slate-400 uppercase tracking-widest">
+              <span className="material-symbols-outlined text-sm">lock</span>
+              Private
+            </div>
+            <div className="flex items-center gap-2 text-xs font-bold text-slate-400 uppercase tracking-widest">
+              <span className="material-symbols-outlined text-sm">do_not_disturb_on</span>
+              No Spam
             </div>
             <div className="flex items-center gap-2 text-xs font-bold text-slate-400 uppercase tracking-widest">
               <span className="material-symbols-outlined text-sm">verified_user</span>
@@ -378,8 +477,9 @@ export function ChatFlow({ onStepChange }: ChatFlowProps) {
             <div className="chat-bubble-bot-gradient border-l-4 border-l-brand-teal">
               <p className="text-lg font-bold mb-2">You're all set! 🎉</p>
               <p className="text-slate-600 mb-4">
-                We're matching you with the best {selectedService.toLowerCase()} pros near{' '}
-                <span className="font-bold text-slate-800">{zipCode}</span>. Expect a call or message shortly!
+                We're connecting you with the best {selectedService.toLowerCase()} pros near{' '}
+                <span className="font-bold text-slate-800">{zipCode}</span>. A pro will call{' '}
+                <span className="font-bold text-slate-800">{phoneNumber}</span> shortly!
               </p>
               <div className="flex flex-wrap gap-3">
                 <div className="sparkle-badge">

@@ -8,7 +8,7 @@ function HomePage() {
 
   return (
     <>
-      <Header step={step} totalSteps={3} />
+      <Header step={step} totalSteps={4} />
       <main className="flex-grow flex flex-col max-w-3xl mx-auto w-full px-6 py-12">
         <ChatFlow onStepChange={setStep} />
       </main>
