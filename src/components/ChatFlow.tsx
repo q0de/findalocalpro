@@ -106,9 +106,17 @@ const Slot = {
   TimingOptions: 6,
   ZipQuestion: 7,
   ZipInput: 8,
-  PhoneQuestion: 9,
-  PhoneInput: 10,
-  Celebration: 11,
+  // Quote path (Just Quotes)
+  QuoteLoading: 9,
+  QuoteResult: 10,
+  QuoteDeliveryQuestion: 11,
+  QuoteDeliveryOptions: 12,
+  QuoteContactInput: 13,
+  QuoteSent: 14,
+  // Call path (Right Now / Schedule Later)
+  PhoneQuestion: 15,
+  PhoneInput: 16,
+  Celebration: 17,
 } as const;
 
 export function ChatFlow({ onStepChange }: ChatFlowProps) {
@@ -119,8 +127,14 @@ export function ChatFlow({ onStepChange }: ChatFlowProps) {
   const [selectedTiming, setSelectedTiming] = useState('');
   const [zipCode, setZipCode] = useState('');
   const [phoneNumber, setPhoneNumber] = useState('');
+  const [contactInfo, setContactInfo] = useState('');
   const [submitting, setSubmitting] = useState(false);
   const [proCount] = useState(() => Math.floor(Math.random() * 30) + 20);
+  const [quoteData, setQuoteData] = useState<{
+    estimate: string; low: string; high: string; details: string;
+    sources?: { title: string; url: string }[];
+  } | null>(null);
+  const [deliveryMethod, setDeliveryMethod] = useState('');
 
   // Reveal a slot after a delay, showing typing indicator in between
   const revealSlot = useCallback((slot: number, delay: number) => {
@@ -188,16 +202,96 @@ export function ChatFlow({ onStepChange }: ChatFlowProps) {
     }, 1600);
   };
 
+  const fetchQuote = async (service: string, zip: string) => {
+    try {
+      const res = await fetch('/api/quote', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ service, zip }),
+      });
+      if (res.ok) {
+        const data = await res.json();
+        setQuoteData(data);
+      } else {
+        setQuoteData({
+          estimate: '$150 - $500',
+          low: '$150',
+          high: '$500',
+          details: `${service} costs vary based on the scope of work. For a precise quote tailored to your situation, we can connect you with a local pro.`,
+        });
+      }
+    } catch {
+      setQuoteData({
+        estimate: '$150 - $500',
+        low: '$150',
+        high: '$500',
+        details: `${service} costs vary based on the scope of work. For a precise quote tailored to your situation, we can connect you with a local pro.`,
+      });
+    }
+  };
+
   const handleZipSubmit = () => {
     if (zipCode.length >= 3) {
       onStepChange(3);
-      // Go to phone step instead of celebration
-      setTimeout(() => revealSlot(Slot.PhoneQuestion, 900), 200);
-      setTimeout(() => {
-        setTyping(false);
-        setVisibleUpTo(Slot.PhoneInput);
-      }, 1500);
+
+      if (selectedTiming === 'Just Quotes') {
+        // Quote path: fetch estimate via AI
+        setVisibleUpTo(Slot.QuoteLoading);
+        setTyping(true);
+        fetchQuote(selectedService, zipCode).then(() => {
+          setTyping(false);
+          setVisibleUpTo(Slot.QuoteResult);
+          // After showing quote, ask how they want it delivered
+          setTimeout(() => revealSlot(Slot.QuoteDeliveryQuestion, 1000), 1500);
+          setTimeout(() => {
+            setTyping(false);
+            setVisibleUpTo(Slot.QuoteDeliveryOptions);
+          }, 3000);
+        });
+      } else {
+        // Call path: go to phone step
+        setTimeout(() => revealSlot(Slot.PhoneQuestion, 900), 200);
+        setTimeout(() => {
+          setTyping(false);
+          setVisibleUpTo(Slot.PhoneInput);
+        }, 1500);
+      }
     }
+  };
+
+  const handleDeliverySelect = (method: string) => {
+    setDeliveryMethod(method);
+    setTimeout(() => {
+      setTyping(false);
+      setVisibleUpTo(Slot.QuoteContactInput);
+    }, 300);
+  };
+
+  const handleQuoteContactSubmit = async () => {
+    if (!contactInfo.trim()) return;
+    setSubmitting(true);
+
+    try {
+      await fetch('https://hocipkeeikriqyojiboj.supabase.co/functions/v1/sms-webhook', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          source: 'website-quote',
+          contact: contactInfo,
+          delivery_method: deliveryMethod,
+          service: selectedService,
+          timing: selectedTiming,
+          zip_code: zipCode,
+          quote_estimate: quoteData?.estimate,
+        }),
+      }).catch(() => {});
+    } catch {
+      // Silent
+    }
+
+    setSubmitting(false);
+    onStepChange(4);
+    setTimeout(() => revealSlot(Slot.QuoteSent, 800), 200);
   };
 
   const formatPhone = (value: string) => {
@@ -239,7 +333,7 @@ export function ChatFlow({ onStepChange }: ChatFlowProps) {
     setTimeout(() => revealSlot(Slot.Celebration, 1000), 200);
   };
 
-  const submitted = visibleUpTo >= Slot.Celebration;
+  const submitted = visibleUpTo >= Slot.Celebration || visibleUpTo >= Slot.QuoteSent;
 
   return (
     <div className="flex flex-col gap-10">
@@ -411,6 +505,127 @@ export function ChatFlow({ onStepChange }: ChatFlowProps) {
             <div className="flex items-center gap-2 text-xs font-bold text-slate-400 uppercase tracking-widest">
               <span className="material-symbols-outlined text-sm">verified_user</span>
               Secure
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* ---- Quote: Loading ---- */}
+      {visibleUpTo === Slot.QuoteLoading && (
+        <div className="flex items-start gap-4 animate-fade-in-up">
+          <div className="avatar-container rotate-6">
+            <span className="material-symbols-outlined text-white text-3xl">search</span>
+          </div>
+          <div className="chat-bubble-bot">
+            <p className="text-lg font-medium">🔍 Researching {selectedService.toLowerCase()} costs near <span className="font-bold">{zipCode}</span>...</p>
+          </div>
+        </div>
+      )}
+
+      {/* ---- Quote: Result ---- */}
+      {visible(Slot.QuoteResult) && quoteData && (
+        <div className="flex items-start gap-4 animate-fade-in-up">
+          <div className="avatar-container -rotate-6">
+            <span className="material-symbols-outlined text-white text-3xl">receipt_long</span>
+          </div>
+          <div className="chat-bubble-bot-gradient border-l-4 border-l-brand-teal">
+            <p className="text-sm font-bold text-brand-purple uppercase tracking-wider mb-2">Estimated Cost Range</p>
+            <p className="text-3xl font-bold text-slate-800 mb-3">{quoteData.estimate}</p>
+            <p className="text-slate-600 text-sm leading-relaxed mb-4">{quoteData.details}</p>
+            {quoteData.sources && quoteData.sources.length > 0 && (
+              <div className="border-t border-slate-100 pt-3 mt-3">
+                <p className="text-xs font-bold text-slate-400 uppercase mb-1">Sources</p>
+                {quoteData.sources.map((s, i) => (
+                  <a key={i} href={s.url} target="_blank" rel="noopener noreferrer" className="block text-xs text-brand-purple hover:underline truncate">{s.title}</a>
+                ))}
+              </div>
+            )}
+            <p className="text-xs text-slate-400 mt-3 italic">*Rough estimate based on market data. Actual costs may vary.</p>
+          </div>
+        </div>
+      )}
+
+      {/* ---- Quote: Delivery question ---- */}
+      {visible(Slot.QuoteDeliveryQuestion) && !visible(Slot.QuoteSent) && (
+        <div className="flex items-start gap-4 ml-18 animate-fade-in-up">
+          <div className="chat-bubble-bot border-l-4 border-l-brand-pink">
+            <p className="text-lg font-bold">Want me to send this estimate to you? How would you like it? 📨</p>
+          </div>
+        </div>
+      )}
+
+      {/* ---- Quote: Delivery options ---- */}
+      {visible(Slot.QuoteDeliveryOptions) && !visible(Slot.QuoteSent) && (
+        <div className={`flex flex-col sm:flex-row gap-4 animate-fade-in-up ${visibleUpTo > Slot.QuoteDeliveryOptions ? 'opacity-50 pointer-events-none' : ''}`}>
+          {[
+            { emoji: '📧', label: 'Email' },
+            { emoji: '💬', label: 'Text' },
+            { emoji: '📞', label: 'Call Me' },
+          ].map((opt) => (
+            <button
+              key={opt.label}
+              onClick={() => handleDeliverySelect(opt.label)}
+              className={`flex-1 bg-white p-5 rounded-2xl border-2 shadow-md hover:shadow-xl transition-all flex flex-col items-center gap-2 group cursor-pointer ${
+                deliveryMethod === opt.label
+                  ? 'border-brand-pink ring-4 ring-brand-pink/10'
+                  : 'border-slate-100 hover:border-brand-pink'
+              }`}
+            >
+              <span className="text-4xl group-hover:scale-125 transition-transform">{opt.emoji}</span>
+              <span className="font-bold text-slate-700">{opt.label}</span>
+            </button>
+          ))}
+        </div>
+      )}
+
+      {/* ---- Quote: Contact input ---- */}
+      {visible(Slot.QuoteContactInput) && !visible(Slot.QuoteSent) && (
+        <div className="max-w-md w-full self-center animate-fade-in-up">
+          <div className="relative group">
+            <input
+              className="w-full bg-white border-4 border-slate-100 rounded-3xl px-8 py-6 text-xl font-bold focus:ring-4 focus:ring-brand-purple/20 focus:border-brand-purple transition-all shadow-xl placeholder:text-slate-300"
+              placeholder={deliveryMethod === 'Email' ? 'you@email.com' : deliveryMethod === 'Text' ? '(555) 123-4567' : '(555) 123-4567'}
+              type={deliveryMethod === 'Email' ? 'email' : 'tel'}
+              value={contactInfo}
+              onChange={(e) => setContactInfo(deliveryMethod === 'Call Me' || deliveryMethod === 'Text' ? formatPhone(e.target.value) : e.target.value)}
+              onKeyDown={(e) => e.key === 'Enter' && handleQuoteContactSubmit()}
+              autoFocus
+            />
+            <button
+              onClick={handleQuoteContactSubmit}
+              disabled={submitting || !contactInfo.trim()}
+              className="absolute right-3 top-3 bottom-3 bg-brand-yellow hover:bg-brand-pink text-slate-900 hover:text-white px-6 rounded-2xl transition-all flex items-center gap-2 font-black shadow-lg cursor-pointer disabled:opacity-40 disabled:cursor-not-allowed"
+            >
+              {submitting ? '...' : 'SEND!'} <span className="material-symbols-outlined font-black">send</span>
+            </button>
+          </div>
+        </div>
+      )}
+
+      {/* ---- Quote: Sent confirmation ---- */}
+      {visible(Slot.QuoteSent) && (
+        <div className="flex flex-col gap-4 animate-fade-in-up">
+          <div className="flex items-start gap-4">
+            <div className="avatar-container rotate-12">
+              <span className="material-symbols-outlined text-white text-4xl">celebration</span>
+            </div>
+            <div className="chat-bubble-bot-gradient border-l-4 border-l-brand-teal">
+              <p className="text-lg font-bold mb-2">Quote sent! 🎉</p>
+              <p className="text-slate-600 mb-4">
+                We'll {deliveryMethod === 'Email' ? 'email' : deliveryMethod === 'Text' ? 'text' : 'call'} you at{' '}
+                <span className="font-bold text-slate-800">{contactInfo}</span> with your {selectedService.toLowerCase()} estimate
+                and connect you with top-rated local pros near <span className="font-bold text-slate-800">{zipCode}</span>.
+              </p>
+              <div className="flex flex-wrap gap-3">
+                <div className="sparkle-badge">
+                  <span className="material-symbols-outlined text-sm text-brand-pink">attach_money</span>
+                  {quoteData?.estimate}
+                </div>
+                <div className="sparkle-badge">
+                  <span className="material-symbols-outlined text-sm text-brand-teal">location_on</span>
+                  Zip: {zipCode}
+                </div>
+              </div>
             </div>
           </div>
         </div>
