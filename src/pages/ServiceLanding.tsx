@@ -104,8 +104,8 @@ export function ServiceLanding() {
               Find<span className="text-brand-purple">A</span>Local<span className="text-brand-pink">Pro</span>
             </h2>
           </Link>
-          <a href="tel:6305550100" className="bg-brand-purple text-white px-6 py-2.5 rounded-full text-sm font-bold hover:bg-brand-pink transition-all shadow-lg hover:-translate-y-1">
-            📞 630-555-0100
+          <a href="tel:6307032607" className="bg-brand-purple text-white px-6 py-2.5 rounded-full text-sm font-bold hover:bg-brand-pink transition-all shadow-lg hover:-translate-y-1">
+            📞 630-703-2607
           </a>
         </div>
       </header>
@@ -118,8 +118,8 @@ export function ServiceLanding() {
             {service.title} in<br />Downers Grove, IL
           </h1>
           <p className="text-lg text-slate-600 mb-8 max-w-xl mx-auto">{service.description}</p>
-          <a href="tel:6305550100" className="inline-flex items-center gap-2 bg-brand-purple text-white px-8 py-4 rounded-full text-lg font-bold hover:bg-brand-pink transition-all shadow-xl hover:-translate-y-1">
-            📞 Call Now: 630-555-0100
+          <a href="tel:6307032607" className="inline-flex items-center gap-2 bg-brand-purple text-white px-8 py-4 rounded-full text-lg font-bold hover:bg-brand-pink transition-all shadow-xl hover:-translate-y-1">
+            📞 Call Now: 630-703-2607
           </a>
           <p className="text-sm text-slate-400 mt-3">Speak with a local pro today</p>
         </div>
@@ -167,23 +167,27 @@ export function ServiceLanding() {
           <div className="bg-slate-50 rounded-3xl p-8 shadow-sm">
             <h2 className="text-2xl font-bold text-slate-800 text-center mb-2">Request a Callback</h2>
             <p className="text-slate-500 text-center mb-8">Prefer not to call? Leave your info and we'll reach out.</p>
-            <form onSubmit={(e) => { e.preventDefault(); alert('Thank you! We will call you shortly.'); }}>
+            <form
+              onSubmit={(e) => { e.preventDefault(); alert('Thank you! We will call you shortly.'); }}
+              toolname="request_service_callback"
+              tooldescription={`Request a callback from a licensed ${vertical?.replace('-', ' ')} professional in your area. A matched pro will call you back within minutes.`}
+            >
               <div className="space-y-4">
                 <div>
                   <label className="block text-sm font-bold text-slate-700 mb-1">Your Name</label>
-                  <input type="text" required placeholder="John Smith" className="w-full px-4 py-3 rounded-xl border border-slate-200 focus:border-brand-purple focus:outline-none" />
+                  <input name="customer_name" type="text" required placeholder="John Smith" className="w-full px-4 py-3 rounded-xl border border-slate-200 focus:border-brand-purple focus:outline-none" />
                 </div>
                 <div>
                   <label className="block text-sm font-bold text-slate-700 mb-1">Phone Number</label>
-                  <input type="tel" required placeholder="(630) 555-0100" className="w-full px-4 py-3 rounded-xl border border-slate-200 focus:border-brand-purple focus:outline-none" />
+                  <input name="phone_number" type="tel" required placeholder="(630) 555-0100" className="w-full px-4 py-3 rounded-xl border border-slate-200 focus:border-brand-purple focus:outline-none" />
                 </div>
                 <div>
                   <label className="block text-sm font-bold text-slate-700 mb-1">ZIP Code</label>
-                  <input type="text" required placeholder="60515" maxLength={5} pattern="[0-9]{5}" className="w-full px-4 py-3 rounded-xl border border-slate-200 focus:border-brand-purple focus:outline-none" />
+                  <input name="zip_code" type="text" required placeholder="60515" maxLength={5} pattern="[0-9]{5}" className="w-full px-4 py-3 rounded-xl border border-slate-200 focus:border-brand-purple focus:outline-none" />
                 </div>
                 <div>
                   <label className="block text-sm font-bold text-slate-700 mb-1">Describe Your Issue</label>
-                  <textarea rows={3} placeholder="Tell us what you need help with..." className="w-full px-4 py-3 rounded-xl border border-slate-200 focus:border-brand-purple focus:outline-none resize-none" />
+                  <textarea name="issue_description" rows={3} placeholder="Tell us what you need help with..." className="w-full px-4 py-3 rounded-xl border border-slate-200 focus:border-brand-purple focus:outline-none resize-none" />
                 </div>
                 <button type="submit" className="w-full bg-brand-purple text-white py-3 rounded-xl font-bold hover:bg-brand-pink transition-colors">
                   Request Callback
@@ -211,8 +215,8 @@ export function ServiceLanding() {
       <section className="py-16 bg-brand-purple text-center">
         <div className="max-w-3xl mx-auto px-6">
           <h2 className="text-3xl font-bold text-white mb-6">Ready to Get Started? Call Now.</h2>
-          <a href="tel:6305550100" className="inline-flex items-center gap-2 bg-white text-brand-purple px-8 py-4 rounded-full text-lg font-bold hover:bg-brand-pink hover:text-white transition-all shadow-xl hover:-translate-y-1">
-            📞 630-555-0100
+          <a href="tel:6307032607" className="inline-flex items-center gap-2 bg-white text-brand-purple px-8 py-4 rounded-full text-lg font-bold hover:bg-brand-pink hover:text-white transition-all shadow-xl hover:-translate-y-1">
+            📞 630-703-2607
           </a>
         </div>
       </section>
