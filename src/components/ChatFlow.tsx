@@ -268,6 +268,16 @@ export function ChatFlow({ onStepChange }: ChatFlowProps) {
 
   const handleDeliverySelect = (method: string) => {
     setDeliveryMethod(method);
+    if (method === 'No thanks') {
+      // Skip contact input, go straight to match upsell
+      setVisibleUpTo(Slot.QuoteSent); // skip past delivery
+      setTimeout(() => revealSlot(Slot.QuoteMatchQuestion, 800), 300);
+      setTimeout(() => {
+        setTyping(false);
+        setVisibleUpTo(Slot.QuoteMatchOptions);
+      }, 1600);
+      return;
+    }
     setTimeout(() => {
       setTyping(false);
       setVisibleUpTo(Slot.QuoteContactInput);
@@ -597,21 +607,21 @@ export function ChatFlow({ onStepChange }: ChatFlowProps) {
       )}
 
       {/* ---- Quote: Delivery question ---- */}
-      {visible(Slot.QuoteDeliveryQuestion) && !visible(Slot.QuoteSent) && (
+      {visible(Slot.QuoteDeliveryQuestion) && !visible(Slot.QuoteSent) && !visible(Slot.QuoteMatchQuestion) && (
         <div className="flex items-start gap-4 ml-18 animate-fade-in-up">
           <div className="chat-bubble-bot border-l-4 border-l-brand-pink">
-            <p className="text-lg font-bold">Want me to send this estimate to you? How would you like it? 📨</p>
+            <p className="text-lg font-bold">Want me to send this estimate to you? 📨</p>
           </div>
         </div>
       )}
 
       {/* ---- Quote: Delivery options ---- */}
-      {visible(Slot.QuoteDeliveryOptions) && !visible(Slot.QuoteSent) && (
+      {visible(Slot.QuoteDeliveryOptions) && !visible(Slot.QuoteSent) && !visible(Slot.QuoteMatchQuestion) && (
         <div className={`flex flex-col sm:flex-row gap-4 animate-fade-in-up ${visibleUpTo > Slot.QuoteDeliveryOptions ? 'opacity-50 pointer-events-none' : ''}`}>
           {[
             { emoji: '📧', label: 'Email' },
             { emoji: '💬', label: 'Text' },
-            { emoji: '📞', label: 'Call Me' },
+            { emoji: '👋', label: 'No thanks' },
           ].map((opt) => (
             <button
               key={opt.label}
@@ -635,10 +645,10 @@ export function ChatFlow({ onStepChange }: ChatFlowProps) {
           <div className="relative group">
             <input
               className="w-full bg-white border-4 border-slate-100 rounded-3xl px-8 py-6 text-xl font-bold focus:ring-4 focus:ring-brand-purple/20 focus:border-brand-purple transition-all shadow-xl placeholder:text-slate-300"
-              placeholder={deliveryMethod === 'Email' ? 'you@email.com' : deliveryMethod === 'Text' ? '(555) 123-4567' : '(555) 123-4567'}
+              placeholder={deliveryMethod === 'Email' ? 'you@email.com' : '(555) 123-4567'}
               type={deliveryMethod === 'Email' ? 'email' : 'tel'}
               value={contactInfo}
-              onChange={(e) => setContactInfo(deliveryMethod === 'Call Me' || deliveryMethod === 'Text' ? formatPhone(e.target.value) : e.target.value)}
+              onChange={(e) => setContactInfo(deliveryMethod === 'Text' ? formatPhone(e.target.value) : e.target.value)}
               onKeyDown={(e) => e.key === 'Enter' && handleQuoteContactSubmit()}
               autoFocus
             />
@@ -654,7 +664,7 @@ export function ChatFlow({ onStepChange }: ChatFlowProps) {
       )}
 
       {/* ---- Quote: Sent confirmation ---- */}
-      {visible(Slot.QuoteSent) && (
+      {visible(Slot.QuoteSent) && deliveryMethod !== 'No thanks' && contactInfo && (
         <div className="flex flex-col gap-4 animate-fade-in-up">
           <div className="flex items-start gap-4">
             <div className="avatar-container rotate-12">
