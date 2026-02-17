@@ -113,10 +113,16 @@ const Slot = {
   QuoteDeliveryOptions: 12,
   QuoteContactInput: 13,
   QuoteSent: 14,
+  // Quote upsell: want us to match you?
+  QuoteMatchQuestion: 15,
+  QuoteMatchOptions: 16,
+  QuoteMatchPhoneInput: 17,
+  QuoteMatchCelebration: 18,
+  QuoteEnd: 19,
   // Call path (Right Now / Schedule Later)
-  PhoneQuestion: 15,
-  PhoneInput: 16,
-  Celebration: 17,
+  PhoneQuestion: 20,
+  PhoneInput: 21,
+  Celebration: 22,
 } as const;
 
 export function ChatFlow({ onStepChange }: ChatFlowProps) {
@@ -135,6 +141,7 @@ export function ChatFlow({ onStepChange }: ChatFlowProps) {
     sources?: { title: string; url: string }[];
   } | null>(null);
   const [deliveryMethod, setDeliveryMethod] = useState('');
+  const [matchPhoneNumber, setMatchPhoneNumber] = useState('');
 
   // Reveal a slot after a delay, showing typing indicator in between
   const revealSlot = useCallback((slot: number, delay: number) => {
@@ -290,8 +297,52 @@ export function ChatFlow({ onStepChange }: ChatFlowProps) {
     }
 
     setSubmitting(false);
+    // Show quote sent, then ask if they want to be matched
+    setVisibleUpTo(Slot.QuoteSent);
+    setTimeout(() => revealSlot(Slot.QuoteMatchQuestion, 1200), 1500);
+    setTimeout(() => {
+      setTyping(false);
+      setVisibleUpTo(Slot.QuoteMatchOptions);
+    }, 3200);
+  };
+
+  const handleMatchSelect = (choice: string) => {
+    if (choice === 'Yes, connect me!') {
+      // Show phone input for matching
+      setTimeout(() => {
+        setTyping(false);
+        setVisibleUpTo(Slot.QuoteMatchPhoneInput);
+      }, 300);
+    } else {
+      // End gracefully
+      onStepChange(4);
+      setTimeout(() => revealSlot(Slot.QuoteEnd, 800), 200);
+    }
+  };
+
+  const handleMatchPhoneSubmit = async () => {
+    const digits = matchPhoneNumber.replace(/\D/g, '');
+    if (digits.length < 10) return;
+    setSubmitting(true);
+
+    try {
+      await fetch('https://hocipkeeikriqyojiboj.supabase.co/functions/v1/sms-webhook', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          source: 'website-quote-match',
+          phone: `+1${digits}`,
+          service: selectedService,
+          timing: 'quote-to-match',
+          zip_code: zipCode,
+          quote_estimate: quoteData?.estimate,
+        }),
+      }).catch(() => {});
+    } catch { /* silent */ }
+
+    setSubmitting(false);
     onStepChange(4);
-    setTimeout(() => revealSlot(Slot.QuoteSent, 800), 200);
+    setTimeout(() => revealSlot(Slot.QuoteMatchCelebration, 1000), 200);
   };
 
   const formatPhone = (value: string) => {
@@ -333,7 +384,7 @@ export function ChatFlow({ onStepChange }: ChatFlowProps) {
     setTimeout(() => revealSlot(Slot.Celebration, 1000), 200);
   };
 
-  const submitted = visibleUpTo >= Slot.Celebration || visibleUpTo >= Slot.QuoteSent;
+  const submitted = visibleUpTo >= Slot.Celebration || visibleUpTo >= Slot.QuoteMatchCelebration || visibleUpTo >= Slot.QuoteEnd;
 
   return (
     <div className="flex flex-col gap-10">
@@ -610,11 +661,10 @@ export function ChatFlow({ onStepChange }: ChatFlowProps) {
               <span className="material-symbols-outlined text-white text-4xl">celebration</span>
             </div>
             <div className="chat-bubble-bot-gradient border-l-4 border-l-brand-teal">
-              <p className="text-lg font-bold mb-2">Quote sent! 🎉</p>
+              <p className="text-lg font-bold mb-2">Quote sent! 📨</p>
               <p className="text-slate-600 mb-4">
-                We'll {deliveryMethod === 'Email' ? 'email' : deliveryMethod === 'Text' ? 'text' : 'call'} you at{' '}
-                <span className="font-bold text-slate-800">{contactInfo}</span> with your {selectedService.toLowerCase()} estimate
-                and connect you with top-rated local pros near <span className="font-bold text-slate-800">{zipCode}</span>.
+                We'll {deliveryMethod === 'Email' ? 'email' : deliveryMethod === 'Text' ? 'text' : 'call'} your {selectedService.toLowerCase()} estimate to{' '}
+                <span className="font-bold text-slate-800">{contactInfo}</span>.
               </p>
               <div className="flex flex-wrap gap-3">
                 <div className="sparkle-badge">
@@ -626,6 +676,115 @@ export function ChatFlow({ onStepChange }: ChatFlowProps) {
                   Zip: {zipCode}
                 </div>
               </div>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* ---- Quote: Match question ---- */}
+      {visible(Slot.QuoteMatchQuestion) && !visible(Slot.QuoteEnd) && !visible(Slot.QuoteMatchCelebration) && (
+        <div className="flex items-start gap-4 ml-18 animate-fade-in-up">
+          <div className="chat-bubble-bot border-l-4 border-l-brand-purple">
+            <p className="text-lg font-bold">Would you like us to connect you with a local pro for a personalized quote? 🔧</p>
+            <p className="text-sm text-slate-500 mt-1">No obligation — a licensed pro will call to discuss your specific needs.</p>
+          </div>
+        </div>
+      )}
+
+      {/* ---- Quote: Match options ---- */}
+      {visible(Slot.QuoteMatchOptions) && !visible(Slot.QuoteEnd) && !visible(Slot.QuoteMatchCelebration) && (
+        <div className={`flex flex-col sm:flex-row gap-4 animate-fade-in-up ${visibleUpTo > Slot.QuoteMatchOptions ? 'opacity-50 pointer-events-none' : ''}`}>
+          {[
+            { emoji: '✅', label: 'Yes, connect me!' },
+            { emoji: '👋', label: 'No thanks, I\'m good' },
+          ].map((opt) => (
+            <button
+              key={opt.label}
+              onClick={() => handleMatchSelect(opt.label)}
+              className="flex-1 bg-white p-5 rounded-2xl border-2 shadow-md hover:shadow-xl transition-all flex flex-col items-center gap-2 group cursor-pointer border-slate-100 hover:border-brand-purple"
+            >
+              <span className="text-4xl group-hover:scale-125 transition-transform">{opt.emoji}</span>
+              <span className="font-bold text-slate-700">{opt.label}</span>
+            </button>
+          ))}
+        </div>
+      )}
+
+      {/* ---- Quote: Match phone input ---- */}
+      {visible(Slot.QuoteMatchPhoneInput) && !visible(Slot.QuoteMatchCelebration) && (
+        <div className="max-w-md w-full self-center animate-fade-in-up">
+          <div className="flex items-start gap-4 mb-4">
+            <div className="avatar-container rotate-3">
+              <span className="material-symbols-outlined text-white text-3xl">call</span>
+            </div>
+            <div className="chat-bubble-bot border-l-4 border-l-brand-yellow">
+              <p className="text-lg font-bold">Great! What's the best number to reach you? 📱</p>
+            </div>
+          </div>
+          <div className="relative group">
+            <input
+              className="w-full bg-white border-4 border-slate-100 rounded-3xl px-8 py-6 text-xl font-bold focus:ring-4 focus:ring-brand-purple/20 focus:border-brand-purple transition-all shadow-xl placeholder:text-slate-300"
+              placeholder="(555) 123-4567"
+              type="tel"
+              value={matchPhoneNumber}
+              onChange={(e) => setMatchPhoneNumber(formatPhone(e.target.value))}
+              onKeyDown={(e) => e.key === 'Enter' && handleMatchPhoneSubmit()}
+              autoFocus
+            />
+            <button
+              onClick={handleMatchPhoneSubmit}
+              disabled={submitting || matchPhoneNumber.replace(/\D/g, '').length < 10}
+              className="absolute right-3 top-3 bottom-3 bg-brand-yellow hover:bg-brand-pink text-slate-900 hover:text-white px-6 rounded-2xl transition-all flex items-center gap-2 font-black shadow-lg cursor-pointer disabled:opacity-40 disabled:cursor-not-allowed"
+            >
+              {submitting ? '...' : 'CALL ME!'} <span className="material-symbols-outlined font-black">phone_in_talk</span>
+            </button>
+          </div>
+        </div>
+      )}
+
+      {/* ---- Quote: Match celebration ---- */}
+      {visible(Slot.QuoteMatchCelebration) && (
+        <div className="flex flex-col gap-4 animate-fade-in-up">
+          <div className="flex items-start gap-4">
+            <div className="avatar-container rotate-12">
+              <span className="material-symbols-outlined text-white text-4xl">celebration</span>
+            </div>
+            <div className="chat-bubble-bot-gradient border-l-4 border-l-brand-teal">
+              <p className="text-lg font-bold mb-2">You're all set! 🎉</p>
+              <p className="text-slate-600 mb-4">
+                A licensed {selectedService.toLowerCase()} pro will call you at{' '}
+                <span className="font-bold text-slate-800">{matchPhoneNumber}</span> shortly to discuss your project near{' '}
+                <span className="font-bold text-slate-800">{zipCode}</span>.
+              </p>
+              <div className="flex flex-wrap gap-3">
+                <div className="sparkle-badge">
+                  <span className="material-symbols-outlined text-sm text-brand-pink">attach_money</span>
+                  Est: {quoteData?.estimate}
+                </div>
+                <div className="sparkle-badge">
+                  <span className="material-symbols-outlined text-sm text-brand-teal">location_on</span>
+                  Zip: {zipCode}
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* ---- Quote: End (no match wanted) ---- */}
+      {visible(Slot.QuoteEnd) && (
+        <div className="flex flex-col gap-4 animate-fade-in-up">
+          <div className="flex items-start gap-4">
+            <div className="avatar-container -rotate-6">
+              <span className="material-symbols-outlined text-white text-3xl">thumb_up</span>
+            </div>
+            <div className="chat-bubble-bot">
+              <p className="text-lg font-bold mb-2">No problem! 👋</p>
+              <p className="text-slate-600">
+                Your estimate has been sent. If you change your mind, just call{' '}
+                <a href="tel:6307032607" className="text-brand-purple font-bold hover:underline">(630) 703-2607</a>{' '}
+                anytime and we'll match you with a pro right away.
+              </p>
             </div>
           </div>
         </div>
