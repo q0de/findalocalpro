@@ -142,6 +142,9 @@ export function ChatFlow({ onStepChange }: ChatFlowProps) {
   } | null>(null);
   const [deliveryMethod, setDeliveryMethod] = useState('');
   const [matchPhoneNumber, setMatchPhoneNumber] = useState('');
+  const [smsConsent, setSmsConsent] = useState(false);
+  const [quoteConsent, setQuoteConsent] = useState(false);
+  const [matchConsent, setMatchConsent] = useState(false);
 
   // Reveal a slot after a delay, showing typing indicator in between
   const revealSlot = useCallback((slot: number, delay: number) => {
@@ -394,7 +397,7 @@ export function ChatFlow({ onStepChange }: ChatFlowProps) {
     setTimeout(() => revealSlot(Slot.Celebration, 1000), 200);
   };
 
-  const submitted = visibleUpTo >= Slot.Celebration || visibleUpTo >= Slot.QuoteMatchCelebration || visibleUpTo >= Slot.QuoteEnd;
+  const submitted = visibleUpTo === Slot.Celebration || visibleUpTo === Slot.QuoteMatchCelebration || visibleUpTo === Slot.QuoteEnd;
 
   return (
     <div className="flex flex-col gap-10">
@@ -649,17 +652,32 @@ export function ChatFlow({ onStepChange }: ChatFlowProps) {
               type={deliveryMethod === 'Email' ? 'email' : 'tel'}
               value={contactInfo}
               onChange={(e) => setContactInfo(deliveryMethod === 'Text' ? formatPhone(e.target.value) : e.target.value)}
-              onKeyDown={(e) => e.key === 'Enter' && handleQuoteContactSubmit()}
+              onKeyDown={(e) => e.key === 'Enter' && (deliveryMethod !== 'Text' || quoteConsent) && handleQuoteContactSubmit()}
               autoFocus
             />
             <button
               onClick={handleQuoteContactSubmit}
-              disabled={submitting || !contactInfo.trim()}
+              disabled={submitting || !contactInfo.trim() || (deliveryMethod === 'Text' && !quoteConsent)}
               className="absolute right-3 top-3 bottom-3 bg-brand-yellow hover:bg-brand-pink text-slate-900 hover:text-white px-6 rounded-2xl transition-all flex items-center gap-2 font-black shadow-lg cursor-pointer disabled:opacity-40 disabled:cursor-not-allowed"
             >
               {submitting ? '...' : 'SEND!'} <span className="material-symbols-outlined font-black">send</span>
             </button>
           </div>
+          {deliveryMethod === 'Text' && (
+            <label className="flex items-start gap-3 mt-4 cursor-pointer px-2">
+              <input
+                type="checkbox"
+                checked={quoteConsent}
+                onChange={(e) => setQuoteConsent(e.target.checked)}
+                className="mt-1 w-5 h-5 rounded border-2 border-slate-300 text-brand-purple focus:ring-brand-purple/20 cursor-pointer flex-shrink-0"
+              />
+              <span className="text-xs text-slate-500 leading-relaxed">
+                By checking this box, you agree to receive text messages from FindALocalPro about your service request. Message frequency varies. Message and data rates may apply. Reply STOP to opt out, HELP for help. View our{' '}
+                <a href="/privacy" className="text-brand-purple hover:underline">Privacy Policy</a> and{' '}
+                <a href="/terms" className="text-brand-purple hover:underline">Terms of Service</a>.
+              </span>
+            </label>
+          )}
         </div>
       )}
 
@@ -738,17 +756,30 @@ export function ChatFlow({ onStepChange }: ChatFlowProps) {
               type="tel"
               value={matchPhoneNumber}
               onChange={(e) => setMatchPhoneNumber(formatPhone(e.target.value))}
-              onKeyDown={(e) => e.key === 'Enter' && handleMatchPhoneSubmit()}
+              onKeyDown={(e) => e.key === 'Enter' && matchConsent && handleMatchPhoneSubmit()}
               autoFocus
             />
             <button
               onClick={handleMatchPhoneSubmit}
-              disabled={submitting || matchPhoneNumber.replace(/\D/g, '').length < 10}
+              disabled={submitting || matchPhoneNumber.replace(/\D/g, '').length < 10 || !matchConsent}
               className="absolute right-3 top-3 bottom-3 bg-brand-yellow hover:bg-brand-pink text-slate-900 hover:text-white px-6 rounded-2xl transition-all flex items-center gap-2 font-black shadow-lg cursor-pointer disabled:opacity-40 disabled:cursor-not-allowed"
             >
               {submitting ? '...' : 'CALL ME!'} <span className="material-symbols-outlined font-black">phone_in_talk</span>
             </button>
           </div>
+          <label className="flex items-start gap-3 mt-4 cursor-pointer px-2">
+            <input
+              type="checkbox"
+              checked={matchConsent}
+              onChange={(e) => setMatchConsent(e.target.checked)}
+              className="mt-1 w-5 h-5 rounded border-2 border-slate-300 text-brand-purple focus:ring-brand-purple/20 cursor-pointer flex-shrink-0"
+            />
+            <span className="text-xs text-slate-500 leading-relaxed">
+              By checking this box, you agree to receive text messages from FindALocalPro about your service request. Message frequency varies. Message and data rates may apply. Reply STOP to opt out, HELP for help. View our{' '}
+              <a href="/privacy" className="text-brand-purple hover:underline">Privacy Policy</a> and{' '}
+              <a href="/terms" className="text-brand-purple hover:underline">Terms of Service</a>.
+            </span>
+          </label>
         </div>
       )}
 
@@ -823,18 +854,31 @@ export function ChatFlow({ onStepChange }: ChatFlowProps) {
               type="tel"
               value={phoneNumber}
               onChange={handlePhoneChange}
-              onKeyDown={(e) => e.key === 'Enter' && handleFinalSubmit()}
+              onKeyDown={(e) => e.key === 'Enter' && smsConsent && handleFinalSubmit()}
               autoFocus
             />
             <button
               onClick={handleFinalSubmit}
-              disabled={submitting || phoneNumber.replace(/\D/g, '').length < 10}
+              disabled={submitting || phoneNumber.replace(/\D/g, '').length < 10 || !smsConsent}
               className="absolute right-3 top-3 bottom-3 bg-brand-yellow hover:bg-brand-pink text-slate-900 hover:text-white px-6 rounded-2xl transition-all flex items-center gap-2 font-black shadow-lg cursor-pointer disabled:opacity-40 disabled:cursor-not-allowed"
             >
               {submitting ? '...' : 'CALL ME!'} <span className="material-symbols-outlined font-black">phone_in_talk</span>
             </button>
           </div>
-          <div className="mt-6 flex justify-center gap-6">
+          <label className="flex items-start gap-3 mt-4 cursor-pointer px-2">
+            <input
+              type="checkbox"
+              checked={smsConsent}
+              onChange={(e) => setSmsConsent(e.target.checked)}
+              className="mt-1 w-5 h-5 rounded border-2 border-slate-300 text-brand-purple focus:ring-brand-purple/20 cursor-pointer flex-shrink-0"
+            />
+            <span className="text-xs text-slate-500 leading-relaxed">
+              By checking this box, you agree to receive text messages from FindALocalPro about your service request. Message frequency varies. Message and data rates may apply. Reply STOP to opt out, HELP for help. View our{' '}
+              <a href="/privacy" className="text-brand-purple hover:underline">Privacy Policy</a> and{' '}
+              <a href="/terms" className="text-brand-purple hover:underline">Terms of Service</a>.
+            </span>
+          </label>
+          <div className="mt-4 flex justify-center gap-6">
             <div className="flex items-center gap-2 text-xs font-bold text-slate-400 uppercase tracking-widest">
               <span className="material-symbols-outlined text-sm">lock</span>
               Private
