@@ -13,6 +13,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     { url: 'https://findalocalpro.com/about', lastModified: now, changeFrequency: 'monthly', priority: 0.6 },
     { url: 'https://findalocalpro.com/contact', lastModified: now, changeFrequency: 'monthly', priority: 0.7 },
     { url: 'https://findalocalpro.com/get-matched', lastModified: now, changeFrequency: 'monthly', priority: 0.8 },
+    { url: 'https://findalocalpro.com/reviews', lastModified: now, changeFrequency: 'weekly', priority: 0.6 },
   ];
 
   // Service vertical pages
