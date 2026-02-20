@@ -14,87 +14,88 @@
   --radius-chat-user: 2rem 2rem 0.5rem 2rem;
 }
 
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
-html {
-  scroll-behavior: smooth;
-}
-
-body {
-  font-family: "Outfit", sans-serif;
-  background-color: #f0f4ff;
-  background-image: radial-gradient(circle at 2px 2px, #e2e8f0 1px, transparent 0);
-  background-size: 32px 32px;
-}
-
-/* Prevent body's dotted grid from bleeding through sections */
 @layer base {
+  * {
+    box-sizing: border-box;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    font-family: "Outfit", sans-serif;
+    background-color: #f0f4ff;
+    background-image: radial-gradient(circle at 2px 2px, #e2e8f0 1px, transparent 0);
+    background-size: 32px 32px;
+  }
+
   section {
     background-image: none;
   }
+
+  h1, h2, h3, .font-playful {
+    font-family: "Fredoka", sans-serif;
+  }
 }
 
-h1, h2, h3, .font-playful {
-  font-family: "Fredoka", sans-serif;
+@layer base {
+  .sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border-width: 0;
+  }
 }
 
-.sr-only {
-  position: absolute;
-  width: 1px;
-  height: 1px;
-  padding: 0;
-  margin: -1px;
-  overflow: hidden;
-  clip: rect(0, 0, 0, 0);
-  white-space: nowrap;
-  border-width: 0;
-}
+@layer components {
+  .chat-bubble-bot {
+    @apply bg-white border-b-4 border-r-4 border-slate-200 rounded-chat-bot p-5 max-w-[85%] shadow-lg relative;
+  }
 
-.chat-bubble-bot {
-  @apply bg-white border-b-4 border-r-4 border-slate-200 rounded-chat-bot p-5 max-w-[85%] shadow-lg relative;
-}
+  .chat-bubble-bot-gradient {
+    @apply bg-gradient-to-br from-white to-slate-50 border-2 border-slate-100 rounded-chat-bot p-5 max-w-[85%] shadow-xl relative;
+  }
 
-.chat-bubble-bot-gradient {
-  @apply bg-gradient-to-br from-white to-slate-50 border-2 border-slate-100 rounded-chat-bot p-5 max-w-[85%] shadow-xl relative;
-}
+  .chat-bubble-user {
+    @apply bg-gradient-to-br from-brand-purple to-primary text-white rounded-chat-user p-5 max-w-[85%] self-end shadow-xl font-medium;
+  }
 
-.chat-bubble-user {
-  @apply bg-gradient-to-br from-brand-purple to-primary text-white rounded-chat-user p-5 max-w-[85%] self-end shadow-xl font-medium;
-}
+  .option-button {
+    @apply bg-white border-2 border-slate-100 px-6 py-4 rounded-2xl hover:scale-105 hover:shadow-xl hover:border-brand-purple transition-all duration-300 text-slate-700 font-bold flex flex-col items-center gap-2 text-center shadow-md cursor-pointer;
+  }
 
-.option-button {
-  @apply bg-white border-2 border-slate-100 px-6 py-4 rounded-2xl hover:scale-105 hover:shadow-xl hover:border-brand-purple transition-all duration-300 text-slate-700 font-bold flex flex-col items-center gap-2 text-center shadow-md cursor-pointer;
-}
+  .option-button.selected {
+    @apply border-brand-purple bg-purple-50 ring-4 ring-brand-purple/10 scale-105;
+  }
 
-.option-button.selected {
-  @apply border-brand-purple bg-purple-50 ring-4 ring-brand-purple/10 scale-105;
-}
+  .avatar-container {
+    @apply w-14 h-14 rounded-2xl bg-gradient-to-tr from-brand-yellow via-brand-pink to-brand-purple flex items-center justify-center shrink-0 shadow-lg border-2 border-white;
+  }
 
-.avatar-container {
-  @apply w-14 h-14 rounded-2xl bg-gradient-to-tr from-brand-yellow via-brand-pink to-brand-purple flex items-center justify-center shrink-0 shadow-lg border-2 border-white;
-}
+  .sparkle-badge {
+    @apply flex items-center gap-2 bg-gradient-to-r from-brand-yellow/20 to-brand-pink/20 px-4 py-2 rounded-full text-xs font-bold text-slate-700 border border-white/50 backdrop-blur-sm;
+  }
 
-.sparkle-badge {
-  @apply flex items-center gap-2 bg-gradient-to-r from-brand-yellow/20 to-brand-pink/20 px-4 py-2 rounded-full text-xs font-bold text-slate-700 border border-white/50 backdrop-blur-sm;
-}
+  .progress-dot {
+    @apply w-3 h-3 rounded-full bg-slate-200 transition-all duration-500;
+  }
 
-.progress-dot {
-  @apply w-3 h-3 rounded-full bg-slate-200 transition-all duration-500;
-}
+  .progress-dot.active {
+    @apply bg-brand-pink w-8;
+  }
 
-.progress-dot.active {
-  @apply bg-brand-pink w-8;
+  .animate-fade-in-up {
+    animation: fadeInUp 0.5s ease-out forwards;
+  }
 }
 
 @keyframes fadeInUp {
   from { opacity: 0; transform: translateY(20px); }
   to { opacity: 1; transform: translateY(0); }
-}
-
-.animate-fade-in-up {
-  animation: fadeInUp 0.5s ease-out forwards;
 }
