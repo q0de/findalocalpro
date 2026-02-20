@@ -30,6 +30,16 @@ interface VerificationCheck {
   checked_at: string;
 }
 
+interface Review {
+  id: string;
+  business_id: string;
+  rating: number;
+  review_text: string;
+  reviewer_name: string;
+  source: string;
+  review_date: string;
+}
+
 const tradeLabels: Record<string, string> = {
   plumbing: 'Plumbing',
   hvac: 'HVAC & Heating',
@@ -37,7 +47,7 @@ const tradeLabels: Record<string, string> = {
   roofing: 'Roofing',
 };
 
-async function getProvider(slug: string): Promise<{ provider: Provider; checks: VerificationCheck[] } | null> {
+async function getProvider(slug: string): Promise<{ provider: Provider; checks: VerificationCheck[]; reviews: Review[] } | null> {
   const headers = {
     apikey: SUPABASE_ANON,
     Authorization: `Bearer ${SUPABASE_ANON}`,
@@ -68,7 +78,14 @@ async function getProvider(slug: string): Promise<{ provider: Provider; checks: 
     }
   }
 
-  return { provider, checks };
+  // Fetch reviews
+  const reviewsRes = await fetch(
+    `${SUPABASE_URL}/rest/v1/reviews?business_id=eq.${provider.id}&select=*&order=rating.desc,review_date.desc`,
+    { headers, next: { revalidate: 3600 } }
+  );
+  const reviews: Review[] = await reviewsRes.json();
+
+  return { provider, checks, reviews };
 }
 
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
@@ -98,8 +115,13 @@ export default async function ProviderProfilePage({ params }: { params: Promise<
   const data = await getProvider(slug);
   if (!data) notFound();
 
-  const { provider, checks } = data;
+  const { provider, checks, reviews } = data;
   const tradeLabel = tradeLabels[provider.trade] || provider.trade;
+
+  // Calculate aggregate rating
+  const averageRating = reviews.length > 0
+    ? reviews.reduce((sum, r) => sum + r.rating, 0) / reviews.length
+    : 0;
 
   // Structured data for SEO — rendered server-side!
   const structuredData = {
@@ -117,12 +139,21 @@ export default async function ProviderProfilePage({ params }: { params: Promise<
     } : undefined,
     foundingDate: provider.year_established ? String(provider.year_established) : undefined,
     additionalType: `https://schema.org/${provider.trade === 'plumbing' ? 'Plumber' : provider.trade === 'electrical' ? 'Electrician' : 'HomeAndConstructionBusiness'}`,
+    ...(reviews.length > 0 && {
+      aggregateRating: {
+        '@type': 'AggregateRating',
+        ratingValue: averageRating.toFixed(2),
+        reviewCount: reviews.length,
+        bestRating: '5',
+        worstRating: '1',
+      },
+    }),
   };
 
   return (
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }} />
-      <ProviderProfileClient provider={provider} checks={checks} tradeLabel={tradeLabel} />
+      <ProviderProfileClient provider={provider} checks={checks} reviews={reviews} tradeLabel={tradeLabel} />
     </>
   );
 }

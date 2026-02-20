@@ -35,6 +35,16 @@ interface VerificationCheck {
   checked_at: string;
 }
 
+interface Review {
+  id: string;
+  business_id: string;
+  rating: number;
+  review_text: string;
+  reviewer_name: string;
+  source: string;
+  review_date: string;
+}
+
 const tradeConfig: Record<string, { icon: string; color: string; bgColor: string; label: string; services: string[] }> = {
   plumbing: {
     icon: 'water_drop', color: 'text-blue-500', bgColor: 'bg-blue-50', label: 'Plumbing',
@@ -61,6 +71,69 @@ const sourceInfo: Record<string, { label: string; icon: string; description: str
   buildzoom: { label: 'BuildZoom', icon: 'construction', description: 'License verification & contractor score' },
   coi: { label: 'Insurance (COI)', icon: 'verified_user', description: 'Certificate of Insurance on file' },
 };
+
+const reviewSourceLabels: Record<string, string> = {
+  google: 'Google',
+  yelp: 'Yelp',
+  bbb: 'BBB',
+  angi: 'Angi',
+  web: 'Web',
+};
+
+function StarRating({ rating, size = 'base' }: { rating: number; size?: 'sm' | 'base' | 'lg' }) {
+  const filled = Math.floor(rating);
+  const partial = rating - filled;
+  const empty = 5 - Math.ceil(rating);
+
+  const sizeClass = size === 'sm' ? 'text-sm' : size === 'lg' ? 'text-2xl' : 'text-base';
+
+  return (
+    <div className="flex items-center gap-0.5">
+      {[...Array(filled)].map((_, i) => (
+        <span key={`filled-${i}`} className={`material-symbols-outlined ${sizeClass} text-yellow-400`} style={{ fontVariationSettings: '"FILL" 1' }}>
+          star
+        </span>
+      ))}
+      {partial > 0 && (
+        <span className={`material-symbols-outlined ${sizeClass} text-yellow-400`} style={{ fontVariationSettings: '"FILL" 0.5' }}>
+          star_half
+        </span>
+      )}
+      {[...Array(empty)].map((_, i) => (
+        <span key={`empty-${i}`} className={`material-symbols-outlined ${sizeClass} text-slate-200`} style={{ fontVariationSettings: '"FILL" 0' }}>
+          star
+        </span>
+      ))}
+    </div>
+  );
+}
+
+function ReviewCard({ review }: { review: Review }) {
+  const formattedDate = new Date(review.review_date).toLocaleDateString('en-US', {
+    month: 'long',
+    day: 'numeric',
+    year: 'numeric',
+  });
+
+  return (
+    <div className="bg-white rounded-2xl border-2 border-slate-100 p-5 shadow-md">
+      <div className="flex items-start justify-between gap-3 mb-3">
+        <div className="flex-1">
+          <div className="flex items-center gap-2 mb-1">
+            <StarRating rating={review.rating} size="sm" />
+            <span className="text-sm font-bold text-slate-800">{review.rating}.0</span>
+          </div>
+          <p className="text-sm font-bold text-slate-700">{review.reviewer_name}</p>
+          <p className="text-xs text-slate-400">{formattedDate}</p>
+        </div>
+        <span className="text-xs font-medium text-slate-500 px-2 py-1 bg-slate-50 rounded-md border border-slate-200">
+          {reviewSourceLabels[review.source] || review.source}
+        </span>
+      </div>
+      <p className="text-sm text-slate-600 leading-relaxed">{review.review_text}</p>
+    </div>
+  );
+}
 
 function TrustMeter({ score }: { score: number }) {
   const pct = Math.round(score);
@@ -219,10 +292,15 @@ function DirectContactCTA({ provider, trade }: { provider: Provider; trade: type
   );
 }
 
-export function ProviderProfileClient({ provider, checks, tradeLabel }: { provider: Provider; checks: VerificationCheck[]; tradeLabel: string }) {
+export function ProviderProfileClient({ provider, checks, reviews, tradeLabel }: { provider: Provider; checks: VerificationCheck[]; reviews: Review[]; tradeLabel: string }) {
   const trade = tradeConfig[provider.trade] || tradeConfig.plumbing;
   const passedChecks = checks.filter(c => c.status === 'pass').length;
   const verifiedAt = provider.last_verified_at ? new Date(provider.last_verified_at).toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' }) : null;
+
+  // Calculate aggregate rating
+  const averageRating = reviews.length > 0
+    ? reviews.reduce((sum, r) => sum + r.rating, 0) / reviews.length
+    : 0;
 
   return (
     <div className="min-h-screen flex flex-col bg-gradient-to-b from-slate-50 to-white">
@@ -335,6 +413,27 @@ export function ProviderProfileClient({ provider, checks, tradeLabel }: { provid
                 ))}
               </div>
             </div>
+
+            {reviews.length > 0 && (
+              <div className="mt-8">
+                <div className="flex items-center justify-between mb-6">
+                  <h2 className="text-xl font-bold text-slate-800 flex items-center gap-2">
+                    <span className="material-symbols-outlined text-brand-pink">star</span>
+                    Customer Reviews
+                  </h2>
+                  <div className="flex items-center gap-2">
+                    <StarRating rating={averageRating} size="base" />
+                    <span className="text-lg font-bold text-slate-800">{averageRating.toFixed(1)}</span>
+                    <span className="text-sm text-slate-400">({reviews.length} {reviews.length === 1 ? 'review' : 'reviews'})</span>
+                  </div>
+                </div>
+                <div className="space-y-4">
+                  {reviews.map((review) => (
+                    <ReviewCard key={review.id} review={review} />
+                  ))}
+                </div>
+              </div>
+            )}
           </div>
 
           <div className="space-y-6">

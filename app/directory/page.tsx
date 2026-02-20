@@ -36,6 +36,21 @@ interface VerificationCheck {
   data: Record<string, unknown>;
 }
 
+interface Review {
+  business_id: string;
+  rating: number;
+  review_text: string;
+  reviewer_name: string;
+  source: string;
+  review_date: string;
+}
+
+interface BusinessReviewStats {
+  averageRating: number;
+  totalReviews: number;
+  topReview?: Review;
+}
+
 async function getDirectoryData() {
   const headers = {
     apikey: SUPABASE_ANON,
@@ -49,8 +64,12 @@ async function getDirectoryData() {
   const providers: Provider[] = await provRes.json();
 
   let checksMap: Record<string, VerificationCheck[]> = {};
+  let reviewsMap: Record<string, BusinessReviewStats> = {};
+
   if (providers.length > 0) {
     const ids = providers.map(p => p.id);
+
+    // Fetch verification checks
     const checksRes = await fetch(
       `${SUPABASE_URL}/rest/v1/verification_checks?business_id=in.(${ids.join(',')})&select=business_id,source,status,summary,data&order=checked_at.desc`,
       { headers, next: { revalidate: 3600 } }
@@ -64,13 +83,42 @@ async function getDirectoryData() {
         checksMap[bid].push(c);
       }
     }
+
+    // Fetch reviews
+    const reviewsRes = await fetch(
+      `${SUPABASE_URL}/rest/v1/reviews?business_id=in.(${ids.join(',')})&select=business_id,rating,review_text,reviewer_name,source,review_date&order=rating.desc`,
+      { headers, next: { revalidate: 3600 } }
+    );
+    const reviewsData: Review[] = await reviewsRes.json();
+
+    // Group reviews by business_id and calculate stats
+    const reviewsByBusiness: Record<string, Review[]> = {};
+    for (const review of reviewsData) {
+      const bid = review.business_id;
+      if (!reviewsByBusiness[bid]) reviewsByBusiness[bid] = [];
+      reviewsByBusiness[bid].push(review);
+    }
+
+    for (const [bid, reviews] of Object.entries(reviewsByBusiness)) {
+      if (reviews.length > 0) {
+        const totalRating = reviews.reduce((sum, r) => sum + r.rating, 0);
+        const averageRating = totalRating / reviews.length;
+        const topReview = reviews[0]; // Already sorted by rating desc
+
+        reviewsMap[bid] = {
+          averageRating,
+          totalReviews: reviews.length,
+          topReview,
+        };
+      }
+    }
   }
 
-  return { providers, checksMap };
+  return { providers, checksMap, reviewsMap };
 }
 
 export default async function DirectoryPage() {
-  const { providers, checksMap } = await getDirectoryData();
+  const { providers, checksMap, reviewsMap } = await getDirectoryData();
 
-  return <DirectoryClient providers={providers} checksMap={checksMap} />;
+  return <DirectoryClient providers={providers} checksMap={checksMap} reviewsMap={reviewsMap} />;
 }

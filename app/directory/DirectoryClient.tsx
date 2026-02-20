@@ -28,6 +28,21 @@ interface VerificationCheck {
   data: Record<string, unknown>;
 }
 
+interface Review {
+  business_id: string;
+  rating: number;
+  review_text: string;
+  reviewer_name: string;
+  source: string;
+  review_date: string;
+}
+
+interface BusinessReviewStats {
+  averageRating: number;
+  totalReviews: number;
+  topReview?: Review;
+}
+
 const tradeConfig: Record<string, { icon: string; color: string; bgColor: string; label: string }> = {
   plumbing: { icon: 'water_drop', color: 'text-blue-500', bgColor: 'bg-blue-100', label: 'Plumbing' },
   hvac: { icon: 'mode_fan', color: 'text-purple-500', bgColor: 'bg-purple-100', label: 'HVAC & Heating' },
@@ -36,6 +51,71 @@ const tradeConfig: Record<string, { icon: string; color: string; bgColor: string
   handyman: { icon: 'handyman', color: 'text-orange-600', bgColor: 'bg-orange-100', label: 'Handyman' },
   general: { icon: 'home_repair_service', color: 'text-slate-600', bgColor: 'bg-slate-100', label: 'General' },
 };
+
+function StarRating({ rating, size = 'base' }: { rating: number; size?: 'sm' | 'base' }) {
+  const filled = Math.floor(rating);
+  const partial = rating - filled;
+  const empty = 5 - Math.ceil(rating);
+
+  const sizeClass = size === 'sm' ? 'text-sm' : 'text-base';
+
+  return (
+    <div className="flex items-center gap-0.5">
+      {[...Array(filled)].map((_, i) => (
+        <span key={`filled-${i}`} className={`material-symbols-outlined ${sizeClass} text-yellow-400`} style={{ fontVariationSettings: '"FILL" 1' }}>
+          star
+        </span>
+      ))}
+      {partial > 0 && (
+        <span className={`material-symbols-outlined ${sizeClass} text-yellow-400`} style={{ fontVariationSettings: '"FILL" 0.5' }}>
+          star_half
+        </span>
+      )}
+      {[...Array(empty)].map((_, i) => (
+        <span key={`empty-${i}`} className={`material-symbols-outlined ${sizeClass} text-slate-200`} style={{ fontVariationSettings: '"FILL" 0' }}>
+          star
+        </span>
+      ))}
+    </div>
+  );
+}
+
+function ReviewSnippet({ stats }: { stats: BusinessReviewStats }) {
+  const { averageRating, totalReviews, topReview } = stats;
+
+  if (!topReview) return null;
+
+  const truncatedText = topReview.review_text.length > 100
+    ? topReview.review_text.slice(0, 100) + '...'
+    : topReview.review_text;
+
+  const sourceLabels: Record<string, string> = {
+    google: 'Google',
+    yelp: 'Yelp',
+    bbb: 'BBB',
+    angi: 'Angi',
+    web: 'Web',
+  };
+
+  return (
+    <div className="space-y-2">
+      <div className="flex items-center gap-2 flex-wrap">
+        <StarRating rating={averageRating} />
+        <span className="text-sm font-bold text-slate-800">{averageRating.toFixed(1)}</span>
+        <span className="text-sm text-slate-400">({totalReviews} {totalReviews === 1 ? 'review' : 'reviews'})</span>
+      </div>
+      <div className="bg-slate-50 rounded-xl p-3 border border-slate-100">
+        <div className="flex items-start justify-between gap-2 mb-1">
+          <span className="text-xs font-bold text-slate-600">{topReview.reviewer_name}</span>
+          <span className="text-xs font-medium text-slate-400 px-2 py-0.5 bg-white rounded-md border border-slate-200">
+            {sourceLabels[topReview.source] || topReview.source}
+          </span>
+        </div>
+        <p className="text-xs text-slate-600 leading-relaxed">{truncatedText}</p>
+      </div>
+    </div>
+  );
+}
 
 function TrustBadge({ score }: { score: number | null }) {
   if (!score) return null;
@@ -68,7 +148,7 @@ function CheckBadge({ check }: { check: VerificationCheck }) {
   );
 }
 
-function ProviderCard({ provider, checks }: { provider: Provider; checks: VerificationCheck[] }) {
+function ProviderCard({ provider, checks, reviewStats }: { provider: Provider; checks: VerificationCheck[]; reviewStats?: BusinessReviewStats }) {
   const trade = tradeConfig[provider.trade] || tradeConfig.general;
   const [expanded, setExpanded] = useState(false);
   const passChecks = checks.filter(c => c.status === 'pass');
@@ -92,6 +172,8 @@ function ProviderCard({ provider, checks }: { provider: Provider; checks: Verifi
           </div>
           <TrustBadge score={provider.trust_score} />
         </div>
+
+        {reviewStats && <ReviewSnippet stats={reviewStats} />}
 
         <div className="flex flex-wrap gap-3 mb-4">
           {bbbCheck && (
@@ -171,7 +253,7 @@ const tradeFilters = [
   { value: 'roofing', label: 'Roofing', icon: 'roofing' },
 ];
 
-export function DirectoryClient({ providers, checksMap }: { providers: Provider[]; checksMap: Record<string, VerificationCheck[]> }) {
+export function DirectoryClient({ providers, checksMap, reviewsMap }: { providers: Provider[]; checksMap: Record<string, VerificationCheck[]>; reviewsMap: Record<string, BusinessReviewStats> }) {
   const [filter, setFilter] = useState('all');
   const [sortBy, setSortBy] = useState<'score' | 'name'>('score');
 
@@ -230,7 +312,7 @@ export function DirectoryClient({ providers, checksMap }: { providers: Provider[
           </div>
         ) : (
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            {filtered.map(p => <ProviderCard key={p.id} provider={p} checks={checksMap[p.id] || []} />)}
+            {filtered.map(p => <ProviderCard key={p.id} provider={p} checks={checksMap[p.id] || []} reviewStats={reviewsMap[p.id]} />)}
           </div>
         )}
 
