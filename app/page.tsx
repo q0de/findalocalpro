@@ -2,8 +2,8 @@ import Link from 'next/link';
 import { SUPABASE_URL, SUPABASE_ANON } from '@/lib/supabase';
 import { Header } from '@/components/Header';
 import { Footer } from '@/components/Footer';
-import { ChatSection } from './ChatSection';
 import { AnimatedSection, CountUpNumber, TrustScoreRing, StaggeredGrid } from './HomeAnimations';
+import { ChatModal, ChatTrigger } from './ChatModal';
 
 interface Provider {
   id: string;
@@ -94,10 +94,10 @@ export default async function HomePage() {
               </p>
               
               <div className="flex flex-col sm:flex-row gap-4">
-                <a href="#chat" className="group inline-flex items-center justify-center gap-2 bg-brand-purple hover:bg-brand-pink text-white px-8 py-4 rounded-2xl font-black text-lg transition-all shadow-xl hover:shadow-2xl hover:-translate-y-1 active:translate-y-0">
+                <ChatTrigger className="group inline-flex items-center justify-center gap-2 bg-brand-purple hover:bg-brand-pink text-white px-8 py-4 rounded-2xl font-black text-lg transition-all shadow-xl hover:shadow-2xl hover:-translate-y-1 active:translate-y-0 cursor-pointer">
                   <span className="material-symbols-outlined transition-transform group-hover:scale-110">chat</span>
                   Get Matched Free
-                </a>
+                </ChatTrigger>
                 <a href="tel:6307032607" className="inline-flex items-center justify-center gap-2 bg-white hover:bg-slate-50 text-slate-800 px-8 py-4 rounded-2xl font-black text-lg border-2 border-slate-200 transition-all shadow-lg hover:-translate-y-1">
                   <span className="material-symbols-outlined">call</span>
                   (630) 703-2607
@@ -371,20 +371,8 @@ export default async function HomePage() {
         </AnimatedSection>
       )}
 
-      {/* ═══════════════════════════════════════════════════════
-          CHAT — Primary conversion
-          ═══════════════════════════════════════════════════════ */}
-      <section id="chat" className="py-20 bg-gradient-to-br from-brand-purple/5 via-white to-brand-pink/5 scroll-mt-20">
-        <div className="max-w-3xl mx-auto px-6">
-          <AnimatedSection>
-            <div className="text-center mb-10">
-              <h2 className="text-3xl md:text-4xl font-black text-slate-800 mb-3">Tell Us What You Need</h2>
-              <p className="text-slate-500">We&apos;ll match you with a verified pro in 60 seconds — free, no obligation</p>
-            </div>
-          </AnimatedSection>
-          <ChatSection />
-        </div>
-      </section>
+      {/* Chat Modal — desktop: popover, mobile: redirects to /get-matched */}
+      <ChatModal />
 
       {/* ═══════════════════════════════════════════════════════
           FAQ — SEO + trust
@@ -437,10 +425,10 @@ export default async function HomePage() {
           <h2 className="text-3xl md:text-4xl font-black text-white mb-4">Stop Guessing. Start Verifying.</h2>
           <p className="text-purple-200 mb-10 text-lg">Every pro on our site has been checked against state records. Get matched for free.</p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <a href="#chat" className="group inline-flex items-center justify-center gap-2 bg-brand-yellow hover:bg-white text-slate-900 px-8 py-4 rounded-2xl font-black text-lg transition-all shadow-xl hover:shadow-2xl hover:-translate-y-1 active:translate-y-0">
+            <ChatTrigger className="group inline-flex items-center justify-center gap-2 bg-brand-yellow hover:bg-white text-slate-900 px-8 py-4 rounded-2xl font-black text-lg transition-all shadow-xl hover:shadow-2xl hover:-translate-y-1 active:translate-y-0 cursor-pointer">
               <span className="material-symbols-outlined transition-transform group-hover:scale-110">chat</span>
               Get Matched Free
-            </a>
+            </ChatTrigger>
             <a href="tel:6307032607" className="inline-flex items-center justify-center gap-2 bg-white/10 hover:bg-white/20 text-white px-8 py-4 rounded-2xl font-black text-lg border-2 border-white/30 transition-all">
               <span className="material-symbols-outlined">call</span>
               (630) 703-2607
