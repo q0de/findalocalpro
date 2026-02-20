@@ -675,7 +675,7 @@ export function ChatFlow({ onStepChange }: ChatFlowProps) {
                 type="checkbox"
                 checked={quoteConsent}
                 onChange={(e) => setQuoteConsent(e.target.checked)}
-                className="mt-1 w-5 h-5 rounded border-2 border-slate-300 text-brand-purple focus:ring-brand-purple/20 cursor-pointer flex-shrink-0"
+                className="mt-1 w-5 h-5 rounded border-2 border-slate-300 text-brand-purple focus:ring-brand-purple/20 cursor-pointer shrink-0"
               />
               <span className="text-xs text-slate-500 leading-relaxed">
                 By checking this box, you agree to receive text messages from FindALocalPro about your service request. Message frequency varies. Message and data rates may apply. Reply STOP to opt out, HELP for help. View our{' '}
@@ -778,7 +778,7 @@ export function ChatFlow({ onStepChange }: ChatFlowProps) {
               type="checkbox"
               checked={matchConsent}
               onChange={(e) => setMatchConsent(e.target.checked)}
-              className="mt-1 w-5 h-5 rounded border-2 border-slate-300 text-brand-purple focus:ring-brand-purple/20 cursor-pointer flex-shrink-0"
+              className="mt-1 w-5 h-5 rounded border-2 border-slate-300 text-brand-purple focus:ring-brand-purple/20 cursor-pointer shrink-0"
             />
             <span className="text-xs text-slate-500 leading-relaxed">
               By checking this box, you agree to receive text messages from FindALocalPro about your service request. Message frequency varies. Message and data rates may apply. Reply STOP to opt out, HELP for help. View our{' '}
@@ -876,7 +876,7 @@ export function ChatFlow({ onStepChange }: ChatFlowProps) {
               type="checkbox"
               checked={smsConsent}
               onChange={(e) => setSmsConsent(e.target.checked)}
-              className="mt-1 w-5 h-5 rounded border-2 border-slate-300 text-brand-purple focus:ring-brand-purple/20 cursor-pointer flex-shrink-0"
+              className="mt-1 w-5 h-5 rounded border-2 border-slate-300 text-brand-purple focus:ring-brand-purple/20 cursor-pointer shrink-0"
             />
             <span className="text-xs text-slate-500 leading-relaxed">
               By checking this box, you agree to receive text messages from FindALocalPro about your service request. Message frequency varies. Message and data rates may apply. Reply STOP to opt out, HELP for help. View our{' '}

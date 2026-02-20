@@ -202,7 +202,7 @@ function DirectContactCTA({ provider, trade }: { provider: Provider; trade: type
           <p className="text-sm font-bold text-slate-700">Get a call from {provider.name}</p>
           <input className="w-full border-2 border-slate-200 rounded-xl px-4 py-3 text-lg font-bold focus:ring-2 focus:ring-brand-purple/20 focus:border-brand-purple transition-all placeholder:text-slate-300" placeholder="(555) 123-4567" type="tel" value={phone} onChange={(e) => setPhone(formatPhone(e.target.value))} autoFocus />
           <label className="flex items-start gap-2 cursor-pointer">
-            <input type="checkbox" checked={consent} onChange={(e) => setConsent(e.target.checked)} className="mt-1 w-4 h-4 rounded border-2 border-slate-300 text-brand-purple focus:ring-brand-purple/20 cursor-pointer flex-shrink-0" />
+            <input type="checkbox" checked={consent} onChange={(e) => setConsent(e.target.checked)} className="mt-1 w-4 h-4 rounded border-2 border-slate-300 text-brand-purple focus:ring-brand-purple/20 cursor-pointer shrink-0" />
             <span className="text-xs text-slate-500 leading-relaxed">
               I agree to receive calls/texts from FindALocalPro about my service request. Message and data rates may apply. Reply STOP to opt out.{' '}
               <Link href="/privacy" className="text-brand-purple hover:underline">Privacy Policy</Link> ·{' '}
@@ -227,7 +227,7 @@ export function ProviderProfileClient({ provider, checks, tradeLabel }: { provid
     <div className="min-h-screen flex flex-col bg-gradient-to-b from-slate-50 to-white">
       <Header step={0} totalSteps={0} />
 
-      <main className="flex-grow max-w-4xl mx-auto w-full px-6 py-12">
+      <main className="grow max-w-4xl mx-auto w-full px-6 py-12">
         {/* Breadcrumb */}
         <nav className="flex items-center gap-2 text-sm text-slate-400 mb-8">
           <Link href="/directory" className="hover:text-brand-purple font-medium">Directory</Link>

@@ -163,8 +163,7 @@ export default async function HomePage() {
       {/* ═══════════════════════════════════════════════════════
           THE DIFFERENCE — Why we're not Angi/Thumbtack
           ═══════════════════════════════════════════════════════ */}
-      <AnimatedSection>
-        <section className="py-20 bg-slate-50">
+              <section className="py-20 bg-slate-50">
           <div className="max-w-4xl mx-auto px-6">
             <div className="text-center mb-14">
               <h2 className="text-3xl md:text-4xl font-black text-slate-800 mb-3">
@@ -223,13 +222,11 @@ export default async function HomePage() {
             </div>
           </div>
         </section>
-      </AnimatedSection>
 
       {/* ═══════════════════════════════════════════════════════
           VERIFICATION DEEP DIVE — The 4 databases
           ═══════════════════════════════════════════════════════ */}
-      <AnimatedSection>
-        <section className="py-20 bg-white">
+              <section className="py-20 bg-white">
           <div className="max-w-4xl mx-auto px-6">
             <div className="text-center mb-14">
               <h2 className="text-3xl md:text-4xl font-black text-slate-800 mb-3">
@@ -253,13 +250,11 @@ export default async function HomePage() {
             </StaggeredGrid>
           </div>
         </section>
-      </AnimatedSection>
 
       {/* ═══════════════════════════════════════════════════════
           SERVICES — What we cover
           ═══════════════════════════════════════════════════════ */}
-      <AnimatedSection>
-        <section className="py-20 bg-slate-50">
+              <section className="py-20 bg-slate-50">
           <div className="max-w-4xl mx-auto px-6">
             <h2 className="text-3xl md:text-4xl font-black text-slate-800 text-center mb-3">Every Home Service Covered</h2>
             <p className="text-slate-500 text-center mb-12">Pick a service or tell us what you need — we&apos;ll find the right pro</p>
@@ -275,13 +270,11 @@ export default async function HomePage() {
             </StaggeredGrid>
           </div>
         </section>
-      </AnimatedSection>
 
       {/* ═══════════════════════════════════════════════════════
           HOW IT WORKS — 3 steps
           ═══════════════════════════════════════════════════════ */}
-      <AnimatedSection>
-        <section className="py-20 bg-white">
+              <section className="py-20 bg-white">
           <div className="max-w-4xl mx-auto px-6">
             <h2 className="text-3xl md:text-4xl font-black text-slate-800 text-center mb-3">Get Connected in 3 Steps</h2>
             <p className="text-slate-500 text-center mb-14">No account needed. No hidden fees. Just help.</p>
@@ -310,14 +303,12 @@ export default async function HomePage() {
             </div>
           </div>
         </section>
-      </AnimatedSection>
 
       {/* ═══════════════════════════════════════════════════════
           FEATURED PROVIDERS — Social proof
           ═══════════════════════════════════════════════════════ */}
       {providers.length > 0 && (
-        <AnimatedSection>
-          <section className="py-20 bg-slate-50">
+                  <section className="py-20 bg-slate-50">
             <div className="max-w-4xl mx-auto px-6">
               <div className="flex items-center justify-between mb-12">
                 <div>
@@ -368,7 +359,6 @@ export default async function HomePage() {
               </div>
             </div>
           </section>
-        </AnimatedSection>
       )}
 
       {/* Chat Modal — desktop: popover, mobile: redirects to /get-matched */}
@@ -377,8 +367,7 @@ export default async function HomePage() {
       {/* ═══════════════════════════════════════════════════════
           FAQ — SEO + trust
           ═══════════════════════════════════════════════════════ */}
-      <AnimatedSection>
-        <section className="py-20 bg-white">
+              <section className="py-20 bg-white">
           <div className="max-w-3xl mx-auto px-6">
             <h2 className="text-3xl font-black text-slate-800 text-center mb-10">Frequently Asked Questions</h2>
             <div className="space-y-3">
@@ -400,7 +389,6 @@ export default async function HomePage() {
             </div>
           </div>
         </section>
-      </AnimatedSection>
 
       {/* ═══════════════════════════════════════════════════════
           SERVICE AREA — Local SEO
