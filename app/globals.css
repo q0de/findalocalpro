@@ -132,3 +132,26 @@ details > div {
   opacity: 1;
   transition: opacity 0s;
 }
+
+/* Smooth FAQ accordion */
+details summary {
+  list-style: none;
+}
+details summary::-webkit-details-marker {
+  display: none;
+}
+details > p {
+  overflow: hidden;
+  max-height: 0;
+  opacity: 0;
+  transition: max-height 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+              opacity 0.3s ease,
+              padding 0.3s ease,
+              margin 0.3s ease;
+  padding-bottom: 0;
+}
+details[open] > p {
+  max-height: 200px;
+  opacity: 1;
+  padding-bottom: 1.5rem;
+}

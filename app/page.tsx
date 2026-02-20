@@ -195,48 +195,56 @@ export default async function HomePage() {
 
             <div className="grid md:grid-cols-2 gap-6">
               {/* What others do */}
-              <div className="bg-white rounded-2xl border-2 border-slate-200 p-6">
-                <div className="flex items-center gap-2 mb-4">
-                  <span className="material-symbols-outlined text-red-400 text-2xl">cancel</span>
-                  <h3 className="font-black text-slate-800 text-lg">Other Directories</h3>
+              <AnimatedSection delay={0} direction="left">
+                <div className="bg-white rounded-2xl border-2 border-slate-200 p-6">
+                  <div className="flex items-center gap-2 mb-4">
+                    <span className="material-symbols-outlined text-red-400 text-2xl">cancel</span>
+                    <h3 className="font-black text-slate-800 text-lg">Other Directories</h3>
+                  </div>
+                  <ul className="space-y-3">
+                    {[
+                      'Pay-to-play rankings',
+                      'Self-reported credentials',
+                      'Fake or incentivized reviews',
+                      'No license verification',
+                      'Hidden fees for homeowners',
+                    ].map((item, i) => (
+                      <AnimatedSection key={item} delay={200 + i * 100} direction="left">
+                        <li className="flex items-center gap-3 text-slate-500">
+                          <span className="material-symbols-outlined text-red-300 text-base">close</span>
+                          {item}
+                        </li>
+                      </AnimatedSection>
+                    ))}
+                  </ul>
                 </div>
-                <ul className="space-y-3">
-                  {[
-                    'Pay-to-play rankings',
-                    'Self-reported credentials',
-                    'Fake or incentivized reviews',
-                    'No license verification',
-                    'Hidden fees for homeowners',
-                  ].map((item) => (
-                    <li key={item} className="flex items-center gap-3 text-slate-500">
-                      <span className="material-symbols-outlined text-red-300 text-base">close</span>
-                      {item}
-                    </li>
-                  ))}
-                </ul>
-              </div>
+              </AnimatedSection>
 
               {/* What we do */}
-              <div className="bg-white rounded-2xl border-2 border-brand-teal/30 p-6 shadow-lg shadow-brand-teal/5">
-                <div className="flex items-center gap-2 mb-4">
-                  <span className="material-symbols-outlined text-brand-teal text-2xl">check_circle</span>
-                  <h3 className="font-black text-slate-800 text-lg">FindALocalPro</h3>
+              <AnimatedSection delay={100} direction="right">
+                <div className="bg-white rounded-2xl border-2 border-brand-teal/30 p-6 shadow-lg shadow-brand-teal/5 hover:shadow-xl hover:border-brand-teal/50 transition-all duration-500">
+                  <div className="flex items-center gap-2 mb-4">
+                    <span className="material-symbols-outlined text-brand-teal text-2xl">check_circle</span>
+                    <h3 className="font-black text-slate-800 text-lg">FindALocalPro</h3>
+                  </div>
+                  <ul className="space-y-3">
+                    {[
+                      'Ranked by verified trust score',
+                      'State license database checked',
+                      'BBB rating & complaints reviewed',
+                      'Business registration confirmed',
+                      '100% free for homeowners',
+                    ].map((item, i) => (
+                      <AnimatedSection key={item} delay={300 + i * 100} direction="right">
+                        <li className="flex items-center gap-3 text-slate-700 font-medium">
+                          <span className="material-symbols-outlined text-brand-teal text-base">check</span>
+                          {item}
+                        </li>
+                      </AnimatedSection>
+                    ))}
+                  </ul>
                 </div>
-                <ul className="space-y-3">
-                  {[
-                    'Ranked by verified trust score',
-                    'State license database checked',
-                    'BBB rating & complaints reviewed',
-                    'Business registration confirmed',
-                    '100% free for homeowners',
-                  ].map((item) => (
-                    <li key={item} className="flex items-center gap-3 text-slate-700 font-medium">
-                      <span className="material-symbols-outlined text-brand-teal text-base">check</span>
-                      {item}
-                    </li>
-                  ))}
-                </ul>
-              </div>
+              </AnimatedSection>
             </div>
           </div>
         </section>
@@ -276,16 +284,16 @@ export default async function HomePage() {
           <div className="max-w-4xl mx-auto px-6">
             <h2 className="text-3xl md:text-4xl font-black text-slate-800 text-center mb-3">Every Home Service Covered</h2>
             <p className="text-slate-500 text-center mb-12">Pick a service or tell us what you need — we&apos;ll find the right pro</p>
-            <div className="grid grid-cols-2 min-[480px]:grid-cols-3 md:grid-cols-4 gap-3 sm:gap-4 md:gap-6">
+            <StaggeredGrid columns={4}>
               {services.map((svc) => (
-                <Link key={svc.label} href={svc.href} className="group bg-white border-2 border-slate-100 rounded-2xl p-3 sm:p-5 text-center shadow-sm hover:border-brand-purple hover:shadow-lg transition-colors duration-300">
-                  <div className={`w-14 h-14 rounded-2xl flex items-center justify-center mx-auto mb-3 ${svc.bg} ${svc.text}`}>
+                <Link key={svc.label} href={svc.href} className="group bg-white border-2 border-slate-100 rounded-2xl p-3 sm:p-5 text-center shadow-sm hover:border-brand-purple hover:shadow-lg transition-all duration-300 hover:-translate-y-1">
+                  <div className={`w-14 h-14 rounded-2xl flex items-center justify-center mx-auto mb-3 ${svc.bg} ${svc.text} transition-transform duration-300 group-hover:scale-110 group-hover:rotate-3`}>
                     <span className="material-symbols-outlined text-2xl">{svc.icon}</span>
                   </div>
                   <p className="text-sm font-bold text-slate-700 group-hover:text-brand-purple transition-colors">{svc.label}</p>
                 </Link>
               ))}
-            </div>
+            </StaggeredGrid>
           </div>
         </section>
 
@@ -337,12 +345,12 @@ export default async function HomePage() {
                   View All <span className="material-symbols-outlined text-base">arrow_forward</span>
                 </Link>
               </div>
-              <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3 sm:gap-4 md:gap-6">
+              <StaggeredGrid columns={3}>
                 {providers.map((p) => {
                   const trade = tradeConfig[p.trade] || tradeConfig.general;
                   const score = Math.round(p.trust_score || 0);
                   return (
-                    <Link key={p.id} href={`/pro/${p.slug}`} className="group bg-white border-2 border-slate-100 rounded-2xl p-6 hover:border-brand-purple hover:shadow-xl transition-colors duration-300">
+                    <Link key={p.id} href={`/pro/${p.slug}`} className="group bg-white border-2 border-slate-100 rounded-2xl p-6 hover:border-brand-purple hover:shadow-xl transition-all duration-300 hover:-translate-y-1">
                       <div className="flex items-center gap-3 mb-4">
                         <div className={`w-12 h-12 rounded-xl flex items-center justify-center ${trade.bgColor} ${trade.color} transition-transform duration-300 group-hover:scale-110`}>
                           <span className="material-symbols-outlined text-xl">{trade.icon}</span>
@@ -369,7 +377,7 @@ export default async function HomePage() {
                     </Link>
                   );
                 })}
-              </div>
+              </StaggeredGrid>
               <div className="mt-8 text-center md:hidden">
                 <Link href="/directory" className="inline-flex items-center gap-2 text-brand-purple font-bold">
                   View All Pros <span className="material-symbols-outlined text-base">arrow_forward</span>
@@ -439,18 +447,22 @@ export default async function HomePage() {
           ═══════════════════════════════════════════════════════ */}
       <section className="py-20 bg-brand-purple text-center">
         <div className="max-w-3xl mx-auto px-6">
-          <h2 className="text-3xl md:text-4xl font-black text-white mb-4">Stop Guessing. Start Verifying.</h2>
-          <p className="text-purple-200 mb-10 text-lg">Every pro on our site has been checked against state records. Get matched for free.</p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <ChatTrigger className="group inline-flex items-center justify-center gap-2 bg-brand-yellow hover:bg-white text-slate-900 px-8 py-4 rounded-2xl font-black text-lg transition-all shadow-xl hover:shadow-2xl hover:-translate-y-1 active:translate-y-0 cursor-pointer">
-              <span className="material-symbols-outlined transition-transform group-hover:scale-110">chat</span>
-              Get Matched Free
-            </ChatTrigger>
-            <a href="tel:6304071727" className="inline-flex items-center justify-center gap-2 bg-white/10 hover:bg-white/20 text-white px-8 py-4 rounded-2xl font-black text-lg border-2 border-white/30 transition-all">
-              <span className="material-symbols-outlined">call</span>
-              (630) 407-1727
-            </a>
-          </div>
+          <AnimatedSection delay={0}>
+            <h2 className="text-3xl md:text-4xl font-black text-white mb-4">Stop Guessing. Start Verifying.</h2>
+            <p className="text-purple-200 mb-10 text-lg">Every pro on our site has been checked against state records. Find yours for free.</p>
+          </AnimatedSection>
+          <AnimatedSection delay={200}>
+            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+              <ChatTrigger className="hero-cta-primary group inline-flex items-center justify-center gap-2 bg-brand-yellow hover:bg-white text-slate-900 px-8 py-4 rounded-2xl font-black text-lg transition-all shadow-xl hover:shadow-2xl hover:-translate-y-1 active:translate-y-0 cursor-pointer">
+                <span className="material-symbols-outlined transition-transform group-hover:scale-110">chat</span>
+                Find My Pro
+              </ChatTrigger>
+              <a href="tel:6304071727" className="hero-cta-secondary inline-flex items-center justify-center gap-2 bg-white/10 hover:bg-white/20 text-white px-8 py-4 rounded-2xl font-black text-lg border-2 border-white/30 transition-all">
+                <span className="material-symbols-outlined phone-ring">call</span>
+                (630) 407-1727
+              </a>
+            </div>
+          </AnimatedSection>
         </div>
       </section>
 
