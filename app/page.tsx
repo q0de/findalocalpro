@@ -284,16 +284,18 @@ export default async function HomePage() {
           <div className="max-w-4xl mx-auto px-6">
             <h2 className="text-3xl md:text-4xl font-black text-slate-800 text-center mb-3">Every Home Service Covered</h2>
             <p className="text-slate-500 text-center mb-12">Pick a service or tell us what you need — we&apos;ll find the right pro</p>
-            <StaggeredGrid columns={4}>
-              {services.map((svc) => (
-                <Link key={svc.label} href={svc.href} className="group bg-white border-2 border-slate-100 rounded-2xl p-3 sm:p-5 text-center shadow-sm hover:border-brand-purple hover:shadow-lg transition-all duration-300 hover:-translate-y-1">
-                  <div className={`w-14 h-14 rounded-2xl flex items-center justify-center mx-auto mb-3 ${svc.bg} ${svc.text} transition-transform duration-300 group-hover:scale-110 group-hover:rotate-3`}>
-                    <span className="material-symbols-outlined text-2xl">{svc.icon}</span>
-                  </div>
-                  <p className="text-sm font-bold text-slate-700 group-hover:text-brand-purple transition-colors">{svc.label}</p>
-                </Link>
+            <div className="grid grid-cols-2 min-[480px]:grid-cols-3 md:grid-cols-4 gap-3 sm:gap-4 md:gap-6">
+              {services.map((svc, i) => (
+                <AnimatedSection key={svc.label} delay={i * 60}>
+                  <Link href={svc.href} className="group block bg-white border-2 border-slate-100 rounded-2xl p-3 sm:p-5 text-center shadow-sm hover:border-brand-purple hover:shadow-lg transition-all duration-300 hover:-translate-y-1">
+                    <div className={`w-14 h-14 rounded-2xl flex items-center justify-center mx-auto mb-3 ${svc.bg} ${svc.text} transition-transform duration-300 group-hover:scale-110 group-hover:rotate-3`}>
+                      <span className="material-symbols-outlined text-2xl">{svc.icon}</span>
+                    </div>
+                    <p className="text-sm font-bold text-slate-700 group-hover:text-brand-purple transition-colors">{svc.label}</p>
+                  </Link>
+                </AnimatedSection>
               ))}
-            </StaggeredGrid>
+            </div>
           </div>
         </section>
 
@@ -345,12 +347,13 @@ export default async function HomePage() {
                   View All <span className="material-symbols-outlined text-base">arrow_forward</span>
                 </Link>
               </div>
-              <StaggeredGrid columns={3}>
-                {providers.map((p) => {
+              <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3 sm:gap-4 md:gap-6">
+                {providers.map((p, i) => {
                   const trade = tradeConfig[p.trade] || tradeConfig.general;
                   const score = Math.round(p.trust_score || 0);
                   return (
-                    <Link key={p.id} href={`/pro/${p.slug}`} className="group bg-white border-2 border-slate-100 rounded-2xl p-6 hover:border-brand-purple hover:shadow-xl transition-all duration-300 hover:-translate-y-1">
+                    <AnimatedSection key={p.id} delay={i * 80}>
+                    <Link href={`/pro/${p.slug}`} className="group block bg-white border-2 border-slate-100 rounded-2xl p-6 hover:border-brand-purple hover:shadow-xl transition-all duration-300 hover:-translate-y-1">
                       <div className="flex items-center gap-3 mb-4">
                         <div className={`w-12 h-12 rounded-xl flex items-center justify-center ${trade.bgColor} ${trade.color} transition-transform duration-300 group-hover:scale-110`}>
                           <span className="material-symbols-outlined text-xl">{trade.icon}</span>
@@ -375,9 +378,10 @@ export default async function HomePage() {
                         <span className="material-symbols-outlined text-slate-300 group-hover:text-brand-purple transition-colors">arrow_forward</span>
                       </div>
                     </Link>
+                    </AnimatedSection>
                   );
                 })}
-              </StaggeredGrid>
+              </div>
               <div className="mt-8 text-center md:hidden">
                 <Link href="/directory" className="inline-flex items-center gap-2 text-brand-purple font-bold">
                   View All Pros <span className="material-symbols-outlined text-base">arrow_forward</span>
