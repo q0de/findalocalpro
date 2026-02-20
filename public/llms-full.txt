@@ -1,0 +1,126 @@
+# FindALocalPro — Full Reference
+
+> Verified home service professionals in DuPage County, Illinois.
+> Last updated: 2026-02-20
+
+## About
+
+FindALocalPro is a home services verification platform serving DuPage County, IL. We check every contractor against 4 government databases before they appear on our site. No paid placements, no ads — just verified credentials.
+
+Founded: 2026
+Location: Downers Grove, IL
+Phone: (630) 703-2607
+Website: https://findalocalpro.com
+
+## Verification Process — Detailed
+
+### Database 1: IDFPR (Illinois Department of Financial and Professional Regulation)
+- What we check: Active state license status for regulated trades (plumbing, electrical, roofing)
+- What it means: The pro passed state licensing exams and meets education/experience requirements
+- Disqualification: Expired, revoked, or suspended license
+- Source: idfpr.illinois.gov public license lookup
+
+### Database 2: IL Secretary of State — Business Registration
+- What we check: Business entity registration and good standing status
+- What it means: The company is a real, registered Illinois business — not a fly-by-night operation
+- Disqualification: Dissolved, revoked, or "not in good standing" status
+- Source: Cyber Drive Illinois business search
+
+### Database 3: Better Business Bureau (BBB)
+- What we check: BBB rating (A+ through F), complaint volume, complaint resolution patterns
+- What it means: Shows how the business handles disputes and customer complaints
+- Disqualification: F rating
+- Source: bbb.org/chicago
+
+### Database 4: BuildZoom
+- What we check: Building permit history, contractor ranking score
+- What it means: Verified track record of permitted work in the area
+- No hard disqualification, but factored into Trust Score
+- Source: buildzoom.com
+
+### Re-verification
+All providers are re-verified monthly. If a license expires or a business is dissolved between verification cycles, the provider is flagged and removed from active listings.
+
+## Trust Score Calculation
+
+Each provider receives a Trust Score from 0-100:
+
+| Component | Weight | Scoring |
+|-----------|--------|---------|
+| License (IDFPR) | 40% | Active = full points, expired = 0 |
+| Business Registration (SOS) | 25% | Active/good standing = full points |
+| BBB Rating | 15% | A+ = 15, A = 13, B = 10, C = 7, F = 0 |
+| BuildZoom Score | 10% | Normalized from BZ ranking |
+| Customer Reviews | 10% | 4.5+ stars = 10, 4.0+ = 7, 3.5+ = 4, <3.5 = 1 |
+
+Zero reviews = no penalty (score scales to 100 without review weight).
+1-2 reviews = half weight. 3+ reviews = full weight.
+
+## Services Covered
+
+### Plumbing
+Leak repair, drain cleaning, water heaters, pipe repair, fixture installation, emergency plumbing.
+URL: https://findalocalpro.com/services/plumbing
+
+### HVAC & Heating
+AC repair, furnace service, system installation, duct cleaning, thermostat installation, heat pumps.
+URL: https://findalocalpro.com/services/hvac
+
+### Electricians
+Electrical repairs, panel upgrades, lighting, wiring/rewiring, EV chargers, generators.
+URL: https://findalocalpro.com/services/electricians
+
+### Roofing
+Roof repair, replacement, storm damage, inspections, gutters, flat roof service.
+URL: https://findalocalpro.com/services/roofing
+
+### Pest Control
+Ants, roaches, rodents, termites, bed bugs, mosquito/tick control.
+URL: https://findalocalpro.com/services/pest-control
+
+### Appliance Repair
+Refrigerators, washers/dryers, dishwashers, ovens, microwaves, HVAC-adjacent units.
+URL: https://findalocalpro.com/services/appliance-repair
+
+## Service Area — 12 Towns
+
+| Town | County | ZIP Codes |
+|------|--------|-----------|
+| Downers Grove | DuPage | 60515, 60516 |
+| Westmont | DuPage | 60559 |
+| Lisle | DuPage | 60532 |
+| Woodridge | DuPage | 60517 |
+| Darien | DuPage | 60561 |
+| Naperville | DuPage | 60540, 60563, 60564, 60565 |
+| Lombard | DuPage | 60148 |
+| Glen Ellyn | DuPage | 60137 |
+| Wheaton | DuPage | 60187, 60189 |
+| Hinsdale | DuPage | 60521 |
+| Oak Brook | DuPage | 60523 |
+| Bolingbrook | Will | 60440, 60490 |
+
+Location pages: https://findalocalpro.com/locations/{town-slug}
+
+## Site Structure
+
+- Homepage: https://findalocalpro.com
+- Provider Directory: https://findalocalpro.com/directory
+- Get Matched (lead form): https://findalocalpro.com/get-matched
+- About Us: https://findalocalpro.com/about
+- Contact: https://findalocalpro.com/contact
+- Reviews: https://findalocalpro.com/reviews
+- Methodology: https://findalocalpro.com/methodology
+- Blog: https://findalocalpro.com/blog
+- Individual Pro Profiles: https://findalocalpro.com/pro/{slug}
+- Privacy Policy: https://findalocalpro.com/privacy
+- Terms of Service: https://findalocalpro.com/terms
+
+## How Homeowners Use FindALocalPro
+
+1. Visit the site or call (630) 703-2607
+2. Select a service category and describe the job
+3. Get matched with verified pros serving their area
+4. Review Trust Scores and verification details
+5. Connect directly with the pro — no middleman markup
+
+Free for homeowners. No account required.

@@ -40,10 +40,10 @@ const services = [
 ];
 
 const verificationSources = [
-  { icon: 'badge', label: 'IDFPR', desc: 'If their license expired or has complaints, we flag it.', color: 'text-blue-600 bg-blue-50' },
-  { icon: 'account_balance', label: 'Secretary of State', desc: 'If they are not a registered business in Illinois, that is a red flag.', color: 'text-indigo-600 bg-indigo-50' },
-  { icon: 'workspace_premium', label: 'BBB', desc: 'Customer complaints and resolution history — the stuff they do not put on their website.', color: 'text-amber-600 bg-amber-50' },
-  { icon: 'construction', label: 'BuildZoom', desc: 'Permit history and project quality scores from public records.', color: 'text-emerald-600 bg-emerald-50' },
+  { icon: 'badge', label: 'IDFPR', desc: 'Confirms your pro passed state licensing exams and carries required insurance. Expired or revoked? They\'re not on our site.', color: 'text-blue-600 bg-blue-50' },
+  { icon: 'account_balance', label: 'Secretary of State', desc: 'Proves they\'re a real, registered Illinois business — not a fly-by-night operation that disappears after cashing your check.', color: 'text-indigo-600 bg-indigo-50' },
+  { icon: 'workspace_premium', label: 'BBB', desc: 'Shows complaint history and how they handle disputes. The stuff they don\'t put on their website — but you need to know.', color: 'text-amber-600 bg-amber-50' },
+  { icon: 'construction', label: 'BuildZoom', desc: 'Ranks contractors by actual permit history and project quality. Real track record, not just marketing claims.', color: 'text-emerald-600 bg-emerald-50' },
 ];
 
 const areaTags = ['Downers Grove', 'Westmont', 'Lisle', 'Woodridge', 'Darien', 'Naperville', 'Lombard', 'Glen Ellyn', 'Wheaton', 'Hinsdale', 'Oak Brook', 'Bolingbrook'];
@@ -94,7 +94,7 @@ export default async function HomePage() {
               </p>
               
               <div className="flex flex-col sm:flex-row gap-4">
-                <ChatTrigger className="group inline-flex items-center justify-center gap-2 bg-brand-purple hover:bg-brand-pink text-white px-8 py-4 rounded-2xl font-black text-lg transition-all shadow-xl hover:shadow-2xl hover:-translate-y-1 active:translate-y-0 cursor-pointer">
+                <ChatTrigger className="ripple-btn group inline-flex items-center justify-center gap-2 bg-brand-purple hover:bg-brand-pink text-white px-8 py-4 rounded-2xl font-black text-lg transition-all shadow-xl hover:shadow-2xl hover:-translate-y-1 active:translate-y-0 cursor-pointer">
                   <span className="material-symbols-outlined transition-transform group-hover:scale-110">chat</span>
                   Get Matched Free
                 </ChatTrigger>

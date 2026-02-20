@@ -1,5 +1,6 @@
 import type { MetadataRoute } from 'next';
 import { SUPABASE_URL, SUPABASE_ANON } from '@/lib/supabase';
+import { blogPosts } from '@/lib/blog-posts';
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const now = new Date();
@@ -61,5 +62,21 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     // Silent — sitemap still works with static pages
   }
 
-  return [...staticPages, ...locationPages, ...servicePages, ...providerPages];
+  // Methodology page
+  const methodologyPage: MetadataRoute.Sitemap = [
+    { url: 'https://findalocalpro.com/methodology', lastModified: now, changeFrequency: 'monthly' as const, priority: 0.7 },
+  ];
+
+  // Blog pages
+  const blogPages: MetadataRoute.Sitemap = [
+    { url: 'https://findalocalpro.com/blog', lastModified: now, changeFrequency: 'weekly' as const, priority: 0.7 },
+    ...blogPosts.map(post => ({
+      url: `https://findalocalpro.com/blog/${post.slug}`,
+      lastModified: new Date(post.modifiedDate),
+      changeFrequency: 'monthly' as const,
+      priority: 0.6,
+    })),
+  ];
+
+  return [...staticPages, ...methodologyPage, ...locationPages, ...servicePages, ...blogPages, ...providerPages];
 }

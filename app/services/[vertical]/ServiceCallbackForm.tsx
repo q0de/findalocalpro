@@ -1,10 +1,32 @@
 'use client';
 
+const tradeLabels: Record<string, string> = {
+  plumbing: 'Plumbing',
+  hvac: 'HVAC',
+  electricians: 'Electrical',
+  roofing: 'Roofing',
+  'pest-control': 'Pest Control',
+  'appliance-repair': 'Appliance Repair',
+};
+
+const urgencyHints: Record<string, string> = {
+  plumbing: 'Most plumbing emergencies get worse by the hour.',
+  hvac: "Don't wait for a breakdown in a Chicago winter.",
+  electricians: 'Electrical issues are a fire hazard — don\'t DIY.',
+  roofing: 'Small leaks become big problems fast.',
+  'pest-control': 'Pests multiply quickly — early action saves money.',
+  'appliance-repair': 'A broken appliance disrupts your whole routine.',
+};
+
 export function ServiceCallbackForm({ vertical }: { vertical: string }) {
+  const trade = tradeLabels[vertical] || 'Home Service';
+  const urgency = urgencyHints[vertical];
+
   return (
     <div className="bg-slate-50 rounded-3xl p-8 shadow-sm">
-      <h2 className="text-2xl font-bold text-slate-800 text-center mb-2">Request a Callback</h2>
-      <p className="text-slate-500 text-center mb-8">Prefer not to call? Leave your info and we&apos;ll reach out.</p>
+      <h2 className="text-2xl font-bold text-slate-800 text-center mb-2">Get a Call from a Verified {trade} Pro</h2>
+      <p className="text-slate-500 text-center mb-2">Leave your info and a verified pro will reach out.</p>
+      {urgency && <p className="text-amber-600 text-sm font-semibold text-center mb-6">⚡ {urgency}</p>}
       <form onSubmit={(e) => { e.preventDefault(); alert('Thank you! We will call you shortly.'); }}>
         <div className="space-y-4">
           <div>

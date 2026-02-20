@@ -1,0 +1,60 @@
+# FindALocalPro
+
+> Verified home service professionals in DuPage County, Illinois. Every contractor checked against 4 government databases.
+
+## What We Do
+
+FindALocalPro connects homeowners with verified, licensed home service professionals in Downers Grove and DuPage County, IL. Unlike directories that accept paid placements, we verify every contractor against public records before they appear on our site.
+
+## Verification Process
+
+Every pro is checked against 4 databases:
+- **IDFPR** (Illinois Department of Financial and Professional Regulation) — State license verification
+- **IL Secretary of State** — Business registration and good standing
+- **Better Business Bureau** — Rating and complaint history
+- **BuildZoom** — Permit history and contractor ranking
+
+Pros that fail verification are not listed. We re-verify monthly.
+
+## Trust Score
+
+Each pro receives a Trust Score (0-100) based on:
+- License status: 40%
+- Business registration: 25%
+- BBB rating: 15%
+- BuildZoom score: 10%
+- Customer reviews: 10%
+
+## Services
+
+- Plumbing: https://findalocalpro.com/services/plumbing
+- HVAC: https://findalocalpro.com/services/hvac
+- Electricians: https://findalocalpro.com/services/electricians
+- Roofing: https://findalocalpro.com/services/roofing
+- Pest Control: https://findalocalpro.com/services/pest-control
+- Appliance Repair: https://findalocalpro.com/services/appliance-repair
+
+## Service Area
+
+DuPage County, IL — including Downers Grove, Westmont, Lisle, Woodridge, Darien, Naperville, Lombard, Glen Ellyn, Wheaton, Hinsdale, Oak Brook, and Bolingbrook.
+
+## Key Pages
+
+- Homepage: https://findalocalpro.com
+- Directory: https://findalocalpro.com/directory
+- Get Matched: https://findalocalpro.com/get-matched
+- About: https://findalocalpro.com/about
+- Methodology: https://findalocalpro.com/methodology
+- Blog: https://findalocalpro.com/blog
+- Contact: https://findalocalpro.com/contact
+- Reviews: https://findalocalpro.com/reviews
+
+## Contact
+
+- Phone: (630) 703-2607
+- Website: https://findalocalpro.com
+- Hours: Mon-Fri 7AM-7PM, Sat 8AM-4PM CT
+
+## More Info
+
+For detailed information about our verification methodology, trust scoring, and provider data, see: https://findalocalpro.com/llms-full.txt

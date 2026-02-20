@@ -92,17 +92,31 @@ function ReviewSnippet({ stats }: { stats: BusinessReviewStats }) {
 function TrustBadge({ score }: { score: number | null }) {
   if (!score) return null;
   const pct = Math.round(score);
-  let color = 'bg-slate-200 text-slate-600';
-  let label = 'Pending';
-  if (pct >= 70) { color = 'bg-brand-teal text-white'; label = 'Verified'; }
-  else if (pct >= 40) { color = 'bg-brand-purple text-white'; label = 'Verified'; }
-  else if (pct > 0) { color = 'bg-brand-yellow text-slate-900'; label = 'Pending'; }
+  const radius = 16;
+  const circumference = 2 * Math.PI * radius;
+  const offset = circumference - (pct / 100) * circumference;
+  const ringColor = pct >= 70 ? '#2dd4bf' : pct >= 40 ? '#a855f7' : '#facc15';
 
   return (
-    <span className={`inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-black uppercase tracking-wider ${color}`}>
-      {pct >= 40 && <span className="material-symbols-outlined text-sm">verified</span>}
-      {label} · {pct}
-    </span>
+    <div className="flex items-center gap-2">
+      <div className="relative w-10 h-10 shrink-0">
+        <svg viewBox="0 0 40 40" className="w-full h-full -rotate-90">
+          <circle cx="20" cy="20" r={radius} fill="none" stroke="rgba(0,0,0,0.08)" strokeWidth="3" />
+          <circle
+            cx="20" cy="20" r={radius} fill="none"
+            stroke={ringColor} strokeWidth="3" strokeLinecap="round"
+            strokeDasharray={circumference} strokeDashoffset={offset}
+            style={{ transition: 'stroke-dashoffset 1s cubic-bezier(0.16,1,0.3,1)' }}
+          />
+        </svg>
+        <div className="absolute inset-0 flex items-center justify-center">
+          <span className="text-[10px] font-black text-slate-800">{pct}</span>
+        </div>
+      </div>
+      <span className="text-xs font-bold text-slate-500 uppercase tracking-wider">
+        {pct >= 40 ? 'Verified' : 'Pending'}
+      </span>
+    </div>
   );
 }
 
