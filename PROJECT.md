@@ -104,6 +104,16 @@ SUPABASE_ACCESS_TOKEN="sbp_695522f2a15b58c2ae732ea04f09679e866315df" npx supabas
 - [x] Weekly cron: `com.findalocalpro.fetch-reviews` — Sundays 7am
 - [x] Script: `~/clawd/scripts/falp-fetch-reviews.py`
 
+### AI Review Summaries — TODO (next session)
+- [ ] After weekly review fetch, generate AI summary per business using Claude API
+- [ ] Summary should be 2-3 sentences: what customers love, any common complaints, overall vibe
+- [ ] Store in `businesses` table as `review_summary` column (TEXT)
+- [ ] Show on directory cards (below stars/count, above verification badges)
+- [ ] Show on pro profile pages (above individual reviews)
+- [ ] Script flow: falp-fetch-reviews.py pulls reviews → new script falp-summarize-reviews.py reads all reviews per business → calls Claude API → updates business record
+- [ ] Weekly cron: run summarizer AFTER review fetcher (Sundays 7:15am)
+- [ ] Example output: "Customers consistently praise Four Suns for same-day emergency service and transparent pricing. A few mentions of scheduling delays during peak season, but overwhelmingly positive — 4.9★ across 259 reviews."
+
 ### Verification Engine (2026-02-20)
 - [x] IDFPR license lookup via Tavily
 - [x] IL Secretary of State business check
