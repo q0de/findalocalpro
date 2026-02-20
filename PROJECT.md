@@ -92,6 +92,18 @@ SUPABASE_ACCESS_TOKEN="sbp_695522f2a15b58c2ae732ea04f09679e866315df" npx supabas
 - [x] Footer: 4-column internal linking grid + 12 service area towns
 - [x] Breadcrumbs on about/contact
 
+### Reviews System (2026-02-20)
+- [x] Review fetcher script (Google Places API + Tavily fallback)
+- [x] Pulls from Yelp, BBB, Angi, Google, web sources
+- [x] Deduplication by business + source + review text
+- [x] Supabase `reviews` table populated (9 initial reviews)
+- [x] /reviews page pulls from Supabase dynamically (with static fallback)
+- [x] AggregateRating + Review JSON-LD schema on /reviews page
+- [x] Stats bar (average rating, total reviews, 5-star count)
+- [x] Source badges (Google, Yelp, BBB, Angi, etc.)
+- [x] Weekly cron: `com.findalocalpro.fetch-reviews` — Sundays 7am
+- [x] Script: `~/clawd/scripts/falp-fetch-reviews.py`
+
 ### Verification Engine (2026-02-20)
 - [x] IDFPR license lookup via Tavily
 - [x] IL Secretary of State business check
