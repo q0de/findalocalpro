@@ -5,6 +5,7 @@ import { Header } from '@/components/Header';
 import { Footer } from '@/components/Footer';
 import Breadcrumbs from '@/components/Breadcrumbs';
 import { blogPosts, getBlogPost } from '@/lib/blog-posts';
+import { BlogContent } from './BlogContent';
 
 export function generateStaticParams() {
   return blogPosts.map((post) => ({ slug: post.slug }));
@@ -59,6 +60,10 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
   } : null;
 
   const otherPosts = blogPosts.filter((p) => p.slug !== post.slug).slice(0, 3);
+  const serviceLinks = post.relatedServices.map(s => {
+    const labels: Record<string, string> = { plumbing: 'Plumbing', hvac: 'HVAC', electricians: 'Electricians', roofing: 'Roofing', 'pest-control': 'Pest Control', 'appliance-repair': 'Appliance Repair' };
+    return { slug: s, label: labels[s] || s };
+  });
 
   return (
     <>
@@ -67,92 +72,137 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
       {faqJsonLd && <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }} />}
 
       <main className="min-h-screen bg-white">
-        <div className="max-w-3xl mx-auto px-6 pt-6">
-          <Breadcrumbs items={[{ label: 'Home', href: '/' }, { label: 'Blog', href: '/blog' }, { label: post.title }]} />
-        </div>
-
-        <article className="max-w-3xl mx-auto px-6 pt-8 pb-12">
-          {/* Header */}
-          <div className="mb-8">
-            <div className="flex items-center gap-3 text-sm text-slate-500 mb-4">
-              <time dateTime={post.publishedDate}>
-                {new Date(post.publishedDate).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}
-              </time>
-              <span>·</span>
-              <span>{post.readingTime}</span>
-            </div>
-            <h1 className="text-3xl md:text-4xl font-black text-slate-900 mb-4 leading-tight">
-              {post.title}
-            </h1>
-            <p className="text-lg text-slate-600">{post.description}</p>
+        {/* Hero Header */}
+        <div className="bg-gradient-to-b from-slate-50 to-white border-b border-slate-100">
+          <div className="max-w-3xl mx-auto px-6 pt-6">
+            <Breadcrumbs items={[{ label: 'Home', href: '/' }, { label: 'Blog', href: '/blog' }, { label: post.title }]} />
           </div>
 
-          {/* Content */}
-          <div
-            className="prose prose-slate prose-lg max-w-none
-              prose-headings:font-black prose-headings:text-slate-900
-              prose-h2:text-2xl prose-h2:mt-10 prose-h2:mb-4
-              prose-h3:text-xl prose-h3:mt-8 prose-h3:mb-3
-              prose-a:text-purple-600 prose-a:font-semibold prose-a:no-underline hover:prose-a:underline
-              prose-li:text-slate-700
-              prose-strong:text-slate-900
-              prose-table:border prose-table:border-slate-200 prose-th:bg-slate-50 prose-th:p-3 prose-td:p-3 prose-td:border-t prose-td:border-slate-200"
-            dangerouslySetInnerHTML={{ __html: post.content }}
-          />
+          <header className="max-w-3xl mx-auto px-6 pt-8 pb-12">
+            {/* Category tags */}
+            <div className="flex flex-wrap gap-2 mb-5">
+              {serviceLinks.map(s => (
+                <Link key={s.slug} href={`/services/${s.slug}`} className="inline-flex items-center gap-1 bg-purple-100 text-purple-700 px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider hover:bg-purple-200 transition-colors">
+                  {s.label}
+                </Link>
+              ))}
+            </div>
 
-          {/* FAQ Section */}
+            <h1 className="text-3xl md:text-[2.75rem] font-black text-slate-900 leading-[1.15] mb-6">
+              {post.title}
+            </h1>
+
+            <p className="text-xl text-slate-500 leading-relaxed font-medium mb-8">
+              {post.description}
+            </p>
+
+            {/* Meta bar */}
+            <div className="flex items-center gap-4 text-sm text-slate-400">
+              <div className="flex items-center gap-2">
+                <div className="w-8 h-8 rounded-full bg-purple-600 flex items-center justify-center">
+                  <span className="material-symbols-rounded text-white text-sm">verified</span>
+                </div>
+                <span className="font-semibold text-slate-600">FindALocalPro Team</span>
+              </div>
+              <span className="w-1 h-1 rounded-full bg-slate-300" />
+              <time dateTime={post.publishedDate}>
+                {new Date(post.publishedDate).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}
+              </time>
+              <span className="w-1 h-1 rounded-full bg-slate-300" />
+              <span className="flex items-center gap-1">
+                <span className="material-symbols-rounded text-base">schedule</span>
+                {post.readingTime}
+              </span>
+            </div>
+          </header>
+        </div>
+
+        <article className="max-w-3xl mx-auto px-6 pt-12 pb-12">
+          {/* Content with enhanced typography */}
+          <BlogContent html={post.content} />
+
+          {/* FAQ Section — Interactive Accordions */}
           {post.faqs.length > 0 && (
-            <section className="mt-16 border-t border-slate-200 pt-12">
-              <h2 className="text-2xl font-black text-slate-900 mb-8 flex items-center gap-2">
-                <span className="material-symbols-rounded text-purple-500">help</span>
-                Common Questions
-              </h2>
-              <div className="space-y-6">
+            <section className="mt-20 pt-12 border-t-2 border-slate-100">
+              <div className="flex items-center gap-3 mb-8">
+                <div className="w-10 h-10 rounded-xl bg-purple-100 flex items-center justify-center">
+                  <span className="material-symbols-rounded text-purple-600">help</span>
+                </div>
+                <div>
+                  <h2 className="text-2xl font-black text-slate-900">Common Questions</h2>
+                  <p className="text-sm text-slate-500">Quick answers from our verification team</p>
+                </div>
+              </div>
+              <div className="space-y-3">
                 {post.faqs.map((faq, i) => (
-                  <div key={i} className="bg-slate-50 rounded-xl p-6">
-                    <h3 className="font-bold text-slate-900 mb-2">{faq.q}</h3>
-                    <p className="text-slate-600 leading-relaxed">{faq.a}</p>
-                  </div>
+                  <details key={i} className="group bg-white border-2 border-slate-100 rounded-2xl overflow-hidden hover:border-purple-200 transition-colors">
+                    <summary className="flex items-center justify-between p-5 cursor-pointer font-bold text-slate-800 hover:text-purple-700 transition-colors text-[0.95rem]">
+                      {faq.q}
+                      <span className="material-symbols-rounded text-slate-400 group-open:rotate-180 transition-transform duration-300 shrink-0 ml-4 text-xl">expand_more</span>
+                    </summary>
+                    <div className="px-5 pb-5 -mt-1">
+                      <p className="text-slate-600 leading-relaxed text-[0.95rem]">{faq.a}</p>
+                    </div>
+                  </details>
                 ))}
               </div>
             </section>
           )}
 
-          {/* CTA */}
-          <section className="mt-16 bg-purple-50 border border-purple-200 rounded-2xl p-8 text-center">
-            <h2 className="text-2xl font-black text-slate-900 mb-3">
-              Need a Verified Pro?
-            </h2>
-            <p className="text-slate-600 mb-6 max-w-lg mx-auto">
-              Every contractor on FindALocalPro is verified against 4 government databases. Free for homeowners in DuPage County.
-            </p>
-            <div className="flex flex-wrap justify-center gap-3">
-              <Link href="/get-matched" className="inline-flex items-center gap-2 bg-purple-600 text-white px-6 py-3 rounded-xl font-bold hover:bg-purple-700 transition-colors">
-                <span className="material-symbols-rounded">search</span>
-                Get Matched Free
-              </Link>
-              <a href="tel:6307032607" className="inline-flex items-center gap-2 border-2 border-purple-600 text-purple-600 px-6 py-3 rounded-xl font-bold hover:bg-purple-50 transition-colors">
-                <span className="material-symbols-rounded">call</span>
-                (630) 703-2607
-              </a>
+          {/* CTA Card */}
+          <section className="mt-16">
+            <div className="relative bg-gradient-to-br from-purple-600 to-purple-800 rounded-3xl p-8 md:p-10 text-white overflow-hidden">
+              {/* Decorative circles */}
+              <div className="absolute -top-10 -right-10 w-40 h-40 bg-white/5 rounded-full" />
+              <div className="absolute -bottom-8 -left-8 w-32 h-32 bg-white/5 rounded-full" />
+              
+              <div className="relative">
+                <h2 className="text-2xl md:text-3xl font-black mb-3">
+                  Need a Verified Pro?
+                </h2>
+                <p className="text-purple-200 mb-8 max-w-md text-[0.95rem] leading-relaxed">
+                  Every contractor on FindALocalPro is verified against 4 government databases. Free for homeowners in DuPage County.
+                </p>
+                <div className="flex flex-wrap gap-3">
+                  <Link href="/get-matched" className="ripple-btn inline-flex items-center gap-2 bg-white text-purple-700 px-6 py-3 rounded-xl font-bold hover:bg-purple-50 transition-colors shadow-lg">
+                    <span className="material-symbols-rounded">search</span>
+                    Get Matched Free
+                  </Link>
+                  <a href="tel:6307032607" className="inline-flex items-center gap-2 border-2 border-white/30 px-6 py-3 rounded-xl font-bold hover:bg-white/10 transition-colors">
+                    <span className="material-symbols-rounded">call</span>
+                    (630) 703-2607
+                  </a>
+                </div>
+              </div>
             </div>
           </section>
         </article>
 
         {/* Related Posts */}
         {otherPosts.length > 0 && (
-          <section className="bg-slate-50 py-12">
+          <section className="bg-slate-50 border-t border-slate-100 py-16">
             <div className="max-w-4xl mx-auto px-6">
-              <h2 className="text-2xl font-black text-slate-900 mb-6">More Guides</h2>
-              <div className="grid md:grid-cols-3 gap-4">
+              <div className="flex items-center justify-between mb-8">
+                <h2 className="text-2xl font-black text-slate-900">Keep Reading</h2>
+                <Link href="/blog" className="text-purple-600 font-bold text-sm flex items-center gap-1 hover:underline">
+                  All guides <span className="material-symbols-rounded text-base">arrow_forward</span>
+                </Link>
+              </div>
+              <div className="grid md:grid-cols-3 gap-5">
                 {otherPosts.map((p) => (
                   <Link
                     key={p.slug}
                     href={`/blog/${p.slug}`}
-                    className="bg-white border border-slate-200 rounded-xl p-5 hover:border-purple-300 hover:shadow-md transition-all"
+                    className="group bg-white border border-slate-200 rounded-2xl p-6 hover:border-purple-300 hover:shadow-lg transition-all hover:-translate-y-1"
                   >
-                    <div className="text-xs text-slate-500 mb-2">{p.readingTime}</div>
-                    <h3 className="font-bold text-slate-900 text-sm leading-snug">{p.title}</h3>
+                    <div className="flex items-center gap-2 text-xs text-slate-400 mb-3">
+                      <span className="material-symbols-rounded text-sm">schedule</span>
+                      {p.readingTime}
+                    </div>
+                    <h3 className="font-bold text-slate-900 text-sm leading-snug group-hover:text-purple-700 transition-colors mb-2">
+                      {p.title}
+                    </h3>
+                    <p className="text-xs text-slate-500 line-clamp-2">{p.description}</p>
                   </Link>
                 ))}
               </div>
