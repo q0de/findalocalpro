@@ -113,7 +113,7 @@ export function CountUpNumber({
 /* ═══════════════════════════════════════════════════════
    TrustScoreRing — Animated circular progress
    ═══════════════════════════════════════════════════════ */
-export function TrustScoreRing({ score }: { score: number }) {
+export function TrustScoreRing({ score, light = false }: { score: number; light?: boolean }) {
   const ref = useRef<SVGSVGElement>(null);
   const [animated, setAnimated] = useState(false);
 
@@ -142,7 +142,7 @@ export function TrustScoreRing({ score }: { score: number }) {
   return (
     <div className="relative w-14 h-14 shrink-0">
       <svg ref={ref} viewBox="0 0 50 50" className="w-full h-full -rotate-90">
-        <circle cx="25" cy="25" r={radius} fill="none" stroke="rgba(255,255,255,0.15)" strokeWidth="4" />
+        <circle cx="25" cy="25" r={radius} fill="none" stroke={light ? 'rgba(0,0,0,0.08)' : 'rgba(255,255,255,0.15)'} strokeWidth="4" />
         <circle
           cx="25" cy="25" r={radius}
           fill="none"
@@ -155,7 +155,7 @@ export function TrustScoreRing({ score }: { score: number }) {
         />
       </svg>
       <div className="absolute inset-0 flex items-center justify-center">
-        <span className="text-white text-xs font-black">{score}</span>
+        <span className={`text-xs font-black ${light ? 'text-slate-800' : 'text-white'}`}>{score}</span>
       </div>
     </div>
   );

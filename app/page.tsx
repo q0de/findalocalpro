@@ -73,35 +73,32 @@ export default async function HomePage() {
       {/* ═══════════════════════════════════════════════════════
           HERO — Verification-first messaging
           ═══════════════════════════════════════════════════════ */}
-      <section className="relative bg-gradient-to-br from-slate-900 via-brand-purple/90 to-brand-pink/80 py-24 md:py-32 overflow-hidden">
-        {/* Subtle grid pattern */}
-        <div className="absolute inset-0 opacity-5" style={{ backgroundImage: 'radial-gradient(circle at 1px 1px, white 1px, transparent 0)', backgroundSize: '40px 40px' }} />
-        
+      <section className="relative bg-gradient-to-br from-brand-purple/5 via-white to-brand-pink/5 py-24 md:py-32 overflow-hidden">
         <div className="relative max-w-5xl mx-auto px-6">
           <div className="grid md:grid-cols-2 gap-12 items-center">
             {/* Left — Copy */}
             <div>
-              <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 text-white/90 text-sm font-bold mb-6">
-                <span className="material-symbols-outlined text-brand-yellow text-base">verified</span>
+              <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-brand-purple/10 border border-brand-purple/20 text-brand-purple text-sm font-bold mb-6">
+                <span className="material-symbols-outlined text-brand-teal text-base">verified</span>
                 Every pro verified against 4 public databases
               </div>
               
-              <h1 className="text-4xl md:text-5xl lg:text-6xl font-black tracking-tight text-white mb-6 leading-[1.1]">
+              <h1 className="text-4xl md:text-5xl lg:text-6xl font-black tracking-tight text-slate-800 mb-6 leading-[1.1]">
                 We Checked Their<br />
-                <span className="text-brand-yellow">Paperwork.</span><br />
+                <span className="text-brand-purple">Paperwork.</span><br />
                 You Pick Your Pro.
               </h1>
               
-              <p className="text-lg text-white/70 mb-8 max-w-lg">
+              <p className="text-lg text-slate-500 mb-8 max-w-lg">
                 State licenses, business registration, BBB ratings, contractor scores — we verify it all so you don&apos;t have to. Free for homeowners.
               </p>
               
               <div className="flex flex-col sm:flex-row gap-4">
-                <a href="#chat" className="group inline-flex items-center justify-center gap-2 bg-brand-yellow hover:bg-white text-slate-900 px-8 py-4 rounded-2xl font-black text-lg transition-all shadow-xl hover:shadow-2xl hover:-translate-y-1 active:translate-y-0">
+                <a href="#chat" className="group inline-flex items-center justify-center gap-2 bg-brand-purple hover:bg-brand-pink text-white px-8 py-4 rounded-2xl font-black text-lg transition-all shadow-xl hover:shadow-2xl hover:-translate-y-1 active:translate-y-0">
                   <span className="material-symbols-outlined transition-transform group-hover:scale-110">chat</span>
                   Get Matched Free
                 </a>
-                <a href="tel:6307032607" className="inline-flex items-center justify-center gap-2 bg-white/10 hover:bg-white/20 text-white px-8 py-4 rounded-2xl font-black text-lg border border-white/20 backdrop-blur-sm transition-all">
+                <a href="tel:6307032607" className="inline-flex items-center justify-center gap-2 bg-white hover:bg-slate-50 text-slate-800 px-8 py-4 rounded-2xl font-black text-lg border-2 border-slate-200 transition-all shadow-lg hover:-translate-y-1">
                   <span className="material-symbols-outlined">call</span>
                   (630) 703-2607
                 </a>
@@ -110,22 +107,22 @@ export default async function HomePage() {
 
             {/* Right — Verification visual */}
             <div className="hidden md:block">
-              <div className="bg-white/10 backdrop-blur-xl rounded-3xl border border-white/20 p-8 shadow-2xl">
+              <div className="bg-white rounded-3xl border-2 border-slate-100 p-8 shadow-xl">
                 <div className="flex items-center gap-3 mb-6">
-                  <TrustScoreRing score={88} />
+                  <TrustScoreRing score={88} light />
                   <div>
-                    <p className="text-white font-black text-lg">Trust Score: 88/100</p>
-                    <p className="text-white/50 text-sm">Sample verification result</p>
+                    <p className="text-slate-800 font-black text-lg">Trust Score: 88/100</p>
+                    <p className="text-slate-400 text-sm">Sample verification result</p>
                   </div>
                 </div>
                 <div className="space-y-3">
                   {verificationSources.map((src, i) => (
                     <AnimatedSection key={src.label} delay={i * 150} direction="right">
-                      <div className="flex items-center gap-3 bg-white/10 rounded-xl px-4 py-3">
+                      <div className="flex items-center gap-3 bg-slate-50 rounded-xl px-4 py-3">
                         <span className="material-symbols-outlined text-brand-teal text-xl">check_circle</span>
                         <div>
-                          <p className="text-white text-sm font-bold">{src.label}</p>
-                          <p className="text-white/50 text-xs">{src.desc}</p>
+                          <p className="text-slate-800 text-sm font-bold">{src.label}</p>
+                          <p className="text-slate-400 text-xs">{src.desc}</p>
                         </div>
                       </div>
                     </AnimatedSection>
@@ -435,17 +432,16 @@ export default async function HomePage() {
       {/* ═══════════════════════════════════════════════════════
           FINAL CTA — Strong close
           ═══════════════════════════════════════════════════════ */}
-      <section className="relative py-20 bg-gradient-to-br from-slate-900 via-brand-purple to-brand-pink text-center overflow-hidden">
-        <div className="absolute inset-0 opacity-10" style={{ backgroundImage: 'radial-gradient(circle at 1px 1px, white 1px, transparent 0)', backgroundSize: '40px 40px' }} />
-        <div className="relative max-w-3xl mx-auto px-6">
+      <section className="py-20 bg-brand-purple text-center">
+        <div className="max-w-3xl mx-auto px-6">
           <h2 className="text-3xl md:text-4xl font-black text-white mb-4">Stop Guessing. Start Verifying.</h2>
-          <p className="text-white/60 mb-10 text-lg">Every pro on our site has been checked against state records. Get matched for free.</p>
+          <p className="text-purple-200 mb-10 text-lg">Every pro on our site has been checked against state records. Get matched for free.</p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <a href="#chat" className="group inline-flex items-center justify-center gap-2 bg-brand-yellow hover:bg-white text-slate-900 px-8 py-4 rounded-2xl font-black text-lg transition-all shadow-xl hover:shadow-2xl hover:-translate-y-1 active:translate-y-0">
               <span className="material-symbols-outlined transition-transform group-hover:scale-110">chat</span>
               Get Matched Free
             </a>
-            <a href="tel:6307032607" className="inline-flex items-center justify-center gap-2 bg-white/10 hover:bg-white/20 text-white px-8 py-4 rounded-2xl font-black text-lg border border-white/20 backdrop-blur-sm transition-all">
+            <a href="tel:6307032607" className="inline-flex items-center justify-center gap-2 bg-white/10 hover:bg-white/20 text-white px-8 py-4 rounded-2xl font-black text-lg border-2 border-white/30 transition-all">
               <span className="material-symbols-outlined">call</span>
               (630) 703-2607
             </a>
