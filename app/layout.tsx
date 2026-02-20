@@ -82,79 +82,10 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteJsonLd) }} />
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(serviceJsonLd) }} />
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }} />
-        <Script src="https://cdn.tailwindcss.com?plugins=forms,container-queries" strategy="beforeInteractive" />
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
         <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet" />
-        <Script id="tailwind-config" strategy="beforeInteractive">{`
-          tailwind.config = {
-            theme: {
-              extend: {
-                colors: {
-                  "brand-pink": "#ff6b9d",
-                  "brand-purple": "#8b5cf6",
-                  "brand-yellow": "#ffcf2d",
-                  "brand-teal": "#2dd4bf",
-                  "primary": "#6366f1",
-                },
-                fontFamily: {
-                  "display": ["Fredoka", "sans-serif"],
-                  "body": ["Outfit", "sans-serif"]
-                },
-                borderRadius: {
-                  "chat-bot": "2rem 2rem 2rem 0.5rem",
-                  "chat-user": "2rem 2rem 0.5rem 2rem",
-                },
-              },
-            },
-          }
-        `}</Script>
-        <style type="text/tailwindcss">{`
-          body {
-            font-family: 'Outfit', sans-serif;
-            background-color: #f0f4ff;
-            background-image: radial-gradient(circle at 2px 2px, #e2e8f0 1px, transparent 0);
-            background-size: 32px 32px;
-          }
-          .chat-bubble-bot {
-            @apply bg-white border-b-4 border-r-4 border-slate-200 rounded-chat-bot p-5 max-w-[85%] shadow-lg relative;
-          }
-          .chat-bubble-bot-gradient {
-            @apply bg-gradient-to-br from-white to-slate-50 border-2 border-slate-100 rounded-chat-bot p-5 max-w-[85%] shadow-xl relative;
-          }
-          .chat-bubble-user {
-            @apply bg-gradient-to-br from-brand-purple to-primary text-white rounded-chat-user p-5 max-w-[85%] self-end shadow-xl font-medium;
-          }
-          .option-button {
-            @apply bg-white border-2 border-slate-100 px-6 py-4 rounded-2xl hover:scale-105 hover:shadow-xl hover:border-brand-purple transition-all duration-300 text-slate-700 font-bold flex flex-col items-center gap-2 text-center shadow-md cursor-pointer;
-          }
-          .option-button.selected {
-            @apply border-brand-purple bg-purple-50 ring-4 ring-brand-purple/10 scale-105;
-          }
-          .avatar-container {
-            @apply w-14 h-14 rounded-2xl bg-gradient-to-tr from-brand-yellow via-brand-pink to-brand-purple flex items-center justify-center flex-shrink-0 shadow-lg border-2 border-white;
-          }
-          .sparkle-badge {
-            @apply flex items-center gap-2 bg-gradient-to-r from-brand-yellow/20 to-brand-pink/20 px-4 py-2 rounded-full text-xs font-bold text-slate-700 border border-white/50 backdrop-blur-sm;
-          }
-          .progress-dot {
-            @apply w-3 h-3 rounded-full bg-slate-200 transition-all duration-500;
-          }
-          .progress-dot.active {
-            @apply bg-brand-pink w-8;
-          }
-          h1, h2, h3, .font-playful {
-            font-family: 'Fredoka', sans-serif;
-          }
-          @keyframes fadeInUp {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-          }
-          .animate-fade-in-up {
-            animation: fadeInUp 0.5s ease-out forwards;
-          }
-        `}</style>
         <Script src="/webmcp.js" defer />
       </head>
       <body className="text-slate-900 min-h-screen flex flex-col">
