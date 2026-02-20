@@ -228,12 +228,15 @@ export function Directory() {
           );
           const checksData = await checksRes.json();
 
-          // Group by business_id
+          // Group by business_id, keeping only latest check per source
           const grouped: Record<string, VerificationCheck[]> = {};
           for (const c of checksData) {
             const bid = c.business_id;
             if (!grouped[bid]) grouped[bid] = [];
-            grouped[bid].push(c);
+            // Dedupe: only keep first (latest) check per source
+            if (!grouped[bid].some(existing => existing.source === c.source)) {
+              grouped[bid].push(c);
+            }
           }
           setChecks(grouped);
         }
