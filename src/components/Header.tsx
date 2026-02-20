@@ -17,6 +17,10 @@ export function Header({ step, totalSteps }: HeaderProps) {
         </a>
 
         <div className="flex items-center gap-4">
+          <a href="/directory" className="hidden md:flex items-center gap-1.5 text-sm font-bold text-slate-500 hover:text-brand-purple transition-colors">
+            <span className="material-symbols-outlined text-base">verified</span>
+            Directory
+          </a>
           <div className="hidden md:flex gap-1">
             {Array.from({ length: totalSteps }).map((_, i) => (
               <div
