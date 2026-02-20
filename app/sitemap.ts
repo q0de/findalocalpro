@@ -16,6 +16,18 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     { url: 'https://findalocalpro.com/reviews', lastModified: now, changeFrequency: 'weekly', priority: 0.6 },
   ];
 
+  // Location pages
+  const locationSlugs = [
+    'downers-grove', 'westmont', 'lisle', 'woodridge', 'darien', 'naperville',
+    'lombard', 'glen-ellyn', 'wheaton', 'hinsdale', 'oak-brook', 'bolingbrook',
+  ];
+  const locationPages: MetadataRoute.Sitemap = locationSlugs.map(slug => ({
+    url: `https://findalocalpro.com/locations/${slug}`,
+    lastModified: now,
+    changeFrequency: 'weekly' as const,
+    priority: 0.8,
+  }));
+
   // Service vertical pages
   const verticals = ['plumbing', 'hvac', 'electricians', 'roofing', 'pest-control', 'appliance-repair'];
   const servicePages: MetadataRoute.Sitemap = verticals.map(v => ({
@@ -49,5 +61,5 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     // Silent — sitemap still works with static pages
   }
 
-  return [...staticPages, ...servicePages, ...providerPages];
+  return [...staticPages, ...locationPages, ...servicePages, ...providerPages];
 }

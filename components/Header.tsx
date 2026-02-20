@@ -3,8 +3,8 @@
 import Link from 'next/link';
 
 interface HeaderProps {
-  step: number;
-  totalSteps: number;
+  step?: number;
+  totalSteps?: number;
 }
 
 export function Header({ step, totalSteps }: HeaderProps) {
@@ -25,14 +25,16 @@ export function Header({ step, totalSteps }: HeaderProps) {
             <span className="material-symbols-outlined text-base">verified</span>
             Directory
           </Link>
-          <div className="hidden md:flex gap-1">
-            {Array.from({ length: totalSteps }).map((_, i) => (
-              <div
-                key={i}
-                className={`progress-dot ${i < step ? 'active' : ''}`}
-              />
-            ))}
-          </div>
+          {totalSteps != null && step != null && (
+            <div className="hidden md:flex gap-1">
+              {Array.from({ length: totalSteps }).map((_, i) => (
+                <div
+                  key={i}
+                  className={`progress-dot ${i < step ? 'active' : ''}`}
+                />
+              ))}
+            </div>
+          )}
           <button className="bg-slate-900 text-white px-6 py-2.5 rounded-full text-sm font-bold hover:bg-brand-purple transition-all shadow-lg hover:-translate-y-1">
             Sign In
           </button>

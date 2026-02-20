@@ -54,8 +54,15 @@ export function Footer() {
         <div className="border-t border-slate-800 pt-8 mb-8">
           <p className="text-xs text-slate-500 mb-3 font-bold uppercase tracking-wider">Serving DuPage County, IL</p>
           <div className="flex flex-wrap gap-2">
-            {['Downers Grove', 'Westmont', 'Lisle', 'Woodridge', 'Darien', 'Naperville', 'Lombard', 'Glen Ellyn', 'Wheaton', 'Hinsdale', 'Oak Brook', 'Bolingbrook'].map((town) => (
-              <span key={town} className="text-xs text-slate-500 bg-slate-800 px-2 py-1 rounded">{town}</span>
+            {[
+              { name: 'Downers Grove', slug: 'downers-grove' }, { name: 'Westmont', slug: 'westmont' },
+              { name: 'Lisle', slug: 'lisle' }, { name: 'Woodridge', slug: 'woodridge' },
+              { name: 'Darien', slug: 'darien' }, { name: 'Naperville', slug: 'naperville' },
+              { name: 'Lombard', slug: 'lombard' }, { name: 'Glen Ellyn', slug: 'glen-ellyn' },
+              { name: 'Wheaton', slug: 'wheaton' }, { name: 'Hinsdale', slug: 'hinsdale' },
+              { name: 'Oak Brook', slug: 'oak-brook' }, { name: 'Bolingbrook', slug: 'bolingbrook' },
+            ].map((town) => (
+              <Link key={town.slug} href={`/locations/${town.slug}`} className="text-xs text-slate-500 bg-slate-800 px-2 py-1 rounded hover:text-white hover:bg-slate-700 transition-colors">{town.name}</Link>
             ))}
           </div>
         </div>
