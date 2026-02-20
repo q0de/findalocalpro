@@ -1,9 +1,9 @@
-import { Link } from 'react-router-dom';
+import Link from "next/link";
 
 export function Terms() {
   return (
     <div className="max-w-3xl mx-auto px-6 py-16">
-      <Link to="/" className="text-brand-purple font-bold text-sm hover:underline mb-8 inline-block">&larr; Back to Home</Link>
+      <Link href="/" className="text-brand-purple font-bold text-sm hover:underline mb-8 inline-block">&larr; Back to Home</Link>
       <h1 className="text-4xl font-bold text-slate-800 mb-2">Terms & Conditions</h1>
       <p className="text-sm text-slate-400 mb-10">Last updated: February 12, 2026</p>
 
@@ -57,7 +57,7 @@ export function Terms() {
 
         <section>
           <h2 className="text-xl font-bold text-slate-800 mb-3">6. Privacy</h2>
-          <p>Your use of FindALocalPro is also governed by our <Link to="/privacy" className="text-brand-purple font-semibold hover:underline">Privacy Policy</Link>, which describes how we collect, use, and protect your information.</p>
+          <p>Your use of FindALocalPro is also governed by our <Link href="/privacy" className="text-brand-purple font-semibold hover:underline">Privacy Policy</Link>, which describes how we collect, use, and protect your information.</p>
         </section>
 
         <section>

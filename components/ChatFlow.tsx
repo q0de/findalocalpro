@@ -1,4 +1,7 @@
+'use client';
+
 import { useState, useEffect, useCallback } from 'react';
+import { SUPABASE_URL } from '@/lib/supabase';
 
 /* ------------------------------------------------------------------ */
 /*  Service data                                                       */
@@ -292,11 +295,12 @@ export function ChatFlow({ onStepChange }: ChatFlowProps) {
     setSubmitting(true);
 
     try {
-      await fetch('https://hocipkeeikriqyojiboj.supabase.co/functions/v1/sms-webhook', {
+      await fetch(`${SUPABASE_URL}/functions/v1/sms-webhook`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           source: 'website-quote',
+          routing: 'elocal',
           contact: contactInfo,
           delivery_method: deliveryMethod,
           service: selectedService,
@@ -339,11 +343,12 @@ export function ChatFlow({ onStepChange }: ChatFlowProps) {
     setSubmitting(true);
 
     try {
-      await fetch('https://hocipkeeikriqyojiboj.supabase.co/functions/v1/sms-webhook', {
+      await fetch(`${SUPABASE_URL}/functions/v1/sms-webhook`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           source: 'website-quote-match',
+          routing: 'elocal',
           phone: `+1${digits}`,
           service: selectedService,
           timing: 'quote-to-match',
@@ -377,11 +382,12 @@ export function ChatFlow({ onStepChange }: ChatFlowProps) {
 
     try {
       // Submit lead to backend
-      await fetch('https://hocipkeeikriqyojiboj.supabase.co/functions/v1/sms-webhook', {
+      await fetch(`${SUPABASE_URL}/functions/v1/sms-webhook`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           source: 'website',
+          routing: 'elocal',
           phone: `+1${digits}`,
           service: selectedService,
           timing: selectedTiming,

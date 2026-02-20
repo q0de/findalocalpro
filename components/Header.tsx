@@ -1,3 +1,7 @@
+'use client';
+
+import Link from 'next/link';
+
 interface HeaderProps {
   step: number;
   totalSteps: number;
@@ -7,20 +11,20 @@ export function Header({ step, totalSteps }: HeaderProps) {
   return (
     <header className="sticky top-0 z-50 w-full bg-white/70 backdrop-blur-xl border-b border-white">
       <div className="max-w-4xl mx-auto px-6 flex h-20 items-center justify-between">
-        <a href="#" className="flex items-center gap-3">
+        <Link href="/" className="flex items-center gap-3">
           <div className="bg-brand-purple w-10 h-10 rounded-xl flex items-center justify-center text-white rotate-3">
             <span className="material-symbols-outlined font-bold">home_repair_service</span>
           </div>
           <h2 className="text-2xl font-bold tracking-tight text-slate-800 font-playful">
             Find<span className="text-brand-purple">A</span>Local<span className="text-brand-pink">Pro</span>
           </h2>
-        </a>
+        </Link>
 
         <div className="flex items-center gap-4">
-          <a href="/directory" className="hidden md:flex items-center gap-1.5 text-sm font-bold text-slate-500 hover:text-brand-purple transition-colors">
+          <Link href="/directory" className="hidden md:flex items-center gap-1.5 text-sm font-bold text-slate-500 hover:text-brand-purple transition-colors">
             <span className="material-symbols-outlined text-base">verified</span>
             Directory
-          </a>
+          </Link>
           <div className="hidden md:flex gap-1">
             {Array.from({ length: totalSteps }).map((_, i) => (
               <div

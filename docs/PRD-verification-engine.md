@@ -238,7 +238,55 @@ Input: provider name, trade, location (zip or city)
 
 ---
 
-## 5. Provider Onboarding Flow
+## 5. Lead Routing Architecture
+
+Two distinct paths based on user intent:
+
+### Path A: Direct Contact (Provider Profile Page)
+
+User is on `/pro/:slug`, viewing a specific provider. They have **high intent** to contact THIS business.
+
+**Flow:**
+1. User clicks "Call Now" → direct `tel:` link to provider's phone
+2. User clicks "Request a Call" → submits phone + consent → webhook receives `{ source: 'website-direct', routing: 'direct', provider_id, provider_name, phone, service }`
+3. Backend creates lead in `leads` table with `provider_id` set
+4. Backend sends SMS to provider: "New lead from FindALocalPro: [name] needs [service] at [zip]. Call them at [phone]."
+5. Lead status tracked: new → sent → contacted → booked/lost
+
+**Toggle:** `VITE_DIRECT_CONTACT_ENABLED` env var. When `false` (default), provider profile shows "Get a Free Quote" redirect to the general chat flow. When `true`, shows direct Call Now + Request a Call buttons. This lets us test the flow end-to-end before going live with real provider numbers.
+
+### Path B: General Matching (Chat Flow / Homepage)
+
+User arrives at homepage or via service landing page. No specific provider in mind. **Lower intent** — needs qualification first.
+
+**Flow:**
+1. Chat flow gathers: service type → timing → zip code → phone number
+2. All webhook payloads include `routing: 'elocal'`
+3. Backend routes to eLocal for matching (they have the provider network)
+4. Twilio call bridge: user's number → FindALocalPro tracking number → eLocal's intake line
+5. eLocal matches to a provider, we earn per-lead fee
+
+**Future (Phase 3+):** When we have enough verified providers in our own database, replace eLocal with our own matching:
+- Query `businesses` table: `WHERE trade = :service AND :zip = ANY(service_area) AND verification_status = 'verified' ORDER BY trust_score DESC`
+- Round-robin among top-scoring providers to distribute leads fairly
+- Direct SMS/call to matched provider (same as Path A)
+
+### Lead Attribution
+
+Every lead gets tagged:
+| Field | Purpose |
+|-------|---------|
+| `source` | Where it came from: `website`, `website-direct`, `website-quote`, `website-quote-match`, `sms`, `nextdoor` |
+| `routing` | How it was routed: `direct` (to specific provider), `elocal` (to eLocal), `internal` (future own matching) |
+| `provider_id` | Set for direct leads; NULL for eLocal leads until eLocal reports back |
+
+### Revenue Per Path
+
+- **Path A (direct):** Provider pays subscription ($49-149/mo) for verified listing + direct leads. Higher margin.
+- **Path B (eLocal):** eLocal pays $15-50 per qualified lead depending on trade. Lower margin but no provider network needed.
+- **Long-term:** Shift volume from Path B → Path A as provider network grows.
+
+---
 
 1. **Discovery** — find provider via Nextdoor recommendations, Google search, existing lead data
 2. **Initial verification** — run automated pipeline (Tier 1 + Tier 2 checks)
@@ -250,7 +298,7 @@ Input: provider name, trade, location (zip or city)
 
 ---
 
-## 6. Tech Stack
+## 7. Tech Stack
 
 | Component | Tech | Notes |
 |-----------|------|-------|
@@ -263,7 +311,28 @@ Input: provider name, trade, location (zip or city)
 
 ---
 
-## 7. Phase 1 Milestones (Weeks 1-4)
+## 8. Monetization
+
+### Layer 1: Pay-Per-Lead (Now)
+- **eLocal partnership** for general matching leads (Path B)
+- Revenue: $15-50/lead depending on trade (plumbing/HVAC highest)
+- No provider relationships needed — eLocal handles matching
+- Target: 50+ leads/month = $750-2,500/month
+
+### Layer 2: Provider Subscriptions (Phase 2-3)
+- **Free tier:** Basic listing, unverified
+- **Basic ($49/mo):** Verified badge, trust score displayed, direct lead routing
+- **Premium ($149/mo):** Priority placement in directory, enhanced profile (photos, reviews), lead analytics dashboard
+- Target: 20 paying providers × $100 avg = $2,000/month
+
+### Layer 3: Data Licensing API (Phase 4+)
+- Sell verification data to insurance companies, real estate platforms, property managers
+- API access: $0.10-1.00 per lookup depending on volume
+- Requires 500+ verified providers to be valuable
+
+---
+
+## 9. Phase 1 Milestones (Weeks 1-4)
 
 - [ ] **Week 1:** IDFPR scraper built and tested. Can look up any IL licensed contractor.
 - [ ] **Week 1:** Supabase schema deployed (providers, verification_checks, enrichment, leads, reviews tables)
@@ -274,7 +343,7 @@ Input: provider name, trade, location (zip or city)
 - [ ] **Week 4:** Provider onboarding form (collect COI, service area, etc.)
 - [ ] **Week 4:** First outreach to 5 verified providers. Pitch free listing.
 
-## 8. Phase 2 Milestones (Weeks 5-8)
+## 10. Phase 2 Milestones (Weeks 5-8)
 
 - [ ] Lead tracking dashboard for providers
 - [ ] Subscription billing (Stripe)
@@ -282,16 +351,19 @@ Input: provider name, trade, location (zip or city)
 - [ ] Nextdoor integration (Dave Mitchell → FindALocalPro pipeline)
 - [ ] 20+ verified providers listed
 
-## 9. Key Metric
+## 11. Key Metric
 
 **Revenue per verified listing** — track monthly. If this number increases over time, the flywheel is working.
 
 ---
 
-## 10. Open Questions
+## 12. Open Questions
 
 - [ ] IDFPR site — is it scrape-friendly or do we need Playwright for the lookup form?
 - [ ] DuPage County contractor registration — is there a public searchable database online?
 - [ ] Google Places API pricing — free tier sufficient for our volume?
 - [ ] Do we migrate to Next.js for SSR (SEO) or keep React SPA with prerendering?
 - [ ] Stripe vs Lemon Squeezy for subscription billing?
+- [ ] eLocal integration — what's their API/intake process? Phone number to bridge to?
+- [ ] When to flip `VITE_DIRECT_CONTACT_ENABLED` to true? Need at least X providers with verified phone numbers.
+- [ ] Call tracking — do we need a Twilio tracking number per provider, or one shared number with routing?

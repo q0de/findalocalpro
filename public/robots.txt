@@ -1,3 +1,0 @@
-User-agent: *
-Allow: /
-Sitemap: https://findalocalpro.com/sitemap.xml

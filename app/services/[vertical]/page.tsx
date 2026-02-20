@@ -1,5 +1,8 @@
-import { useParams, Link } from 'react-router-dom';
-import { Footer } from '../components/Footer';
+import type { Metadata } from 'next';
+import { notFound } from 'next/navigation';
+import Link from 'next/link';
+import { Footer } from '@/components/Footer';
+import { ServiceCallbackForm } from './ServiceCallbackForm';
 
 interface ServiceInfo {
   title: string;
@@ -10,9 +13,8 @@ interface ServiceInfo {
 
 const verticals: Record<string, ServiceInfo> = {
   plumbing: {
-    title: 'Plumbing Services',
-    icon: '🔧',
-    description: 'From leaky faucets to major pipe repairs, get connected with an experienced local plumber who can solve your problem quickly.',
+    title: 'Plumbing Services', icon: '🔧',
+    description: 'Licensed plumber in Downers Grove and DuPage County. Leak repair, drain cleaning, water heaters, pipe repair. Free estimates, same-day service.',
     services: [
       { name: 'Leak Detection & Repair', desc: 'Find and fix hidden leaks before they cause water damage.' },
       { name: 'Drain Cleaning', desc: 'Clear stubborn clogs in sinks, showers, and main sewer lines.' },
@@ -23,9 +25,8 @@ const verticals: Record<string, ServiceInfo> = {
     ],
   },
   hvac: {
-    title: 'HVAC Services',
-    icon: '❄️',
-    description: 'Stay comfortable year-round. Get connected with a local HVAC technician for heating, cooling, and air quality solutions.',
+    title: 'HVAC Services', icon: '❄️',
+    description: 'Expert HVAC service in Downers Grove and DuPage County. AC repair, furnace service, duct cleaning, and new system installation. Licensed techs.',
     services: [
       { name: 'AC Repair & Maintenance', desc: 'Keep your cooling system running efficiently all summer.' },
       { name: 'Furnace Service', desc: 'Heating repair, tune-ups, and new system installation.' },
@@ -36,9 +37,8 @@ const verticals: Record<string, ServiceInfo> = {
     ],
   },
   electricians: {
-    title: 'Electrical Services',
-    icon: '⚡',
-    description: 'Electrical work requires a professional. Get connected with a qualified local electrician for safe, reliable service.',
+    title: 'Electrical Services', icon: '⚡',
+    description: 'Licensed electricians in Downers Grove and DuPage County. Wiring, panel upgrades, EV chargers, emergency repairs. Safe, reliable, insured.',
     services: [
       { name: 'Electrical Repairs', desc: 'Fix outlets, switches, breakers, and wiring issues safely.' },
       { name: 'Panel Upgrades', desc: 'Upgrade your electrical panel to handle modern power demands.' },
@@ -49,9 +49,8 @@ const verticals: Record<string, ServiceInfo> = {
     ],
   },
   'pest-control': {
-    title: 'Pest Control Services',
-    icon: '🐜',
-    description: 'Don\'t let pests take over your home. Get connected with a local exterminator who can eliminate the problem for good.',
+    title: 'Pest Control Services', icon: '🐜',
+    description: 'Pest control in Downers Grove and DuPage County. Ants, roaches, rodents, termites, bed bugs, wildlife removal. Licensed, insured pros.',
     services: [
       { name: 'Ant & Roach Control', desc: 'Eliminate common household pests and prevent them from returning.' },
       { name: 'Rodent Removal', desc: 'Mice and rat control with exclusion to keep them out.' },
@@ -62,9 +61,8 @@ const verticals: Record<string, ServiceInfo> = {
     ],
   },
   'appliance-repair': {
-    title: 'Appliance Repair Services',
-    icon: '🔌',
-    description: 'When your appliances break down, you need a fix fast. Get connected with a local appliance repair technician today.',
+    title: 'Appliance Repair Services', icon: '🔌',
+    description: 'Fast appliance repair in Downers Grove and DuPage County. Fridge, washer, dryer, dishwasher, oven, garbage disposal. Local techs, same-day.',
     services: [
       { name: 'Refrigerator Repair', desc: 'Fix cooling issues, ice makers, and other fridge problems.' },
       { name: 'Washer & Dryer Repair', desc: 'Get your laundry machines back up and running.' },
@@ -78,25 +76,38 @@ const verticals: Record<string, ServiceInfo> = {
 
 const areaTags = ['Downers Grove', 'Westmont', 'Lisle', 'Woodridge', 'Darien', 'Naperville', 'Lombard', 'Glen Ellyn', 'Wheaton', 'Hinsdale', 'Oak Brook', 'Bolingbrook'];
 
-export function ServiceLanding() {
-  const { vertical } = useParams<{ vertical: string }>();
-  const service = vertical ? verticals[vertical] : null;
+export async function generateMetadata({ params }: { params: Promise<{ vertical: string }> }): Promise<Metadata> {
+  const { vertical } = await params;
+  const service = verticals[vertical];
+  if (!service) return { title: 'Service Not Found | FindALocalPro' };
 
-  if (!service) {
-    return (
-      <div className="max-w-3xl mx-auto px-6 py-16 text-center">
-        <h1 className="text-4xl font-bold text-slate-800 mb-4">Service Not Found</h1>
-        <Link to="/" className="text-brand-purple font-bold hover:underline">Back to Home</Link>
-      </div>
-    );
-  }
+  return {
+    title: `${service.title} in Downers Grove, IL | FindALocalPro`,
+    description: service.description,
+    openGraph: {
+      title: `${service.title} in Downers Grove, IL`,
+      description: service.description,
+      url: `https://findalocalpro.com/services/${vertical}`,
+      images: [{ url: 'https://findalocalpro.com/og-image.png', width: 1200, height: 630 }],
+    },
+  };
+}
+
+export async function generateStaticParams() {
+  return Object.keys(verticals).map(v => ({ vertical: v }));
+}
+
+export default async function ServiceLandingPage({ params }: { params: Promise<{ vertical: string }> }) {
+  const { vertical } = await params;
+  const service = verticals[vertical];
+  if (!service) notFound();
 
   return (
     <>
       {/* Header */}
       <header className="sticky top-0 z-50 w-full bg-white/70 backdrop-blur-xl border-b border-white">
         <div className="max-w-4xl mx-auto px-6 flex h-20 items-center justify-between">
-          <Link to="/" className="flex items-center gap-3">
+          <Link href="/" className="flex items-center gap-3">
             <div className="bg-brand-purple w-10 h-10 rounded-xl flex items-center justify-center text-white rotate-3">
               <span className="material-symbols-outlined font-bold">home_repair_service</span>
             </div>
@@ -115,7 +126,7 @@ export function ServiceLanding() {
         <div className="max-w-3xl mx-auto px-6">
           <span className="text-6xl mb-6 block">{service.icon}</span>
           <h1 className="text-4xl md:text-5xl font-bold text-slate-800 mb-4">
-            {service.title} in<br />Downers Grove, IL
+            {service.title} in Downers Grove, IL
           </h1>
           <p className="text-lg text-slate-600 mb-8 max-w-xl mx-auto">{service.description}</p>
           <a href="tel:6307032607" className="inline-flex items-center gap-2 bg-brand-purple text-white px-8 py-4 rounded-full text-lg font-bold hover:bg-brand-pink transition-all shadow-xl hover:-translate-y-1">
@@ -132,7 +143,7 @@ export function ServiceLanding() {
           <p className="text-slate-500 text-center mb-12">Get connected with a local professional in minutes</p>
           <div className="grid md:grid-cols-3 gap-8">
             {[
-              { num: '1', title: 'Call Us', desc: `Give us a call and tell us about your ${vertical?.replace('-', ' ')} needs.` },
+              { num: '1', title: 'Call Us', desc: `Give us a call and tell us about your ${vertical.replace('-', ' ')} needs.` },
               { num: '2', title: 'We Connect You', desc: 'We match you with a qualified local professional in your area.' },
               { num: '3', title: 'Get Service', desc: 'Your pro handles the job. Simple, fast, and hassle-free.' },
             ].map((step) => (
@@ -164,37 +175,7 @@ export function ServiceLanding() {
       {/* Callback Form */}
       <section className="py-16 bg-white">
         <div className="max-w-lg mx-auto px-6">
-          <div className="bg-slate-50 rounded-3xl p-8 shadow-sm">
-            <h2 className="text-2xl font-bold text-slate-800 text-center mb-2">Request a Callback</h2>
-            <p className="text-slate-500 text-center mb-8">Prefer not to call? Leave your info and we'll reach out.</p>
-            <form
-              onSubmit={(e) => { e.preventDefault(); alert('Thank you! We will call you shortly.'); }}
-              toolname="request_service_callback"
-              tooldescription={`Request a callback from a licensed ${vertical?.replace('-', ' ')} professional in your area. A matched pro will call you back within minutes.`}
-            >
-              <div className="space-y-4">
-                <div>
-                  <label className="block text-sm font-bold text-slate-700 mb-1">Your Name</label>
-                  <input name="customer_name" type="text" required placeholder="John Smith" className="w-full px-4 py-3 rounded-xl border border-slate-200 focus:border-brand-purple focus:outline-none" />
-                </div>
-                <div>
-                  <label className="block text-sm font-bold text-slate-700 mb-1">Phone Number</label>
-                  <input name="phone_number" type="tel" required placeholder="(630) 555-0100" className="w-full px-4 py-3 rounded-xl border border-slate-200 focus:border-brand-purple focus:outline-none" />
-                </div>
-                <div>
-                  <label className="block text-sm font-bold text-slate-700 mb-1">ZIP Code</label>
-                  <input name="zip_code" type="text" required placeholder="60515" maxLength={5} pattern="[0-9]{5}" className="w-full px-4 py-3 rounded-xl border border-slate-200 focus:border-brand-purple focus:outline-none" />
-                </div>
-                <div>
-                  <label className="block text-sm font-bold text-slate-700 mb-1">Describe Your Issue</label>
-                  <textarea name="issue_description" rows={3} placeholder="Tell us what you need help with..." className="w-full px-4 py-3 rounded-xl border border-slate-200 focus:border-brand-purple focus:outline-none resize-none" />
-                </div>
-                <button type="submit" className="w-full bg-brand-purple text-white py-3 rounded-xl font-bold hover:bg-brand-pink transition-colors">
-                  Request Callback
-                </button>
-              </div>
-            </form>
-          </div>
+          <ServiceCallbackForm vertical={vertical} />
         </div>
       </section>
 

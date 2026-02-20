@@ -1,3 +1,5 @@
+import Link from 'next/link';
+
 const trustBadges = [
   { icon: 'shield', label: 'Vetted Pros', hoverColor: 'group-hover:bg-brand-teal' },
   { icon: 'receipt_long', label: 'Clear Pricing', hoverColor: 'group-hover:bg-brand-pink' },
@@ -25,10 +27,10 @@ export function Footer() {
             &copy; 2026 FindALocalPro. Making home care delightful! ✨
           </p>
           <div className="flex gap-8">
-            <a className="text-sm font-bold text-slate-400 hover:text-brand-purple transition-colors" href="/directory">Directory</a>
-            <a className="text-sm font-bold text-slate-400 hover:text-brand-purple transition-colors" href="/privacy">Privacy</a>
-            <a className="text-sm font-bold text-slate-400 hover:text-brand-purple transition-colors" href="/terms">Terms</a>
-            <a className="text-sm font-bold text-brand-pink hover:scale-110 transition-all" href="#">Become a Pro</a>
+            <Link className="text-sm font-bold text-slate-400 hover:text-brand-purple transition-colors" href="/directory">Directory</Link>
+            <Link className="text-sm font-bold text-slate-400 hover:text-brand-purple transition-colors" href="/privacy">Privacy</Link>
+            <Link className="text-sm font-bold text-slate-400 hover:text-brand-purple transition-colors" href="/terms">Terms</Link>
+            <Link className="text-sm font-bold text-brand-pink hover:scale-110 transition-all" href="#">Become a Pro</Link>
           </div>
         </div>
       </div>

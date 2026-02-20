@@ -1,10 +1,9 @@
-import { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
-import { Header } from '../components/Header';
-import { Footer } from '../components/Footer';
+'use client';
 
-const SUPABASE_URL = 'https://hocipkeeikriqyojiboj.supabase.co';
-const SUPABASE_ANON = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImhvY2lwa2VlaWtyaXF5b2ppYm9qIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzExOTE2NDYsImV4cCI6MjA4Njc2NzY0Nn0.4WmlnsXdcUfTC0znL04CC254HKnVwfHqnWLeplXtBwA';
+import { useState } from 'react';
+import Link from 'next/link';
+import { Header } from '@/components/Header';
+import { Footer } from '@/components/Footer';
 
 interface Provider {
   id: string;
@@ -55,24 +54,14 @@ function TrustBadge({ score }: { score: number | null }) {
 }
 
 function CheckBadge({ check }: { check: VerificationCheck }) {
-  const icons: Record<string, string> = {
-    bbb: 'workspace_premium',
-    buildzoom: 'construction',
-    idfpr: 'badge',
-    google: 'star',
-  };
-  const statusColors: Record<string, string> = {
-    pass: 'text-brand-teal',
-    warning: 'text-brand-yellow',
-    not_found: 'text-slate-300',
-    error: 'text-red-400',
-  };
+  const icons: Record<string, string> = { bbb: 'workspace_premium', buildzoom: 'construction', idfpr: 'badge', google: 'star' };
+  const statusColors: Record<string, string> = { pass: 'text-brand-teal', warning: 'text-brand-yellow', not_found: 'text-slate-300', error: 'text-red-400' };
   return (
     <div className="flex items-center gap-2 text-sm">
       <span className={`material-symbols-outlined text-base ${statusColors[check.status] || 'text-slate-400'}`}>
         {check.status === 'pass' ? 'check_circle' : check.status === 'not_found' ? 'remove_circle_outline' : 'error_outline'}
       </span>
-      <span className={`material-symbols-outlined text-sm text-slate-400`}>{icons[check.source] || 'fact_check'}</span>
+      <span className="material-symbols-outlined text-sm text-slate-400">{icons[check.source] || 'fact_check'}</span>
       <span className="text-slate-600 truncate">{check.summary}</span>
     </div>
   );
@@ -87,7 +76,6 @@ function ProviderCard({ provider, checks }: { provider: Provider; checks: Verifi
 
   return (
     <div className="bg-white rounded-3xl border-2 border-slate-100 shadow-lg hover:shadow-xl transition-all overflow-hidden group">
-      {/* Header */}
       <div className="p-6 pb-4">
         <div className="flex items-start justify-between gap-4 mb-3">
           <div className="flex items-center gap-3">
@@ -95,7 +83,7 @@ function ProviderCard({ provider, checks }: { provider: Provider; checks: Verifi
               <span className="material-symbols-outlined text-2xl">{trade.icon}</span>
             </div>
             <div>
-              <Link to={`/pro/${provider.slug}`} className="text-lg font-bold text-slate-800 leading-tight hover:text-brand-purple transition-colors">
+              <Link href={`/pro/${provider.slug}`} className="text-lg font-bold text-slate-800 leading-tight hover:text-brand-purple transition-colors">
                 {provider.name}
               </Link>
               <p className="text-sm text-slate-400 font-medium">{trade.label}</p>
@@ -104,7 +92,6 @@ function ProviderCard({ provider, checks }: { provider: Provider; checks: Verifi
           <TrustBadge score={provider.trust_score} />
         </div>
 
-        {/* Quick info */}
         <div className="flex flex-wrap gap-3 mb-4">
           {bbbCheck && (
             <div className="sparkle-badge">
@@ -126,7 +113,6 @@ function ProviderCard({ provider, checks }: { provider: Provider; checks: Verifi
           )}
         </div>
 
-        {/* Contact */}
         <div className="flex flex-wrap gap-4 text-sm">
           {provider.phone && (
             <a href={`tel:${provider.phone}`} className="flex items-center gap-1.5 text-brand-purple font-bold hover:underline">
@@ -149,37 +135,25 @@ function ProviderCard({ provider, checks }: { provider: Provider; checks: Verifi
         </div>
       </div>
 
-      {/* Expandable verification details */}
       {checks.length > 0 && (
         <>
-          <button
-            onClick={() => setExpanded(!expanded)}
-            className="w-full px-6 py-3 bg-slate-50 border-t border-slate-100 flex items-center justify-between text-sm font-bold text-slate-500 hover:text-brand-purple transition-colors cursor-pointer"
-          >
+          <button onClick={() => setExpanded(!expanded)} className="w-full px-6 py-3 bg-slate-50 border-t border-slate-100 flex items-center justify-between text-sm font-bold text-slate-500 hover:text-brand-purple transition-colors cursor-pointer">
             <span className="flex items-center gap-2">
               <span className="material-symbols-outlined text-base">fact_check</span>
               {passChecks.length} of {checks.length} checks passed
             </span>
-            <span className={`material-symbols-outlined text-base transition-transform ${expanded ? 'rotate-180' : ''}`}>
-              expand_more
-            </span>
+            <span className={`material-symbols-outlined text-base transition-transform ${expanded ? 'rotate-180' : ''}`}>expand_more</span>
           </button>
           {expanded && (
             <div className="px-6 py-4 bg-slate-50 border-t border-slate-100 flex flex-col gap-2 animate-fade-in-up">
-              {checks.map((c, i) => (
-                <CheckBadge key={i} check={c} />
-              ))}
+              {checks.map((c, i) => <CheckBadge key={i} check={c} />)}
             </div>
           )}
         </>
       )}
 
-      {/* CTA */}
       <div className="px-6 py-4 border-t border-slate-100">
-        <Link
-          to={`/?service=${encodeURIComponent(trade.label)}`}
-          className="w-full inline-flex items-center justify-center gap-2 bg-brand-yellow hover:bg-brand-pink text-slate-900 hover:text-white px-6 py-3 rounded-2xl font-black transition-all shadow-md hover:shadow-lg cursor-pointer"
-        >
+        <Link href={`/?service=${encodeURIComponent(trade.label)}`} className="w-full inline-flex items-center justify-center gap-2 bg-brand-yellow hover:bg-brand-pink text-slate-900 hover:text-white px-6 py-3 rounded-2xl font-black transition-all shadow-md hover:shadow-lg cursor-pointer">
           Get a Free Quote
           <span className="material-symbols-outlined font-black">arrow_forward</span>
         </Link>
@@ -196,58 +170,9 @@ const tradeFilters = [
   { value: 'roofing', label: 'Roofing', icon: 'roofing' },
 ];
 
-export function Directory() {
-  const [providers, setProviders] = useState<Provider[]>([]);
-  const [checks, setChecks] = useState<Record<string, VerificationCheck[]>>({});
-  const [loading, setLoading] = useState(true);
+export function DirectoryClient({ providers, checksMap }: { providers: Provider[]; checksMap: Record<string, VerificationCheck[]> }) {
   const [filter, setFilter] = useState('all');
   const [sortBy, setSortBy] = useState<'score' | 'name'>('score');
-
-  useEffect(() => {
-    async function fetchData() {
-      try {
-        const headers = {
-          apikey: SUPABASE_ANON,
-          Authorization: `Bearer ${SUPABASE_ANON}`,
-        };
-
-        // Fetch verified providers (score > 0, active)
-        const provRes = await fetch(
-          `${SUPABASE_URL}/rest/v1/businesses?is_active=eq.true&trust_score=gt.0&select=id,name,slug,trade,phone,website_url,address,zip,trust_score,verification_status,is_verified,year_established&order=trust_score.desc`,
-          { headers }
-        );
-        const provData: Provider[] = await provRes.json();
-        setProviders(provData);
-
-        // Fetch all verification checks for these providers
-        if (provData.length > 0) {
-          const ids = provData.map(p => p.id);
-          const checksRes = await fetch(
-            `${SUPABASE_URL}/rest/v1/verification_checks?business_id=in.(${ids.join(',')})&select=business_id,source,status,summary,data&order=checked_at.desc`,
-            { headers }
-          );
-          const checksData = await checksRes.json();
-
-          // Group by business_id, keeping only latest check per source
-          const grouped: Record<string, VerificationCheck[]> = {};
-          for (const c of checksData) {
-            const bid = c.business_id;
-            if (!grouped[bid]) grouped[bid] = [];
-            // Dedupe: only keep first (latest) check per source
-            if (!grouped[bid].some(existing => existing.source === c.source)) {
-              grouped[bid].push(c);
-            }
-          }
-          setChecks(grouped);
-        }
-      } catch (err) {
-        console.error('Failed to load directory:', err);
-      } finally {
-        setLoading(false);
-      }
-    }
-    fetchData();
-  }, []);
 
   const filtered = providers
     .filter(p => filter === 'all' || p.trade === filter)
@@ -263,97 +188,51 @@ export function Directory() {
       <Header step={0} totalSteps={0} />
 
       <main className="flex-grow max-w-5xl mx-auto w-full px-6 py-12">
-        {/* Hero */}
         <div className="text-center mb-12 animate-fade-in-up">
           <h1 className="text-4xl md:text-5xl font-bold tracking-tight text-slate-800 font-playful mb-4">
-            Verified <span className="text-brand-purple">Local</span> Pros
+            Verified Local Pros
           </h1>
           <p className="text-lg text-slate-500 max-w-2xl mx-auto">
-            Every pro is verified against state license databases, BBB ratings, and contractor registrations.
-            Real data, not just reviews.
+            Every pro is verified against state license databases, BBB ratings, and contractor registrations. Real data, not just reviews.
           </p>
           <div className="flex justify-center gap-6 mt-6">
-            <div className="sparkle-badge">
-              <span className="material-symbols-outlined text-sm text-brand-teal">verified</span>
-              {verifiedCount} Verified Pros
-            </div>
-            <div className="sparkle-badge">
-              <span className="material-symbols-outlined text-sm text-brand-purple">fact_check</span>
-              Multi-Source Checks
-            </div>
-            <div className="sparkle-badge">
-              <span className="material-symbols-outlined text-sm text-brand-pink">update</span>
-              Updated Weekly
-            </div>
+            <div className="sparkle-badge"><span className="material-symbols-outlined text-sm text-brand-teal">verified</span>{verifiedCount} Verified Pros</div>
+            <div className="sparkle-badge"><span className="material-symbols-outlined text-sm text-brand-purple">fact_check</span>Multi-Source Checks</div>
+            <div className="sparkle-badge"><span className="material-symbols-outlined text-sm text-brand-pink">update</span>Updated Weekly</div>
           </div>
         </div>
 
-        {/* Filters */}
         <div className="flex flex-wrap items-center justify-between gap-4 mb-8">
           <div className="flex flex-wrap gap-2">
             {tradeFilters.map(tf => (
-              <button
-                key={tf.value}
-                onClick={() => setFilter(tf.value)}
-                className={`flex items-center gap-2 px-4 py-2 rounded-full text-sm font-bold transition-all cursor-pointer ${
-                  filter === tf.value
-                    ? 'bg-brand-purple text-white shadow-md'
-                    : 'bg-white text-slate-600 border-2 border-slate-100 hover:border-brand-purple'
-                }`}
-              >
-                <span className="material-symbols-outlined text-base">{tf.icon}</span>
-                {tf.label}
+              <button key={tf.value} onClick={() => setFilter(tf.value)} className={`flex items-center gap-2 px-4 py-2 rounded-full text-sm font-bold transition-all cursor-pointer ${filter === tf.value ? 'bg-brand-purple text-white shadow-md' : 'bg-white text-slate-600 border-2 border-slate-100 hover:border-brand-purple'}`}>
+                <span className="material-symbols-outlined text-base">{tf.icon}</span>{tf.label}
               </button>
             ))}
           </div>
-          <button
-            onClick={() => setSortBy(sortBy === 'score' ? 'name' : 'score')}
-            className="flex items-center gap-2 px-4 py-2 rounded-full text-sm font-bold bg-white text-slate-500 border-2 border-slate-100 hover:border-brand-purple transition-all cursor-pointer"
-          >
-            <span className="material-symbols-outlined text-base">sort</span>
-            {sortBy === 'score' ? 'By Score' : 'A-Z'}
+          <button onClick={() => setSortBy(sortBy === 'score' ? 'name' : 'score')} className="flex items-center gap-2 px-4 py-2 rounded-full text-sm font-bold bg-white text-slate-500 border-2 border-slate-100 hover:border-brand-purple transition-all cursor-pointer">
+            <span className="material-symbols-outlined text-base">sort</span>{sortBy === 'score' ? 'By Score' : 'A-Z'}
           </button>
         </div>
 
-        {/* Grid */}
-        {loading ? (
-          <div className="flex items-center justify-center py-20">
-            <div className="flex items-center gap-3 text-slate-400">
-              <div className="w-3 h-3 bg-brand-purple rounded-full animate-bounce" />
-              <div className="w-3 h-3 bg-brand-pink rounded-full animate-bounce" style={{ animationDelay: '150ms' }} />
-              <div className="w-3 h-3 bg-brand-teal rounded-full animate-bounce" style={{ animationDelay: '300ms' }} />
-              <span className="ml-2 font-bold">Loading verified pros...</span>
-            </div>
-          </div>
-        ) : filtered.length === 0 ? (
+        {filtered.length === 0 ? (
           <div className="text-center py-20">
             <span className="material-symbols-outlined text-6xl text-slate-200 mb-4">search_off</span>
             <p className="text-xl font-bold text-slate-400">No verified pros found for this trade yet.</p>
-            <p className="text-slate-400 mt-2">We're adding new pros every week!</p>
+            <p className="text-slate-400 mt-2">We&apos;re adding new pros every week!</p>
           </div>
         ) : (
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            {filtered.map(p => (
-              <ProviderCard key={p.id} provider={p} checks={checks[p.id] || []} />
-            ))}
+            {filtered.map(p => <ProviderCard key={p.id} provider={p} checks={checksMap[p.id] || []} />)}
           </div>
         )}
 
-        {/* Bottom CTA */}
         <div className="mt-16 text-center">
           <div className="bg-white rounded-3xl border-2 border-slate-100 shadow-xl p-8 max-w-2xl mx-auto">
-            <h2 className="text-2xl font-bold text-slate-800 mb-3 font-playful">
-              Are you a <span className="text-brand-pink">Pro</span>? 🔧
-            </h2>
-            <p className="text-slate-500 mb-6">
-              Get verified and start receiving qualified leads from homeowners in your area.
-            </p>
-            <a
-              href="tel:6307032607"
-              className="inline-flex items-center gap-2 bg-brand-purple hover:bg-brand-pink text-white px-8 py-4 rounded-2xl font-black transition-all shadow-lg hover:shadow-xl cursor-pointer"
-            >
-              <span className="material-symbols-outlined">call</span>
-              Become a Verified Pro
+            <h2 className="text-2xl font-bold text-slate-800 mb-3 font-playful">Are you a <span className="text-brand-pink">Pro</span>? 🔧</h2>
+            <p className="text-slate-500 mb-6">Get verified and start receiving qualified leads from homeowners in your area.</p>
+            <a href="tel:6307032607" className="inline-flex items-center gap-2 bg-brand-purple hover:bg-brand-pink text-white px-8 py-4 rounded-2xl font-black transition-all shadow-lg hover:shadow-xl cursor-pointer">
+              <span className="material-symbols-outlined">call</span>Become a Verified Pro
             </a>
           </div>
         </div>

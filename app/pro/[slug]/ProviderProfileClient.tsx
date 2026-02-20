@@ -1,10 +1,11 @@
-import { useState, useEffect } from 'react';
-import { useParams, Link } from 'react-router-dom';
-import { Header } from '../components/Header';
-import { Footer } from '../components/Footer';
+'use client';
 
-const SUPABASE_URL = 'https://hocipkeeikriqyojiboj.supabase.co';
-const SUPABASE_ANON = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImhvY2lwa2VlaWtyaXF5b2ppYm9qIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzExOTE2NDYsImV4cCI6MjA4Njc2NzY0Nn0.4WmlnsXdcUfTC0znL04CC254HKnVwfHqnWLeplXtBwA';
+import { useState } from 'react';
+import type { FormEvent } from 'react';
+import Link from 'next/link';
+import { Header } from '@/components/Header';
+import { Footer } from '@/components/Footer';
+import { SUPABASE_URL, DIRECT_CONTACT_ENABLED } from '@/lib/supabase';
 
 interface Provider {
   id: string;
@@ -117,7 +118,6 @@ function CheckCard({ check }: { check: VerificationCheck }) {
         </span>
       </div>
       <p className="text-sm text-slate-600 mt-2">{check.summary}</p>
-      {/* Show key data points */}
       {(() => {
         const d = data as Record<string, unknown>;
         const badges: string[] = [];
@@ -137,136 +137,102 @@ function CheckCard({ check }: { check: VerificationCheck }) {
   );
 }
 
-export function ProviderProfile() {
-  const { slug } = useParams<{ slug: string }>();
-  const [provider, setProvider] = useState<Provider | null>(null);
-  const [checks, setChecks] = useState<VerificationCheck[]>([]);
-  const [loading, setLoading] = useState(true);
-  const [notFound, setNotFound] = useState(false);
+function DirectContactCTA({ provider, trade }: { provider: Provider; trade: typeof tradeConfig[string] }) {
+  const [showForm, setShowForm] = useState(false);
+  const [phone, setPhone] = useState('');
+  const [consent, setConsent] = useState(false);
+  const [submitting, setSubmitting] = useState(false);
+  const [submitted, setSubmitted] = useState(false);
 
-  useEffect(() => {
-    async function fetchData() {
-      const headers = {
-        apikey: SUPABASE_ANON,
-        Authorization: `Bearer ${SUPABASE_ANON}`,
-      };
+  const formatPhone = (value: string) => {
+    const digits = value.replace(/\D/g, '').slice(0, 10);
+    if (digits.length <= 3) return digits;
+    if (digits.length <= 6) return `(${digits.slice(0, 3)}) ${digits.slice(3)}`;
+    return `(${digits.slice(0, 3)}) ${digits.slice(3, 6)}-${digits.slice(6)}`;
+  };
 
-      const provRes = await fetch(
-        `${SUPABASE_URL}/rest/v1/businesses?slug=eq.${slug}&is_active=eq.true&select=*`,
-        { headers }
-      );
-      const provData = await provRes.json();
-      if (!provData.length) {
-        setNotFound(true);
-        setLoading(false);
-        return;
-      }
-      const prov = provData[0];
-      setProvider(prov);
+  const handleSubmit = async (e: FormEvent) => {
+    e.preventDefault();
+    const digits = phone.replace(/\D/g, '');
+    if (digits.length < 10 || !consent) return;
+    setSubmitting(true);
+    try {
+      await fetch(`${SUPABASE_URL}/functions/v1/sms-webhook`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          source: 'website-direct',
+          routing: 'direct',
+          provider_id: provider.id,
+          provider_name: provider.name,
+          phone: `+1${digits}`,
+          service: trade.label,
+        }),
+      });
+    } catch { /* silent */ }
+    setSubmitting(false);
+    setSubmitted(true);
+  };
 
-      // Fetch checks — get latest per source
-      const checksRes = await fetch(
-        `${SUPABASE_URL}/rest/v1/verification_checks?business_id=eq.${prov.id}&select=source,status,summary,data,checked_at&order=checked_at.desc`,
-        { headers }
-      );
-      const checksData = await checksRes.json();
-      // Dedupe: keep only latest check per source
-      const seen = new Set<string>();
-      const deduped: VerificationCheck[] = [];
-      for (const c of checksData) {
-        if (!seen.has(c.source)) {
-          seen.add(c.source);
-          deduped.push(c);
-        }
-      }
-      setChecks(deduped);
-      setLoading(false);
-    }
-    fetchData();
-  }, [slug]);
-
-  // SEO: dynamic page title and meta
-  useEffect(() => {
-    if (provider) {
-      const t = tradeConfig[provider.trade] || tradeConfig.plumbing;
-      document.title = `${provider.name} — Verified ${t.label} Pro | FindALocalPro`;
-      const metaDesc = document.querySelector('meta[name="description"]');
-      if (metaDesc) {
-        metaDesc.setAttribute('content', `${provider.name} — Trust Score ${Math.round(provider.trust_score || 0)}/100. Verified ${t.label.toLowerCase()} professional in DuPage County, IL. License, BBB rating, and contractor score checked.`);
-      }
-    }
-  }, [provider]);
-
-  if (loading) {
+  if (submitted) {
     return (
-      <div className="min-h-screen flex flex-col bg-gradient-to-b from-slate-50 to-white">
-        <Header step={0} totalSteps={0} />
-        <div className="flex-grow flex items-center justify-center">
-          <div className="flex items-center gap-3 text-slate-400">
-            <div className="w-3 h-3 bg-brand-purple rounded-full animate-bounce" />
-            <div className="w-3 h-3 bg-brand-pink rounded-full animate-bounce" style={{ animationDelay: '150ms' }} />
-            <div className="w-3 h-3 bg-brand-teal rounded-full animate-bounce" style={{ animationDelay: '300ms' }} />
-            <span className="ml-2 font-bold">Loading provider...</span>
-          </div>
-        </div>
-        <Footer />
+      <div className="bg-green-50 border-2 border-green-200 rounded-2xl p-5 text-center">
+        <span className="material-symbols-outlined text-3xl text-brand-teal mb-2">check_circle</span>
+        <p className="font-bold text-slate-800">Request sent!</p>
+        <p className="text-sm text-slate-500 mt-1">{provider.name} will call you shortly.</p>
       </div>
     );
   }
 
-  if (notFound || !provider) {
-    return (
-      <div className="min-h-screen flex flex-col bg-gradient-to-b from-slate-50 to-white">
-        <Header step={0} totalSteps={0} />
-        <div className="flex-grow flex flex-col items-center justify-center text-center px-6">
-          <span className="material-symbols-outlined text-6xl text-slate-200 mb-4">search_off</span>
-          <h1 className="text-2xl font-bold text-slate-400 mb-2">Provider Not Found</h1>
-          <p className="text-slate-400 mb-6">This provider doesn't exist or is no longer active.</p>
-          <Link to="/directory" className="inline-flex items-center gap-2 bg-brand-purple text-white px-6 py-3 rounded-2xl font-black">
-            <span className="material-symbols-outlined">arrow_back</span>
-            Back to Directory
-          </Link>
-        </div>
-        <Footer />
-      </div>
-    );
-  }
+  return (
+    <div className="flex flex-col gap-3">
+      {provider.phone && (
+        <a href={`tel:${provider.phone}`} className="inline-flex items-center justify-center gap-2 bg-brand-teal hover:bg-brand-teal/90 text-white px-8 py-4 rounded-2xl font-black transition-all shadow-lg hover:shadow-xl">
+          <span className="material-symbols-outlined">call</span>
+          Call Now
+        </a>
+      )}
+      {!showForm ? (
+        <button onClick={() => setShowForm(true)} className="inline-flex items-center justify-center gap-2 bg-brand-yellow hover:bg-brand-pink text-slate-900 hover:text-white px-8 py-4 rounded-2xl font-black transition-all shadow-lg hover:shadow-xl cursor-pointer">
+          <span className="material-symbols-outlined">phone_callback</span>
+          Request a Call
+        </button>
+      ) : (
+        <form onSubmit={handleSubmit} className="bg-white border-2 border-slate-100 rounded-2xl p-5 shadow-lg space-y-3">
+          <p className="text-sm font-bold text-slate-700">Get a call from {provider.name}</p>
+          <input className="w-full border-2 border-slate-200 rounded-xl px-4 py-3 text-lg font-bold focus:ring-2 focus:ring-brand-purple/20 focus:border-brand-purple transition-all placeholder:text-slate-300" placeholder="(555) 123-4567" type="tel" value={phone} onChange={(e) => setPhone(formatPhone(e.target.value))} autoFocus />
+          <label className="flex items-start gap-2 cursor-pointer">
+            <input type="checkbox" checked={consent} onChange={(e) => setConsent(e.target.checked)} className="mt-1 w-4 h-4 rounded border-2 border-slate-300 text-brand-purple focus:ring-brand-purple/20 cursor-pointer flex-shrink-0" />
+            <span className="text-xs text-slate-500 leading-relaxed">
+              I agree to receive calls/texts from FindALocalPro about my service request. Message and data rates may apply. Reply STOP to opt out.{' '}
+              <Link href="/privacy" className="text-brand-purple hover:underline">Privacy Policy</Link> ·{' '}
+              <Link href="/terms" className="text-brand-purple hover:underline">Terms</Link>
+            </span>
+          </label>
+          <button type="submit" disabled={submitting || phone.replace(/\D/g, '').length < 10 || !consent} className="w-full bg-brand-yellow hover:bg-brand-pink text-slate-900 hover:text-white py-3 rounded-xl font-black transition-all shadow-md cursor-pointer disabled:opacity-40 disabled:cursor-not-allowed">
+            {submitting ? 'Sending...' : 'Request Call'}
+          </button>
+        </form>
+      )}
+    </div>
+  );
+}
 
+export function ProviderProfileClient({ provider, checks, tradeLabel }: { provider: Provider; checks: VerificationCheck[]; tradeLabel: string }) {
   const trade = tradeConfig[provider.trade] || tradeConfig.plumbing;
   const passedChecks = checks.filter(c => c.status === 'pass').length;
   const verifiedAt = provider.last_verified_at ? new Date(provider.last_verified_at).toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' }) : null;
-
-  // Structured data for SEO
-  const structuredData = {
-    '@context': 'https://schema.org',
-    '@type': 'LocalBusiness',
-    name: provider.name,
-    url: provider.website_url || `https://findalocalpro.com/pro/${provider.slug}`,
-    telephone: provider.phone,
-    address: provider.address ? {
-      '@type': 'PostalAddress',
-      streetAddress: provider.address,
-      addressLocality: provider.address?.split(',')[1]?.trim(),
-      addressRegion: 'IL',
-      postalCode: provider.zip,
-    } : undefined,
-    foundingDate: provider.year_established ? String(provider.year_established) : undefined,
-    additionalType: `https://schema.org/${provider.trade === 'plumbing' ? 'Plumber' : provider.trade === 'electrical' ? 'Electrician' : 'HomeAndConstructionBusiness'}`,
-  };
 
   return (
     <div className="min-h-screen flex flex-col bg-gradient-to-b from-slate-50 to-white">
       <Header step={0} totalSteps={0} />
 
-      {/* JSON-LD for SEO */}
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }} />
-
       <main className="flex-grow max-w-4xl mx-auto w-full px-6 py-12">
         {/* Breadcrumb */}
         <nav className="flex items-center gap-2 text-sm text-slate-400 mb-8">
-          <Link to="/directory" className="hover:text-brand-purple font-medium">Directory</Link>
+          <Link href="/directory" className="hover:text-brand-purple font-medium">Directory</Link>
           <span className="material-symbols-outlined text-xs">chevron_right</span>
-          <Link to={`/directory?trade=${provider.trade}`} className="hover:text-brand-purple font-medium capitalize">{trade.label}</Link>
+          <Link href={`/directory?trade=${provider.trade}`} className="hover:text-brand-purple font-medium capitalize">{trade.label}</Link>
           <span className="material-symbols-outlined text-xs">chevron_right</span>
           <span className="text-slate-600 font-bold">{provider.name}</span>
         </nav>
@@ -282,7 +248,6 @@ export function ProviderProfile() {
                 <h1 className="text-2xl md:text-3xl font-bold text-slate-800 mb-1">{provider.name}</h1>
                 <p className="text-slate-400 font-medium mb-3">{trade.label} · DuPage County, IL</p>
 
-                {/* Quick badges */}
                 <div className="flex flex-wrap gap-2 mb-4">
                   {provider.year_established && (
                     <span className="sparkle-badge">
@@ -304,7 +269,6 @@ export function ProviderProfile() {
                   )}
                 </div>
 
-                {/* Contact */}
                 <div className="flex flex-wrap gap-4">
                   {provider.phone && (
                     <a href={`tel:${provider.phone}`} className="flex items-center gap-2 text-brand-purple font-bold hover:underline">
@@ -330,19 +294,19 @@ export function ProviderProfile() {
 
             {/* CTA */}
             <div className="md:text-right shrink-0">
-              <Link
-                to={`/?service=${encodeURIComponent(trade.label)}`}
-                className="inline-flex items-center gap-2 bg-brand-yellow hover:bg-brand-pink text-slate-900 hover:text-white px-8 py-4 rounded-2xl font-black transition-all shadow-lg hover:shadow-xl"
-              >
-                Get a Free Quote
-                <span className="material-symbols-outlined font-black">arrow_forward</span>
-              </Link>
+              {DIRECT_CONTACT_ENABLED ? (
+                <DirectContactCTA provider={provider} trade={trade} />
+              ) : (
+                <Link href={`/?service=${encodeURIComponent(trade.label)}`} className="inline-flex items-center gap-2 bg-brand-yellow hover:bg-brand-pink text-slate-900 hover:text-white px-8 py-4 rounded-2xl font-black transition-all shadow-lg hover:shadow-xl">
+                  Get a Free Quote
+                  <span className="material-symbols-outlined font-black">arrow_forward</span>
+                </Link>
+              )}
             </div>
           </div>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-          {/* Left column: Verification */}
           <div className="md:col-span-2 space-y-6">
             <h2 className="text-xl font-bold text-slate-800 flex items-center gap-2">
               <span className="material-symbols-outlined text-brand-purple">verified</span>
@@ -351,15 +315,12 @@ export function ProviderProfile() {
 
             {checks.length > 0 ? (
               <div className="space-y-4">
-                {checks.map((c, i) => (
-                  <CheckCard key={i} check={c} />
-                ))}
+                {checks.map((c, i) => <CheckCard key={i} check={c} />)}
               </div>
             ) : (
               <p className="text-slate-400">No verification checks on file yet.</p>
             )}
 
-            {/* Services */}
             <div className="mt-8">
               <h2 className="text-xl font-bold text-slate-800 flex items-center gap-2 mb-4">
                 <span className="material-symbols-outlined text-brand-teal">checklist</span>
@@ -376,11 +337,9 @@ export function ProviderProfile() {
             </div>
           </div>
 
-          {/* Right column: Trust Score + CTA */}
           <div className="space-y-6">
             <TrustMeter score={provider.trust_score || 0} />
 
-            {/* What this means */}
             <div className="bg-white rounded-3xl border-2 border-slate-100 shadow-lg p-6">
               <h3 className="text-lg font-bold text-slate-800 mb-3 flex items-center gap-2">
                 <span className="material-symbols-outlined text-brand-pink">info</span>
@@ -400,7 +359,7 @@ export function ProviderProfile() {
                   </li>
                   <li className="flex items-start gap-2">
                     <span className="material-symbols-outlined text-brand-teal text-base mt-0.5">workspace_premium</span>
-                    <span><strong>BBB Rating</strong> — What's their complaint history?</span>
+                    <span><strong>BBB Rating</strong> — What&apos;s their complaint history?</span>
                   </li>
                   <li className="flex items-start gap-2">
                     <span className="material-symbols-outlined text-brand-teal text-base mt-0.5">construction</span>
@@ -414,14 +373,20 @@ export function ProviderProfile() {
             {/* Secondary CTA */}
             <div className="bg-brand-purple rounded-3xl p-6 text-white text-center">
               <h3 className="text-lg font-bold mb-2">Need a {trade.label.toLowerCase().replace(' & heating', '')} quote?</h3>
-              <p className="text-sm text-purple-200 mb-4">Get connected with verified pros in 60 seconds.</p>
-              <Link
-                to={`/?service=${encodeURIComponent(trade.label)}`}
-                className="inline-flex items-center gap-2 bg-brand-yellow text-slate-900 px-6 py-3 rounded-2xl font-black hover:shadow-lg transition-all"
-              >
-                <span className="material-symbols-outlined">chat</span>
-                Start Chat
-              </Link>
+              <p className="text-sm text-purple-200 mb-4">
+                {DIRECT_CONTACT_ENABLED ? `Contact ${provider.name} directly or browse more pros.` : 'Get connected with verified pros in 60 seconds.'}
+              </p>
+              {DIRECT_CONTACT_ENABLED && provider.phone ? (
+                <a href={`tel:${provider.phone}`} className="inline-flex items-center gap-2 bg-brand-yellow text-slate-900 px-6 py-3 rounded-2xl font-black hover:shadow-lg transition-all">
+                  <span className="material-symbols-outlined">call</span>
+                  Call {provider.name}
+                </a>
+              ) : (
+                <Link href={`/?service=${encodeURIComponent(trade.label)}`} className="inline-flex items-center gap-2 bg-brand-yellow text-slate-900 px-6 py-3 rounded-2xl font-black hover:shadow-lg transition-all">
+                  <span className="material-symbols-outlined">chat</span>
+                  Start Chat
+                </Link>
+              )}
             </div>
           </div>
         </div>

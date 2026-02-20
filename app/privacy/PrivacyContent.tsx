@@ -1,9 +1,9 @@
-import { Link } from 'react-router-dom';
+import Link from "next/link";
 
 export function PrivacyPolicy() {
   return (
     <div className="max-w-3xl mx-auto px-6 py-16">
-      <Link to="/" className="text-brand-purple font-bold text-sm hover:underline mb-8 inline-block">&larr; Back to Home</Link>
+      <Link href="/" className="text-brand-purple font-bold text-sm hover:underline mb-8 inline-block">&larr; Back to Home</Link>
       <h1 className="text-4xl font-bold text-slate-800 mb-2">Privacy Policy</h1>
       <p className="text-sm text-slate-400 mb-10">Last updated: February 12, 2026</p>
 

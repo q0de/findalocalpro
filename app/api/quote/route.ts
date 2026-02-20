@@ -1,4 +1,4 @@
-import { VercelRequest, VercelResponse } from '@vercel/node';
+import { NextRequest, NextResponse } from 'next/server';
 
 const PERPLEXITY_API_KEY = process.env.PERPLEXITY_API_KEY;
 
@@ -30,32 +30,20 @@ async function getQuoteFromPerplexity(service: string, zip: string) {
     body: JSON.stringify({
       model: 'sonar',
       messages: [
-        {
-          role: 'system',
-          content: 'You are a home service pricing expert. Search the web for current pricing data and respond ONLY with valid JSON, no other text.'
-        },
-        {
-          role: 'user',
-          content: `What does "${service}" typically cost for a homeowner near ZIP code ${zip}? Search for current 2025-2026 pricing data.
-
-Respond in this exact JSON format only, no markdown, no code blocks, no other text:
-{"low":"$X","high":"$Y","estimate":"$X - $Y","details":"A 2-3 sentence explanation of what affects the price range, written conversationally for a homeowner. Mention specific sub-services and what drives costs up or down."}`
-        }
+        { role: 'system', content: 'You are a home service pricing expert. Search the web for current pricing data and respond ONLY with valid JSON, no other text.' },
+        { role: 'user', content: `What does "${service}" typically cost for a homeowner near ZIP code ${zip}? Search for current 2025-2026 pricing data.\n\nRespond in this exact JSON format only, no markdown, no code blocks, no other text:\n{"low":"$X","high":"$Y","estimate":"$X - $Y","details":"A 2-3 sentence explanation of what affects the price range, written conversationally for a homeowner. Mention specific sub-services and what drives costs up or down."}` },
       ],
       max_tokens: 400,
       return_citations: true,
     }),
   });
 
-  if (!response.ok) {
-    throw new Error(`Perplexity API failed: ${response.status}`);
-  }
+  if (!response.ok) throw new Error(`Perplexity API failed: ${response.status}`);
 
   const data = await response.json();
   const text = data.choices?.[0]?.message?.content || '';
   const citations = data.citations || [];
 
-  // Extract JSON from response (handle markdown code blocks)
   const cleaned = text.replace(/```json\s*/g, '').replace(/```\s*/g, '').trim();
   const jsonMatch = cleaned.match(/\{[\s\S]*\}/);
   if (jsonMatch) {
@@ -72,38 +60,21 @@ Respond in this exact JSON format only, no markdown, no code blocks, no other te
   throw new Error('Could not parse response');
 }
 
-export default async function handler(req: VercelRequest, res: VercelResponse) {
-  res.setHeader('Access-Control-Allow-Origin', '*');
-  res.setHeader('Access-Control-Allow-Methods', 'POST, OPTIONS');
-  res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
-
-  if (req.method === 'OPTIONS') return res.status(200).end();
-  if (req.method !== 'POST') return res.status(405).json({ error: 'Method not allowed' });
-
-  const { service, zip } = req.body || {};
-  if (!service || !zip) return res.status(400).json({ error: 'Missing service or zip' });
+export async function POST(req: NextRequest) {
+  const { service, zip } = await req.json();
+  if (!service || !zip) return NextResponse.json({ error: 'Missing service or zip' }, { status: 400 });
 
   try {
     if (!PERPLEXITY_API_KEY) throw new Error('No API key');
-
     const result = await getQuoteFromPerplexity(service, zip);
-
-    return res.status(200).json({
-      success: true,
-      service,
-      zip,
-      ...result,
+    return NextResponse.json({
+      success: true, service, zip, ...result,
       disclaimer: 'This is a rough estimate based on market data. Actual costs may vary. Get a free personalized quote by calling (630) 703-2607.',
     });
-  } catch (error: any) {
-    console.error('Quote estimation error:', error?.message);
-    return res.status(200).json({
-      success: true,
-      service,
-      zip,
-      estimate: getDefaultEstimate(service),
-      low: '',
-      high: '',
+  } catch {
+    return NextResponse.json({
+      success: true, service, zip,
+      estimate: getDefaultEstimate(service), low: '', high: '',
       details: `${service} costs vary based on the scope of work, materials, and your specific situation. For an accurate quote tailored to your needs, we can connect you with a licensed local pro.`,
       sources: [],
       disclaimer: 'Get a free personalized quote by calling (630) 703-2607.',

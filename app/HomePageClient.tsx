@@ -1,9 +1,11 @@
-import { useState } from 'react';
-import { Header } from './components/Header';
-import { ChatFlow } from './components/ChatFlow';
-import { Footer } from './components/Footer';
+'use client';
 
-function HomePage() {
+import { useState } from 'react';
+import { Header } from '@/components/Header';
+import { ChatFlow } from '@/components/ChatFlow';
+import { Footer } from '@/components/Footer';
+
+export function HomePage() {
   const [step, setStep] = useState(0);
 
   return (
@@ -16,5 +18,3 @@ function HomePage() {
     </div>
   );
 }
-
-export default HomePage;
