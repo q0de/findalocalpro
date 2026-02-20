@@ -359,6 +359,59 @@ export function HeroAnimatedHeadline() {
 }
 
 /* ═══════════════════════════════════════════════════════
+   HeroFadeIn — Delayed fade+slide for hero sub-elements
+   ═══════════════════════════════════════════════════════ */
+export function HeroFadeIn({ 
+  children, 
+  delay = 0, 
+  direction = 'up' 
+}: { 
+  children: ReactNode; 
+  delay?: number; 
+  direction?: 'up' | 'right' | 'left';
+}) {
+  const ref = useRef<HTMLDivElement>(null);
+  const [visible, setVisible] = useState(false);
+
+  useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setTimeout(() => setVisible(true), delay);
+          observer.unobserve(el);
+        }
+      },
+      { threshold: 0.2 }
+    );
+
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, [delay]);
+
+  const transforms: Record<string, string> = {
+    up: 'translateY(24px)',
+    right: 'translateX(40px)',
+    left: 'translateX(-40px)',
+  };
+
+  return (
+    <div
+      ref={ref}
+      style={{
+        opacity: visible ? 1 : 0,
+        transform: visible ? 'translate(0, 0)' : transforms[direction],
+        transition: `opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1), transform 0.7s cubic-bezier(0.16, 1, 0.3, 1)`,
+      }}
+    >
+      {children}
+    </div>
+  );
+}
+
+/* ═══════════════════════════════════════════════════════
    HeroCTAButtons — Animated entrance + dopamine hover/click
    ═══════════════════════════════════════════════════════ */
 export function HeroCTAButtons({ children }: { children: ReactNode }) {

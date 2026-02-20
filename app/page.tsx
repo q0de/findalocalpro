@@ -2,7 +2,7 @@ import Link from 'next/link';
 import { SUPABASE_URL, SUPABASE_ANON } from '@/lib/supabase';
 import { Header } from '@/components/Header';
 import { Footer } from '@/components/Footer';
-import { AnimatedSection, CountUpNumber, TrustScoreRing, StaggeredGrid, FloatingCard, HeroAnimatedHeadline, HeroCTAButtons } from './HomeAnimations';
+import { AnimatedSection, CountUpNumber, TrustScoreRing, StaggeredGrid, FloatingCard, HeroAnimatedHeadline, HeroCTAButtons, HeroFadeIn } from './HomeAnimations';
 import { ChatModal, ChatTrigger } from './ChatModal';
 
 interface Provider {
@@ -78,16 +78,20 @@ export default async function HomePage() {
           <div className="grid md:grid-cols-2 gap-12 items-center">
             {/* Left — Copy */}
             <div>
-              <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-brand-purple/10 border border-brand-purple/20 text-brand-purple text-sm font-bold mb-6">
-                <span className="material-symbols-outlined text-brand-teal text-base">verified</span>
-                Every pro verified against 4 public databases
-              </div>
+              <HeroFadeIn delay={0} direction="up">
+                <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-brand-purple/10 border border-brand-purple/20 text-brand-purple text-sm font-bold mb-6">
+                  <span className="material-symbols-outlined text-brand-teal text-base">verified</span>
+                  Every pro verified against 4 public databases
+                </div>
+              </HeroFadeIn>
               
               <HeroAnimatedHeadline />
               
-              <p className="text-lg text-slate-500 mb-8 max-w-lg">
-                4 databases checked for every pro: state license • BBB rating • business registration • contractor score. Always free.
-              </p>
+              <HeroFadeIn delay={1800} direction="up">
+                <p className="text-lg text-slate-500 mb-8 max-w-lg">
+                  4 databases checked for every pro: state license • BBB rating • business registration • contractor score. Always free.
+                </p>
+              </HeroFadeIn>
               
               <HeroCTAButtons>
                 <div className="flex flex-col sm:flex-row gap-4">
@@ -114,6 +118,7 @@ export default async function HomePage() {
             </div>
 
             {/* Right — Verification visual */}
+            <HeroFadeIn delay={600} direction="right">
             <FloatingCard className="hidden md:block">
               <div className="bg-white rounded-3xl border-2 border-slate-100 p-8 shadow-xl">
                 <div className="flex items-center gap-3 mb-6">
@@ -143,6 +148,7 @@ export default async function HomePage() {
                 </div>
               </div>
             </FloatingCard>
+            </HeroFadeIn>
           </div>
         </div>
       </section>
