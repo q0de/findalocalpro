@@ -40,10 +40,10 @@ const services = [
 ];
 
 const verificationSources = [
-  { icon: 'badge', label: 'State License (IDFPR)', desc: 'Active IL license verified', color: 'text-blue-600 bg-blue-50' },
-  { icon: 'account_balance', label: 'Secretary of State', desc: 'Business registration confirmed', color: 'text-indigo-600 bg-indigo-50' },
-  { icon: 'workspace_premium', label: 'Better Business Bureau', desc: 'Rating & complaint history', color: 'text-amber-600 bg-amber-50' },
-  { icon: 'construction', label: 'BuildZoom', desc: 'Contractor score & rank', color: 'text-emerald-600 bg-emerald-50' },
+  { icon: 'badge', label: 'IDFPR', desc: 'If their license expired or has complaints, we flag it.', color: 'text-blue-600 bg-blue-50' },
+  { icon: 'account_balance', label: 'Secretary of State', desc: 'If they are not a registered business in Illinois, that is a red flag.', color: 'text-indigo-600 bg-indigo-50' },
+  { icon: 'workspace_premium', label: 'BBB', desc: 'Customer complaints and resolution history — the stuff they do not put on their website.', color: 'text-amber-600 bg-amber-50' },
+  { icon: 'construction', label: 'BuildZoom', desc: 'Permit history and project quality scores from public records.', color: 'text-emerald-600 bg-emerald-50' },
 ];
 
 const areaTags = ['Downers Grove', 'Westmont', 'Lisle', 'Woodridge', 'Darien', 'Naperville', 'Lombard', 'Glen Ellyn', 'Wheaton', 'Hinsdale', 'Oak Brook', 'Bolingbrook'];
@@ -90,7 +90,7 @@ export default async function HomePage() {
               </h1>
               
               <p className="text-lg text-slate-500 mb-8 max-w-lg">
-                State licenses, business registration, BBB ratings, contractor scores — we verify it all so you don&apos;t have to. Free for homeowners.
+                4 databases checked for every pro: state license • BBB rating • business registration • contractor score. Always free.
               </p>
               
               <div className="flex flex-col sm:flex-row gap-4">
@@ -116,7 +116,12 @@ export default async function HomePage() {
                   </div>
                 </div>
                 <div className="space-y-3">
-                  {verificationSources.map((src, i) => (
+                  {[
+                    { label: 'State License (IDFPR)', desc: 'Active IL license verified' },
+                    { label: 'Secretary of State', desc: 'Business registration confirmed' },
+                    { label: 'Better Business Bureau', desc: 'Rating & complaint history' },
+                    { label: 'BuildZoom', desc: 'Contractor score & rank' },
+                  ].map((src, i) => (
                     <AnimatedSection key={src.label} delay={i * 150} direction="right">
                       <div className="flex items-center gap-3 bg-slate-50 rounded-xl px-4 py-3">
                         <span className="material-symbols-outlined text-brand-teal text-xl">check_circle</span>
@@ -139,12 +144,11 @@ export default async function HomePage() {
           ═══════════════════════════════════════════════════════ */}
       <section className="py-10 bg-white border-b border-slate-100">
         <div className="max-w-4xl mx-auto px-6">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
+          <div className="grid grid-cols-3 gap-8">
             {[
-              { end: 4, suffix: '', label: 'Databases Checked', icon: 'database' },
-              { end: 11, suffix: '+', label: 'Verified Pros', icon: 'verified_user' },
-              { end: 12, suffix: '', label: 'Towns Served', icon: 'location_on' },
-              { end: 60, suffix: 's', label: 'Average Match Time', icon: 'schedule' },
+              { end: 4, suffix: '', label: 'Government Databases', icon: 'database' },
+              { end: 137, suffix: '+', label: 'Records Analyzed', icon: 'verified_user' },
+              { end: 60, suffix: 's', label: 'Under 60s Match', icon: 'schedule' },
             ].map((stat) => (
               <div key={stat.label} className="text-center">
                 <div className="flex items-center justify-center gap-1 mb-1">
@@ -369,7 +373,7 @@ export default async function HomePage() {
           ═══════════════════════════════════════════════════════ */}
               <section className="py-20 bg-white">
           <div className="max-w-3xl mx-auto px-6">
-            <h2 className="text-3xl font-black text-slate-800 text-center mb-10">Frequently Asked Questions</h2>
+            <h2 className="text-3xl font-black text-slate-800 text-center mb-10">What Homeowners Ask Us</h2>
             <div className="space-y-3">
               {[
                 { q: 'How is FindALocalPro different from Angi or Thumbtack?', a: 'We verify every pro against 4 public databases — state licensing (IDFPR), Secretary of State business registration, BBB ratings, and contractor scores. Other sites rank by who pays the most. We rank by who\'s actually credentialed.' },

@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import { Header } from '@/components/Header';
 import { Footer } from '@/components/Footer';
+import Breadcrumbs from '@/components/Breadcrumbs';
 import { ChatSection } from '../ChatSection';
 
 export const metadata: Metadata = {
@@ -14,6 +15,12 @@ export default function GetMatchedPage() {
       <Header step={0} totalSteps={0} />
       <main className="flex-1 py-8 px-4">
         <div className="max-w-lg mx-auto">
+          <Breadcrumbs
+            items={[
+              { label: 'Home', href: '/' },
+              { label: 'Get Matched' },
+            ]}
+          />
           <div className="text-center mb-6">
             <h1 className="text-2xl font-bold text-slate-800 mb-2">Get Matched With a Pro</h1>
             <p className="text-slate-500 text-sm">Tell us what you need — we&apos;ll connect you in 60 seconds</p>

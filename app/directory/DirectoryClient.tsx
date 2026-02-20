@@ -4,6 +4,7 @@ import { useState } from 'react';
 import Link from 'next/link';
 import { Header } from '@/components/Header';
 import { Footer } from '@/components/Footer';
+import Breadcrumbs from '@/components/Breadcrumbs';
 
 interface Provider {
   id: string;
@@ -188,6 +189,12 @@ export function DirectoryClient({ providers, checksMap }: { providers: Provider[
       <Header step={0} totalSteps={0} />
 
       <main className="grow max-w-5xl mx-auto w-full px-6 py-12">
+        <Breadcrumbs
+          items={[
+            { label: 'Home', href: '/' },
+            { label: 'Directory' },
+          ]}
+        />
         <div className="text-center mb-12 animate-fade-in-up">
           <h1 className="text-4xl md:text-5xl font-bold tracking-tight text-slate-800 font-playful mb-4">
             Verified Local Pros

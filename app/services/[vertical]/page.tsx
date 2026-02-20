@@ -3,6 +3,7 @@ import { notFound } from 'next/navigation';
 import Link from 'next/link';
 import { Header } from '@/components/Header';
 import { Footer } from '@/components/Footer';
+import Breadcrumbs from '@/components/Breadcrumbs';
 import { SUPABASE_URL, SUPABASE_ANON } from '@/lib/supabase';
 import { ServiceCallbackForm } from './ServiceCallbackForm';
 
@@ -179,9 +180,40 @@ export default async function ServiceLandingPage({ params }: { params: Promise<{
 
   const { providers, checksMap } = await getProvidersForTrade(service.trade);
 
+  // Service structured data
+  const serviceSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'Service',
+    name: service.title,
+    description: service.description,
+    serviceType: service.trade,
+    areaServed: {
+      '@type': 'Place',
+      name: 'DuPage County, IL',
+    },
+    provider: {
+      '@type': 'Organization',
+      name: 'FindALocalPro',
+      url: 'https://findalocalpro.com',
+    },
+  };
+
   return (
     <div className="min-h-screen flex flex-col overflow-x-hidden">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(serviceSchema) }}
+      />
       <Header step={0} totalSteps={0} />
+      <div className="max-w-5xl mx-auto px-6 pt-6">
+        <Breadcrumbs
+          items={[
+            { label: 'Home', href: '/' },
+            { label: 'Services', href: '/directory' },
+            { label: service.title },
+          ]}
+        />
+      </div>
 
       {/* Hero */}
       <section className="bg-gradient-to-br from-brand-purple/5 via-white to-brand-pink/5 py-20 md:py-28">
@@ -407,6 +439,36 @@ export default async function ServiceLandingPage({ params }: { params: Promise<{
               <span className="material-symbols-outlined">call</span>
               (630) 703-2607
             </a>
+          </div>
+        </div>
+      </section>
+
+      {/* Related Services */}
+      <section className="py-20 bg-white">
+        <div className="max-w-5xl mx-auto px-6">
+          <h2 className="text-3xl md:text-4xl font-black text-slate-800 text-center mb-3">Other Services We Verify</h2>
+          <p className="text-slate-500 text-center mb-12">Need help with something else? We verify pros in all home service trades.</p>
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {Object.entries(verticals)
+              .filter(([key]) => key !== vertical)
+              .map(([key, relatedService]) => (
+                <Link
+                  key={key}
+                  href={`/services/${key}`}
+                  className="group block bg-white border-2 border-slate-100 rounded-2xl p-6 hover:border-brand-purple/30 hover:shadow-xl transition-all duration-300"
+                >
+                  <div className="flex items-center gap-4 mb-3">
+                    <div className={`w-12 h-12 rounded-xl flex items-center justify-center ${relatedService.iconBg} ${relatedService.iconColor} transition-transform duration-300 group-hover:scale-110`}>
+                      <span className="material-symbols-outlined text-2xl">{relatedService.materialIcon}</span>
+                    </div>
+                    <h3 className="font-black text-slate-800 group-hover:text-brand-purple transition-colors">{relatedService.title}</h3>
+                  </div>
+                  <p className="text-slate-500 text-sm mb-4">{relatedService.description.split('.')[0]}.</p>
+                  <div className="flex items-center gap-2 text-brand-purple font-bold text-sm group-hover:gap-3 transition-all">
+                    View Pros <span className="material-symbols-outlined text-base">arrow_forward</span>
+                  </div>
+                </Link>
+              ))}
           </div>
         </div>
       </section>

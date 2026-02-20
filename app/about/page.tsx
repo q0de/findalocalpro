@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import Link from 'next/link';
 import { Header } from '@/components/Header';
 import { Footer } from '@/components/Footer';
+import Breadcrumbs from '@/components/Breadcrumbs';
 
 export const metadata: Metadata = {
   title: 'About FindALocalPro — How We Verify Home Service Professionals',
@@ -50,12 +51,14 @@ export default function AboutPage() {
     <div className="min-h-screen flex flex-col overflow-x-hidden">
       <Header step={0} totalSteps={0} />
 
-      {/* Breadcrumb */}
-      <nav className="max-w-4xl mx-auto px-6 py-4 text-sm text-slate-400">
-        <Link href="/" className="hover:text-brand-purple">Home</Link>
-        <span className="mx-2">›</span>
-        <span className="text-slate-600 font-medium">About</span>
-      </nav>
+      <div className="max-w-4xl mx-auto px-6 pt-6">
+        <Breadcrumbs
+          items={[
+            { label: 'Home', href: '/' },
+            { label: 'About' },
+          ]}
+        />
+      </div>
 
       {/* Hero */}
       <section className="py-16 md:py-20 bg-gradient-to-br from-brand-purple/5 via-white to-brand-pink/5">

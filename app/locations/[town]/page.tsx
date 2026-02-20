@@ -3,6 +3,7 @@ import { notFound } from 'next/navigation';
 import Link from 'next/link';
 import { Header } from '@/components/Header';
 import { Footer } from '@/components/Footer';
+import Breadcrumbs from '@/components/Breadcrumbs';
 import { SUPABASE_URL, SUPABASE_ANON } from '@/lib/supabase';
 
 interface TownInfo {
@@ -296,16 +297,15 @@ export default async function LocationPage({ params }: { params: Promise<{ town:
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
 
       <main className="min-h-screen bg-white">
-        {/* Breadcrumbs */}
-        <nav className="max-w-5xl mx-auto px-6 pt-6" aria-label="Breadcrumb">
-          <ol className="flex items-center gap-2 text-sm text-slate-500">
-            <li><Link href="/" className="hover:text-purple-600 transition-colors">Home</Link></li>
-            <li><span className="material-symbols-rounded text-xs">chevron_right</span></li>
-            <li><Link href="/directory" className="hover:text-purple-600 transition-colors">Directory</Link></li>
-            <li><span className="material-symbols-rounded text-xs">chevron_right</span></li>
-            <li className="text-slate-900 font-medium">{town.name}</li>
-          </ol>
-        </nav>
+        <div className="max-w-5xl mx-auto px-6 pt-6">
+          <Breadcrumbs
+            items={[
+              { label: 'Home', href: '/' },
+              { label: 'Locations' },
+              { label: town.name },
+            ]}
+          />
+        </div>
 
         {/* Hero */}
         <section className="max-w-5xl mx-auto px-6 pt-8 pb-12">

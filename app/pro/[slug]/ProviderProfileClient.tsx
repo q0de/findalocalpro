@@ -5,6 +5,7 @@ import type { FormEvent } from 'react';
 import Link from 'next/link';
 import { Header } from '@/components/Header';
 import { Footer } from '@/components/Footer';
+import Breadcrumbs from '@/components/Breadcrumbs';
 import { SUPABASE_URL, DIRECT_CONTACT_ENABLED } from '@/lib/supabase';
 
 interface Provider {
@@ -228,14 +229,13 @@ export function ProviderProfileClient({ provider, checks, tradeLabel }: { provid
       <Header step={0} totalSteps={0} />
 
       <main className="grow max-w-4xl mx-auto w-full px-6 py-12">
-        {/* Breadcrumb */}
-        <nav className="flex items-center gap-2 text-sm text-slate-400 mb-8">
-          <Link href="/directory" className="hover:text-brand-purple font-medium">Directory</Link>
-          <span className="material-symbols-outlined text-xs">chevron_right</span>
-          <Link href={`/directory?trade=${provider.trade}`} className="hover:text-brand-purple font-medium capitalize">{trade.label}</Link>
-          <span className="material-symbols-outlined text-xs">chevron_right</span>
-          <span className="text-slate-600 font-bold">{provider.name}</span>
-        </nav>
+        <Breadcrumbs
+          items={[
+            { label: 'Home', href: '/' },
+            { label: 'Directory', href: '/directory' },
+            { label: provider.name },
+          ]}
+        />
 
         {/* Hero Card */}
         <div className="bg-white rounded-3xl border-2 border-slate-100 shadow-xl p-8 mb-8 animate-fade-in-up">
