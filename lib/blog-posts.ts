@@ -354,7 +354,7 @@ export const blogPosts: BlogPost[] = [
 
       <p>Every <a href="/services/hvac">HVAC contractor on FindALocalPro</a> is verified against four government databases before they appear in our directory. No paid placements, no ads — just verified credentials and public records.</p>
 
-      <p><a href="/get-matched">Get matched with a verified HVAC pro</a> serving Downers Grove and DuPage County, or call us at <strong>(630) 703-2607</strong>.</p>
+      <p><a href="/get-matched">Get matched with a verified HVAC pro</a> serving Downers Grove and DuPage County, or call us at <strong>(630) 407-1727</strong>.</p>
     `,
   },
   {
@@ -452,7 +452,7 @@ export const blogPosts: BlogPost[] = [
 
       <p>Every <a href="/services/electricians">electrician on FindALocalPro</a> has been verified against state licensing records, business registration, BBB, and permit history. We check so you don't have to.</p>
 
-      <p><a href="/get-matched">Get matched with a verified electrician</a> or call <strong>(630) 703-2607</strong>.</p>
+      <p><a href="/get-matched">Get matched with a verified electrician</a> or call <strong>(630) 407-1727</strong>.</p>
     `,
   },
   {
@@ -554,7 +554,7 @@ export const blogPosts: BlogPost[] = [
 
       <p>Every <a href="/services/roofing">roofing contractor on FindALocalPro</a> is verified against IDFPR licensing records, IL Secretary of State business registration, BBB, and BuildZoom permit history. No storm chasers. No unlicensed operators. Just verified credentials you can trust.</p>
 
-      <p><a href="/get-matched">Get matched with a verified roofer</a> in DuPage County, or call <strong>(630) 703-2607</strong>.</p>
+      <p><a href="/get-matched">Get matched with a verified roofer</a> in DuPage County, or call <strong>(630) 407-1727</strong>.</p>
     `,
   },
 ];

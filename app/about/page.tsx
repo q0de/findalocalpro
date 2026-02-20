@@ -152,7 +152,7 @@ export default function AboutPage() {
               <span className="material-symbols-outlined text-brand-teal text-3xl mb-4 block">handyman</span>
               <h3 className="font-black text-slate-800 text-xl mb-3">For Professionals</h3>
               <p className="text-slate-600 leading-relaxed">
-                If you&apos;re a licensed home service professional in DuPage County, you may already be in our directory. We verify contractors proactively using public records. Want to claim or update your listing? <a href="tel:6307032607" className="text-brand-purple font-bold hover:underline">Call us at (630) 703-2607</a>.
+                If you&apos;re a licensed home service professional in DuPage County, you may already be in our directory. We verify contractors proactively using public records. Want to claim or update your listing? <a href="tel:6304071727" className="text-brand-purple font-bold hover:underline">Call us at (630) 407-1727</a>.
               </p>
             </div>
           </div>
@@ -169,9 +169,9 @@ export default function AboutPage() {
               <span className="material-symbols-outlined">chat</span>
               Get Matched Free
             </Link>
-            <a href="tel:6307032607" className="inline-flex items-center justify-center gap-2 bg-white/10 hover:bg-white/20 text-white px-8 py-4 rounded-2xl font-black text-lg border-2 border-white/30 transition-all">
+            <a href="tel:6304071727" className="inline-flex items-center justify-center gap-2 bg-white/10 hover:bg-white/20 text-white px-8 py-4 rounded-2xl font-black text-lg border-2 border-white/30 transition-all">
               <span className="material-symbols-outlined">call</span>
-              (630) 703-2607
+              (630) 407-1727
             </a>
           </div>
         </div>

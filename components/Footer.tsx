@@ -38,7 +38,7 @@ export function Footer() {
             <ul className="space-y-2">
               <li><Link href="/get-matched" className="text-sm hover:text-white transition-colors">Get Matched Free</Link></li>
               <li><Link href="/about#verification" className="text-sm hover:text-white transition-colors">How We Verify</Link></li>
-              <li><a href="tel:6307032607" className="text-sm hover:text-white transition-colors">(630) 703-2607</a></li>
+              <li><a href="tel:6304071727" className="text-sm hover:text-white transition-colors">(630) 407-1727</a></li>
             </ul>
           </div>
 
@@ -87,7 +87,7 @@ export function Footer() {
             </p>
           </div>
           <p className="text-xs text-slate-600">
-            Downers Grove, IL · (630) 703-2607
+            Downers Grove, IL · (630) 407-1727
           </p>
         </div>
       </div>

@@ -338,7 +338,7 @@ export function DirectoryClient({ providers, checksMap, reviewsMap }: { provider
           <div className="bg-white rounded-3xl border-2 border-slate-100 shadow-xl p-8 max-w-2xl mx-auto">
             <h2 className="text-2xl font-bold text-slate-800 mb-3 font-playful">Are you a <span className="text-brand-pink">Pro</span>? 🔧</h2>
             <p className="text-slate-500 mb-6">Get verified and start receiving qualified leads from homeowners in your area.</p>
-            <a href="tel:6307032607" className="inline-flex items-center gap-2 bg-brand-purple hover:bg-brand-pink text-white px-8 py-4 rounded-2xl font-black transition-all shadow-lg hover:shadow-xl cursor-pointer">
+            <a href="tel:6304071727" className="inline-flex items-center gap-2 bg-brand-purple hover:bg-brand-pink text-white px-8 py-4 rounded-2xl font-black transition-all shadow-lg hover:shadow-xl cursor-pointer">
               <span className="material-symbols-outlined">call</span>Become a Verified Pro
             </a>
           </div>

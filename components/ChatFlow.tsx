@@ -829,7 +829,7 @@ export function ChatFlow({ onStepChange }: ChatFlowProps) {
               <p className="text-lg font-bold mb-2">No problem! 👋</p>
               <p className="text-slate-600">
                 Your estimate has been sent. If you change your mind, just call{' '}
-                <a href="tel:6307032607" className="text-brand-purple font-bold hover:underline">(630) 703-2607</a>{' '}
+                <a href="tel:6304071727" className="text-brand-purple font-bold hover:underline">(630) 407-1727</a>{' '}
                 anytime and we'll match you with a pro right away.
               </p>
             </div>

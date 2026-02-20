@@ -168,9 +168,9 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
                     <span className="material-symbols-rounded">search</span>
                     Get Matched Free
                   </Link>
-                  <a href="tel:6307032607" className="inline-flex items-center gap-2 border-2 border-white/30 px-6 py-3 rounded-xl font-bold hover:bg-white/10 transition-colors">
+                  <a href="tel:6304071727" className="inline-flex items-center gap-2 border-2 border-white/30 px-6 py-3 rounded-xl font-bold hover:bg-white/10 transition-colors">
                     <span className="material-symbols-rounded">call</span>
-                    (630) 703-2607
+                    (630) 407-1727
                   </a>
                 </div>
               </div>

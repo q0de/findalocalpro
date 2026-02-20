@@ -236,9 +236,9 @@ export default async function ServiceLandingPage({ params }: { params: Promise<{
                   <span className="material-symbols-outlined transition-transform group-hover:scale-110">chat</span>
                   Get Matched Free
                 </Link>
-                <a href="tel:6307032607" className="inline-flex items-center justify-center gap-2 bg-white hover:bg-slate-50 text-slate-800 px-8 py-4 rounded-2xl font-black text-lg border-2 border-slate-200 transition-all shadow-lg hover:-translate-y-1">
+                <a href="tel:6304071727" className="inline-flex items-center justify-center gap-2 bg-white hover:bg-slate-50 text-slate-800 px-8 py-4 rounded-2xl font-black text-lg border-2 border-slate-200 transition-all shadow-lg hover:-translate-y-1">
                   <span className="material-symbols-outlined">call</span>
-                  (630) 703-2607
+                  (630) 407-1727
                 </a>
               </div>
             </div>
@@ -434,9 +434,9 @@ export default async function ServiceLandingPage({ params }: { params: Promise<{
               <span className="material-symbols-outlined transition-transform group-hover:scale-110">chat</span>
               Get Matched Free
             </Link>
-            <a href="tel:6307032607" className="inline-flex items-center justify-center gap-2 bg-white/10 hover:bg-white/20 text-white px-8 py-4 rounded-2xl font-black text-lg border-2 border-white/30 transition-all">
+            <a href="tel:6304071727" className="inline-flex items-center justify-center gap-2 bg-white/10 hover:bg-white/20 text-white px-8 py-4 rounded-2xl font-black text-lg border-2 border-white/30 transition-all">
               <span className="material-symbols-outlined">call</span>
-              (630) 703-2607
+              (630) 407-1727
             </a>
           </div>
         </div>

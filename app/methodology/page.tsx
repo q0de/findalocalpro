@@ -265,7 +265,7 @@ export default function MethodologyPage() {
                 <span className="material-symbols-rounded text-amber-600">flag</span>
                 Community Reporting
               </h3>
-              <p className="text-slate-600 text-sm">Homeowners can report concerns about any listed provider. Reports trigger an immediate re-verification outside the normal monthly cycle. Contact us at (630) 703-2607.</p>
+              <p className="text-slate-600 text-sm">Homeowners can report concerns about any listed provider. Reports trigger an immediate re-verification outside the normal monthly cycle. Contact us at (630) 407-1727.</p>
             </div>
           </div>
         </section>

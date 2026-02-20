@@ -223,7 +223,7 @@ export async function generateMetadata({ params }: { params: Promise<{ town: str
   if (!town) return { title: 'Location Not Found | FindALocalPro' };
 
   const title = `Verified Home Service Pros in ${town.name}, ${town.state} | FindALocalPro`;
-  const description = `Find licensed, verified plumbers, electricians, HVAC techs & roofers in ${town.name}, ${town.state}. Every pro checked against 4 government databases. Free for homeowners. (630) 703-2607`;
+  const description = `Find licensed, verified plumbers, electricians, HVAC techs & roofers in ${town.name}, ${town.state}. Every pro checked against 4 government databases. Free for homeowners. (630) 407-1727`;
 
   return {
     title,
@@ -264,7 +264,7 @@ export default async function LocationPage({ params }: { params: Promise<{ town:
     name: `FindALocalPro — ${town.name}`,
     description: `Verified home service professionals serving ${town.name}, ${town.state}`,
     url: `https://findalocalpro.com/locations/${townSlug}`,
-    telephone: '(630) 703-2607',
+    telephone: '(630) 407-1727',
     address: {
       '@type': 'PostalAddress',
       addressLocality: town.name,
@@ -324,9 +324,9 @@ export default async function LocationPage({ params }: { params: Promise<{ town:
               <span className="material-symbols-rounded">search</span>
               Find a Pro in {town.name}
             </Link>
-            <a href="tel:6307032607" className="inline-flex items-center gap-2 border-2 border-purple-600 text-purple-600 px-6 py-3 rounded-xl font-bold hover:bg-purple-50 transition-colors">
+            <a href="tel:6304071727" className="inline-flex items-center gap-2 border-2 border-purple-600 text-purple-600 px-6 py-3 rounded-xl font-bold hover:bg-purple-50 transition-colors">
               <span className="material-symbols-rounded">call</span>
-              (630) 703-2607
+              (630) 407-1727
             </a>
           </div>
         </section>
@@ -484,8 +484,8 @@ export default async function LocationPage({ params }: { params: Promise<{ town:
               <Link href="/get-matched" className="inline-flex items-center gap-2 bg-white text-purple-900 px-8 py-3 rounded-xl font-bold hover:bg-purple-50 transition-colors">
                 Get Matched Free
               </Link>
-              <a href="tel:6307032607" className="inline-flex items-center gap-2 border-2 border-white px-8 py-3 rounded-xl font-bold hover:bg-white/10 transition-colors">
-                Call (630) 703-2607
+              <a href="tel:6304071727" className="inline-flex items-center gap-2 border-2 border-white px-8 py-3 rounded-xl font-bold hover:bg-white/10 transition-colors">
+                Call (630) 407-1727
               </a>
             </div>
           </div>

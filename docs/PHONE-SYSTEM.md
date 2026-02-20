@@ -6,7 +6,7 @@
 ## Architecture
 
 ```
-Caller → Twilio (+1 630-703-2607) → Supabase Edge Function (voice-webhook)
+Caller → Twilio (+1 630-407-1727) → Supabase Edge Function (voice-webhook)
                                           ↓
                                    ElevenLabs IVR Audio
                                           ↓
@@ -16,7 +16,7 @@ Caller → Twilio (+1 630-703-2607) → Supabase Edge Function (voice-webhook)
                                           ↓
                               Follow-up SMS to caller
 
-SMS → Twilio (+1 630-703-2607) → Supabase Edge Function (sms-webhook)
+SMS → Twilio (+1 630-407-1727) → Supabase Edge Function (sms-webhook)
                                           ↓
                                    Parse service + zip
                                           ↓
@@ -31,7 +31,7 @@ SMS → Twilio (+1 630-703-2607) → Supabase Edge Function (sms-webhook)
 
 ## Twilio Config
 
-- **Number:** +1 630-703-2607
+- **Number:** +1 630-407-1727
 - **Account SID:** (In Proton Pass → "login.twilio.com")
 - **Auth Token:** In Proton Pass → "login.twilio.com" (clawrl3000@proton.me)
 - **Voice URL:** https://hocipkeeikriqyojiboj.supabase.co/functions/v1/voice-webhook (POST)

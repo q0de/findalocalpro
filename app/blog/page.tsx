@@ -160,9 +160,9 @@ export default function BlogIndex() {
               <Link href="/get-matched" className="ripple-btn inline-flex items-center gap-2 bg-purple-600 text-white px-8 py-3.5 rounded-xl font-bold hover:bg-purple-700 transition-colors shadow-lg">
                 Get Matched Free
               </Link>
-              <a href="tel:6307032607" className="inline-flex items-center gap-2 border-2 border-slate-200 bg-white text-slate-700 px-8 py-3.5 rounded-xl font-bold hover:border-purple-300 transition-colors">
+              <a href="tel:6304071727" className="inline-flex items-center gap-2 border-2 border-slate-200 bg-white text-slate-700 px-8 py-3.5 rounded-xl font-bold hover:border-purple-300 transition-colors">
                 <span className="material-symbols-rounded">call</span>
-                (630) 703-2607
+                (630) 407-1727
               </a>
             </div>
           </div>

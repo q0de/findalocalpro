@@ -10,7 +10,7 @@ Home services lead gen site for DuPage County, IL. Conversational chat UI + IVR 
 ## Architecture
 
 ```
-SEO Pages (programmatic) → Chat Flow OR Phone IVR (+1 630-703-2607)
+SEO Pages (programmatic) → Chat Flow OR Phone IVR (+1 630-407-1727)
          ↓                           ↓
     Lead captured in Supabase (service + zip + phone + timing)
          ↓

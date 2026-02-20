@@ -5,11 +5,11 @@ import { Footer } from '@/components/Footer';
 import Breadcrumbs from '@/components/Breadcrumbs';
 
 export const metadata: Metadata = {
-  title: 'Contact FindALocalPro — Downers Grove, IL | (630) 703-2607',
-  description: 'Contact FindALocalPro for verified home service professionals in Downers Grove and DuPage County, IL. Call (630) 703-2607 or use our free matching service.',
+  title: 'Contact FindALocalPro — Downers Grove, IL | (630) 407-1727',
+  description: 'Contact FindALocalPro for verified home service professionals in Downers Grove and DuPage County, IL. Call (630) 407-1727 or use our free matching service.',
   openGraph: {
     title: 'Contact FindALocalPro — Downers Grove, IL',
-    description: 'Get connected with verified home service professionals. Call (630) 703-2607.',
+    description: 'Get connected with verified home service professionals. Call (630) 407-1727.',
     url: 'https://findalocalpro.com/contact',
   },
   alternates: { canonical: 'https://findalocalpro.com/contact' },
@@ -20,7 +20,7 @@ const contactJsonLd = {
   '@type': 'LocalBusiness',
   name: 'FindALocalPro',
   url: 'https://findalocalpro.com',
-  telephone: '+1-630-703-2607',
+  telephone: '+1-630-407-1727',
   description: 'Verified home service professionals in Downers Grove and DuPage County, IL. Every pro checked against 4 government databases.',
   address: {
     '@type': 'PostalAddress',
@@ -89,12 +89,12 @@ export default function ContactPage() {
         <div className="max-w-4xl mx-auto px-6">
           <div className="grid md:grid-cols-3 gap-6">
             {/* Phone */}
-            <a href="tel:6307032607" className="group bg-white rounded-2xl border-2 border-slate-100 p-8 text-center hover:border-brand-purple hover:shadow-xl transition-all duration-300 hover:-translate-y-1">
+            <a href="tel:6304071727" className="group bg-white rounded-2xl border-2 border-slate-100 p-8 text-center hover:border-brand-purple hover:shadow-xl transition-all duration-300 hover:-translate-y-1">
               <div className="w-16 h-16 bg-brand-purple/10 rounded-2xl flex items-center justify-center mx-auto mb-4 group-hover:bg-brand-purple/20 transition-colors">
                 <span className="material-symbols-outlined text-brand-purple text-3xl">call</span>
               </div>
               <h2 className="font-black text-slate-800 text-lg mb-2">Call Us</h2>
-              <p className="text-brand-purple font-black text-xl">(630) 703-2607</p>
+              <p className="text-brand-purple font-black text-xl">(630) 407-1727</p>
               <p className="text-slate-400 text-sm mt-2">Mon-Fri 8am-6pm, Sat 9am-2pm</p>
             </a>
 
@@ -176,8 +176,8 @@ export default function ContactPage() {
           <div className="space-y-3">
             {[
               { q: 'Is FindALocalPro really free?', a: 'Yes, 100% free for homeowners. We connect you with verified professionals at no cost. No account needed, no hidden fees.' },
-              { q: 'How do I claim my business listing?', a: 'If you\'re a licensed home service professional in DuPage County, call us at (630) 703-2607. We can update your listing with accurate contact information and verify your credentials.' },
-              { q: 'I had a bad experience with a listed pro. What do I do?', a: 'Call us at (630) 703-2607 or email hello@findalocalpro.com. We take complaints seriously and will re-verify the contractor\'s standing. Trust scores are updated based on new information.' },
+              { q: 'How do I claim my business listing?', a: 'If you\'re a licensed home service professional in DuPage County, call us at (630) 407-1727. We can update your listing with accurate contact information and verify your credentials.' },
+              { q: 'I had a bad experience with a listed pro. What do I do?', a: 'Call us at (630) 407-1727 or email hello@findalocalpro.com. We take complaints seriously and will re-verify the contractor\'s standing. Trust scores are updated based on new information.' },
             ].map((faq) => (
               <details key={faq.q} className="group bg-white border-2 border-slate-100 rounded-2xl overflow-hidden hover:border-brand-purple/20 transition-colors">
                 <summary className="flex items-center justify-between p-6 cursor-pointer font-black text-slate-800 hover:text-brand-purple transition-colors">

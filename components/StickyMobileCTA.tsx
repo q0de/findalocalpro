@@ -20,7 +20,7 @@ export function StickyMobileCTA() {
     >
       <div className="bg-white border-t border-slate-200 shadow-[0_-4px_20px_rgba(0,0,0,0.1)] px-4 py-3 flex gap-3">
         <a
-          href="tel:6307032607"
+          href="tel:6304071727"
           className="flex-1 flex items-center justify-center gap-2 bg-slate-900 text-white py-3 rounded-xl font-bold text-sm"
         >
           <span className="material-symbols-rounded text-lg">call</span>

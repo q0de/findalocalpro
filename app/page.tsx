@@ -100,9 +100,9 @@ export default async function HomePage() {
                   </div>
                   <div className="flex flex-col items-center gap-1.5">
                     <span className="text-xs font-bold text-slate-400 uppercase tracking-wider">Call Now</span>
-                    <a href="tel:6307032607" className="hero-cta-secondary inline-flex items-center justify-center gap-2 bg-white text-slate-800 px-6 sm:px-8 py-4 rounded-2xl font-black text-base sm:text-lg border-2 border-slate-200 shadow-lg">
+                    <a href="tel:6304071727" className="hero-cta-secondary inline-flex items-center justify-center gap-2 bg-white text-slate-800 px-6 sm:px-8 py-4 rounded-2xl font-black text-base sm:text-lg border-2 border-slate-200 shadow-lg">
                       <span className="material-symbols-outlined phone-ring">call</span>
-                      (630) 703-2607
+                      (630) 407-1727
                     </a>
                   </div>
                 </div>
@@ -440,9 +440,9 @@ export default async function HomePage() {
               <span className="material-symbols-outlined transition-transform group-hover:scale-110">chat</span>
               Get Matched Free
             </ChatTrigger>
-            <a href="tel:6307032607" className="inline-flex items-center justify-center gap-2 bg-white/10 hover:bg-white/20 text-white px-8 py-4 rounded-2xl font-black text-lg border-2 border-white/30 transition-all">
+            <a href="tel:6304071727" className="inline-flex items-center justify-center gap-2 bg-white/10 hover:bg-white/20 text-white px-8 py-4 rounded-2xl font-black text-lg border-2 border-white/30 transition-all">
               <span className="material-symbols-outlined">call</span>
-              (630) 703-2607
+              (630) 407-1727
             </a>
           </div>
         </div>

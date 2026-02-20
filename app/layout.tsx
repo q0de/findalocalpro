@@ -6,11 +6,11 @@ import './globals.css';
 
 export const metadata: Metadata = {
   title: 'Verified Home Pros in Downers Grove & DuPage County, IL | FindALocalPro',
-  description: 'Every contractor verified against 4 government databases — IDFPR license, BBB, IL SOS registration & BuildZoom. 11 verified pros across plumbing, HVAC, electrical & roofing. Free for homeowners. (630) 703-2607',
+  description: 'Every contractor verified against 4 government databases — IDFPR license, BBB, IL SOS registration & BuildZoom. 11 verified pros across plumbing, HVAC, electrical & roofing. Free for homeowners. (630) 407-1727',
   keywords: 'verified contractors Downers Grove, licensed plumber DuPage County, HVAC repair Downers Grove IL, electrician near me Downers Grove, roofing contractor DuPage, home service professionals Illinois',
   openGraph: {
     title: 'Verified Home Pros in Downers Grove & DuPage County | FindALocalPro',
-    description: 'Every contractor verified against 4 government databases. Free matching for DuPage County homeowners. (630) 703-2607',
+    description: 'Every contractor verified against 4 government databases. Free matching for DuPage County homeowners. (630) 407-1727',
     type: 'website',
     url: 'https://findalocalpro.com',
     images: [{ url: 'https://findalocalpro.com/og-image.png', width: 1200, height: 630, alt: 'FindALocalPro — Verified Home Service Pros in DuPage County' }],
@@ -18,7 +18,7 @@ export const metadata: Metadata = {
   twitter: {
     card: 'summary_large_image',
     title: 'Verified Home Pros in Downers Grove & DuPage County | FindALocalPro',
-    description: 'Every contractor verified against 4 government databases. Free matching for DuPage County homeowners. (630) 703-2607',
+    description: 'Every contractor verified against 4 government databases. Free matching for DuPage County homeowners. (630) 407-1727',
     images: ['https://findalocalpro.com/og-image.png'],
   },
   alternates: {
@@ -57,7 +57,7 @@ const localBusinessJsonLd = {
   '@type': 'LocalBusiness',
   name: 'FindALocalPro',
   url: 'https://findalocalpro.com',
-  telephone: '+1-630-703-2607',
+  telephone: '+1-630-407-1727',
   description: 'Verified home service professionals in Downers Grove and DuPage County, IL. Every pro checked against 4 government databases.',
   address: {
     '@type': 'PostalAddress',

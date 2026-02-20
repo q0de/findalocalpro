@@ -186,7 +186,7 @@ professionals in your area. Plumbing, HVAC, electrical, roofing...
 
 **Meta description:**
 Current: Generic, no geo, no differentiator.
-Rewrite: `Every contractor verified against IDFPR license records, BBB, and SOS registration. 11 pros, 12 DuPage County towns. 100% free for homeowners. (630) 703-2607`
+Rewrite: `Every contractor verified against IDFPR license records, BBB, and SOS registration. 11 pros, 12 DuPage County towns. 100% free for homeowners. (630) 407-1727`
 
 Why: Specificity (4 databases named), numbers (11 pros, 12 towns), trust (free), and phone number in meta (clickable on mobile).
 
@@ -205,7 +205,7 @@ Why: Number + credential + verification method. Someone searching "plumber Downe
 | Location | Current CTA | Problem | Rewrite |
 |----------|------------|---------|---------|
 | Hero primary | "Get Matched Free" | Vague — matched with what? How? | "See Verified Pros Near You" |
-| Hero secondary | "(630) 703-2607" | Good — phone is direct ✅ | Keep |
+| Hero secondary | "(630) 407-1727" | Good — phone is direct ✅ | Keep |
 | Service page primary | "Get Matched Free" | Same issue | "See 3 Licensed Plumbers" (dynamic count) |
 | Final CTA | "Get Matched Free" | Repetitive, no urgency | "Chat with a Local Pro — 60 Second Match" |
 | Callback form | "Request Callback" | Generic, no benefit | "Get a Call from a Licensed Pro" |

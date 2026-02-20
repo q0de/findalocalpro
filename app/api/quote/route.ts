@@ -69,7 +69,7 @@ export async function POST(req: NextRequest) {
     const result = await getQuoteFromPerplexity(service, zip);
     return NextResponse.json({
       success: true, service, zip, ...result,
-      disclaimer: 'This is a rough estimate based on market data. Actual costs may vary. Get a free personalized quote by calling (630) 703-2607.',
+      disclaimer: 'This is a rough estimate based on market data. Actual costs may vary. Get a free personalized quote by calling (630) 407-1727.',
     });
   } catch {
     return NextResponse.json({
@@ -77,7 +77,7 @@ export async function POST(req: NextRequest) {
       estimate: getDefaultEstimate(service), low: '', high: '',
       details: `${service} costs vary based on the scope of work, materials, and your specific situation. For an accurate quote tailored to your needs, we can connect you with a licensed local pro.`,
       sources: [],
-      disclaimer: 'Get a free personalized quote by calling (630) 703-2607.',
+      disclaimer: 'Get a free personalized quote by calling (630) 407-1727.',
     });
   }
 }
