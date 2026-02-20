@@ -110,7 +110,9 @@ SUPABASE_ACCESS_TOKEN="sbp_695522f2a15b58c2ae732ea04f09679e866315df" npx supabas
 - [ ] Store in `businesses` table as `review_summary` column (TEXT)
 - [ ] Show on directory cards (below stars/count, above verification badges)
 - [ ] Show on pro profile pages (above individual reviews)
-- [ ] Script flow: falp-fetch-reviews.py pulls reviews → new script falp-summarize-reviews.py reads all reviews per business → calls Claude API → updates business record
+- [ ] Use OpenAI API — gpt-4.1-mini or gpt-4.1-nano (gpt-4o-mini is sunset/deprecated). NOT Claude (save quota for main agent)
+- [ ] Script flow: falp-fetch-reviews.py pulls reviews → new script falp-summarize-reviews.py reads all reviews per business → calls OpenAI/Kimi API → updates business record
+- [ ] API key: check ~/.clawdbot/.env for OPENAI_API_KEY or MOONSHOT_API_KEY
 - [ ] Weekly cron: run summarizer AFTER review fetcher (Sundays 7:15am)
 - [ ] Example output: "Customers consistently praise Four Suns for same-day emergency service and transparent pricing. A few mentions of scheduling delays during peak season, but overwhelmingly positive — 4.9★ across 259 reviews."
 
