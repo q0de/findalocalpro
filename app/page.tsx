@@ -2,7 +2,7 @@ import Link from 'next/link';
 import { SUPABASE_URL, SUPABASE_ANON } from '@/lib/supabase';
 import { Header } from '@/components/Header';
 import { Footer } from '@/components/Footer';
-import { AnimatedSection, CountUpNumber, TrustScoreRing, StaggeredGrid, FloatingCard } from './HomeAnimations';
+import { AnimatedSection, CountUpNumber, TrustScoreRing, StaggeredGrid, FloatingCard, HeroAnimatedHeadline, HeroCTAButtons } from './HomeAnimations';
 import { ChatModal, ChatTrigger } from './ChatModal';
 
 interface Provider {
@@ -83,26 +83,28 @@ export default async function HomePage() {
                 Every pro verified against 4 public databases
               </div>
               
-              <h1 className="text-4xl md:text-5xl lg:text-6xl font-black tracking-tight text-slate-800 mb-6 leading-[1.1]">
-                We Checked Their<br />
-                <span className="text-brand-purple">Paperwork.</span><br />
-                You Pick Your Pro.
-              </h1>
+              <HeroAnimatedHeadline />
               
               <p className="text-lg text-slate-500 mb-8 max-w-lg">
                 4 databases checked for every pro: state license • BBB rating • business registration • contractor score. Always free.
               </p>
               
-              <div className="flex flex-col sm:flex-row gap-4">
-                <ChatTrigger className="ripple-btn group inline-flex items-center justify-center gap-2 bg-brand-purple hover:bg-brand-pink text-white px-8 py-4 rounded-2xl font-black text-lg transition-all shadow-xl hover:shadow-2xl hover:-translate-y-1 active:translate-y-0 cursor-pointer">
-                  <span className="material-symbols-outlined transition-transform group-hover:scale-110">chat</span>
-                  Get Matched Free
-                </ChatTrigger>
-                <a href="tel:6307032607" className="inline-flex items-center justify-center gap-2 bg-white hover:bg-slate-50 text-slate-800 px-8 py-4 rounded-2xl font-black text-lg border-2 border-slate-200 transition-all shadow-lg hover:-translate-y-1">
-                  <span className="material-symbols-outlined">call</span>
-                  (630) 703-2607
-                </a>
-              </div>
+              <HeroCTAButtons>
+                <div className="flex flex-col sm:flex-row gap-3">
+                  <ChatTrigger className="hero-cta-primary hero-cta-glow ripple-btn group inline-flex items-center justify-center gap-2 bg-brand-purple text-white px-6 sm:px-8 py-4 rounded-2xl font-black text-base sm:text-lg whitespace-nowrap cursor-pointer shadow-xl">
+                    <span className="material-symbols-outlined transition-transform group-hover:scale-110">chat</span>
+                    Find My Pro — It&apos;s Free
+                  </ChatTrigger>
+                  <a href="tel:6307032607" className="hero-cta-secondary inline-flex items-center justify-center gap-2 bg-white text-slate-800 px-6 sm:px-8 py-4 rounded-2xl font-black text-base sm:text-lg whitespace-nowrap border-2 border-slate-200 shadow-lg">
+                    <span className="material-symbols-outlined phone-ring">call</span>
+                    Call Now — (630) 703-2607
+                  </a>
+                </div>
+                <p className="mt-3 text-sm text-slate-400 flex items-center gap-1">
+                  <span className="material-symbols-outlined text-brand-teal text-sm">lock</span>
+                  No spam, no credit card. Takes 60 seconds.
+                </p>
+              </HeroCTAButtons>
             </div>
 
             {/* Right — Verification visual */}

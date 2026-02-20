@@ -215,6 +215,257 @@ export function FloatingCard({ children, className = '' }: { children: ReactNode
 }
 
 /* ═══════════════════════════════════════════════════════
+   HeroAnimatedHeadline — Text animates in, paperwork gets
+   yellow highlight → purple → green checkmark pops
+   ═══════════════════════════════════════════════════════ */
+export function HeroAnimatedHeadline() {
+  const ref = useRef<HTMLDivElement>(null);
+  const [phase, setPhase] = useState(0);
+  // 0=hidden, 1=text animating in, 2=yellow highlight sweeps, 3=turns purple, 4=green check pops
+
+  useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setPhase(1);
+          observer.unobserve(el);
+        }
+      },
+      { threshold: 0.3 }
+    );
+
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, []);
+
+  useEffect(() => {
+    if (phase === 0) return;
+    const timers = [
+      // phase 1 starts immediately (text fade in)
+      // phase 2: yellow highlight sweeps after text is in
+      setTimeout(() => setPhase(2), 800),
+      // phase 3: yellow → purple
+      setTimeout(() => setPhase(3), 1500),
+      // phase 4: green check pops
+      setTimeout(() => setPhase(4), 2100),
+    ];
+    return () => timers.forEach(clearTimeout);
+  }, [phase >= 1]);
+
+  const wordDelay = (i: number) => `${i * 120}ms`;
+
+  // Highlight color transitions: transparent → yellow → purple
+  const highlightColor =
+    phase >= 3 ? 'rgba(139, 92, 246, 0.35)' :
+    phase >= 2 ? 'rgba(250, 204, 21, 0.6)' :
+    'rgba(250, 204, 21, 0)';
+
+  // Highlight width: 0 → 100%
+  const highlightWidth = phase >= 2 ? '100%' : '0%';
+
+  // Paperwork text color: purple when highlight is purple
+  const paperworkColor = phase >= 3 ? '#7c3aed' : '#7c3aed';
+
+  return (
+    <div ref={ref}>
+      <h1 className="text-4xl md:text-5xl lg:text-6xl font-black tracking-tight text-slate-800 mb-6 leading-[1.1]">
+        {/* Line 1: "We Checked Their" */}
+        {['We', 'Checked', 'Their'].map((word, i) => (
+          <span
+            key={word}
+            style={{
+              display: 'inline-block',
+              opacity: phase >= 1 ? 1 : 0,
+              transform: phase >= 1 ? 'translateY(0)' : 'translateY(20px)',
+              transition: `opacity 0.5s cubic-bezier(0.16, 1, 0.3, 1) ${wordDelay(i)}, transform 0.5s cubic-bezier(0.16, 1, 0.3, 1) ${wordDelay(i)}`,
+              marginRight: '0.3em',
+            }}
+          >
+            {word}
+          </span>
+        ))}
+        <br />
+
+        {/* Line 2: "Paperwork." with animated highlight + checkmark */}
+        <span
+          style={{
+            display: 'inline-block',
+            opacity: phase >= 1 ? 1 : 0,
+            transform: phase >= 1 ? 'translateY(0)' : 'translateY(20px)',
+            transition: `opacity 0.5s cubic-bezier(0.16, 1, 0.3, 1) ${wordDelay(3)}, transform 0.5s cubic-bezier(0.16, 1, 0.3, 1) ${wordDelay(3)}`,
+          }}
+        >
+          <span className="relative inline-block">
+            <span className="relative z-10" style={{ color: paperworkColor }}>
+              Paperwork.
+            </span>
+            {/* Animated highlight bar */}
+            <span
+              style={{
+                position: 'absolute',
+                left: 0,
+                bottom: '0.05em',
+                height: '0.35em',
+                width: highlightWidth,
+                backgroundColor: highlightColor,
+                zIndex: 0,
+                borderRadius: '2px',
+                transition: 'width 0.6s cubic-bezier(0.16, 1, 0.3, 1), background-color 0.5s ease',
+              }}
+            />
+          </span>
+        </span>
+
+        {' '}
+
+        {/* Green checkmark — pops in */}
+        <span
+          style={{
+            display: 'inline-block',
+            fontSize: '0.6em',
+            verticalAlign: 'middle',
+            color: '#10b981',
+            opacity: phase >= 4 ? 1 : 0,
+            transform: phase >= 4 ? 'scale(1)' : 'scale(0)',
+            transition: 'opacity 0.3s ease, transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1)',
+          }}
+        >
+          ✓
+        </span>
+
+        <br />
+
+        {/* Line 3: "You Pick Your Pro." */}
+        {['You', 'Pick', 'Your', 'Pro.'].map((word, i) => (
+          <span
+            key={word}
+            style={{
+              display: 'inline-block',
+              opacity: phase >= 1 ? 1 : 0,
+              transform: phase >= 1 ? 'translateY(0)' : 'translateY(20px)',
+              transition: `opacity 0.5s cubic-bezier(0.16, 1, 0.3, 1) ${wordDelay(i + 4)}, transform 0.5s cubic-bezier(0.16, 1, 0.3, 1) ${wordDelay(i + 4)}`,
+              marginRight: '0.3em',
+            }}
+          >
+            {word}
+          </span>
+        ))}
+      </h1>
+    </div>
+  );
+}
+
+/* ═══════════════════════════════════════════════════════
+   HeroCTAButtons — Animated entrance + dopamine hover/click
+   ═══════════════════════════════════════════════════════ */
+export function HeroCTAButtons({ children }: { children: ReactNode }) {
+  const ref = useRef<HTMLDivElement>(null);
+  const [visible, setVisible] = useState(false);
+
+  useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          // Delay entrance until after headline animation finishes (~2.5s)
+          setTimeout(() => setVisible(true), 2400);
+          observer.unobserve(el);
+        }
+      },
+      { threshold: 0.3 }
+    );
+
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, []);
+
+  return (
+    <div ref={ref}>
+      <div
+        style={{
+          opacity: visible ? 1 : 0,
+          transform: visible ? 'translateY(0)' : 'translateY(16px)',
+          transition: 'opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1), transform 0.6s cubic-bezier(0.16, 1, 0.3, 1)',
+        }}
+      >
+        {children}
+      </div>
+      <style>{`
+        .hero-cta-primary {
+          position: relative;
+          overflow: hidden;
+          transition: transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1),
+                      box-shadow 0.2s ease;
+        }
+        .hero-cta-primary:hover {
+          transform: translateY(-3px) scale(1.03);
+          box-shadow: 0 16px 40px rgba(124, 58, 237, 0.35),
+                      0 0 0 0 rgba(124, 58, 237, 0);
+        }
+        .hero-cta-primary:active {
+          transform: translateY(0) scale(0.97);
+          transition-duration: 0.1s;
+        }
+        .hero-cta-primary::before {
+          content: '';
+          position: absolute;
+          inset: -2px;
+          border-radius: inherit;
+          background: linear-gradient(135deg, rgba(255,255,255,0.3), transparent 50%);
+          opacity: 0;
+          transition: opacity 0.3s;
+          pointer-events: none;
+        }
+        .hero-cta-primary:hover::before {
+          opacity: 1;
+        }
+        @keyframes ctaGlow {
+          0%, 100% { box-shadow: 0 8px 24px rgba(124, 58, 237, 0.2); }
+          50% { box-shadow: 0 8px 32px rgba(124, 58, 237, 0.4); }
+        }
+        .hero-cta-glow {
+          animation: ctaGlow 2.5s ease-in-out infinite;
+          animation-delay: 3s;
+        }
+        .hero-cta-secondary {
+          transition: transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1),
+                      box-shadow 0.2s ease,
+                      border-color 0.2s ease;
+        }
+        .hero-cta-secondary:hover {
+          transform: translateY(-2px);
+          box-shadow: 0 12px 28px rgba(0, 0, 0, 0.1);
+          border-color: #7c3aed;
+        }
+        .hero-cta-secondary:active {
+          transform: translateY(0) scale(0.97);
+          transition-duration: 0.1s;
+        }
+        .hero-cta-secondary .phone-ring {
+          display: inline-block;
+          transition: transform 0.3s ease;
+        }
+        .hero-cta-secondary:hover .phone-ring {
+          animation: phoneRing 0.5s ease;
+        }
+        @keyframes phoneRing {
+          0%, 100% { transform: rotate(0deg); }
+          20% { transform: rotate(15deg); }
+          40% { transform: rotate(-10deg); }
+          60% { transform: rotate(10deg); }
+          80% { transform: rotate(-5deg); }
+        }
+      `}</style>
+    </div>
+  );
+}
+
+/* ═══════════════════════════════════════════════════════
    StaggeredGrid — Children animate in one by one
    ═══════════════════════════════════════════════════════ */
 export function StaggeredGrid({ 

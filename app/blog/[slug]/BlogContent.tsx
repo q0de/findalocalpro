@@ -29,16 +29,23 @@ export function BlogContent({ html }: { html: string }) {
     // 2. Enhance h2s with section dividers and scroll animation
     const h2s = el.querySelectorAll('h2');
     h2s.forEach((h2) => {
-      // Add divider before each h2 (except if it's the first element)
       if (h2.previousElementSibling) {
         const divider = document.createElement('div');
         divider.className = 'blog-section-divider';
         divider.innerHTML = '<span></span><span></span><span></span>';
         h2.parentNode?.insertBefore(divider, h2);
       }
-      // Add scroll reveal class
       h2.classList.add('blog-reveal');
     });
+
+    // 2b. Add reveal to more elements — h3s, callouts, lists, tables, blockquotes
+    el.querySelectorAll('h3').forEach(el => el.classList.add('blog-reveal'));
+    el.querySelectorAll('ul, ol').forEach((el, i) => {
+      el.classList.add('blog-reveal');
+      (el as HTMLElement).style.transitionDelay = `${i * 50}ms`;
+    });
+    el.querySelectorAll('.blog-callout').forEach(el => el.classList.add('blog-reveal'));
+    el.querySelectorAll('.blog-table-wrapper').forEach(el => el.classList.add('blog-reveal'));
 
     // 3. Enhance tip/callout paragraphs
     const allPs = el.querySelectorAll('p');
@@ -80,7 +87,7 @@ export function BlogContent({ html }: { html: string }) {
           }
         });
       },
-      { threshold: 0.1, rootMargin: '0px 0px -40px 0px' }
+      { threshold: 0.05, rootMargin: '0px 0px -60px 0px' }
     );
     reveals.forEach((r) => observer.observe(r));
 
@@ -338,13 +345,31 @@ const blogStyles = `
   /* ═══ Scroll Reveal ═══ */
   .blog-reveal {
     opacity: 0;
-    transform: translateY(12px);
-    transition: opacity 0.5s cubic-bezier(0.16, 1, 0.3, 1), transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+    transform: translateY(30px);
+    transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
   }
 
   .blog-revealed {
     opacity: 1;
     transform: translateY(0);
+  }
+
+  /* Stagger children inside revealed lists */
+  .blog-reveal.blog-revealed li {
+    animation: listItemIn 0.5s cubic-bezier(0.16, 1, 0.3, 1) both;
+  }
+  .blog-reveal.blog-revealed li:nth-child(1) { animation-delay: 0ms; }
+  .blog-reveal.blog-revealed li:nth-child(2) { animation-delay: 60ms; }
+  .blog-reveal.blog-revealed li:nth-child(3) { animation-delay: 120ms; }
+  .blog-reveal.blog-revealed li:nth-child(4) { animation-delay: 180ms; }
+  .blog-reveal.blog-revealed li:nth-child(5) { animation-delay: 240ms; }
+  .blog-reveal.blog-revealed li:nth-child(6) { animation-delay: 300ms; }
+  .blog-reveal.blog-revealed li:nth-child(7) { animation-delay: 360ms; }
+  .blog-reveal.blog-revealed li:nth-child(8) { animation-delay: 420ms; }
+
+  @keyframes listItemIn {
+    from { opacity: 0; transform: translateX(-12px); }
+    to { opacity: 1; transform: translateX(0); }
   }
 
   /* ═══ Responsive ═══ */
