@@ -67,6 +67,13 @@ export function Footer() {
           </div>
         </div>
 
+        {/* Disclaimer */}
+        <div className="border-t border-slate-800 pt-6 mb-6">
+          <p className="text-xs text-slate-500 leading-relaxed">
+            <strong className="text-slate-400">Home Services Campaign Disclaimer:</strong> FindALocalPro is a free service to assist homeowners in connecting with local service providers. All contractors/providers are independent and FindALocalPro does not warrant or guarantee any work performed. It is the responsibility of the homeowner to verify that the hired contractor furnishes the necessary license and insurance required for the work being performed. All persons depicted in a photo or video are actors or models and not contractors listed on FindALocalPro.
+          </p>
+        </div>
+
         {/* Bottom bar */}
         <div className="border-t border-slate-800 pt-8 flex flex-col md:flex-row items-center justify-between gap-4">
           <div className="flex items-center gap-3">

@@ -20,6 +20,7 @@ interface Provider {
   year_established: number | null;
   last_verified_at: string | null;
   service_area: string[] | null;
+  review_summary: string | null;
 }
 
 interface VerificationCheck {

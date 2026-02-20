@@ -25,13 +25,12 @@
 
   body {
     font-family: "Outfit", sans-serif;
-    background-color: #f0f4ff;
-    background-image: radial-gradient(circle at 2px 2px, #e2e8f0 1px, transparent 0);
-    background-size: 32px 32px;
+    background-color: #f8fafc;
   }
 
-  section {
-    background-image: none;
+  .material-symbols-outlined {
+    font-variation-settings: 'wght' 400, 'GRAD' 0, 'opsz' 24;
+    display: inline-block;
   }
 
   h1, h2, h3, .font-playful {

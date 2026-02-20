@@ -26,6 +26,7 @@ interface Provider {
   verification_status: string;
   is_verified: boolean;
   year_established: number | null;
+  review_summary: string | null;
 }
 
 interface VerificationCheck {
@@ -58,7 +59,7 @@ async function getDirectoryData() {
   };
 
   const provRes = await fetch(
-    `${SUPABASE_URL}/rest/v1/businesses?is_active=eq.true&trust_score=gt.0&select=id,name,slug,trade,phone,website_url,address,zip,trust_score,verification_status,is_verified,year_established&order=trust_score.desc`,
+    `${SUPABASE_URL}/rest/v1/businesses?is_active=eq.true&trust_score=gt.0&select=id,name,slug,trade,phone,website_url,address,zip,trust_score,verification_status,is_verified,year_established,review_summary&order=trust_score.desc`,
     { headers, next: { revalidate: 3600 } }
   );
   const providers: Provider[] = await provRes.json();

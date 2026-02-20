@@ -19,6 +19,7 @@ interface Provider {
   verification_status: string;
   is_verified: boolean;
   year_established: number | null;
+  review_summary: string | null;
 }
 
 interface VerificationCheck {
@@ -54,65 +55,36 @@ const tradeConfig: Record<string, { icon: string; color: string; bgColor: string
 
 function StarRating({ rating, size = 'base' }: { rating: number; size?: 'sm' | 'base' }) {
   const filled = Math.floor(rating);
-  const partial = rating - filled;
-  const empty = 5 - Math.ceil(rating);
+  const hasHalf = rating - filled >= 0.25;
+  const empty = 5 - filled - (hasHalf ? 1 : 0);
 
   const sizeClass = size === 'sm' ? 'text-sm' : 'text-base';
+  const fillStyle = { fontVariationSettings: '"FILL" 1' };
+  const emptyStyle = { fontVariationSettings: '"FILL" 0' };
 
   return (
     <div className="flex items-center gap-0.5">
       {[...Array(filled)].map((_, i) => (
-        <span key={`filled-${i}`} className={`material-symbols-outlined ${sizeClass} text-yellow-400`} style={{ fontVariationSettings: '"FILL" 1' }}>
-          star
-        </span>
+        <span key={`f-${i}`} className={`material-symbols-outlined ${sizeClass} text-yellow-400`} style={fillStyle}>star</span>
       ))}
-      {partial > 0 && (
-        <span className={`material-symbols-outlined ${sizeClass} text-yellow-400`} style={{ fontVariationSettings: '"FILL" 0.5' }}>
-          star_half
-        </span>
+      {hasHalf && (
+        <span className={`material-symbols-outlined ${sizeClass} text-yellow-400`} style={fillStyle}>star_half</span>
       )}
       {[...Array(empty)].map((_, i) => (
-        <span key={`empty-${i}`} className={`material-symbols-outlined ${sizeClass} text-slate-200`} style={{ fontVariationSettings: '"FILL" 0' }}>
-          star
-        </span>
+        <span key={`e-${i}`} className={`material-symbols-outlined ${sizeClass} text-slate-200`} style={emptyStyle}>star</span>
       ))}
     </div>
   );
 }
 
 function ReviewSnippet({ stats }: { stats: BusinessReviewStats }) {
-  const { averageRating, totalReviews, topReview } = stats;
-
-  if (!topReview) return null;
-
-  const truncatedText = topReview.review_text.length > 100
-    ? topReview.review_text.slice(0, 100) + '...'
-    : topReview.review_text;
-
-  const sourceLabels: Record<string, string> = {
-    google: 'Google',
-    yelp: 'Yelp',
-    bbb: 'BBB',
-    angi: 'Angi',
-    web: 'Web',
-  };
+  const { averageRating, totalReviews } = stats;
 
   return (
-    <div className="space-y-2">
-      <div className="flex items-center gap-2 flex-wrap">
-        <StarRating rating={averageRating} />
-        <span className="text-sm font-bold text-slate-800">{averageRating.toFixed(1)}</span>
-        <span className="text-sm text-slate-400">({totalReviews} {totalReviews === 1 ? 'review' : 'reviews'})</span>
-      </div>
-      <div className="bg-slate-50 rounded-xl p-3 border border-slate-100">
-        <div className="flex items-start justify-between gap-2 mb-1">
-          <span className="text-xs font-bold text-slate-600">{topReview.reviewer_name}</span>
-          <span className="text-xs font-medium text-slate-400 px-2 py-0.5 bg-white rounded-md border border-slate-200">
-            {sourceLabels[topReview.source] || topReview.source}
-          </span>
-        </div>
-        <p className="text-xs text-slate-600 leading-relaxed">{truncatedText}</p>
-      </div>
+    <div className="flex items-center gap-2 flex-wrap">
+      <StarRating rating={averageRating} />
+      <span className="text-sm font-bold text-slate-800">{averageRating.toFixed(1)}</span>
+      <span className="text-sm text-slate-400">({totalReviews} {totalReviews === 1 ? 'review' : 'reviews'})</span>
     </div>
   );
 }
@@ -148,6 +120,32 @@ function CheckBadge({ check }: { check: VerificationCheck }) {
   );
 }
 
+function AISummary({ text }: { text: string }) {
+  const [expanded, setExpanded] = useState(false);
+
+  return (
+    <div className="mb-4 px-4 py-3 bg-brand-purple/5 rounded-xl border border-brand-purple/10 relative overflow-hidden">
+      <span className="material-symbols-outlined absolute right-2 top-1/2 -translate-y-1/2 text-5xl text-brand-purple/10 pointer-events-none" style={{ fontVariationSettings: '"FILL" 1' }}>auto_awesome</span>
+      <div
+        className="relative transition-all duration-500 ease-in-out"
+        style={{ maxHeight: expanded ? '500px' : '3.6rem', overflow: 'hidden' }}
+      >
+        <p className="text-sm text-slate-600 leading-relaxed italic text-left">{text}</p>
+        {!expanded && (
+          <div className="absolute bottom-0 left-0 right-0 h-12" style={{ background: 'linear-gradient(to top, #f5f0ff 20%, #f5f0ff80 60%, transparent)' }} />
+        )}
+      </div>
+      <button
+        onClick={() => setExpanded(!expanded)}
+        className="flex items-center gap-1 text-xs font-bold text-brand-purple hover:text-brand-pink mt-1 cursor-pointer relative"
+      >
+        {expanded ? 'Show less' : 'Read more'}
+        <span className={`material-symbols-outlined text-sm transition-transform duration-300 ${expanded ? 'rotate-180' : ''}`}>expand_more</span>
+      </button>
+    </div>
+  );
+}
+
 function ProviderCard({ provider, checks, reviewStats }: { provider: Provider; checks: VerificationCheck[]; reviewStats?: BusinessReviewStats }) {
   const trade = tradeConfig[provider.trade] || tradeConfig.general;
   const [expanded, setExpanded] = useState(false);
@@ -173,7 +171,13 @@ function ProviderCard({ provider, checks, reviewStats }: { provider: Provider; c
           <TrustBadge score={provider.trust_score} />
         </div>
 
-        {reviewStats && <ReviewSnippet stats={reviewStats} />}
+        {reviewStats && (
+          <Link href={`/pro/${provider.slug}#reviews`} className="block mb-3 hover:opacity-80 transition-opacity">
+            <ReviewSnippet stats={reviewStats} />
+          </Link>
+        )}
+
+        {provider.review_summary && <AISummary text={provider.review_summary} />}
 
         <div className="flex flex-wrap gap-3 mb-4">
           {bbbCheck && (

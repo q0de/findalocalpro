@@ -162,6 +162,59 @@ export function TrustScoreRing({ score, light = false }: { score: number; light?
 }
 
 /* ═══════════════════════════════════════════════════════
+   FloatingCard — Gentle float + 3D mouse-tracking tilt
+   ═══════════════════════════════════════════════════════ */
+export function FloatingCard({ children, className = '' }: { children: ReactNode; className?: string }) {
+  const cardRef = useRef<HTMLDivElement>(null);
+  const [tilt, setTilt] = useState({ x: 0, y: 0 });
+  const [isHovered, setIsHovered] = useState(false);
+
+  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
+    const el = cardRef.current;
+    if (!el) return;
+    const rect = el.getBoundingClientRect();
+    const x = (e.clientX - rect.left) / rect.width - 0.5;   // -0.5 to 0.5
+    const y = (e.clientY - rect.top) / rect.height - 0.5;
+    setTilt({ x: y * -12, y: x * 12 }); // max ±6deg
+  };
+
+  const handleMouseLeave = () => {
+    setIsHovered(false);
+    setTilt({ x: 0, y: 0 });
+  };
+
+  return (
+    <div
+      ref={cardRef}
+      onMouseMove={handleMouseMove}
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={handleMouseLeave}
+      className={className}
+      style={{
+        perspective: '800px',
+      }}
+    >
+      <div
+        style={{
+          transform: `rotateX(${tilt.x}deg) rotateY(${tilt.y}deg) translateZ(0)`,
+          transition: isHovered ? 'transform 0.1s ease-out' : 'transform 0.4s ease-out',
+          animation: 'floatBob 4s ease-in-out infinite',
+          willChange: 'transform',
+        }}
+      >
+        {children}
+      </div>
+      <style>{`
+        @keyframes floatBob {
+          0%, 100% { translate: 0 0; }
+          50% { translate: 0 -8px; }
+        }
+      `}</style>
+    </div>
+  );
+}
+
+/* ═══════════════════════════════════════════════════════
    StaggeredGrid — Children animate in one by one
    ═══════════════════════════════════════════════════════ */
 export function StaggeredGrid({ 
@@ -193,20 +246,19 @@ export function StaggeredGrid({
   }, []);
 
   const gridCols = columns === 4 
-    ? 'grid-cols-2 sm:grid-cols-3 md:grid-cols-4' 
+    ? 'grid-cols-2 min-[480px]:grid-cols-3 md:grid-cols-4' 
     : columns === 3 
     ? 'grid-cols-1 sm:grid-cols-2 md:grid-cols-3'
     : 'grid-cols-1 md:grid-cols-2';
 
   return (
-    <div ref={ref} className={`grid ${gridCols} gap-4 md:gap-6`}>
+    <div ref={ref} className={`grid ${gridCols} gap-3 sm:gap-4 md:gap-6`}>
       {Array.isArray(children) ? children.map((child, i) => (
         <div
           key={i}
           style={{
             opacity: isVisible ? 1 : 0,
-            transform: isVisible ? 'translateY(0) scale(1)' : 'translateY(20px) scale(0.95)',
-            transition: `opacity 0.5s cubic-bezier(0.16, 1, 0.3, 1) ${i * 80}ms, transform 0.5s cubic-bezier(0.16, 1, 0.3, 1) ${i * 80}ms`,
+            transition: `opacity 0.5s cubic-bezier(0.16, 1, 0.3, 1) ${i * 80}ms`,
           }}
         >
           {child}

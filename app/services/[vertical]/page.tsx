@@ -69,14 +69,13 @@ const verticals: Record<string, ServiceInfo> = {
   },
   'pest-control': {
     title: 'Pest Control Services', trade: 'pest-control', icon: '🐜', materialIcon: 'pest_control', iconColor: 'text-emerald-600', iconBg: 'bg-emerald-100',
-    description: 'Pest control in Downers Grove and DuPage County. Ants, roaches, rodents, termites, bed bugs, wildlife removal. Licensed, insured pros.',
+    description: 'Pest control in Downers Grove and DuPage County. Ants, roaches, rodents, termites, bed bugs. Licensed, insured pros.',
     services: [
       { name: 'Ant & Roach Control', desc: 'Eliminate common household pests and prevent them from returning.' },
       { name: 'Rodent Removal', desc: 'Mice and rat control with exclusion to keep them out.' },
       { name: 'Termite Treatment', desc: 'Protect your home\'s structure from termite damage.' },
       { name: 'Bed Bug Treatment', desc: 'Thorough bed bug elimination using proven methods.' },
       { name: 'Mosquito & Tick Control', desc: 'Yard treatments to reduce biting insects around your home.' },
-      { name: 'Wildlife Removal', desc: 'Humane removal of raccoons, squirrels, and other wildlife.' },
     ],
   },
   'appliance-repair': {

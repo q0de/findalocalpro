@@ -2,7 +2,7 @@ import Link from 'next/link';
 import { SUPABASE_URL, SUPABASE_ANON } from '@/lib/supabase';
 import { Header } from '@/components/Header';
 import { Footer } from '@/components/Footer';
-import { AnimatedSection, CountUpNumber, TrustScoreRing, StaggeredGrid } from './HomeAnimations';
+import { AnimatedSection, CountUpNumber, TrustScoreRing, StaggeredGrid, FloatingCard } from './HomeAnimations';
 import { ChatModal, ChatTrigger } from './ChatModal';
 
 interface Provider {
@@ -25,18 +25,18 @@ const tradeConfig: Record<string, { icon: string; color: string; bgColor: string
 };
 
 const services = [
-  { icon: 'water_drop', label: 'Plumbing', color: 'bg-blue-100 text-blue-500', href: '/services/plumbing' },
-  { icon: 'mode_fan', label: 'HVAC & Heating', color: 'bg-purple-100 text-purple-500', href: '/services/hvac' },
-  { icon: 'bolt', label: 'Electrician', color: 'bg-yellow-100 text-yellow-600', href: '/services/electricians' },
-  { icon: 'roofing', label: 'Roofing', color: 'bg-red-100 text-red-500', href: '/services/roofing' },
-  { icon: 'handyman', label: 'Handyman', color: 'bg-orange-100 text-orange-600', href: '/get-matched' },
-  { icon: 'water_damage', label: 'Water Damage', color: 'bg-cyan-100 text-cyan-600', href: '/get-matched' },
-  { icon: 'science', label: 'Mold Removal', color: 'bg-lime-100 text-lime-600', href: '/get-matched' },
-  { icon: 'settings', label: 'Appliance Repair', color: 'bg-gray-100 text-gray-600', href: '/services/appliance-repair' },
-  { icon: 'pest_control', label: 'Pest Control', color: 'bg-emerald-100 text-emerald-600', href: '/services/pest-control' },
-  { icon: 'key', label: 'Locksmith', color: 'bg-amber-100 text-amber-600', href: '/get-matched' },
-  { icon: 'forest', label: 'Tree Services', color: 'bg-emerald-100 text-emerald-700', href: '/get-matched' },
-  { icon: 'solar_power', label: 'Solar', color: 'bg-yellow-100 text-yellow-600', href: '/get-matched' },
+  { icon: 'water_drop', label: 'Plumbing', bg: 'bg-blue-50', text: 'text-blue-500', href: '/services/plumbing' },
+  { icon: 'mode_fan', label: 'HVAC & Heating', bg: 'bg-purple-50', text: 'text-purple-500', href: '/services/hvac' },
+  { icon: 'bolt', label: 'Electrician', bg: 'bg-yellow-50', text: 'text-yellow-600', href: '/services/electricians' },
+  { icon: 'roofing', label: 'Roofing', bg: 'bg-red-50', text: 'text-red-500', href: '/services/roofing' },
+  { icon: 'handyman', label: 'Handyman', bg: 'bg-orange-50', text: 'text-orange-600', href: '/get-matched' },
+  { icon: 'water_damage', label: 'Water Damage', bg: 'bg-cyan-50', text: 'text-cyan-600', href: '/get-matched' },
+  { icon: 'science', label: 'Mold Removal', bg: 'bg-lime-50', text: 'text-lime-600', href: '/get-matched' },
+  { icon: 'settings', label: 'Appliance Repair', bg: 'bg-gray-50', text: 'text-gray-600', href: '/services/appliance-repair' },
+  { icon: 'pest_control', label: 'Pest Control', bg: 'bg-emerald-50', text: 'text-emerald-600', href: '/services/pest-control' },
+  { icon: 'key', label: 'Locksmith', bg: 'bg-amber-50', text: 'text-amber-600', href: '/get-matched' },
+  { icon: 'forest', label: 'Tree Services', bg: 'bg-emerald-50', text: 'text-emerald-700', href: '/get-matched' },
+  { icon: 'solar_power', label: 'Solar', bg: 'bg-yellow-50', text: 'text-yellow-600', href: '/get-matched' },
 ];
 
 const verificationSources = [
@@ -106,7 +106,7 @@ export default async function HomePage() {
             </div>
 
             {/* Right — Verification visual */}
-            <div className="hidden md:block">
+            <FloatingCard className="hidden md:block">
               <div className="bg-white rounded-3xl border-2 border-slate-100 p-8 shadow-xl">
                 <div className="flex items-center gap-3 mb-6">
                   <TrustScoreRing score={88} light />
@@ -134,7 +134,7 @@ export default async function HomePage() {
                   ))}
                 </div>
               </div>
-            </div>
+            </FloatingCard>
           </div>
         </div>
       </section>
@@ -258,20 +258,20 @@ export default async function HomePage() {
       {/* ═══════════════════════════════════════════════════════
           SERVICES — What we cover
           ═══════════════════════════════════════════════════════ */}
-              <section className="py-20 bg-slate-50">
+              <section className="py-20 bg-slate-50 overflow-hidden">
           <div className="max-w-4xl mx-auto px-6">
             <h2 className="text-3xl md:text-4xl font-black text-slate-800 text-center mb-3">Every Home Service Covered</h2>
             <p className="text-slate-500 text-center mb-12">Pick a service or tell us what you need — we&apos;ll find the right pro</p>
-            <StaggeredGrid columns={4}>
+            <div className="grid grid-cols-2 min-[480px]:grid-cols-3 md:grid-cols-4 gap-3 sm:gap-4 md:gap-6">
               {services.map((svc) => (
-                <Link key={svc.label} href={svc.href} className="group bg-white border-2 border-slate-100 rounded-2xl p-5 text-center hover:border-brand-purple hover:shadow-lg transition-all duration-300 hover:-translate-y-1">
-                  <div className={`w-14 h-14 rounded-2xl flex items-center justify-center mx-auto mb-3 ${svc.color} transition-all duration-300 group-hover:scale-110 group-hover:shadow-lg`}>
+                <Link key={svc.label} href={svc.href} className="group bg-white border-2 border-slate-100 rounded-2xl p-3 sm:p-5 text-center shadow-sm hover:border-brand-purple hover:shadow-lg transition-colors duration-300">
+                  <div className={`w-14 h-14 rounded-2xl flex items-center justify-center mx-auto mb-3 ${svc.bg} ${svc.text}`}>
                     <span className="material-symbols-outlined text-2xl">{svc.icon}</span>
                   </div>
                   <p className="text-sm font-bold text-slate-700 group-hover:text-brand-purple transition-colors">{svc.label}</p>
                 </Link>
               ))}
-            </StaggeredGrid>
+            </div>
           </div>
         </section>
 
@@ -290,7 +290,7 @@ export default async function HomePage() {
               ].map((step, i) => (
                 <AnimatedSection key={step.num} delay={i * 200}>
                   <div className="text-center">
-                    <div className="relative w-20 h-20 mx-auto mb-6">
+                    <div className="relative w-20 h-20 mx-auto mb-6 overflow-hidden rounded-2xl">
                       <div className="absolute inset-0 bg-brand-purple/10 rounded-2xl rotate-6" />
                       <div className="relative w-full h-full bg-brand-purple text-white rounded-2xl flex items-center justify-center shadow-lg shadow-brand-purple/20">
                         <span className="material-symbols-outlined text-3xl">{step.icon}</span>
@@ -323,12 +323,12 @@ export default async function HomePage() {
                   View All <span className="material-symbols-outlined text-base">arrow_forward</span>
                 </Link>
               </div>
-              <StaggeredGrid columns={3}>
+              <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3 sm:gap-4 md:gap-6">
                 {providers.map((p) => {
                   const trade = tradeConfig[p.trade] || tradeConfig.general;
                   const score = Math.round(p.trust_score || 0);
                   return (
-                    <Link key={p.id} href={`/pro/${p.slug}`} className="group bg-white border-2 border-slate-100 rounded-2xl p-6 hover:border-brand-purple hover:shadow-xl transition-all duration-300 hover:-translate-y-1">
+                    <Link key={p.id} href={`/pro/${p.slug}`} className="group bg-white border-2 border-slate-100 rounded-2xl p-6 hover:border-brand-purple hover:shadow-xl transition-colors duration-300">
                       <div className="flex items-center gap-3 mb-4">
                         <div className={`w-12 h-12 rounded-xl flex items-center justify-center ${trade.bgColor} ${trade.color} transition-transform duration-300 group-hover:scale-110`}>
                           <span className="material-symbols-outlined text-xl">{trade.icon}</span>
@@ -350,12 +350,12 @@ export default async function HomePage() {
                             <span className="text-xs text-slate-400">Est. {p.year_established}</span>
                           )}
                         </div>
-                        <span className="material-symbols-outlined text-slate-300 group-hover:text-brand-purple group-hover:translate-x-1 transition-all">arrow_forward</span>
+                        <span className="material-symbols-outlined text-slate-300 group-hover:text-brand-purple transition-colors">arrow_forward</span>
                       </div>
                     </Link>
                   );
                 })}
-              </StaggeredGrid>
+              </div>
               <div className="mt-8 text-center md:hidden">
                 <Link href="/directory" className="inline-flex items-center gap-2 text-brand-purple font-bold">
                   View All Pros <span className="material-symbols-outlined text-base">arrow_forward</span>

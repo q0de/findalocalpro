@@ -25,6 +25,7 @@ interface Provider {
   year_established: number | null;
   last_verified_at: string | null;
   service_area: string[] | null;
+  review_summary: string | null;
 }
 
 interface VerificationCheck {
@@ -82,27 +83,23 @@ const reviewSourceLabels: Record<string, string> = {
 
 function StarRating({ rating, size = 'base' }: { rating: number; size?: 'sm' | 'base' | 'lg' }) {
   const filled = Math.floor(rating);
-  const partial = rating - filled;
-  const empty = 5 - Math.ceil(rating);
+  const hasHalf = rating - filled >= 0.25;
+  const empty = 5 - filled - (hasHalf ? 1 : 0);
 
   const sizeClass = size === 'sm' ? 'text-sm' : size === 'lg' ? 'text-2xl' : 'text-base';
+  const fillStyle = { fontVariationSettings: '"FILL" 1' };
+  const emptyStyle = { fontVariationSettings: '"FILL" 0' };
 
   return (
     <div className="flex items-center gap-0.5">
       {[...Array(filled)].map((_, i) => (
-        <span key={`filled-${i}`} className={`material-symbols-outlined ${sizeClass} text-yellow-400`} style={{ fontVariationSettings: '"FILL" 1' }}>
-          star
-        </span>
+        <span key={`f-${i}`} className={`material-symbols-outlined ${sizeClass} text-yellow-400`} style={fillStyle}>star</span>
       ))}
-      {partial > 0 && (
-        <span className={`material-symbols-outlined ${sizeClass} text-yellow-400`} style={{ fontVariationSettings: '"FILL" 0.5' }}>
-          star_half
-        </span>
+      {hasHalf && (
+        <span className={`material-symbols-outlined ${sizeClass} text-yellow-400`} style={fillStyle}>star_half</span>
       )}
       {[...Array(empty)].map((_, i) => (
-        <span key={`empty-${i}`} className={`material-symbols-outlined ${sizeClass} text-slate-200`} style={{ fontVariationSettings: '"FILL" 0' }}>
-          star
-        </span>
+        <span key={`e-${i}`} className={`material-symbols-outlined ${sizeClass} text-slate-200`} style={emptyStyle}>star</span>
       ))}
     </div>
   );
@@ -415,7 +412,7 @@ export function ProviderProfileClient({ provider, checks, reviews, tradeLabel }:
             </div>
 
             {reviews.length > 0 && (
-              <div className="mt-8">
+              <div id="reviews" className="mt-8 scroll-mt-24">
                 <div className="flex items-center justify-between mb-6">
                   <h2 className="text-xl font-bold text-slate-800 flex items-center gap-2">
                     <span className="material-symbols-outlined text-brand-pink">star</span>
@@ -427,6 +424,17 @@ export function ProviderProfileClient({ provider, checks, reviews, tradeLabel }:
                     <span className="text-sm text-slate-400">({reviews.length} {reviews.length === 1 ? 'review' : 'reviews'})</span>
                   </div>
                 </div>
+                {provider.review_summary && (
+                  <div className="mb-6 px-4 py-3 bg-brand-purple/5 rounded-xl border border-brand-purple/10">
+                    <div className="flex items-start gap-2">
+                      <span className="material-symbols-outlined text-base text-brand-purple mt-0.5">auto_awesome</span>
+                      <div>
+                        <p className="text-xs font-bold text-brand-purple mb-1">AI Summary</p>
+                        <p className="text-sm text-slate-600 leading-relaxed italic">{provider.review_summary}</p>
+                      </div>
+                    </div>
+                  </div>
+                )}
                 <div className="space-y-4">
                   {reviews.map((review) => (
                     <ReviewCard key={review.id} review={review} />
