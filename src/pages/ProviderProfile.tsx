@@ -185,6 +185,18 @@ export function ProviderProfile() {
     fetchData();
   }, [slug]);
 
+  // SEO: dynamic page title and meta
+  useEffect(() => {
+    if (provider) {
+      const t = tradeConfig[provider.trade] || tradeConfig.plumbing;
+      document.title = `${provider.name} — Verified ${t.label} Pro | FindALocalPro`;
+      const metaDesc = document.querySelector('meta[name="description"]');
+      if (metaDesc) {
+        metaDesc.setAttribute('content', `${provider.name} — Trust Score ${Math.round(provider.trust_score || 0)}/100. Verified ${t.label.toLowerCase()} professional in DuPage County, IL. License, BBB rating, and contractor score checked.`);
+      }
+    }
+  }, [provider]);
+
   if (loading) {
     return (
       <div className="min-h-screen flex flex-col bg-gradient-to-b from-slate-50 to-white">
@@ -223,15 +235,6 @@ export function ProviderProfile() {
   const trade = tradeConfig[provider.trade] || tradeConfig.plumbing;
   const passedChecks = checks.filter(c => c.status === 'pass').length;
   const verifiedAt = provider.last_verified_at ? new Date(provider.last_verified_at).toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' }) : null;
-
-  // SEO: dynamic page title and meta
-  useEffect(() => {
-    document.title = `${provider.name} — Verified ${trade.label} Pro | FindALocalPro`;
-    const metaDesc = document.querySelector('meta[name="description"]');
-    if (metaDesc) {
-      metaDesc.setAttribute('content', `${provider.name} — Trust Score ${Math.round(provider.trust_score || 0)}/100. Verified ${trade.label.toLowerCase()} professional in DuPage County, IL. License, BBB rating, and contractor score checked.`);
-    }
-  }, [provider, trade]);
 
   // Structured data for SEO
   const structuredData = {
