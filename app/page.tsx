@@ -90,15 +90,21 @@ export default async function HomePage() {
               </p>
               
               <HeroCTAButtons>
-                <div className="flex flex-col sm:flex-row gap-3">
-                  <ChatTrigger className="hero-cta-primary hero-cta-glow ripple-btn group inline-flex items-center justify-center gap-2 bg-brand-purple text-white px-6 sm:px-8 py-4 rounded-2xl font-black text-base sm:text-lg whitespace-nowrap cursor-pointer shadow-xl">
-                    <span className="material-symbols-outlined transition-transform group-hover:scale-110">chat</span>
-                    Find My Pro — It&apos;s Free
-                  </ChatTrigger>
-                  <a href="tel:6307032607" className="hero-cta-secondary inline-flex items-center justify-center gap-2 bg-white text-slate-800 px-6 sm:px-8 py-4 rounded-2xl font-black text-base sm:text-lg whitespace-nowrap border-2 border-slate-200 shadow-lg">
-                    <span className="material-symbols-outlined phone-ring">call</span>
-                    Call Now — (630) 703-2607
-                  </a>
+                <div className="flex flex-col sm:flex-row gap-4">
+                  <div className="flex flex-col items-center gap-1.5">
+                    <span className="text-xs font-bold text-brand-purple uppercase tracking-wider">Get Matched Free</span>
+                    <ChatTrigger className="hero-cta-primary hero-cta-glow ripple-btn group inline-flex items-center justify-center gap-2 bg-brand-purple text-white px-6 sm:px-8 py-4 rounded-2xl font-black text-base sm:text-lg cursor-pointer shadow-xl">
+                      <span className="material-symbols-outlined transition-transform group-hover:scale-110">chat</span>
+                      Find My Pro
+                    </ChatTrigger>
+                  </div>
+                  <div className="flex flex-col items-center gap-1.5">
+                    <span className="text-xs font-bold text-slate-400 uppercase tracking-wider">Call Now</span>
+                    <a href="tel:6307032607" className="hero-cta-secondary inline-flex items-center justify-center gap-2 bg-white text-slate-800 px-6 sm:px-8 py-4 rounded-2xl font-black text-base sm:text-lg border-2 border-slate-200 shadow-lg">
+                      <span className="material-symbols-outlined phone-ring">call</span>
+                      (630) 703-2607
+                    </a>
+                  </div>
                 </div>
                 <p className="mt-3 text-sm text-slate-400 flex items-center gap-1">
                   <span className="material-symbols-outlined text-brand-teal text-sm">lock</span>
