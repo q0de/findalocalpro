@@ -423,9 +423,13 @@ export default async function LocationPage({ params }: { params: Promise<{ town:
               </div>
             ))}
           </div>
-          <div className="mt-8 text-center">
+          <div className="mt-8 flex flex-wrap justify-center gap-4">
             <Link href="/get-matched" className="inline-flex items-center gap-2 bg-purple-600 text-white px-6 py-3 rounded-xl font-bold hover:bg-purple-700 transition-colors">
               Get Matched with a Verified Pro
+            </Link>
+            <Link href="/directory" className="inline-flex items-center gap-2 border-2 border-purple-600 text-purple-600 px-6 py-3 rounded-xl font-bold hover:bg-purple-50 transition-colors">
+              <span className="material-symbols-rounded text-base">list_alt</span>
+              Browse Full Directory
             </Link>
           </div>
         </section>

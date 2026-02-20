@@ -98,11 +98,15 @@ export default async function HomePage() {
                   <span className="material-symbols-outlined transition-transform group-hover:scale-110">chat</span>
                   Get Matched Free
                 </ChatTrigger>
-                <a href="tel:6307032607" className="inline-flex items-center justify-center gap-2 bg-white hover:bg-slate-50 text-slate-800 px-8 py-4 rounded-2xl font-black text-lg border-2 border-slate-200 transition-all shadow-lg hover:-translate-y-1">
-                  <span className="material-symbols-outlined">call</span>
-                  (630) 703-2607
-                </a>
+                <Link href="/directory" className="inline-flex items-center justify-center gap-2 bg-white hover:bg-slate-50 text-slate-800 px-8 py-4 rounded-2xl font-black text-lg border-2 border-slate-200 transition-all shadow-lg hover:-translate-y-1">
+                  <span className="material-symbols-outlined">search</span>
+                  Browse Directory
+                </Link>
               </div>
+              <a href="tel:6307032607" className="inline-flex items-center gap-2 text-slate-500 hover:text-brand-purple font-bold mt-4 transition-colors">
+                <span className="material-symbols-outlined text-base">call</span>
+                Or call (630) 703-2607
+              </a>
             </div>
 
             {/* Right — Verification visual */}
@@ -396,12 +400,23 @@ export default async function HomePage() {
       <section className="py-16 bg-slate-50">
         <div className="max-w-4xl mx-auto px-6 text-center">
           <h2 className="text-3xl font-black text-slate-800 mb-3">Serving DuPage County & Beyond</h2>
-          <p className="text-slate-500 mb-8">Verified pros in your neighborhood</p>
-          <div className="flex flex-wrap justify-center gap-3">
-            {areaTags.map((area) => (
-              <span key={area} className="bg-white px-5 py-2.5 rounded-full text-sm font-bold text-slate-600 shadow-sm border border-slate-100 hover:border-brand-purple/30 hover:text-brand-purple transition-all cursor-default">{area}</span>
+          <p className="text-slate-500 mb-8">Verified pros in your neighborhood — click a town to learn more</p>
+          <div className="flex flex-wrap justify-center gap-3 mb-8">
+            {[
+              { name: 'Downers Grove', slug: 'downers-grove' }, { name: 'Westmont', slug: 'westmont' },
+              { name: 'Lisle', slug: 'lisle' }, { name: 'Woodridge', slug: 'woodridge' },
+              { name: 'Darien', slug: 'darien' }, { name: 'Naperville', slug: 'naperville' },
+              { name: 'Lombard', slug: 'lombard' }, { name: 'Glen Ellyn', slug: 'glen-ellyn' },
+              { name: 'Wheaton', slug: 'wheaton' }, { name: 'Hinsdale', slug: 'hinsdale' },
+              { name: 'Oak Brook', slug: 'oak-brook' }, { name: 'Bolingbrook', slug: 'bolingbrook' },
+            ].map((town) => (
+              <Link key={town.slug} href={`/locations/${town.slug}`} className="bg-white px-5 py-2.5 rounded-full text-sm font-bold text-slate-600 shadow-sm border border-slate-100 hover:border-brand-purple/30 hover:text-brand-purple hover:shadow-md transition-all">{town.name}</Link>
             ))}
           </div>
+          <Link href="/directory" className="inline-flex items-center gap-2 bg-brand-purple text-white px-6 py-3 rounded-xl font-bold hover:bg-brand-pink transition-all shadow-lg hover:-translate-y-0.5">
+            <span className="material-symbols-outlined text-base">list_alt</span>
+            Browse Full Directory
+          </Link>
         </div>
       </section>
 

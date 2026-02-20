@@ -21,7 +21,7 @@ export function Header({ step, totalSteps }: HeaderProps) {
         </Link>
 
         <div className="flex items-center gap-4">
-          <Link href="/directory" className="hidden md:flex items-center gap-1.5 text-sm font-bold text-slate-500 hover:text-brand-purple transition-colors">
+          <Link href="/directory" className="flex items-center gap-1.5 text-sm font-bold text-slate-500 hover:text-brand-purple transition-colors">
             <span className="material-symbols-outlined text-base">verified</span>
             Directory
           </Link>
