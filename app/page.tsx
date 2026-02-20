@@ -98,15 +98,11 @@ export default async function HomePage() {
                   <span className="material-symbols-outlined transition-transform group-hover:scale-110">chat</span>
                   Get Matched Free
                 </ChatTrigger>
-                <Link href="/directory" className="inline-flex items-center justify-center gap-2 bg-white hover:bg-slate-50 text-slate-800 px-8 py-4 rounded-2xl font-black text-lg border-2 border-slate-200 transition-all shadow-lg hover:-translate-y-1">
-                  <span className="material-symbols-outlined">search</span>
-                  Browse Directory
-                </Link>
+                <a href="tel:6307032607" className="inline-flex items-center justify-center gap-2 bg-white hover:bg-slate-50 text-slate-800 px-8 py-4 rounded-2xl font-black text-lg border-2 border-slate-200 transition-all shadow-lg hover:-translate-y-1">
+                  <span className="material-symbols-outlined">call</span>
+                  (630) 703-2607
+                </a>
               </div>
-              <a href="tel:6307032607" className="inline-flex items-center gap-2 text-slate-500 hover:text-brand-purple font-bold mt-4 transition-colors">
-                <span className="material-symbols-outlined text-base">call</span>
-                Or call (630) 703-2607
-              </a>
             </div>
 
             {/* Right — Verification visual */}

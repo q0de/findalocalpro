@@ -319,13 +319,9 @@ export default async function ServiceLandingPage({ params }: { params: Promise<{
               })}
             </div>
 
-            <div className="flex flex-wrap justify-center gap-4 mt-8">
-              <Link href="/directory" className="inline-flex items-center gap-2 bg-brand-purple text-white px-6 py-3 rounded-xl font-bold hover:bg-brand-pink transition-all shadow-lg hover:-translate-y-0.5">
-                <span className="material-symbols-outlined text-base">list_alt</span>
-                Browse Full Directory
-              </Link>
-              <Link href="/get-matched" className="inline-flex items-center gap-2 border-2 border-brand-purple text-brand-purple px-6 py-3 rounded-xl font-bold hover:bg-brand-purple/5 transition-colors">
-                Get Matched Free
+            <div className="text-center mt-8">
+              <Link href="/directory" className="inline-flex items-center gap-2 text-brand-purple font-bold hover:underline">
+                Browse Full Directory <span className="material-symbols-outlined text-base">arrow_forward</span>
               </Link>
             </div>
           </div>
