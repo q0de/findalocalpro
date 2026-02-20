@@ -32,8 +32,10 @@ body {
 }
 
 /* Prevent body's dotted grid from bleeding through sections */
-section {
-  background-image: none;
+@layer base {
+  section {
+    background-image: none;
+  }
 }
 
 h1, h2, h3, .font-playful {
