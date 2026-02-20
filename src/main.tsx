@@ -7,6 +7,7 @@ import { PrivacyPolicy } from './pages/PrivacyPolicy.tsx'
 import { Terms } from './pages/Terms.tsx'
 import { ServiceLanding } from './pages/ServiceLanding.tsx'
 import { Directory } from './pages/Directory.tsx'
+import { ProviderProfile } from './pages/ProviderProfile.tsx'
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
@@ -14,6 +15,7 @@ createRoot(document.getElementById('root')!).render(
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/directory" element={<Directory />} />
+        <Route path="/pro/:slug" element={<ProviderProfile />} />
         <Route path="/privacy" element={<PrivacyPolicy />} />
         <Route path="/terms" element={<Terms />} />
         <Route path="/services/:vertical" element={<ServiceLanding />} />

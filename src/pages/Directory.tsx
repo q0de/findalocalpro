@@ -95,7 +95,9 @@ function ProviderCard({ provider, checks }: { provider: Provider; checks: Verifi
               <span className="material-symbols-outlined text-2xl">{trade.icon}</span>
             </div>
             <div>
-              <h3 className="text-lg font-bold text-slate-800 leading-tight">{provider.name}</h3>
+              <Link to={`/pro/${provider.slug}`} className="text-lg font-bold text-slate-800 leading-tight hover:text-brand-purple transition-colors">
+                {provider.name}
+              </Link>
               <p className="text-sm text-slate-400 font-medium">{trade.label}</p>
             </div>
           </div>
