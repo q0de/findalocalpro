@@ -23,7 +23,7 @@ async function sendTelegramAlert(message: string) {
 
 async function sendSMS(to: string, body: string) {
   try {
-    const params = new URLSearchParams({ To: to, From: "+16304071727", Body: body });
+    const params = new URLSearchParams({ To: to, MessagingServiceSid: "MG4b59ef2450880def07109aa4fba26ce7", Body: body });
     await fetch(`https://api.twilio.com/2010-04-01/Accounts/${TWILIO_SID}/Messages.json`, {
       method: "POST",
       headers: {
@@ -193,7 +193,7 @@ serve(async (req) => {
       await fetch(`${SUPABASE_URL}/functions/v1/voice-webhook/trigger-callback`, {
         method: "POST",
         headers: { "Content-Type": "application/x-www-form-urlencoded" },
-        body: new URLSearchParams({ phone: from, service: service || "" }).toString(),
+        body: new URLSearchParams({ phone: from, service: service || "", zip: zip || "" }).toString(),
       });
       await sendTelegramAlert(`📞 <b>Auto-callback triggered</b>\n📱 <code>${from}</code>\n🔧 Service: ${service || "unknown"}\n📍 ZIP: ${zip || "unknown"}\n📤 Calling them back now`);
     } catch (e) {

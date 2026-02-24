@@ -3,6 +3,7 @@
 // Also handles SMS-triggered outbound call bridges
 
 import { createClient } from "https://esm.sh/@supabase/supabase-js@2";
+import { zipToState } from "./zip-to-state.ts";
 
 const SUPABASE_URL = Deno.env.get("SUPABASE_URL")!;
 const SUPABASE_KEY = Deno.env.get("SUPABASE_SERVICE_ROLE_KEY")!;
@@ -132,6 +133,78 @@ Deno.serve(async (req: Request) => {
     return new Response("Method not allowed", { status: 405 });
   }
 
+  // ── Route: /trigger-callback — must be before formData() parse ──
+  if (path.endsWith("/trigger-callback")) {
+    const text = await req.text();
+    const cbParams = new URLSearchParams(text);
+    const phone = cbParams.get("phone") || "";
+    const service = cbParams.get("service") || "default";
+    const zip = cbParams.get("zip") || "";
+
+    if (!phone || phone === "unknown") {
+      return new Response(JSON.stringify({ error: "No phone number provided" }), {
+        status: 400,
+        headers: { "Content-Type": "application/json" },
+      });
+    }
+
+    // If we already have zip, skip the zip question — go straight to bridge-ready
+    // If no zip, fall back to bridge-nozip which asks for it
+    const callbackUrl = zip
+      ? `${WEBHOOK_BASE}/voice-webhook/bridge-ready?service=${encodeURIComponent(service)}&zip=${encodeURIComponent(zip)}`
+      : `${WEBHOOK_BASE}/voice-webhook/bridge-nozip?service=${encodeURIComponent(service)}`;
+
+    try {
+      const twilioUrl = `https://api.twilio.com/2010-04-01/Accounts/${TWILIO_ACCOUNT_SID}/Calls.json`;
+      const callReqParams = new URLSearchParams({
+        To: phone,
+        From: TWILIO_NUMBER,
+        Url: callbackUrl,
+        StatusCallback: `${WEBHOOK_BASE}/voice-webhook/status`,
+        StatusCallbackEvent: "completed",
+        Timeout: "30",
+      });
+
+      const callResp = await fetch(twilioUrl, {
+        method: "POST",
+        headers: {
+          Authorization: "Basic " + btoa(`${TWILIO_ACCOUNT_SID}:${TWILIO_AUTH_TOKEN}`),
+          "Content-Type": "application/x-www-form-urlencoded",
+        },
+        body: callReqParams.toString(),
+      });
+
+      const callData = await callResp.json();
+
+      if (callResp.ok) {
+        await logCall({
+          fromNumber: TWILIO_NUMBER,
+          toNumber: phone,
+          direction: "outbound",
+          service,
+          callSid: callData.sid,
+          status: "initiated",
+        });
+        return new Response(JSON.stringify({ ok: true, callSid: callData.sid }), {
+          headers: { "Content-Type": "application/json" },
+        });
+      } else {
+        console.error("[trigger-callback] Twilio error:", callData);
+        await notifyTelegram(`❌ *Callback failed*\n📱 ${phone}\nError: ${callData.message || "unknown"}`);
+        return new Response(JSON.stringify({ error: callData.message }), {
+          status: 500,
+          headers: { "Content-Type": "application/json" },
+        });
+      }
+    } catch (err) {
+      console.error("[trigger-callback] Error:", err);
+      return new Response(JSON.stringify({ error: String(err) }), {
+        status: 500,
+        headers: { "Content-Type": "application/json" },
+      });
+    }
+  }
+
   const formData = await req.formData();
   const callSid = formData.get("CallSid") as string;
   const from = formData.get("From") as string;
@@ -219,6 +292,77 @@ const SVC_AUDIO_MAP: Record<string, string> = {
   "air duct cleaning": "svc_air_duct_cleaning", "water damage": "svc_water_damage",
   default: "svc_default",
 };
+
+// ── Route: /bridge-ready — We already have service + zip, confirm and connect ──
+  if (path.endsWith("/bridge-ready")) {
+    const service = formData.get("service") as string || url.searchParams.get("service") || "default";
+    const zipCode = formData.get("zip") as string || url.searchParams.get("zip") || "";
+
+    const elocalNumber = ELOCAL_NUMBERS[service] || ELOCAL_NUMBERS.default;
+    const isLive = !elocalNumber.startsWith("+1800555");
+
+    // Map service to the pre-recorded ElevenLabs service name clip
+    const svcAudio = SVC_AUDIO_MAP[service] || SVC_AUDIO_MAP.default;
+
+    // Resolve zip → state for the "in [State]" audio clip
+    const stateCode = zipCode ? zipToState(zipCode) : null;
+    const stateClip = stateCode ? `<Play>${AUDIO_BASE}/state_${stateCode}.mp3</Play>` : "";
+
+    // ElevenLabs clips stitched:
+    // "Hi! This is Find A Local Pro calling you back about your..." + [service] + "request" + "in [State]"
+    // Then either connect (live) or play not-yet-live message
+    let twiml: string;
+    if (isLive) {
+      twiml = `<?xml version="1.0" encoding="UTF-8"?>
+<Response>
+  <Play>${AUDIO_BASE}/callback_intro.mp3</Play>
+  <Play>${AUDIO_BASE}/${svcAudio}.mp3</Play>
+  <Play>${AUDIO_BASE}/callback_request.mp3</Play>
+  ${stateClip}
+  <Pause length="1"/>
+  <Play>${AUDIO_BASE}/callback_connecting.mp3</Play>
+  <Dial callerId="${TWILIO_NUMBER}" timeout="30" action="${WEBHOOK_BASE}/voice-webhook/status" method="POST">
+    <Number>${elocalNumber}</Number>
+  </Dial>
+  <Play>${AUDIO_BASE}/callback_failed.mp3</Play>
+</Response>`;
+    } else {
+      twiml = `<?xml version="1.0" encoding="UTF-8"?>
+<Response>
+  <Play>${AUDIO_BASE}/callback_intro.mp3</Play>
+  <Play>${AUDIO_BASE}/${svcAudio}.mp3</Play>
+  <Play>${AUDIO_BASE}/callback_request.mp3</Play>
+  ${stateClip}
+  <Pause length="1"/>
+  <Play>${AUDIO_BASE}/callback_notlive.mp3</Play>
+</Response>`;
+    }
+
+    // Log the call
+    if (from) {
+      const { data: leads } = await supabase
+        .from("leads")
+        .select("id")
+        .eq("phone", from)
+        .order("created_at", { ascending: false })
+        .limit(1);
+
+      if (leads && leads.length > 0) {
+        await supabase.from("conversations").insert({
+          lead_id: leads[0].id,
+          direction: "outbound",
+          message_type: "voice",
+          body: `Callback: confirmed ${service} in ${zipCode}`,
+          twilio_sid: formData.get("CallSid") as string,
+          twilio_status: "in-progress",
+          from_number: TWILIO_NUMBER,
+          to_number: from,
+        });
+      }
+    }
+
+    return new Response(twiml, { headers: { "Content-Type": "text/xml" } });
+  }
 
 // ── Route: /bridge-nozip — SMS-triggered call, asks for zip first ──
   if (path.endsWith("/bridge-nozip")) {

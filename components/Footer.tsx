@@ -48,6 +48,7 @@ export function Footer() {
             <ul className="space-y-2">
               <li><Link href="/privacy" className="text-sm hover:text-white transition-colors">Privacy Policy</Link></li>
               <li><Link href="/terms" className="text-sm hover:text-white transition-colors">Terms of Service</Link></li>
+              <li><Link href="/privacy#ccpa" className="text-sm hover:text-white transition-colors">Do Not Sell My Info</Link></li>
             </ul>
           </div>
         </div>
@@ -72,7 +73,7 @@ export function Footer() {
         {/* Disclaimer */}
         <div className="border-t border-slate-800 pt-6 mb-6">
           <p className="text-xs text-slate-500 leading-relaxed">
-            <strong className="text-slate-400">Home Services Campaign Disclaimer:</strong> FindALocalPro is a free service to assist homeowners in connecting with local service providers. All contractors/providers are independent and FindALocalPro does not warrant or guarantee any work performed. It is the responsibility of the homeowner to verify that the hired contractor furnishes the necessary license and insurance required for the work being performed. All persons depicted in a photo or video are actors or models and not contractors listed on FindALocalPro.
+            <strong className="text-slate-400">Important Disclosure:</strong> FindALocalPro is a free referral service that connects homeowners with independent local service professionals. FindALocalPro does not itself perform any home services work. All service providers listed on this site are independent contractors and businesses. FindALocalPro does not warrant or guarantee any work performed by any service provider. FindALocalPro does not guarantee the licensing, insurance, qualifications, or quality of work of any service provider. It is the sole responsibility of the homeowner to verify that any hired service provider holds all necessary licenses and insurance required for the work being performed. All persons depicted in photos or videos are actors or models and not actual service providers listed on FindALocalPro.
           </p>
         </div>
 

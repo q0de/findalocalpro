@@ -114,6 +114,9 @@ export default async function HomePage() {
                   <span className="material-symbols-outlined text-brand-teal text-sm">lock</span>
                   No spam, no credit card. Takes 60 seconds.
                 </p>
+                <p className="mt-2 text-xs text-slate-400 max-w-md">
+                  By using our chat or calling, you provide prior express written consent to receive calls and SMS from FindALocalPro, including via automated technology and artificial/prerecorded voice, regarding your service request. Consent is not a condition of service. Msg &amp; data rates may apply. Reply STOP to opt out.
+                </p>
               </HeroCTAButtons>
             </div>
 
@@ -466,6 +469,9 @@ export default async function HomePage() {
                 (630) 407-1727
               </a>
             </div>
+            <p className="mt-4 text-xs text-white/50 max-w-lg mx-auto">
+              By using our chat or calling, you provide prior express written consent to receive calls and SMS from FindALocalPro, including via automated technology and artificial/prerecorded voice, regarding your service request. Consent is not a condition of service. Msg &amp; data rates may apply. Reply STOP to opt out.
+            </p>
           </AnimatedSection>
         </div>
       </section>

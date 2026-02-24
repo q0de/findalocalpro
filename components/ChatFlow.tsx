@@ -420,7 +420,7 @@ export function ChatFlow({ onStepChange }: ChatFlowProps) {
                 Hey there! Welcome to <span className="text-brand-purple font-bold">FindALocalPro</span>! 🌈
               </p>
               <p className="text-slate-600">
-                I'm here to connect you with the absolute best pro for your home. Let's get started!
+                I'm here to connect you with a verified pro for your home. Let's get started!
               </p>
             </div>
           </div>
@@ -678,7 +678,7 @@ export function ChatFlow({ onStepChange }: ChatFlowProps) {
                 className="mt-1 w-5 h-5 rounded border-2 border-slate-300 text-brand-purple focus:ring-brand-purple/20 cursor-pointer shrink-0"
               />
               <span className="text-xs text-slate-500 leading-relaxed">
-                By checking this box, you agree to receive text messages from FindALocalPro about your service request. Message frequency varies. Message and data rates may apply. Reply STOP to opt out, HELP for help. View our{' '}
+                By checking this box, you provide prior express written consent to receive calls and SMS from FindALocalPro, including via automated technology and artificial/prerecorded voice, regarding your service request. Consent is not a condition of service. Message frequency varies. Msg & data rates may apply. Reply STOP to opt out, HELP for help. View our{' '}
                 <a href="/privacy" className="text-brand-purple hover:underline">Privacy Policy</a> and{' '}
                 <a href="/terms" className="text-brand-purple hover:underline">Terms of Service</a>.
               </span>
@@ -781,7 +781,7 @@ export function ChatFlow({ onStepChange }: ChatFlowProps) {
               className="mt-1 w-5 h-5 rounded border-2 border-slate-300 text-brand-purple focus:ring-brand-purple/20 cursor-pointer shrink-0"
             />
             <span className="text-xs text-slate-500 leading-relaxed">
-              By checking this box, you agree to receive text messages from FindALocalPro about your service request. Message frequency varies. Message and data rates may apply. Reply STOP to opt out, HELP for help. View our{' '}
+              By submitting your phone number, you provide prior express written consent to receive calls and SMS from FindALocalPro and matched service providers, including via automated technology and artificial/prerecorded voice, regarding your service request. Consent is not a condition of service. Message frequency varies. Msg & data rates may apply. Reply STOP to opt out, HELP for help. View our{' '}
               <a href="/privacy" className="text-brand-purple hover:underline">Privacy Policy</a> and{' '}
               <a href="/terms" className="text-brand-purple hover:underline">Terms of Service</a>.
             </span>
@@ -879,7 +879,7 @@ export function ChatFlow({ onStepChange }: ChatFlowProps) {
               className="mt-1 w-5 h-5 rounded border-2 border-slate-300 text-brand-purple focus:ring-brand-purple/20 cursor-pointer shrink-0"
             />
             <span className="text-xs text-slate-500 leading-relaxed">
-              By checking this box, you agree to receive text messages from FindALocalPro about your service request. Message frequency varies. Message and data rates may apply. Reply STOP to opt out, HELP for help. View our{' '}
+              By submitting your phone number, you provide prior express written consent to receive calls and SMS from FindALocalPro and matched service providers, including via automated technology and artificial/prerecorded voice, regarding your service request. Consent is not a condition of service. Message frequency varies. Msg & data rates may apply. Reply STOP to opt out, HELP for help. View our{' '}
               <a href="/privacy" className="text-brand-purple hover:underline">Privacy Policy</a> and{' '}
               <a href="/terms" className="text-brand-purple hover:underline">Terms of Service</a>.
             </span>
@@ -911,7 +911,7 @@ export function ChatFlow({ onStepChange }: ChatFlowProps) {
             <div className="chat-bubble-bot-gradient border-l-4 border-l-brand-teal">
               <p className="text-lg font-bold mb-2">You're all set! 🎉</p>
               <p className="text-slate-600 mb-4">
-                We're connecting you with the best {selectedService.toLowerCase()} pros near{' '}
+                We're connecting you with verified {selectedService.toLowerCase()} pros near{' '}
                 <span className="font-bold text-slate-800">{zipCode}</span>. A pro will call{' '}
                 <span className="font-bold text-slate-800">{phoneNumber}</span> shortly!
               </p>

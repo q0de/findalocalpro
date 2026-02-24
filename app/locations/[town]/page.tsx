@@ -94,7 +94,7 @@ const towns: Record<string, TownInfo> = {
     lat: 41.7508,
     lng: -88.1535,
     population: '149,500',
-    description: 'Naperville is one of the largest cities in Illinois and consistently ranked among the best places to live in the country. With neighborhoods ranging from historic downtown Victorian homes to sprawling modern subdivisions, the demand for qualified home service professionals is enormous — and so is the risk of hiring unlicensed operators.',
+    description: 'Naperville is one of the largest cities in Illinois and consistently ranked among the top places to live in the country. With neighborhoods ranging from historic downtown Victorian homes to sprawling modern subdivisions, the demand for qualified home service professionals is enormous — and so is the risk of hiring unlicensed operators.',
     neighborhoods: ['Downtown Historic District', 'Ashwood Park', 'Cress Creek', 'White Eagle', 'Tall Grass', 'Hobson West'],
     localTips: 'Naperville has some of the strictest building permit requirements in DuPage County. Any electrical, plumbing, or structural work requires permits through the city. Contractors who tell you "we don\'t need a permit for this" are a red flag. The city also has a contractor registration requirement — verify it.',
     commonIssues: ['Strict permit requirements catching unprepared homeowners', 'Historic district renovation restrictions downtown', 'Large-home HVAC zoning complexity', 'Irrigation system winterization and repair', 'High demand creating long wait times for quality pros'],

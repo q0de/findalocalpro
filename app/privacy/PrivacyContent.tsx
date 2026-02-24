@@ -76,8 +76,33 @@ export function PrivacyPolicy() {
           </ul>
         </section>
 
+        <section id="ccpa">
+          <h2 className="text-xl font-bold text-slate-800 mb-3">9. California Privacy Rights (CCPA)</h2>
+          <p>California residents have specific rights regarding their personal information under the California Consumer Privacy Act (CCPA):</p>
+          <ul className="list-disc pl-6 space-y-1 mt-2">
+            <li><strong>Right to Know:</strong> You have the right to know what personal information we collect, use, disclose, and sell</li>
+            <li><strong>Right to Delete:</strong> You have the right to request deletion of your personal information</li>
+            <li><strong>Right to Opt-Out:</strong> You have the right to opt out of the sale of your personal information</li>
+          </ul>
+          <p className="mt-3"><strong>Important:</strong> FindALocalPro does not sell personal information as defined under CCPA.</p>
+          <p className="mt-3">To exercise your rights, email us at privacy@findalocalpro.com or call (630) 407-1727. We will respond to verifiable requests within 45 days.</p>
+          <p className="mt-3 font-semibold">Do Not Sell My Personal Information</p>
+          <p>As stated above, we do not sell personal information. However, if our practices change in the future, California residents will have the right to opt out of such sales.</p>
+        </section>
+
         <section>
-          <h2 className="text-xl font-bold text-slate-800 mb-3">9. Contact Us</h2>
+          <h2 className="text-xl font-bold text-slate-800 mb-3">10. Third-Party Service Connections</h2>
+          <p>When we match you with a service provider through our platform:</p>
+          <ul className="list-disc pl-6 space-y-1 mt-2">
+            <li>Your contact information and service request details are shared with that specific provider solely to fulfill your request</li>
+            <li>This sharing is necessary to provide our referral service and is not considered a "sale" of personal information under CCPA</li>
+            <li>The service provider may contact you directly to discuss your project and provide their services</li>
+          </ul>
+          <p className="mt-3">Each service provider operates independently and has their own privacy practices. We recommend reviewing their privacy policies when working with them.</p>
+        </section>
+
+        <section>
+          <h2 className="text-xl font-bold text-slate-800 mb-3">11. Contact Us</h2>
           <p>If you have questions about this Privacy Policy or wish to exercise your rights, contact us:</p>
           <ul className="list-none mt-2 space-y-1">
             <li><strong>Email:</strong> privacy@findalocalpro.com</li>
@@ -87,7 +112,7 @@ export function PrivacyPolicy() {
         </section>
 
         <section>
-          <h2 className="text-xl font-bold text-slate-800 mb-3">10. Changes to This Policy</h2>
+          <h2 className="text-xl font-bold text-slate-800 mb-3">12. Changes to This Policy</h2>
           <p>We may update this Privacy Policy from time to time. Changes will be posted on this page with an updated effective date.</p>
         </section>
       </div>
