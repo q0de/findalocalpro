@@ -804,14 +804,27 @@ Deno.serve(async (req: Request) => {
       const minDur = elLead?.billable_duration || 0;
 
       if (dialCallStatus === "completed" && callDuration > 0) {
-        const billable = elLead?.billable || (callDuration >= minDur);
+        // Per eLocal rules: a call is billable if it rang 10+ seconds OR was answered.
+        // A connected call (provider picked up) is always billable regardless of duration.
+        // The billable_duration from eLocal API is program-specific but their published
+        // policy says answered calls = billable. We treat any connected call as billable.
         const bidStr = elLead?.bid_price ? `$${elLead.bid_price}` : "N/A";
-        if (billable && minDur > 0) {
-          await notifyTelegram(`💰 *BILLABLE CALL!*\n${icon} ${svc}\n📱 ${from}\n⏱ ${callDuration}s (min ${minDur}s) ✅\n💵 Revenue: ${bidStr}`);
-        } else if (callDuration < minDur && minDur > 0) {
-          await notifyTelegram(`⚠️ *Call Too Short*\n${icon} ${svc}\n📱 ${from}\n⏱ ${callDuration}s (needed ${minDur}s)\n💵 Bid: ${bidStr} — NOT billable`);
+        const billable = true; // Connected + completed = billable per eLocal rules
+        
+        // Update the DB to mark as billable
+        if (elLead) {
+          await supabase
+            .from("elocal_leads")
+            .update({ billable: true, call_duration: callDuration, call_status: "completed" })
+            .eq("twilio_call_sid", callSid);
+        }
+
+        if (minDur > 0 && callDuration < minDur) {
+          // Call was shorter than eLocal's program minimum — still billable per their rules,
+          // but flag it so we can track if they try to dispute
+          await notifyTelegram(`💰 *BILLABLE CALL* (short)\n${icon} ${svc}\n📱 ${from}\n⏱ ${callDuration}s (program min: ${minDur}s)\n💵 Revenue: ${bidStr}\nℹ️ Connected call = billable per eLocal policy`);
         } else {
-          await notifyTelegram(`✅ *Call Completed*\n${icon} ${svc}\n📱 ${from}\n⏱ ${callDuration}s`);
+          await notifyTelegram(`💰 *BILLABLE CALL!*\n${icon} ${svc}\n📱 ${from}\n⏱ ${callDuration}s ✅\n💵 Revenue: ${bidStr}`);
         }
       } else if (dialCallStatus === "no-answer") {
         await notifyTelegram(`📵 *No Answer*\n${icon} ${svc}\n📱 ${from}\nPro didn't pick up`);
