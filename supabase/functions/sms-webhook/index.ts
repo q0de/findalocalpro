@@ -139,6 +139,11 @@ serve(async (req) => {
     if (leads.length > 0) {
       // Update existing lead
       existingLead = true;
+      const prevService = leads[0].service_needed;
+      const prevZip = leads[0].zip_code;
+      const mergedService = service || prevService;
+      const mergedZip = zip || prevZip;
+
       await fetch(
         `${SUPABASE_URL}/rest/v1/leads?id=eq.${leads[0].id}`,
         {
@@ -150,13 +155,28 @@ serve(async (req) => {
             Prefer: "return=minimal",
           },
           body: JSON.stringify({
-            service_needed: service || leads[0].service_needed,
-            zip_code: zip || leads[0].zip_code,
+            service_needed: mergedService,
+            zip_code: mergedZip,
             notes: `SMS: "${body}" | Previous: ${leads[0].notes || ""}`,
             source: "direct_sms",
           }),
         }
       );
+
+      // If we now have BOTH service + zip (maybe they just replied with the zip),
+      // and no callback was triggered yet, trigger it now
+      if (mergedService && mergedZip && (!prevZip || !prevService)) {
+        try {
+          await fetch(`${SUPABASE_URL}/functions/v1/voice-webhook/trigger-callback`, {
+            method: "POST",
+            headers: { "Content-Type": "application/x-www-form-urlencoded" },
+            body: new URLSearchParams({ phone: from, service: mergedService, zip: mergedZip }).toString(),
+          });
+          await sendTelegramAlert(`📞 <b>Follow-up callback triggered!</b>\n📱 <code>${from}</code>\n🔧 Service: ${mergedService}\n📍 ZIP: ${mergedZip}\n📤 Now have both — calling them back`);
+        } catch (e) {
+          console.error("Follow-up callback trigger failed:", e);
+        }
+      }
     }
   } catch { /* best effort */ }
 
@@ -188,7 +208,14 @@ serve(async (req) => {
   }
 
   // Trigger a callback — call them with our ElevenLabs voice
-  if (isWebsite || service || zip) {
+  // ONLY call back when we have BOTH service AND zip (or it's a website submission with structured data).
+  // If we only have service but no zip, wait for the follow-up SMS with the zip code.
+  // This prevents the race condition where we ask "what's your zip?" AND call them simultaneously.
+  const hasEnoughForCallback = isWebsite
+    ? (from !== "unknown")                    // Website submissions already have structured data
+    : (!!service && !!zip);                   // SMS: need both service + zip before calling
+  
+  if (hasEnoughForCallback) {
     try {
       await fetch(`${SUPABASE_URL}/functions/v1/voice-webhook/trigger-callback`, {
         method: "POST",
@@ -199,6 +226,9 @@ serve(async (req) => {
     } catch (e) {
       console.error("Callback trigger failed:", e);
     }
+  } else if (service && !zip) {
+    // We have the service but need the zip — DON'T call yet, just wait for their reply
+    await sendTelegramAlert(`⏳ <b>Waiting for ZIP</b>\n📱 <code>${from}</code>\n🔧 Service: ${service}\n📍 Asked for ZIP code — will callback once they reply`);
   }
 
   // Auto-reply via SMS
