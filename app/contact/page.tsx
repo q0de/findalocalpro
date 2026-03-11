@@ -89,14 +89,20 @@ export default function ContactPage() {
         <div className="max-w-4xl mx-auto px-6">
           <div className="grid md:grid-cols-3 gap-6">
             {/* Phone */}
-            <a href="tel:6304071727" className="group bg-white rounded-2xl border-2 border-slate-100 p-8 text-center hover:border-brand-purple hover:shadow-xl transition-all duration-300 hover:-translate-y-1">
+            <div className="group bg-white rounded-2xl border-2 border-slate-100 p-8 text-center hover:border-brand-purple hover:shadow-xl transition-all duration-300">
               <div className="w-16 h-16 bg-brand-purple/10 rounded-2xl flex items-center justify-center mx-auto mb-4 group-hover:bg-brand-purple/20 transition-colors">
                 <span className="material-symbols-outlined text-brand-purple text-3xl">call</span>
               </div>
-              <h2 className="font-black text-slate-800 text-lg mb-2">Call Us</h2>
-              <p className="text-brand-purple font-black text-xl">(630) 407-1727</p>
-              <p className="text-slate-400 text-sm mt-2">Mon-Fri 8am-6pm, Sat 9am-2pm</p>
-            </a>
+              <h2 className="font-black text-slate-800 text-lg mb-4">Call Us Directly</h2>
+              <div className="space-y-2 text-left">
+                <a href="tel:6307565104" className="flex justify-between items-center hover:text-brand-purple transition-colors"><span className="text-slate-600 text-sm">🔧 Plumbing</span><span className="font-bold text-sm">(630) 756-5104</span></a>
+                <a href="tel:6303183024" className="flex justify-between items-center hover:text-brand-purple transition-colors"><span className="text-slate-600 text-sm">⚡ Electrical</span><span className="font-bold text-sm">(630) 318-3024</span></a>
+                <a href="tel:6305998262" className="flex justify-between items-center hover:text-brand-purple transition-colors"><span className="text-slate-600 text-sm">❄️ HVAC / Cooling</span><span className="font-bold text-sm">(630) 599-8262</span></a>
+                <a href="tel:6307565505" className="flex justify-between items-center hover:text-brand-purple transition-colors"><span className="text-slate-600 text-sm">🔥 HVAC / Heating</span><span className="font-bold text-sm">(630) 756-5505</span></a>
+                <a href="tel:6304071727" className="flex justify-between items-center hover:text-brand-purple transition-colors"><span className="text-slate-600 text-sm">📞 General</span><span className="font-bold text-sm">(630) 407-1727</span></a>
+              </div>
+              <p className="text-slate-400 text-sm mt-3">Mon-Fri 8am-6pm, Sat 9am-2pm</p>
+            </div>
 
             {/* Chat */}
             <Link href="/get-matched" className="group bg-white rounded-2xl border-2 border-slate-100 p-8 text-center hover:border-brand-teal hover:shadow-xl transition-all duration-300 hover:-translate-y-1">

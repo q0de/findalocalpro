@@ -92,6 +92,15 @@ const verticals: Record<string, ServiceInfo> = {
   },
 };
 
+/** Direct phone numbers per vertical — routes to vertical-specific Twilio numbers */
+const verticalPhones: Record<string, { display: string; tel: string }> = {
+  plumbing:          { display: '(630) 756-5104', tel: '6307565104' },
+  electricians:      { display: '(630) 318-3024', tel: '6303183024' },
+  hvac:              { display: '(630) 599-8262', tel: '6305998262' },
+  // Verticals without dedicated numbers fall back to general IVR
+};
+const DEFAULT_PHONE = { display: '(630) 407-1727', tel: '6304071727' };
+
 const areaTags = ['Downers Grove', 'Westmont', 'Lisle', 'Woodridge', 'Darien', 'Naperville', 'Lombard', 'Glen Ellyn', 'Wheaton', 'Hinsdale', 'Oak Brook', 'Bolingbrook'];
 
 interface Provider {
@@ -177,6 +186,8 @@ export default async function ServiceLandingPage({ params }: { params: Promise<{
   const service = verticals[vertical];
   if (!service) notFound();
 
+  const phone = verticalPhones[vertical] ?? DEFAULT_PHONE;
+
   const { providers, checksMap } = await getProvidersForTrade(service.trade);
 
   // Service structured data
@@ -236,9 +247,9 @@ export default async function ServiceLandingPage({ params }: { params: Promise<{
                   <span className="material-symbols-outlined transition-transform group-hover:scale-110">chat</span>
                   Get Matched Free
                 </Link>
-                <a href="tel:6304071727" className="inline-flex items-center justify-center gap-2 bg-white hover:bg-slate-50 text-slate-800 px-8 py-4 rounded-2xl font-black text-lg border-2 border-slate-200 transition-all shadow-lg hover:-translate-y-1">
+                <a href={`tel:${phone.tel}`} className="inline-flex items-center justify-center gap-2 bg-white hover:bg-slate-50 text-slate-800 px-8 py-4 rounded-2xl font-black text-lg border-2 border-slate-200 transition-all shadow-lg hover:-translate-y-1">
                   <span className="material-symbols-outlined">call</span>
-                  (630) 407-1727
+                  {phone.display}
                 </a>
               </div>
             </div>
@@ -434,9 +445,9 @@ export default async function ServiceLandingPage({ params }: { params: Promise<{
               <span className="material-symbols-outlined transition-transform group-hover:scale-110">chat</span>
               Get Matched Free
             </Link>
-            <a href="tel:6304071727" className="inline-flex items-center justify-center gap-2 bg-white/10 hover:bg-white/20 text-white px-8 py-4 rounded-2xl font-black text-lg border-2 border-white/30 transition-all">
+            <a href={`tel:${phone.tel}`} className="inline-flex items-center justify-center gap-2 bg-white/10 hover:bg-white/20 text-white px-8 py-4 rounded-2xl font-black text-lg border-2 border-white/30 transition-all">
               <span className="material-symbols-outlined">call</span>
-              (630) 407-1727
+              {phone.display}
             </a>
           </div>
         </div>
