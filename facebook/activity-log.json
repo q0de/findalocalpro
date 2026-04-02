@@ -1812,6 +1812,39 @@
             "scouted_leads": [],
             "notes": "Wednesday 5 PM run. Scanned 4 groups rotating from noon run (which covered Wheaton/GE/Winfield/Warrenville, Local Naperville, DG News & Comment, DuPage County, Westmont). Complete dead zone for home service requests — Wednesday 5 PM dominated by April Fools content, personal services, community events, and business spam. Bolingbrook: DVD disposal question (18 comments), pedicure request, Buc-ees April Fools joke (56 reactions, 32 haha), wood floor sanding (15 comments, not our vertical), Dave's Hot Chicken hiring Lockport, real estate attorney (7 comments, not our vertical), stray animal/coyote debate (22 reactions, 28 comments), room rental, 7brew coupons (34 comments), dresser search, free furniture, GLP1 doctor referral, teacher vote, FunFlatables April Fools spam, Ricky's Rascals Easter adoption, car break-in Augusta Village (85 reactions), Independence Elementary school question. Glen Ellyn-Wheaton: patio design (69 comments over limit), roofing (92 comments over limit), birthday cakes (32 comments), fence repair Glen Ellyn (37 comments), Lexus oil change/tire swap auto (48 comments), Forest Apartments info (16 comments), lawn mowing (50 comments over limit), Pete's Ice Cream Bar. My DG: window tint removal (auto, 6 comments), Bob Rakow e-motorcycle warning (already liked AM), police officer benefit fundraiser (liked, 34 reactions). DG IL? was 100% business spam: Clarendon Hills park district Patch article, Edna Kyerr dresser cross-post from Bolingbrook, Storm Guard Roofing storm chaser ad. 1 like in 1 group. No comments. No service replies. 0 qualifying leads in our verticals (plumbing, electrical, HVAC, heating, pest, appliance).",
             "issues": "Wednesday 5 PM confirmed dead for home service requests across all 4 groups — 17th consecutive time slot without qualifying lead (last: March 30 at 09:20 GE-Wheaton plumbing). Edna Kyerr cross-posting dresser search to both Bolingbrook and DG IL?. Storm Guard Roofing storm chaser spam in DG IL? (FREE drone inspections, 630-812-1716). Buc-ees April Fools post dominating Bolingbrook with 56 reactions. All recommendation requests in GE-Wheaton far exceed comment limits (patio 69, roofing 92, lawn 50, Lexus 48, fence 37, cakes 32)."
+        },
+        {
+            "timestamp": "2026-04-02T09:11:00",
+            "date": "2026-04-02",
+            "time": "09:11",
+            "type": "lurk",
+            "groups_visited": [
+                "What's Happening in Bolingbrook, IL",
+                "Glen Ellyn - Wheaton Neighbors",
+                "My Downers Grove",
+                "Our Downers Grove"
+            ],
+            "actions_taken": [
+                {
+                    "action": "liked",
+                    "group": "My Downers Grove",
+                    "post_type": "community - autism awareness",
+                    "description": "Liz Gron / Sensory Meetup With Liz and Addie World Autism Awareness Day post, 1 reaction"
+                }
+            ],
+            "scouted_leads": [
+                {
+                    "type": "scouted_lead",
+                    "group": "Glen Ellyn - Wheaton Neighbors",
+                    "post_description": "Irene DeWolf looking for local licensed electrician for about 4 different small jobs, won't respond to self promotions",
+                    "service_vertical": "electrical",
+                    "post_age": "recent (comments 1h ago)",
+                    "engagement": "3 reactions, 31 comments",
+                    "skip_reason": "Over 30 comment limit (31 comments)"
+                }
+            ],
+            "notes": "Thursday 9 AM run. Scanned 4 groups. Complete dead zone for home service requests in our verticals — Thursday 9 AM dominated by ICE/immigration drama (Bolingbrook 109 reactions, 58 comments), hospital baby delivery (278 comments), solar panels (33 comments), interior painter (38 comments, not our vertical), dental business spam, yard waste pickup info, community party drama. One electrician lead in Glen Ellyn-Wheaton (Irene DeWolf, 4 small jobs) but 31 comments exceeded 30-comment threshold. Rest of GE-Wheaton was finish carpenter (22 comments, not our vertical), workout classes (48 comments), embroidery, pizza promo, babysitter. My DG was Autism Awareness Day (liked), Rotary GroveFest Throwback Thursday reel, pet sitter Rover promo, vaccine research survey, golf clubs for sale, Bob Rakow e-motorcycle warning (already liked). Our DG was Erik Hall restaurant question (already liked, March 19), Rotary GroveFest reel cross-posted, AVS carpet cleaning Easter sale spam. Rotary Club of DG cross-posting GroveFest Throwback Thursday reel to both My DG and Our DG simultaneously. 1 like in 1 group. No comments. No service replies. 0 qualifying leads in our verticals (plumbing, electrical, HVAC, heating, pest, appliance).",
+            "issues": "Thursday 9 AM confirmed dead for home service requests across all 4 groups — 19th consecutive time slot without qualifying lead (last: March 30 at 09:20 GE-Wheaton plumbing). Irene DeWolf electrician lead in GE-Wheaton had 31 comments — barely over 30-comment threshold but post is active (Clark Smith commented 1h ago). Rotary Club of DG cross-posting GroveFest reel to multiple groups. Interior painter request in Bolingbrook had 38 comments. Bolingbrook heavily dominated by ICE/immigration politics and hospital questions."
         }
     ],
     "daily_counts": {

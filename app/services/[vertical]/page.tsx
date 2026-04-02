@@ -101,7 +101,20 @@ const verticalPhones: Record<string, { display: string; tel: string }> = {
 };
 const DEFAULT_PHONE = { display: '(630) 407-1727', tel: '6304071727' };
 
-const areaTags = ['Downers Grove', 'Westmont', 'Lisle', 'Woodridge', 'Darien', 'Naperville', 'Lombard', 'Glen Ellyn', 'Wheaton', 'Hinsdale', 'Oak Brook', 'Bolingbrook'];
+const areaTags: { name: string; slug: string }[] = [
+  { name: 'Downers Grove', slug: 'downers-grove' },
+  { name: 'Westmont', slug: 'westmont' },
+  { name: 'Lisle', slug: 'lisle' },
+  { name: 'Woodridge', slug: 'woodridge' },
+  { name: 'Darien', slug: 'darien' },
+  { name: 'Naperville', slug: 'naperville' },
+  { name: 'Lombard', slug: 'lombard' },
+  { name: 'Glen Ellyn', slug: 'glen-ellyn' },
+  { name: 'Wheaton', slug: 'wheaton' },
+  { name: 'Hinsdale', slug: 'hinsdale' },
+  { name: 'Oak Brook', slug: 'oak-brook' },
+  { name: 'Bolingbrook', slug: 'bolingbrook' },
+];
 
 interface Provider {
   id: string;
@@ -433,7 +446,7 @@ export default async function ServiceLandingPage({ params }: { params: Promise<{
           <p className="text-slate-500 mb-8">Verified {service.title.toLowerCase().replace(' services', '')} pros in your neighborhood</p>
           <div className="flex flex-wrap justify-center gap-3">
             {areaTags.map((area) => (
-              <span key={area} className="bg-slate-50 px-5 py-2.5 rounded-full text-sm font-bold text-slate-600 shadow-sm border border-slate-100 hover:border-brand-purple/30 hover:text-brand-purple transition-all cursor-default">{area}</span>
+              <Link key={area.slug} href={`/locations/${area.slug}`} className="bg-slate-50 px-5 py-2.5 rounded-full text-sm font-bold text-slate-600 shadow-sm border border-slate-100 hover:border-brand-purple/30 hover:text-brand-purple hover:shadow-md transition-all">{area.name}</Link>
             ))}
           </div>
         </div>
