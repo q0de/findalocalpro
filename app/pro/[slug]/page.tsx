@@ -101,6 +101,9 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   return {
     title: `${provider.name} — Verified ${tradeLabel} Pro | FindALocalPro`,
     description: `${provider.name} — Trust Score ${score}/100. Verified ${tradeLabel.toLowerCase()} professional in DuPage County, IL. License, BBB rating, and contractor score checked.`,
+    alternates: {
+      canonical: `https://findalocalpro.com/pro/${slug}`,
+    },
     openGraph: {
       title: `${provider.name} — Verified ${tradeLabel} Pro`,
       description: `Trust Score ${score}/100. Verified ${tradeLabel.toLowerCase()} pro in DuPage County, IL.`,

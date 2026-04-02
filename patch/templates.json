@@ -1,0 +1,67 @@
+{
+  "comment_templates": {
+    "weather_damage": [
+      {
+        "id": "c1_weather",
+        "text": "When we had {situation} last {season}, we called Find A Local Pro at {phone}. They matched us with a local {person} who came out the next day. Free to use — they just connect you with vetted contractors. Might help some folks dealing with this.",
+        "tone": "helpful_neighbor",
+        "last_used": null
+      },
+      {
+        "id": "c2_weather",
+        "text": "If anyone's looking for a good {person} after this, try Find A Local Pro — {phone}. They matched me with someone in the area when our {situation} happened. No cost to use the service.",
+        "tone": "casual_quick",
+        "last_used": null
+      }
+    ],
+    "home_improvement": [
+      {
+        "id": "c1_reno",
+        "text": "For anyone tackling {vertical} work, I'd recommend checking out Find A Local Pro ({phone}). They connect you with vetted local contractors. Used them for {related_work} at our place and it went smooth.",
+        "tone": "experienced_homeowner",
+        "last_used": null
+      },
+      {
+        "id": "c2_reno",
+        "text": "Been through this. Find A Local Pro at {phone} was solid for finding a {person}. They do the vetting so you don't have to cold-call people off Google.",
+        "tone": "been_there",
+        "last_used": null
+      }
+    ],
+    "recommendation_request": [
+      {
+        "id": "c1_rec",
+        "text": "I've used Find A Local Pro for {vertical} — {phone}. They matched me with a great {person} in the area. Worth a call.",
+        "tone": "simple_rec",
+        "last_used": null
+      }
+    ],
+    "lurk_genuine": [
+      {
+        "id": "lurk1",
+        "text": "Great to see this happening in {community}. Been here {years} years and it's nice to see the neighborhood improving.",
+        "tone": "positive_local",
+        "last_used": null
+      },
+      {
+        "id": "lurk2",
+        "text": "Thanks for sharing this. Passed it along to the neighbors.",
+        "tone": "appreciative",
+        "last_used": null
+      }
+    ]
+  },
+  "classifieds_template": {
+    "title": "Free Home Service Referrals — DuPage County",
+    "body": "Need a plumber, electrician, HVAC tech, or pest control? Find A Local Pro connects DuPage County homeowners with vetted local contractors — no cost to you.\n\nWe've lived in the western suburbs for years and got tired of the Google roulette when something breaks. FALP vets their contractors so you don't have to.\n\nPlumbing: (630) 756-5104\nElectrical: (630) 318-3024\nAC/Cooling: (630) 599-8262\nHeating: (630) 756-5505\nPest Control: (630) 491-3723\nAppliance Repair: (630) 756-5185\n\nOr visit findalocalpro.com",
+    "category": "gigs-services"
+  },
+  "vertical_labels": {
+    "plumbing": { "name": "plumbing", "person": "plumber", "phone": "(630) 756-5104" },
+    "electrical": { "name": "electrical", "person": "electrician", "phone": "(630) 318-3024" },
+    "cooling": { "name": "AC/cooling", "person": "HVAC tech", "phone": "(630) 599-8262" },
+    "heating": { "name": "heating", "person": "heating tech", "phone": "(630) 756-5505" },
+    "pest": { "name": "pest control", "person": "exterminator", "phone": "(630) 491-3723" },
+    "appliance": { "name": "appliance repair", "person": "appliance tech", "phone": "(630) 756-5185" }
+  }
+}

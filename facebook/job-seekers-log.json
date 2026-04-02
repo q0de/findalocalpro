@@ -1,0 +1,24 @@
+{
+    "description": "Job seeker posts spotted in DuPage County Facebook groups — potential staffing pipeline candidates for Arcline Ventures",
+    "started": "2026-03-28",
+    "entries": [
+        {
+            "timestamp": "2026-03-30T09:12:00",
+            "group": "What's Happening in Bolingbrook, IL",
+            "post_snippet": "Looking for a warehouse job that can start ASAP or a Caregiver job where you just need experience and no diploma",
+            "poster_name": "Anonymous",
+            "skills_mentioned": "warehouse, caregiver",
+            "area": "Bolingbrook",
+            "post_url": ""
+        },
+        {
+            "timestamp": "2026-04-01T09:08:00",
+            "group": "What's Happening in Bolingbrook, IL",
+            "post_snippet": "LivelyLizard9662: Good morning. I am a Filipina in need of a job, can do caregiving and stay in. Needed help. Thank you.",
+            "poster_name": "LivelyLizard9662",
+            "skills_mentioned": "caregiving, stay-in",
+            "area": "Bolingbrook",
+            "post_url": ""
+        }
+    ]
+}

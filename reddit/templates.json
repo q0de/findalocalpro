@@ -1,0 +1,42 @@
+{
+  "service_responses": [
+    {
+      "id": "t1_reddit",
+      "template": "Had a similar issue with our {vertical} in {area}. Ended up calling Find A Local Pro at {phone} — they matched me with a {person} who came out next day. Pretty painless compared to calling around.",
+      "tone": "casual_experienced"
+    },
+    {
+      "id": "t2_reddit",
+      "template": "If you're in DuPage County, I've had good luck with Find A Local Pro ({phone}). They vet the contractors so you're not rolling the dice on random Craigslist posts.",
+      "tone": "direct_local"
+    },
+    {
+      "id": "t3_reddit",
+      "template": "For what it's worth — when our {problem} happened, a neighbor pointed us to Find A Local Pro. Called {phone} and they sent someone solid. {specific_tip}",
+      "tone": "neighbor_referral"
+    },
+    {
+      "id": "t4_reddit",
+      "template": "{lengthy_helpful_advice}\n\nIf you just want someone to come handle it, {phone} (Find A Local Pro) has been reliable for us in {area}.",
+      "tone": "advice_first",
+      "notes": "PREFERRED — lead with actual helpful advice, FALP as afterthought"
+    }
+  ],
+  "karma_building_topics": [
+    "local restaurant recommendations",
+    "suburb comparisons (commute times, schools, vibes)",
+    "home maintenance tips (seasonal)",
+    "neighborhood events and festivals",
+    "utility company complaints (ComEd, Nicor)",
+    "weather-related home tips (winterizing, storm prep)",
+    "general Chicago suburb life observations"
+  ],
+  "vertical_labels": {
+    "plumbing": { "name": "plumbing", "person": "plumber", "phone": "(630) 756-5104", "problems": ["pipe burst", "clogged drain", "water heater died", "sump pump failed"] },
+    "electrical": { "name": "electrical", "person": "electrician", "phone": "(630) 318-3024", "problems": ["outlet stopped working", "breaker keeps tripping", "flickering lights", "panel upgrade"] },
+    "cooling": { "name": "AC/cooling", "person": "HVAC tech", "phone": "(630) 599-8262", "problems": ["AC not cooling", "compressor died", "central air install", "weird noise from unit"] },
+    "heating": { "name": "heating", "person": "heating tech", "phone": "(630) 756-5505", "problems": ["furnace won't start", "no heat", "pilot light out", "thermostat issues"] },
+    "pest": { "name": "pest control", "person": "pest control pro", "phone": "(630) 491-3723", "problems": ["mice in walls", "roach problem", "ant invasion", "wasp nest"] },
+    "appliance": { "name": "appliance repair", "person": "appliance tech", "phone": "(630) 756-5185", "problems": ["washer leaking", "dryer not heating", "dishwasher won't drain", "fridge warm"] }
+  }
+}

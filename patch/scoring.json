@@ -1,0 +1,37 @@
+{
+  "article_keywords": {
+    "plumbing": ["plumber", "plumbing", "water main", "pipe burst", "sewer", "water heater", "drain", "flooding basement", "sump pump"],
+    "electrical": ["electrician", "electrical", "power outage", "wiring", "outlet", "circuit breaker", "electrical fire"],
+    "cooling": ["AC", "air conditioning", "HVAC", "cooling", "air conditioner", "central air"],
+    "heating": ["furnace", "heating", "no heat", "boiler", "thermostat", "gas leak", "carbon monoxide"],
+    "pest": ["pest", "exterminator", "mice", "rats", "roaches", "termites", "bed bugs", "ants", "wasps"],
+    "appliance": ["appliance", "washing machine", "dryer", "dishwasher", "refrigerator", "oven", "garbage disposal"],
+    "general_home": ["home repair", "contractor", "handyman", "renovation", "remodel", "storm damage", "ice dam", "roof leak", "water damage", "fire damage", "mold"]
+  },
+  "recommendation_signals": [
+    "anyone know a good",
+    "looking for a",
+    "can anyone recommend",
+    "need a reliable",
+    "who do you use for",
+    "any suggestions for",
+    "recommendations for"
+  ],
+  "scoring": {
+    "has_service_keyword": 15,
+    "weather_damage_article": 15,
+    "critical_community": 10,
+    "high_community": 5,
+    "active_comments": 10,
+    "under_24h": 10,
+    "under_6h": 5,
+    "already_commented": -999,
+    "minimum_score": 30
+  },
+  "area_keywords": [
+    "Downers Grove", "Naperville", "Wheaton", "Glen Ellyn", "Bolingbrook",
+    "Woodridge", "Lisle", "Darien", "Westmont", "Lombard", "Oak Brook",
+    "Burr Ridge", "Hinsdale", "Clarendon Hills", "DuPage",
+    "western suburbs", "west suburbs"
+  ]
+}

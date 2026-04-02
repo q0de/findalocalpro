@@ -1,0 +1,94 @@
+{
+  "communities": [
+    {
+      "name": "Downers Grove",
+      "slug": "downersgrove",
+      "url": "https://patch.com/illinois/downersgrove",
+      "classifieds_url": "https://patch.com/illinois/downersgrove/classifieds",
+      "priority": "critical",
+      "status": "target",
+      "nearby": ["Lisle", "Darien", "Woodridge", "Westmont"]
+    },
+    {
+      "name": "Naperville",
+      "slug": "naperville",
+      "url": "https://patch.com/illinois/naperville",
+      "classifieds_url": "https://patch.com/illinois/naperville/classifieds",
+      "priority": "critical",
+      "status": "target",
+      "nearby": ["Lisle", "Bolingbrook", "Woodridge", "Aurora", "Wheaton"]
+    },
+    {
+      "name": "Wheaton",
+      "slug": "wheaton",
+      "url": "https://patch.com/illinois/wheaton",
+      "classifieds_url": "https://patch.com/illinois/wheaton/classifieds",
+      "priority": "high",
+      "status": "target",
+      "nearby": ["Glen Ellyn", "Winfield", "Carol Stream"]
+    },
+    {
+      "name": "Glen Ellyn",
+      "slug": "glenellyn",
+      "url": "https://patch.com/illinois/glenellyn",
+      "classifieds_url": "https://patch.com/illinois/glenellyn/classifieds",
+      "priority": "high",
+      "status": "target",
+      "nearby": ["Wheaton", "Lombard", "Villa Park"]
+    },
+    {
+      "name": "Bolingbrook",
+      "slug": "bolingbrook",
+      "url": "https://patch.com/illinois/bolingbrook",
+      "classifieds_url": "https://patch.com/illinois/bolingbrook/classifieds",
+      "priority": "high",
+      "status": "target",
+      "nearby": ["Woodridge", "Romeoville", "Plainfield"]
+    },
+    {
+      "name": "Woodridge",
+      "slug": "woodridge",
+      "url": "https://patch.com/illinois/woodridge",
+      "classifieds_url": "https://patch.com/illinois/woodridge/classifieds",
+      "priority": "medium",
+      "status": "target",
+      "nearby": ["Downers Grove", "Bolingbrook", "Darien", "Lisle"]
+    },
+    {
+      "name": "Lisle",
+      "slug": "lisle",
+      "url": "https://patch.com/illinois/lisle",
+      "classifieds_url": "https://patch.com/illinois/lisle/classifieds",
+      "priority": "medium",
+      "status": "target",
+      "nearby": ["Downers Grove", "Naperville", "Woodridge"]
+    },
+    {
+      "name": "Darien",
+      "slug": "darien-il",
+      "url": "https://patch.com/illinois/darien-il",
+      "classifieds_url": "https://patch.com/illinois/darien-il/classifieds",
+      "priority": "medium",
+      "status": "target",
+      "nearby": ["Downers Grove", "Woodridge", "Westmont"]
+    },
+    {
+      "name": "Oak Brook",
+      "slug": "oak-brook",
+      "url": "https://patch.com/illinois/oak-brook",
+      "classifieds_url": "https://patch.com/illinois/oak-brook/classifieds",
+      "priority": "low",
+      "status": "target",
+      "nearby": ["Hinsdale", "Elmhurst", "Downers Grove"]
+    },
+    {
+      "name": "Burr Ridge",
+      "slug": "burrridge",
+      "url": "https://patch.com/illinois/burrridge",
+      "classifieds_url": "https://patch.com/illinois/burrridge/classifieds",
+      "priority": "low",
+      "status": "target",
+      "nearby": ["Hinsdale", "Willowbrook", "Darien"]
+    }
+  ]
+}

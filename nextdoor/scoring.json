@@ -1,0 +1,279 @@
+{
+  "lead_values": {
+    "plumbing": {
+      "base_value": 200,
+      "emergency_multiplier": 1.5,
+      "keywords": [
+        "leak",
+        "burst",
+        "flooding",
+        "no water",
+        "emergency",
+        "urgent",
+        "asap"
+      ]
+    },
+    "electrical": {
+      "base_value": 180,
+      "emergency_multiplier": 1.3,
+      "keywords": [
+        "sparking",
+        "no power",
+        "outlet",
+        "breaker",
+        "panel",
+        "flickering",
+        "shock"
+      ]
+    },
+    "hvac": {
+      "base_value": 150,
+      "emergency_multiplier": 1.4,
+      "keywords": [
+        "no heat",
+        "no cooling",
+        "furnace",
+        "ac",
+        "air conditioning",
+        "thermostat",
+        "ductwork"
+      ]
+    },
+    "pest_control": {
+      "base_value": 120,
+      "emergency_multiplier": 1.2,
+      "keywords": [
+        "infestation",
+        "mice",
+        "rats",
+        "ants",
+        "wasps",
+        "termites",
+        "bees",
+        "roaches"
+      ]
+    },
+    "appliance_repair": {
+      "base_value": 100,
+      "emergency_multiplier": 1.1,
+      "keywords": [
+        "broken",
+        "not working",
+        "leaking",
+        "dishwasher",
+        "washer",
+        "dryer",
+        "fridge",
+        "disposal"
+      ]
+    },
+    "mold_remediation": {
+      "base_value": 180,
+      "emergency_multiplier": 1.3,
+      "keywords": [
+        "mold",
+        "mould",
+        "black mold",
+        "mildew",
+        "mold remediation",
+        "mold removal",
+        "mold inspection",
+        "mold testing",
+        "musty smell",
+        "water damage mold",
+        "basement mold",
+        "bathroom mold",
+        "attic mold"
+      ]
+    }
+  },
+  "freshness_decay": {
+    "0_to_1_hour": 1.0,
+    "1_to_4_hours": 0.7,
+    "4_to_8_hours": 0.3,
+    "8_to_24_hours": 0.1,
+    "24_plus_hours": 0.0
+  },
+  "competition_factor": {
+    "0_replies": 1.0,
+    "1_to_3_replies": 0.6,
+    "4_to_10_replies": 0.3,
+    "10_to_15_replies": 0.1,
+    "15_plus_replies": 0.0
+  },
+  "minimum_score_threshold": 50,
+  "daily_caps": {
+    "service_posts": 3,
+    "community_posts": 5,
+    "total_posts": 6
+  },
+  "timing_constraints": {
+    "minimum_gap_between_service_posts_hours": 2.5,
+    "minimum_gap_between_any_posts_minutes": 15,
+    "organic_to_service_ratio_target": 3.0,
+    "randomization_jitter_minutes": {
+      "min": 5,
+      "max": 20
+    }
+  },
+  "anti_detection": {
+    "max_posts_per_week": 15,
+    "template_rotation_window_days": 3,
+    "skip_if_already_replied": true,
+    "skip_weekdays_before_hour": 8,
+    "skip_weekdays_after_hour": 22,
+    "skip_weekends_before_hour": 9,
+    "skip_weekends_after_hour": 21,
+    "engagement_requirements": {
+      "min_likes_given_per_week": 8,
+      "min_community_comments_per_week": 5
+    }
+  },
+  "quality_filters": {
+    "min_post_length_chars": 20,
+    "max_post_age_hours": 48,
+    "max_existing_business_replies": 2,
+    "skip_neighborhoods": [],
+    "required_service_keywords": {
+      "plumbing": [
+        "plumber",
+        "leak",
+        "pipe",
+        "water",
+        "drain",
+        "toilet",
+        "sink",
+        "faucet"
+      ],
+      "electrical": [
+        "electrician",
+        "electric",
+        "power",
+        "outlet",
+        "wiring",
+        "breaker",
+        "light"
+      ],
+      "hvac": [
+        "hvac",
+        "furnace",
+        "ac",
+        "air conditioning",
+        "heating",
+        "cooling",
+        "thermostat"
+      ],
+      "pest_control": [
+        "pest",
+        "bug",
+        "ant",
+        "mouse",
+        "rat",
+        "wasp",
+        "bee",
+        "termite",
+        "exterminator"
+      ],
+      "appliance_repair": [
+        "appliance",
+        "dishwasher",
+        "washing machine",
+        "dryer",
+        "refrigerator",
+        "garbage disposal"
+      ]
+    }
+  },
+  "scoring_weights": {
+    "base_value": 0.4,
+    "freshness": 0.3,
+    "competition": 0.2,
+    "emergency_keywords": 0.1
+  },
+  "neighborhood_priority": {
+    "_note": "All suburbs welcome — no geographic filtering. Nearby get slight priority for scoring but ALL qualify.",
+    "downers_grove": 1.0,
+    "woodridge": 0.95,
+    "westmont": 0.95,
+    "lisle": 0.9,
+    "oak_brook": 0.9,
+    "lombard": 0.85,
+    "glen_ellyn": 0.85,
+    "villa_park": 0.8,
+    "elmhurst": 0.8,
+    "wheaton": 0.8,
+    "naperville": 0.75,
+    "bolingbrook": 0.75,
+    "carol_stream": 0.7,
+    "glendale_heights": 0.7,
+    "addison": 0.7,
+    "aurora": 0.65,
+    "plainfield": 0.65,
+    "romeoville": 0.65,
+    "joliet": 0.6,
+    "tinley_park": 0.6,
+    "orland_park": 0.6,
+    "oak_lawn": 0.6,
+    "schaumburg": 0.6,
+    "roselle": 0.6,
+    "_default": 0.5
+  },
+  "weekly_schedule": {
+    "monday": {
+      "active_hours": [
+        9,
+        12,
+        16,
+        19
+      ],
+      "max_posts": 3
+    },
+    "tuesday": {
+      "active_hours": [
+        10,
+        14,
+        17,
+        20
+      ],
+      "max_posts": 3
+    },
+    "wednesday": {
+      "active_hours": [
+        9,
+        13,
+        18
+      ],
+      "max_posts": 3
+    },
+    "thursday": {
+      "active_hours": [
+        11,
+        15,
+        19
+      ],
+      "max_posts": 3
+    },
+    "friday": {
+      "active_hours": [
+        9,
+        14,
+        17
+      ],
+      "max_posts": 3
+    },
+    "saturday": {
+      "active_hours": [
+        10,
+        16
+      ],
+      "max_posts": 3
+    },
+    "sunday": {
+      "active_hours": [
+        11,
+        17
+      ],
+      "max_posts": 3
+    }
+  }
+}

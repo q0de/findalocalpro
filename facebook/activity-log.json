@@ -1,0 +1,1895 @@
+{
+    "activities": [
+        {
+            "date": "2026-03-19",
+            "time": "17:04",
+            "type": "lurk",
+            "groups_visited": [
+                "Contractor/Home Related Recommendations in Chicagoland",
+                "What's Happening in Bolingbrook, IL",
+                "My Downers Grove",
+                "Glen Ellyn - Wheaton Neighbors",
+                "What's Happening in Downers Grove IL?"
+            ],
+            "actions_taken": [
+                {
+                    "action": "liked",
+                    "group": "What's Happening in Bolingbrook, IL",
+                    "post_type": "community - loose dogs/safety",
+                    "description": "Brandon Rodriguez video of 3 German Shepherds spotted walking around Redwood Rd at 1:45 AM, 33 reactions, 9 comments, 4 shares"
+                },
+                {
+                    "action": "liked",
+                    "group": "My Downers Grove",
+                    "post_type": "community - charity/animal shelter",
+                    "description": "Cindy Galloway Gorman collecting items for animal shelters during spring cleaning — blankets, towels, pet toys, leashes, 2 reactions"
+                }
+            ],
+            "scouted_leads": [
+                {
+                    "type": "scouted_lead",
+                    "group": "What's Happening in Bolingbrook, IL",
+                    "post_description": "HandsomeCaterpillar5616 asking 'Any construction/plumbing experts?' — mold from small leak near water heater that leaked for about 2 years, with photo",
+                    "service_vertical": "plumbing/mold",
+                    "post_age": "recent (within hours)",
+                    "engagement": "5 reactions, 13 comments",
+                    "skip_reason": "Leak was past tense ('there was a leak'), primary concern is mold remediation which is not our vertical. Plumbing angle is weak."
+                }
+            ],
+            "notes": "Thursday 5 PM run (Local Buzz edition). Scanned 5 groups not visited today — rotated from noon run. Chicagoland Contractor Recommendations still very low activity — only 3 visible posts: government Cook County leak repair link share, contractor scam warning about Revive Restoration/Doug Bayer in Naperville ($10K taken, work never done), and old kitchen remodel request (13 weeks). Bolingbrook dominated by lawn care request (36 comments), kids hair styling, hail damage vehicle (24 comments, ongoing from March storms), lash lift request, plumbing/mold question (scouted but skipped), grub damage lawn care (74 comments, 4 days old), Steak n Shake closed permanently debate (21 comments), loose Shepherds video (liked), and free PediaSure formula. My DG was very quiet — animal shelter donations (liked), balloons giveaway, old lost pet (16 weeks), Timothy Christian School resale event, pickup truck request. Glen Ellyn-Wheaton very active with flower planting question, facial recommendations (32 comments), food service urgent hiring, birthday banners, bat mitzvah blowout salon, landscaping teen labor, Safe Harbor courthouse childcare job (already liked previously). DG IL remains 100% business spam — Mara's Flooring cross-posted from Cicero Illinois group. 2 likes across 2 groups. No comments. No service replies. 0 qualifying leads in our verticals.",
+            "issues": "DG IL continues to be completely flooded with business spam from unrelated groups (Cicero IL cross-post). Chicagoland Contractor Recs still very low activity. Mickey's on Rt 53 changing their fries caused community outrage in Bolingbrook. Steak n Shake in Bolingbrook appears permanently closed despite 'temporary' sign."
+        },
+        {
+            "date": "2026-03-19",
+            "time": "12:03",
+            "type": "lurk",
+            "groups_visited": [
+                "What's Happening in Naperville IL?",
+                "Naperville Talk",
+                "What's Happening in Wheaton, Glen Ellyn, Winfield and Warrenville",
+                "Local Naperville",
+                "Our Downers Grove",
+                "Downers Grove News and Comment"
+            ],
+            "actions_taken": [
+                {
+                    "action": "liked",
+                    "group": "Our Downers Grove",
+                    "post_type": "community - restaurant recommendation question",
+                    "description": "Erik Hall asking 'What's your favorite restaurant in downtown DG?' - 13 comments, active discussion"
+                }
+            ],
+            "scouted_leads": [],
+            "notes": "Thursday noon run. Scanned 6 groups not visited yesterday. Extremely heavy business spam across ALL groups today. Naperville IL? and Naperville Talk both still pending participation approval — can't engage. Naperville IL? had escape room reel (Rachel McCabe cross-posted to multiple groups), charity event (PurpleStride), HDZ Tree Company spam, Schmaltz Deli St Patrick's recap, chiropractor reel. Naperville Talk defaulted to Buy and Sell tab with marketplace listings. Wheaton/GE/Winfield/Warrenville had birthday banner question (not our vertical), Devout Cleaning reel spam, Abbey Farms Honey Festival vendor search, same Rachel McCabe escape room cross-post, rental search ($1200-1600 budget, 93 comments, 42 reactions — community roasting the budget), KW Auto Spa reel from Feb 15, mental health provider ad. Local Naperville vanity URL now working (was blocked before) — 100% business spam (Mosquito Hunters of Naperville, Alexander Rabbits/Yoko Networks IT, Aimee Schlueter journal promo). Our DG had one good community post (Erik Hall restaurant question, liked) then LOLA European Fashion Polish sneaker boutique spam and De La Huerta Mobile Notary/Officiant wedding spam. DG News & Comment was all spam — RKB Hardwood Floors (Randy Brattin), Cezar Construction handyman, Tina McDonald Santana Gathering for Peace event in Elmhurst, Mercedes Washor power washing. 1 like in 1 group. No comments. No service replies. 0 qualifying leads in our verticals (plumbing, electrical, HVAC, heating, pest, appliance).",
+            "issues": "Rachel McCabe escape room reel cross-posted to Naperville IL? and Wheaton groups simultaneously. Naperville IL? and Naperville Talk both still pending participation approval — going on 2+ weeks now. Mosquito Hunters of Naperville spamming Local Naperville. Randy Brattin/RKB Hardwood Floors cross-posting to DG News. Thursday noon is dead for home service requests across all groups — dominated by business spam, food/restaurant questions, and marketplace listings. Local Naperville vanity URL now accessible (was blocked previously)."
+        },
+        {
+            "date": "2026-03-18",
+            "time": "17:03",
+            "type": "lurk",
+            "groups_visited": [
+                "Contractor/Home Related Recommendations in Chicagoland",
+                "What's Happening in Bolingbrook, IL",
+                "My Downers Grove",
+                "Glen Ellyn - Wheaton Neighbors",
+                "What's Happening in Downers Grove IL?"
+            ],
+            "actions_taken": [
+                {
+                    "action": "liked",
+                    "group": "What's Happening in Bolingbrook, IL",
+                    "post_type": "community - charity/youth",
+                    "description": "Bolingbrook Community Closet (Rising contributor) prom dress donation pickup round one, 14 reactions, 5 comments"
+                },
+                {
+                    "action": "liked",
+                    "group": "My Downers Grove",
+                    "post_type": "community - school achievement",
+                    "description": "Bob Rakow (Moderator/All-star) sharing District 99 Students at Illinois ProStart Invitational, 10 reactions, 2 comments"
+                }
+            ],
+            "scouted_leads": [
+                {
+                    "type": "scouted_lead",
+                    "group": "What's Happening in Bolingbrook, IL",
+                    "post_description": "Diana Cruz looking for contractor to install and bury sump pump discharge line in Lemont area",
+                    "service_vertical": "plumbing",
+                    "post_age": "about 1 day",
+                    "engagement": "12 reactions, 42 comments",
+                    "skip_reason": "Over 20 comment limit (42 comments), Lemont borderline service area"
+                },
+                {
+                    "type": "scouted_lead",
+                    "group": "Glen Ellyn - Wheaton Neighbors",
+                    "post_description": "Karen Treland Evensen needs handyman for water in light fixture, Wheaton area, specifically asks for personal recommendations only",
+                    "service_vertical": "plumbing/electrical",
+                    "post_age": "2 days",
+                    "engagement": "9 reactions, 25 comments",
+                    "skip_reason": "Over 20 comment limit (25 comments), 2 days old, poster explicitly requested personal recs only"
+                }
+            ],
+            "notes": "Wednesday evening run. First scan in 3 days (last was Saturday March 15). Scanned 5 groups including first-ever visit to Contractor/Home Recommendations in Chicagoland (critical priority). That group turned out to be very low activity with mostly old posts — kitchen remodel from 13 weeks ago, real estate photographer from 19 weeks ago, contractor scam warnings. Not useful for our verticals. Bolingbrook dominated by daycare requests, overnight parking debate (93 comments, 60 reactions), food spot recommendations, voting/politics post (89 comments), tax person request, auto hail damage. My DG had new parent group question, contractor quote request (47 comments, commenting turned off by moderator), Bob Rakow D99 ProStart post, Musical Bingo fundraiser. Glen Ellyn-Wheaton had in-home daycare, power washing/deck staining (94 comments), water-in-light-fixture handyman request (25 comments, over limit), lash extensions, babysitter, Danby Station closing rumor (still ongoing, now 50 comments). DG IL? was 100% business spam — Curb Appeal IL remodeling reel, Platinum Floor Solutions ad, Xtreme Performance PDR hail damage reel. 2 likes across 2 groups. No comments. No service replies. 0 qualifying leads in our verticals (2 scouted but both over comment limit).",
+            "issues": "Chicagoland Contractor Recommendations group (critical priority) is very low activity and not useful for lead gen — mostly old posts and contractor warnings. DG IL? continues to be 100% business spam. Wednesday evening relatively quiet for home service requests across all groups — dominated by daycare, food, politics, and auto body posts."
+        },
+        {
+            "date": "2026-03-15",
+            "time": "17:01",
+            "type": "lurk",
+            "groups_visited": [
+                "Local Naperville",
+                "Our Downers Grove",
+                "Downers Grove News and Comment",
+                "What's Happening in Wheaton, Glen Ellyn, Winfield and Warrenville",
+                "What's happening in Westmont, IL"
+            ],
+            "actions_taken": [],
+            "scouted_leads": [],
+            "notes": "Sunday afternoon run. Scanned 5 groups not visited in morning run. Browser extremely unstable — tab repeatedly redirected to X/Twitter (Codetard teletext tweet) mid-session, multiple CDP timeouts. Could not land any likes due to browser issues. All 5 groups were 100% business spam with zero community content or service requests in our verticals. Local Naperville: Always Blessed Movers, RKB Hardwood Floors, JPSX airport shuttle, Martinelli Meats. Our DG: Kindly Social birthday party promo, Taurasi Restaurant pasta, Joyce Ostberg local history video (Wheaton Mastodon — tried to like but browser navigated to Twitter instead). DG News & Comment: Fernando Alcantara storm damage advice (subtle contractor ad), Leo Exteriors roofing hiring, Juan Hernandez lawn aeration spam, Monika Tabeau Tsikos public adjuster storm chaser (Machelle Tosti calling it out again). Wheaton: hard surface cleaning reel, Little Pops pizzeria peanut butter pie promo, Mickey's Pro Painting, Armelinda DeBolt estate auction, Mara's Flooring hardwood refinishing. Westmont: still sorted by 'New posts', Carlos Castillo DJ/party rental spam in Spanish. 0 likes across 5 groups (browser failures). No comments. No service replies. 0 qualifying leads in our verticals.",
+            "issues": "Browser severely unstable — tab redirected to X/Twitter (x.com/codetaur/status/...) multiple times when attempting Facebook interactions. CDP timeouts on Like clicks. Dark mode notification popup appeared. Sunday afternoon continues to be dead for home service requests across all groups."
+        },
+        {
+            "date": "2026-03-15",
+            "time": "09:07",
+            "type": "lurk",
+            "groups_visited": [
+                "What's Happening in Naperville IL?",
+                "What's Happening in Bolingbrook, IL",
+                "Glen Ellyn - Wheaton Neighbors",
+                "My Downers Grove",
+                "What's Happening in Downers Grove IL?"
+            ],
+            "actions_taken": [
+                {
+                    "action": "liked",
+                    "group": "My Downers Grove",
+                    "post_type": "community - lost & found",
+                    "description": "Leslie L Harris (All-star) found jewelry at Fairview train station, 5 reactions, 4 comments, 1 share"
+                },
+                {
+                    "action": "liked",
+                    "group": "What's Happening in Bolingbrook, IL",
+                    "post_type": "community - new business excitement",
+                    "description": "Paulinka Dabrow (Rising contributor) excited about Woodman's Market coming to area, 477 reactions, 184 comments, 7 shares"
+                }
+            ],
+            "scouted_leads": [
+                {
+                    "type": "scouted_lead",
+                    "group": "What's Happening in Bolingbrook, IL",
+                    "post_description": "Anonymous poster looking for reasonable local plumber for small PVC fixing job",
+                    "service_vertical": "plumbing",
+                    "post_age": "about 19 hours",
+                    "engagement": "9 reactions, 43 comments",
+                    "skip_reason": "Over 20 comment limit (43 comments)"
+                }
+            ],
+            "notes": "Sunday morning run. Scanned 5 groups. Extremely quiet Sunday morning for service requests — only 1 lead scouted (plumbing in Bolingbrook) but exceeded 20-comment limit at 43 comments. Naperville IL? still pending participation approval — feed visible but dominated by D203 teacher cuts article and Painted Tree Boutiques promos. Bolingbrook was community-heavy: Woodman's Market excitement (477 reactions, biggest post), Jerk Friday food promo, Crunch Fitness water, non-stick pans request, impatient drivers rant, drywall/paint request (not our vertical), carpet cleaning (not our vertical), transmission fluid mechanic (auto, not our vertical), custom cake request. Glen Ellyn-Wheaton was Danby Station closing rumor (45 comments), exterior painters (98 comments, not our vertical), admin pinned no-nicknames reminder, bridal makeup, summer nanny, pet sitting, babysitting — all personal services, no home service leads. My DG had cupcake bouquets spam, fitness trainer seeking work, found jewelry at Fairview (liked), Fairview Hardware apron (already liked), exchange student hosts, lost drone Westmont, pay phone nostalgia. DG IL? was 100% business spam — custom creations reel, photography promo, Junk Busters ad. 2 likes across 2 groups. No comments. No service replies. 0 qualifying leads in our verticals.",
+            "issues": "Naperville IL? still pending participation approval. DG IL? completely flooded with business spam. Sunday morning is very quiet for home service requests across all groups."
+        },
+        {
+            "date": "2026-03-14",
+            "time": "17:02",
+            "type": "lurk",
+            "groups_visited": [
+                "My Downers Grove",
+                "What's Happening in Wheaton, Glen Ellyn, Winfield and Warrenville",
+                "Downers Grove News and Comment",
+                "What's happening in Westmont, IL",
+                "Local Naperville"
+            ],
+            "actions_taken": [
+                {
+                    "action": "liked",
+                    "group": "My Downers Grove",
+                    "post_type": "community - local history/nostalgia",
+                    "description": "Karen Slachetka Rodde sharing shop apron from Fairview Hardware in Downers Grove, 13 reactions, 3 comments"
+                },
+                {
+                    "action": "liked",
+                    "group": "Local Naperville",
+                    "post_type": "community - volunteer/environment",
+                    "description": "LeighAnn Lenz Tysiak promoting Waubonsie Creek stream cleanup April 18th at Oakhurst Wetlands, collected over 1000 lbs of trash last year, 1 reaction"
+                }
+            ],
+            "scouted_leads": [],
+            "notes": "Saturday afternoon run. Scanned 5 groups not visited in morning run. Extremely quiet day for service requests — Saturday afternoon is dead across all groups. My DG had nostalgia posts (Fairview Hardware apron, pay phone at DuPage County), exchange student host families, lost drone in Westmont, women's golf club (already liked). Wheaton/GE was 100% business spam — craft fair promo (Joan Rott Vanderhoff), Lopez Twins Landscaping, Brass From The Past band event, Venezia Nail Spa, TJ's Truck Services storm cleanup ad, speech pathologist class. DG News & Comment was Nature's Best Market review promo, insurance claim discussion, Blue Leaf LLC landscaping reel, event promo. Westmont sorted by 'New posts' as usual — Village Theatre Guild play, Javi Mexican Grill restaurant spam, Oakwood Electric reel. Local Naperville had Wreckroom Dekalb promo, Xclusive Hardscape paver ad, but also a good Waubonsie Creek stream cleanup volunteer post. 2 likes across 2 groups. No comments. No service replies. 0 qualifying leads in our verticals.",
+            "issues": "Saturday afternoon extremely dead for service requests across all groups. Wheaton/GE group overwhelmed with business promos. Westmont still sorted by 'New posts' and flooded with spam. Local Naperville vanity URL now working (previously blocked)."
+        },
+        {
+            "date": "2026-03-14",
+            "time": "09:07",
+            "type": "lurk",
+            "groups_visited": [
+                "What's Happening in Bolingbrook, IL",
+                "Glen Ellyn - Wheaton Neighbors",
+                "What's Happening in Downers Grove IL?",
+                "Our Downers Grove"
+            ],
+            "actions_taken": [
+                {
+                    "action": "liked",
+                    "group": "What's Happening in Bolingbrook, IL",
+                    "post_type": "community - animal rescue/adoption",
+                    "description": "Delonda Fugate Belanger / NAWS Humane Society kitten and cat adoption events Saturday March 14 at NAWS and Sunday March 15 at PetSmart Mokena"
+                },
+                {
+                    "action": "liked",
+                    "group": "Glen Ellyn - Wheaton Neighbors",
+                    "post_type": "community - local business question",
+                    "description": "Lynn Dahle asking if anyone tried new Summer Moon coffee spot off Butterfield by Oberweis, 15 reactions, 24 comments"
+                }
+            ],
+            "scouted_leads": [],
+            "notes": "Saturday morning run. Extremely quiet for service requests — Saturday mornings are apparently dead for home service leads. Bolingbrook dominated by Matilda the Musical posts (Michael Carpanzano reel, BHS Theatre promo), NAWS kitten adoption, best pizza debate (142 comments), carpet cleaning request (not our vertical, 15 comments), roofing/siding request (not our vertical, 113 comments). Glen Ellyn had Sogno Wheaton restaurant photo, Summer Moon coffee question, ABC Balloon Co hiring, Danby Station closing rumor (38 comments), car window repair (auto glass, not our vertical, 6 comments), childcare request, fence replacement (16 comments), locksmith request, brow waxing, babysitting. DG IL? was 100% business spam — yoga cross-posts, Lindsay Kastning Photography promos, BK Drain Pros ad, Outpost Mexican Eatery, Star Buds dispensary anniversary, zipper repair question. Our DG had event planner spam, Baked Apple movie filming (already liked from previous session), nanny group promo. 2 likes across 2 groups. No comments. No service replies. 0 qualifying leads in our verticals (plumbing, electrical, HVAC, heating, pest, appliance).",
+            "issues": "Saturday morning is very quiet for service requests. Erin Ritchie cross-posting Good Juju Yoga event to multiple groups. BK Drain Pros spam in DG IL?. Barbara's Elegant Touch event planner spam in Our DG."
+        },
+        {
+            "date": "2026-03-13",
+            "time": "17:03",
+            "type": "lurk",
+            "groups_visited": [
+                "Glen Ellyn - Wheaton Neighbors",
+                "What's Happening in Bolingbrook, IL",
+                "My Downers Grove",
+                "Our Downers Grove"
+            ],
+            "actions_taken": [
+                {
+                    "action": "liked",
+                    "group": "Glen Ellyn - Wheaton Neighbors",
+                    "post_type": "community - local event",
+                    "description": "Steve Langford 7th Annual St. Patrick's Day Bagpipe Concert in Glen Ellyn, Sunday March 15 at 4pm, Forest Ave and Turner, 330 reactions, 18 comments, 43 shares"
+                },
+                {
+                    "action": "liked",
+                    "group": "What's Happening in Bolingbrook, IL",
+                    "post_type": "community - school performance",
+                    "description": "Michael Carpanzano (Village Trustee, All-star) sharing Bolingbrook High School Theatre Matilda the Musical, performances March 13-21"
+                },
+                {
+                    "action": "liked",
+                    "group": "My Downers Grove",
+                    "post_type": "community - school achievement",
+                    "description": "Bob Rakow (Moderator) sharing DGS students inducted into World Language Honors Societies via Downers Grove South High School"
+                }
+            ],
+            "scouted_leads": [
+                {
+                    "type": "scouted_lead",
+                    "group": "What's Happening in Bolingbrook, IL",
+                    "post_description": "Anonymous poster looking for professional and reliable roofer to inspect roof/siding and submit claim, wants legit responses only",
+                    "service_vertical": "roofing",
+                    "post_age": "recent (today)",
+                    "engagement": "18 reactions, 116 comments",
+                    "skip_reason": "Over 20 comment limit (116 comments), not our vertical (roofing)"
+                }
+            ],
+            "notes": "Friday evening run. Scanned 4 groups plus groups feed sidebar. Very quiet evening for service requests — all groups dominated by food questions (best pizza in Bolingbrook, 85 comments), community events (bagpipe concert, Matilda musical, 3-on-3 basketball), school content (Bob Rakow DGS honors, DGN basketball), and business promos (barber shop, landscaping, painting company hiring, warehouse sale). Glen Ellyn-Wheaton had fence replacement request (not our vertical, 15 comments) and hiring painters post. Bolingbrook had roofer request but 116 comments. My DG had sad dog hit-by-car incident post. Our Downers Grove numeric ID 1489671984605498 was wrong — found correct ID 1156902214505256 via groups feed sidebar. 3 likes across 3 groups. No comments. No service replies. 0 qualifying leads in our verticals.",
+            "issues": "Our Downers Grove numeric ID was wrong in previous usage (1489671984605498 returns 'content not available'). Correct numeric ID is 1156902214505256 (found via groups feed sidebar)."
+        },
+        {
+            "date": "2026-03-13",
+            "time": "12:03",
+            "type": "lurk",
+            "groups_visited": [
+                "What's Happening in Naperville IL?",
+                "Our Downers Grove",
+                "What's Happening in Wheaton, Glen Ellyn, Winfield and Warrenville",
+                "Downers Grove News and Comment",
+                "What's happening in Westmont, IL"
+            ],
+            "actions_taken": [
+                {
+                    "action": "liked",
+                    "group": "Our Downers Grove",
+                    "post_type": "community - public safety/K9",
+                    "description": "DuPage County Sheriff's Office National K9 Veterans Day post with photos honoring military, police, and working K9s"
+                }
+            ],
+            "scouted_leads": [],
+            "notes": "Friday afternoon run. Scanned 5 groups not visited this morning. Worst cross-posting spam day in weeks — Nicole Dodson Robertson cross-posted Saffron Table dinner event to ALL 5 groups as top/near-top post. Karla S Hoyos / KSHBEAUTY esthetician also cross-posted to Wheaton and Westmont. Naperville IL? still pending participation approval — visible posts were Granitex Corp renovation spam and HDZ Tree Company storm service spam. Our Downers Grove had K9 Veterans Day post (liked), then Taurasi Restaurant cake promo, Top Appliance Repair ad, Louis Lawn Cutting spam, and DG Police phone scam warning. Wheaton had Airbnb complaint near Lincoln Elementary (community), Pride Ride skate event, healthcare provider question (33 comments, not our vertical), JT Barrett storm cleanup spam. DG News & Comment was Saffron Table cross-post, 3-on-3 basketball registration, Westmont Lions sponsor request, Nash Painting spam. Westmont remains 100% business spam (esthetician, Saffron Table, Kesar Salon wine facial, C&H Home Exteriors storm chaser). 1 like in 1 group. No comments. No service replies. 0 qualifying leads in our verticals across all 5 groups. One browser timeout on reactions dialog in Our DG (recovered with Escape).",
+            "issues": "Nicole Dodson Robertson cross-posting Saffron Table event to ALL groups simultaneously (seen in 5+ groups today). Karla S Hoyos KSHBEAUTY also multi-group cross-posting. Naperville IL? still pending participation approval. Westmont still 100% spam. Browser CDP timeout on reactions dialog (recovered)."
+        },
+        {
+            "date": "2026-03-13",
+            "time": "09:07",
+            "type": "lurk",
+            "groups_visited": [
+                "What's Happening in Bolingbrook, IL",
+                "Glen Ellyn - Wheaton Neighbors",
+                "My Downers Grove",
+                "What's Happening in Downers Grove IL?"
+            ],
+            "actions_taken": [
+                {
+                    "action": "liked",
+                    "group": "What's Happening in Bolingbrook, IL",
+                    "post_type": "community - local government/safety",
+                    "description": "Michael Carpanzano (Village Trustee, All-star) sharing hail storm resources and advice for residents after intense hail, 31 reactions, 17 comments"
+                },
+                {
+                    "action": "liked",
+                    "group": "My Downers Grove",
+                    "post_type": "community - school performance",
+                    "description": "Bob Rakow (Moderator) sharing O'Neill Middle School Finding Nemo Musical - spectacular performance for YMCA preschool and Fairmount, 10 reactions"
+                }
+            ],
+            "scouted_leads": [
+                {
+                    "type": "scouted_lead",
+                    "group": "What's Happening in Bolingbrook, IL",
+                    "post_description": "Mike Nesheim (Top contributor) looking to have battery backup for sump pump installed, asking for plumber recommendations",
+                    "service_vertical": "plumbing",
+                    "post_age": "about 3 days",
+                    "engagement": "15 reactions, 82 comments",
+                    "skip_reason": "Over 20 comment limit (82 comments)"
+                },
+                {
+                    "type": "scouted_lead",
+                    "group": "What's Happening in Bolingbrook, IL",
+                    "post_description": "Angie Rivera Carrero (Rising contributor) looking for reliable handyman to remove and replace ceiling fan",
+                    "service_vertical": "electrical/handyman",
+                    "post_age": "about 22 hours",
+                    "engagement": "21 reactions, 49 comments",
+                    "skip_reason": "Over 20 comment limit (49 comments)"
+                }
+            ],
+            "notes": "Friday morning run. Scanned 4 groups (Westmont vanity URL still blocked, couldn't access). Storm aftermath continues dominating feeds across all groups. Bolingbrook had 2 leads in our verticals but both exceeded 20-comment limit (sump pump battery backup 82 comments, ceiling fan replacement 49 comments). Glen Ellyn-Wheaton had childcare, brow waxing, fence replacement, pizza promos - no home service leads. My Downers Grove was Lent fish fry recommendations and Bob Rakow school content. DG IL? had contractor spam (PDL Contracting from December re-shared), restaurant review, and craft workshop event. Post-storm roofing/contractor spam still heavy across groups. 2 likes across 2 groups. No comments. No service replies. 0 qualifying leads (2 scouted but both over comment limit).",
+            "issues": "Westmont vanity URL still blocked. Naperville group numeric ID not available in groups.json (navigated to DG IL? by accident with wrong ID). Both plumbing/electrical leads in Bolingbrook exceeded 20-comment cap."
+        },
+        {
+            "date": "2026-03-12",
+            "time": "17:03",
+            "type": "lurk",
+            "groups_visited": [
+                "What's Happening in Naperville IL?",
+                "What's Up Naperville",
+                "What's Happening in Wheaton, Glen Ellyn, Winfield and Warrenville",
+                "What's happening in Westmont, IL"
+            ],
+            "actions_taken": [
+                {
+                    "action": "liked",
+                    "group": "What's happening in Westmont, IL",
+                    "post_type": "community - pet health/vaccine clinic",
+                    "description": "Hinsdale Humane Society announcing spots opened for tomorrow's Vaccine Clinic (March 13), affordable canine and feline services by appointment"
+                }
+            ],
+            "scouted_leads": [],
+            "notes": "Thursday evening run. Worst spam day seen yet. Kathleen Blackwell real estate open house reel cross-posted as TOP POST to EVERY SINGLE GROUP (Naperville IL?, What's Up Naperville, Wheaton/Glen Ellyn/Winfield/Warrenville). Juan Hernandez lawn care aeration spam also cross-posted to all groups. KW Auto Spa detailing reel (from Feb 9) still appearing in multiple groups. Naperville IL? still pending participation approval - had one genuine hardwood floor refinishing request (Chryss Crockett, 30yr resident, 22 comments) but not our vertical and can't engage anyway. What's Up Naperville 100% spam. Wheaton group had nothing but spam through 6+ posts (real estate, lawn care, auto spa, rental listing, landscaping, tile installation). Westmont sorted by 'New posts' - Neil Kshirsagar 48-image text spam, Elite Icons Framing promo, more Juan Hernandez lawn care, but Hinsdale Humane Society vaccine clinic was a good community post. 1 like in 1 group. No comments. No service replies. 0 qualifying leads in our verticals across all 4 groups.",
+            "issues": "Kathleen Blackwell real estate reel cross-posted to ALL groups as #1 post. Juan Hernandez lawn care spam also in all groups. Naperville IL? still pending approval. Worst cross-posting spam day observed - 3 accounts dominating feeds across every group simultaneously."
+        },
+        {
+            "date": "2026-03-12",
+            "time": "12:03",
+            "type": "lurk",
+            "groups_visited": [
+                "What's Happening in Bolingbrook, IL",
+                "Glen Ellyn - Wheaton Neighbors",
+                "My Downers Grove",
+                "Local Naperville"
+            ],
+            "actions_taken": [
+                {
+                    "action": "liked",
+                    "group": "My Downers Grove",
+                    "post_type": "community - women's golf club",
+                    "description": "Cynthia Herrera Lindstrom promoting Village Greens Women's Club at Village Greens of Woodridge - 18 holes Wednesday mornings, 8 reactions, 4 comments"
+                },
+                {
+                    "action": "liked",
+                    "group": "What's Happening in Bolingbrook, IL",
+                    "post_type": "community - storm chaser warning",
+                    "description": "Tara Blackwell Bozarth (All-star contributor) warning about free roof inspection storm chasers coming, 157 reactions, 102 comments, 3 shares"
+                }
+            ],
+            "scouted_leads": [
+                {
+                    "type": "scouted_lead",
+                    "group": "What's Happening in Bolingbrook, IL",
+                    "post_description": "Angie Rivera Carrero looking for reliable handyman to remove and replace a ceiling fan",
+                    "service_vertical": "electrical/handyman",
+                    "post_age": "recent (today)",
+                    "engagement": "11 reactions, 34 comments",
+                    "skip_reason": "Over 20 comment limit (34 comments)"
+                }
+            ],
+            "notes": "Thursday afternoon run. Rotated to groups not visited in morning. Extremely heavy spam day across ALL groups - post-storm roofing spam continues dominating feeds. Bolingbrook had a ceiling fan replacement request (electrical adjacent) but 34 comments exceeded the 20 limit. Rest was car sales, auto mechanic, makeup artist (33 comments), apartment hunting, construction job seeker, food business promo, daycare ad, football registration. Glen Ellyn-Wheaton had 2 admin pinned posts taking up top slots, then brow waxing, hair stylist (59 comments, locked), fence replacement, preservation group update, dance company ad, counseling ad, Easter event, deli promo. My Downers Grove had roofing storm-chaser spam on top, community meeting, women's golf club, Bob Rakow school content and anti-spam reminder. Local Naperville vanity URL still blocked (content not available). 2 likes across 2 groups. No comments. No service replies (0 qualifying leads in our verticals today).",
+            "issues": "Local Naperville vanity URL still blocked. Post-storm roofing spam overwhelming ALL groups. Ceiling fan replacement lead in Bolingbrook exceeded 20-comment limit. Very slow day for service requests in our target verticals (plumbing, electrical, HVAC, pest, appliance)."
+        },
+        {
+            "date": "2026-03-12",
+            "time": "09:13",
+            "type": "lurk",
+            "groups_visited": [
+                "What's Happening in Downers Grove IL?",
+                "Our Downers Grove",
+                "What's Going on In Naperville, IL",
+                "Downers Grove News and Comment"
+            ],
+            "actions_taken": [
+                {
+                    "action": "care_reaction",
+                    "group": "What's Happening in Downers Grove IL?",
+                    "post_type": "community - cancer fundraiser",
+                    "description": "Joy Magill Moreno sharing GoFundMe 'Standing with Joy in Her Fight Against Cancer' by Shauna Evans - financial crisis plea, 1 care reaction before ours"
+                },
+                {
+                    "action": "liked",
+                    "group": "Our Downers Grove",
+                    "post_type": "community - local business/entertainment",
+                    "description": "The Baked Apple Breakfast Co. announcing early close to film scenes for movie 'Sharing Air' - 33 reactions, 6 comments, 6 shares"
+                }
+            ],
+            "scouted_leads": [
+                {
+                    "type": "scouted_lead",
+                    "group": "What's Happening in Naperville IL?",
+                    "post_description": "Kara Hurley Flynn looking for someone to check cedar shake roof - wants honest and reliable quotes on replace/repair",
+                    "service_vertical": "roofing",
+                    "post_age": "about 2 days (seen in groups feed)",
+                    "engagement": "18 reactions, 69 comments",
+                    "source": "groups feed preview"
+                }
+            ],
+            "notes": "Thursday morning run. Extreme spam levels across ALL groups today. Rachel Pomykala 'Sweets & Decor More' cross-posted to DG IL and DG News & Comment as top post. DG IL flooded with Roadhouse 38 restaurant spam, Restrepo Construction 'flood warning', Goat's Outdoor Services, Grindstone Roofing, political ad (Judge Peggy O'Connell), Windy Acres Farm Easter event. Our Downers Grove had one good post (Baked Apple movie filming) then all business spam (Whiskey Wealth podcast, Aquaman Powerwashing, American Music Institute, Century 21, Prairie Power Wash). What's Going on In Naperville still sorted by 'Recent activity' - top post Vinco Inc painting spam - completely unusable. DG News & Comment 100% storm-chaser roofing/hail spam (Trident Construction, public adjuster) - Machelle Tosti calling out spam in comments. Naperville Talk vanity URL still blocked, no numeric ID in sidebar. 2 reactions across 2 groups (1 care, 1 like). No comments this run. 1 scouted lead (cedar shake roofing from Naperville IL). Post-storm roofing solicitation spam is overwhelming multiple groups.",
+            "issues": "Naperville Talk still inaccessible (vanity URL blocked, not in sidebar). What's Going on In Naperville remains all spam. DG News & Comment overwhelmed by storm-chasing contractors. Rachel Pomykala cross-posting business promo to multiple groups."
+        },
+        {
+            "date": "2026-03-11",
+            "time": "15:05",
+            "type": "lurk",
+            "groups_visited": [
+                "My Downers Grove",
+                "Glen Ellyn - Wheaton Neighbors",
+                "What's Happening in Bolingbrook, IL",
+                "What's happening in Westmont, IL"
+            ],
+            "actions_taken": [
+                {
+                    "action": "liked",
+                    "group": "My Downers Grove",
+                    "post_type": "community - local government",
+                    "description": "Bob Rakow (Moderator/All-star) sharing Village Council meeting - Mayor Pro Tem Leslie Sadowski-Fugitt reading proclamation for DuPage River Sweep on April 18, 6 reactions, 2 comments"
+                },
+                {
+                    "action": "liked",
+                    "group": "My Downers Grove",
+                    "post_type": "community - moderation/anti-spam",
+                    "description": "Bob Rakow reminder that page does not permit advertising - numerous roof repair companies trying to post ads, 27 reactions, 2 comments, 1 share"
+                },
+                {
+                    "action": "liked",
+                    "group": "Glen Ellyn - Wheaton Neighbors",
+                    "post_type": "community - charitable/donation",
+                    "description": "Maria Milazzo asking where to donate used clothes - looking for non-profit organizations, shelters, not Goodwill or large corporations, 11 reactions, 46 comments"
+                },
+                {
+                    "action": "liked",
+                    "group": "What's Happening in Bolingbrook, IL",
+                    "post_type": "community - animal rescue",
+                    "description": "Ruby Whiskers Animal Rescue - dog found shivering in rain next to busy highway, 85 reactions (48 care, 17 like, 16 sad), 18 comments, 32 shares"
+                },
+                {
+                    "action": "liked",
+                    "group": "What's Happening in Bolingbrook, IL",
+                    "post_type": "community - consumer protection",
+                    "description": "Anonymous warning to call police on unlicensed roofing solicitors - ask to see solicitors license, protect neighbors from shady contractors, 58 reactions (43 like, 13 haha), 29 comments"
+                }
+            ],
+            "scouted_leads": [
+                {
+                    "type": "scouted_lead",
+                    "group": "What's Happening in Bolingbrook, IL",
+                    "post_description": "Anonymous poster looking for someone to install glass (car windshield/window damaged by hail from March 10 storms)",
+                    "service_vertical": "auto_glass",
+                    "post_age": "about 19 hours",
+                    "engagement": "190 reactions (102 wow, 46 like, 30 sad), 81 comments, 9 shares",
+                    "post_url": "https://www.facebook.com/groups/104287120162473/posts/1832840260640475/"
+                }
+            ],
+            "notes": "Wednesday afternoon run. Rotated to 4 groups not visited today. Post-storm activity dominating feeds - hail damage from March 10 tornado/storms driving auto glass and roofing requests. Bob Rakow actively fighting roof repair spam in My Downers Grove (good sign for group quality). Glen Ellyn-Wheaton had lots of recommendation requests (hair stylist, dentist, swim lessons, nanny) but no home service leads. Bolingbrook extremely active with storm-related content - huge auto glass post (190 reactions) and unlicensed roofer warning (58 reactions). Westmont remains 100% business spam (insurance, lawncare x2, realty) - no community content visible at all. 5 likes across 3 groups. No comments this run. 1 scouted lead (auto glass from hail damage).",
+            "issues": "Vanity group URLs still blocked (used numeric IDs). Westmont group completely unusable - sorted by 'New posts' instead of 'Most relevant', flooded with business page cross-posts."
+        },
+        {
+            "date": "2026-03-11",
+            "time": "09:09",
+            "type": "lurk",
+            "groups_visited": [
+                "Local Naperville",
+                "What's Up Naperville",
+                "What's Happening in Wheaton, Glen Ellyn, Winfield and Warrenville",
+                "Downers grove community"
+            ],
+            "actions_taken": [
+                {
+                    "action": "liked",
+                    "group": "What's Up Naperville",
+                    "post_type": "community - weather/disaster",
+                    "description": "Curtis Jacob Lergner / Chicago & Midwest Storm Chasers - first look at tornado damage near Aroma Park and south side of Kankakee IL after violent tornado on March 10, 2026, multiple destruction photos"
+                },
+                {
+                    "action": "liked",
+                    "group": "What's Happening in Wheaton, Glen Ellyn, Winfield and Warrenville",
+                    "post_type": "community - fitness question",
+                    "description": "ExhilaratingLion4996 asking if anyone has taken barre at Vasa Wheaton, 1 comment from Harold Smith saying his daughter said it was pretty hard"
+                },
+                {
+                    "action": "liked",
+                    "group": "What's Happening in Wheaton, Glen Ellyn, Winfield and Warrenville",
+                    "post_type": "community - school fundraiser",
+                    "description": "Stephanie Jobin sharing Johnson PTA Double Dine-Out at Warrenville Subway today March 11, 10AM-10PM, supporting Johnson Elementary PTA"
+                }
+            ],
+            "scouted_leads": [
+                {
+                    "type": "scouted_lead",
+                    "group": "What's Happening in Bolingbrook, IL",
+                    "post_description": "Anonymous poster looking for recommendations for windshield repair/replacement",
+                    "service_vertical": "auto_glass",
+                    "post_age": "about a day old",
+                    "engagement": "5 reactions, 10 comments",
+                    "source": "groups feed preview"
+                }
+            ],
+            "notes": "Wednesday morning run. Rotated to 4 groups not visited yesterday. Vanity URLs still blocked for What's Up Naperville and Wheaton group - had to use groups feed sidebar for numeric IDs. Local Naperville was 100% business spam (Cedar Mill fence, Midwest gutter cleaning, United Roofing hail storm ad). What's Up Naperville top was Mike Zivic cover photo update and drainage business spam but had good tornado damage post from Kankakee. Wheaton group had junk removal spam, pest control spam, but also a barre class question and Johnson PTA dine-out. Downers grove community (806 members) was completely flooded with same cross-posted spam (Mike Zivic cover photo, Huuso Exteriors roofing promo, Midwest gutter cleaning). 3 likes across 2 groups. No comments this run. 1 scouted lead (windshield repair from Bolingbrook seen in groups feed). Mike Zivic cover photo update cross-posted to every single group today.",
+            "issues": "Vanity URLs still blocked. Mike Zivic cover photo spam cross-posted to ALL groups as top post. Midwest Lighting gutter cleaning ad also cross-posted to multiple groups. DG community group too small and spam-flooded to be useful."
+        },
+        {
+            "date": "2026-03-10",
+            "time": "15:05",
+            "type": "lurk",
+            "groups_visited": [
+                "My Downers Grove",
+                "What's Happening in Bolingbrook, IL",
+                "What's Happening in Downers Grove IL?",
+                "Downers Grove News and Comment"
+            ],
+            "actions_taken": [
+                {
+                    "action": "liked",
+                    "group": "My Downers Grove",
+                    "post_type": "community - school achievement",
+                    "description": "Bob Rakow (Moderator) sharing DGN DECA Shines at State! - photos from Downers Grove North High School DECA competition, 7 reactions"
+                },
+                {
+                    "action": "liked",
+                    "group": "What's Happening in Bolingbrook, IL",
+                    "post_type": "community - local business complaint",
+                    "description": "Carol French Mason complaining about Vic's car wash dirty lobby and animal smells - bunny/hamster debate in comments, 19 reactions, 29 comments"
+                },
+                {
+                    "action": "liked",
+                    "group": "What's Happening in Downers Grove IL?",
+                    "post_type": "community - restaurant review",
+                    "description": "Steven Kras restaurant review of Simon's Restaurant in Villa Park - breakfast food photos, feeling excited, 7 reactions, 6 comments"
+                },
+                {
+                    "action": "liked",
+                    "group": "What's Happening in Downers Grove IL?",
+                    "post_type": "community - good samaritan",
+                    "description": "MysticalFlower7924 found DG South student Jack Sbragia's wallet, turned in to CVS on Main Street, 1 reaction"
+                }
+            ],
+            "scouted_leads": [
+                {
+                    "type": "scouted_lead",
+                    "group": "My Downers Grove",
+                    "post_description": "Giancarlo Garcia looking for a local glass shop that could cut glass for two end tables",
+                    "service_vertical": "glass_cutting",
+                    "post_age": "recent (today, has 16 comments)",
+                    "engagement": "5 reactions, 16 comments",
+                    "post_url": "https://www.facebook.com/groups/565402193624801/posts/3320976114734048/"
+                },
+                {
+                    "type": "scouted_lead",
+                    "group": "What's Happening in Bolingbrook, IL",
+                    "post_description": "Anonymous poster looking for window cleaner (inside and out) for approximately 5 windows in a townhouse, has own supplies",
+                    "service_vertical": "window_cleaning",
+                    "post_age": "recent (today)",
+                    "engagement": "4 reactions, 16 comments",
+                    "post_url": "https://www.facebook.com/groups/104287120162473/posts/1832529577338210/"
+                }
+            ],
+            "notes": "Tuesday afternoon run. Smooth session - no browser timeouts. Rotated to 4 groups not visited this morning. My Downers Grove had good school content from Bob Rakow plus a glass cutting service request. Bolingbrook had a fun community post about Vic's car wash (bunny in lobby debate) and a window cleaning request. DG IL had a nice restaurant review and lost wallet good samaritan post. DG News and Comment was 100% business spam (esthetician promo). 4 likes across 3 groups. No comments this run. 2 scouted leads (glass cutting, window cleaning). Spring home services requests continue.",
+            "issues": "DG News and Comment completely flooded with business spam - no community content visible. Vanity group URLs still blocked."
+        },
+        {
+            "date": "2026-03-10",
+            "time": "09:08",
+            "type": "lurk",
+            "groups_visited": [
+                "Glen Ellyn - Wheaton Neighbors",
+                "What's Happening in Naperville IL?",
+                "What's happening in Westmont, IL",
+                "Our Downers Grove"
+            ],
+            "actions_taken": [
+                {
+                    "action": "liked",
+                    "group": "Glen Ellyn - Wheaton Neighbors",
+                    "post_type": "community - pet health/vet recommendation",
+                    "description": "Katiana Brañes asking for vet recommendations for pitbull with severe allergies - vets keep prescribing apoquel but it doesn't help, dog losing fur, 9 reactions, 101 comments"
+                },
+                {
+                    "action": "liked",
+                    "group": "Our Downers Grove",
+                    "post_type": "community - animal shelter donation request",
+                    "description": "Grace Lucrezia Chiaro-Bolch sharing Will County Humane Society request for donated wash cloths, kitchen towels and bath towels for shelter cleaning"
+                }
+            ],
+            "scouted_leads": [
+                {
+                    "type": "scouted_lead",
+                    "group": "Glen Ellyn - Wheaton Neighbors",
+                    "post_description": "Skyler Venegas looking for affordable carpenter to build small stairs for side entrance of home",
+                    "service_vertical": "carpentry",
+                    "post_age": "recent (today, ~9 hours)",
+                    "engagement": "8 reactions, 29 comments",
+                    "post_url": "https://www.facebook.com/groups/2327310610879847/posts/4467913516819535/"
+                },
+                {
+                    "type": "scouted_lead",
+                    "group": "Glen Ellyn - Wheaton Neighbors",
+                    "post_description": "Nicole Matrisciano looking for orthopedic surgeon specializing in knees at Central DuPage or Delnor for mother's knee surgery",
+                    "service_vertical": "medical",
+                    "post_age": "recent (today)",
+                    "engagement": "1 reaction, 30 comments",
+                    "post_url": "https://www.facebook.com/groups/2327310610879847/posts/4468116960132524/"
+                },
+                {
+                    "type": "scouted_lead",
+                    "group": "Glen Ellyn - Wheaton Neighbors",
+                    "post_description": "Megan Marie looking for recommendation to install turf under playset",
+                    "service_vertical": "landscaping/turf",
+                    "post_age": "recent (today, ~13 hours)",
+                    "engagement": "3 reactions, 19 comments",
+                    "post_url": "https://www.facebook.com/groups/2327310610879847/posts/4468381723439381/"
+                }
+            ],
+            "notes": "Tuesday morning run. Extremely heavy business spam across ALL groups today — worse than usual. Glen Ellyn-Wheaton had good community engagement but all top posts were recommendation requests. Naperville IL still pending participation approval, flooded with garage door and barber shop spam plus crime news. Westmont was all business (generator install, paver restoration, mortgage). Our Downers Grove had humane society donation request and bowling tournament — liked humane society post but browser timed out on bowling like. 2 likes across 2 groups. No comments. 3 scouted leads (carpentry, medical, landscaping/turf). Spring home improvement season continues.",
+            "issues": "Browser CDP timeout on second like in Our Downers Grove (recovered gracefully). Naperville IL still pending participation approval. Vanity group URLs still blocked. Heavy business spam across all groups — Tuesday morning may be peak spam time."
+        },
+        {
+            "date": "2026-03-09",
+            "time": "15:05",
+            "type": "lurk",
+            "groups_visited": [
+                "What's Happening in Bolingbrook, IL",
+                "My Downers Grove",
+                "Local Naperville",
+                "Downers Grove News and Comment"
+            ],
+            "actions_taken": [
+                {
+                    "action": "liked",
+                    "group": "What's Happening in Bolingbrook, IL",
+                    "post_type": "community - local food business",
+                    "description": "Fry the Coop announcing new beef tallow wings - double fried naked chicken wings in 100% beef tallow, 5 reactions, 4 comments"
+                },
+                {
+                    "action": "liked",
+                    "group": "What's Happening in Bolingbrook, IL",
+                    "post_type": "community - personal milestone",
+                    "description": "Puda Puda (Top contributor) celebrating 6 months breastfeeding, looking for someone to make cupcakes with pictures, 7 reactions, 7 comments"
+                },
+                {
+                    "action": "liked",
+                    "group": "My Downers Grove",
+                    "post_type": "community - neighborhood sighting",
+                    "description": "Tracy Potter 'Spotted on Fairview' between 59th and Fairway with photo (still active from yesterday), 17 reactions, 4 comments, 3 shares"
+                },
+                {
+                    "action": "liked",
+                    "group": "Downers Grove News and Comment",
+                    "post_type": "community - weather/safety",
+                    "description": "Sylvia McIvor sharing Illinois Weather Community severe weather outlook - Northern IL tornado risk, hail, heavy rain maps for today through Wednesday morning"
+                }
+            ],
+            "scouted_leads": [
+                {
+                    "type": "scouted_lead",
+                    "group": "What's Happening in Bolingbrook, IL",
+                    "post_description": "Cindy Patula (Top contributor) looking for a reputable attorney to draw up a trust",
+                    "service_vertical": "legal",
+                    "post_age": "recent (today)",
+                    "engagement": "2 reactions, 16 comments"
+                },
+                {
+                    "type": "scouted_lead",
+                    "group": "What's Happening in Bolingbrook, IL",
+                    "post_description": "Anonymous poster asking how to get in contact with someone to come out and check for mold",
+                    "service_vertical": "mold_inspection",
+                    "post_age": "recent (today, 6+ hours)",
+                    "engagement": "2 reactions, 23 comments"
+                },
+                {
+                    "type": "scouted_lead",
+                    "group": "What's Happening in Bolingbrook, IL",
+                    "post_description": "Martin Roja (Rising contributor) looking for a good reliable house cleaner with reasonable prices",
+                    "service_vertical": "house_cleaning",
+                    "post_age": "recent (today)",
+                    "engagement": "10 reactions, 51 comments"
+                },
+                {
+                    "type": "scouted_lead",
+                    "group": "My Downers Grove",
+                    "post_description": "Morgan Alda (Rising contributor) looking for a groomer who comes to their house - dog having mini seizures when dropped off at groomer",
+                    "service_vertical": "pet_grooming",
+                    "post_age": "recent (today, ~1 hour)",
+                    "engagement": "0 reactions, 3 comments"
+                }
+            ],
+            "notes": "Monday afternoon run. Smooth session - no browser timeouts. Rotated to 4 groups not visited this morning. Bolingbrook continues to be the most active group for service requests - 3 new leads today alone. Local Naperville was 100% business spam (accident attorney, photographer, flooring company) - no community content at all. My Downers Grove top post was vacation rental promo. DG News and Comment had good weather/safety content. 4 likes across 3 groups. No comments this run. 4 scouted leads (legal, mold inspection, house cleaning, pet grooming).",
+            "issues": "Local Naperville completely flooded with business spam - no community posts visible. Vanity group URLs still blocked (used numeric IDs from sidebar)."
+        },
+        {
+            "date": "2026-03-09",
+            "time": "09:09",
+            "type": "lurk",
+            "groups_visited": [
+                "What's Happening in Downers Grove IL?",
+                "What's Up Naperville",
+                "What's Happening in Wheaton, Glen Ellyn, Winfield and Warrenville",
+                "What's Going on In Naperville, IL"
+            ],
+            "actions_taken": [
+                {
+                    "action": "liked",
+                    "group": "What's Happening in Downers Grove IL?",
+                    "post_type": "community - relocation question",
+                    "description": "Moving-To-Chicago-June asking about Metra station parking availability (Naperville, Lisle, Belmont, Downers Grove) between 7-8am, 4 reactions, 15 comments"
+                },
+                {
+                    "action": "liked",
+                    "group": "What's Happening in Wheaton, Glen Ellyn, Winfield and Warrenville",
+                    "post_type": "community - local wellness event",
+                    "description": "Kristin Sutherland Sassi promoting Monday Meditation - Renew/Restore with Yoga Nidra and Live Sound at Studio 11 Yoga & Wellness, 320 Reber St Wheaton"
+                }
+            ],
+            "scouted_leads": [],
+            "notes": "Monday morning run. Extremely heavy business spam across ALL groups today. Ryan ML 'Ivy League Dog School' cross-posted to every single group as top post. What's Up Naperville was 100% business spam (dog school, drywall, drain cleaning, junk removal, concrete, mortgage). What's Going on In Naperville same as always - all marketplace/business posts. Only found 2 likeable community posts across 4 groups. DST adjustment may have affected posting patterns (clocks sprung forward last night). No comments this run. No service requests spotted.",
+            "issues": "Ryan ML Ivy League Dog School spam cross-posted to ALL groups as top post. Vanity group URLs still blocked (used numeric IDs). What's Going on In Naperville remains unusable - all spam."
+        },
+        {
+            "date": "2026-03-08",
+            "time": "15:10",
+            "type": "lurk",
+            "groups_visited": [
+                "My Downers Grove",
+                "Glen Ellyn - Wheaton Neighbors",
+                "What's Happening in Bolingbrook, IL",
+                "What's Happening in Naperville IL?"
+            ],
+            "actions_taken": [
+                {
+                    "action": "liked",
+                    "group": "My Downers Grove",
+                    "post_type": "community - safety update",
+                    "description": "Mary Zearfoss (Rising contributor) update on car vs pedestrian incident at Trader Joe's parking lot - woman did call police and was transported to hospital, 4 reactions"
+                },
+                {
+                    "action": "liked",
+                    "group": "My Downers Grove",
+                    "post_type": "community - neighborhood sighting",
+                    "description": "Tracy Potter 'Spotted on Fairview' between 59th and Fairway with photo, 5 reactions, 1 comment"
+                },
+                {
+                    "action": "liked",
+                    "group": "Glen Ellyn - Wheaton Neighbors",
+                    "post_type": "community - babysitting/youth",
+                    "description": "Carly Ulepic, Benet Academy junior offering babysitting and driving services, CPR certified, 16 reactions, 10 comments"
+                },
+                {
+                    "action": "liked",
+                    "group": "What's Happening in Bolingbrook, IL",
+                    "post_type": "community - local food business",
+                    "description": "Sharesse MzResse Mohr (Top contributor) Mohr Eatz $22 Jerk Dinner Plates with new options, 10 reactions, 16 comments, 2 shares"
+                },
+                {
+                    "action": "liked",
+                    "group": "What's Happening in Naperville IL?",
+                    "post_type": "community - local magazine content",
+                    "description": "Fox Valley Magazine (Admin) bourbon distillery video - Justa Coupla Guys visit to Whiskey Acres Distillery in DeKalb"
+                }
+            ],
+            "scouted_leads": [
+                {
+                    "type": "scouted_lead",
+                    "group": "What's Happening in Bolingbrook, IL",
+                    "post_description": "Anonymous poster looking for a really good realtor to sell house in Romeoville/Bolingbrook area - wants someone patient who guides throughout process",
+                    "service_vertical": "real_estate",
+                    "post_age": "recent (active, 109 comments)",
+                    "engagement": "19 reactions, 109 comments"
+                }
+            ],
+            "notes": "Sunday afternoon run. Smooth session - no browser timeouts. Rotated to 4 groups not visited in morning run. Used numeric IDs from sidebar for navigation (vanity URLs still blocked). 5 likes across 4 groups. Glen Ellyn-Wheaton top post was landscaping business promo (Hudson Wertz) - scrolled past to find community content. Naperville IL still flooded with Lawns By Us spam cross-posted everywhere. Naperville IL still pending participation approval. No comments this run. 1 realtor recommendation lead scouted in Bolingbrook.",
+            "issues": "Naperville IL? still pending participation approval. Lawns By Us cross-posting spam to multiple groups. Vanity group URLs still blocked."
+        },
+        {
+            "date": "2026-03-08",
+            "time": "09:07",
+            "type": "lurk",
+            "groups_visited": [
+                "What's happening in Westmont, IL",
+                "Local Naperville",
+                "Downers Grove News and Comment",
+                "Our Downers Grove"
+            ],
+            "actions_taken": [
+                {
+                    "action": "liked",
+                    "group": "What's happening in Westmont, IL",
+                    "post_type": "community - local incident",
+                    "description": "Johnny Skach asking about fight at the Natatorium with lots of cops"
+                },
+                {
+                    "action": "liked",
+                    "group": "Local Naperville",
+                    "post_type": "community - school event",
+                    "description": "DJ Suavesmooth reel from Fearn Elementary 'Dancing Through the Decades' family dance, YMCA song"
+                },
+                {
+                    "action": "liked",
+                    "group": "Downers Grove News and Comment",
+                    "post_type": "community - local small business",
+                    "description": "Meghan Nova Hilts Carlson sharing Cookies by Cadence new cookie recipes with photos"
+                },
+                {
+                    "action": "liked",
+                    "group": "Our Downers Grove",
+                    "post_type": "community - public safety",
+                    "description": "DuPage County Sheriff's Office Daylight Saving Time reminder - spring forward tonight"
+                }
+            ],
+            "scouted_leads": [],
+            "notes": "Sunday morning run. Rotated to 4 less-visited groups. Naperville Talk vanity URL still blocked and not visible in sidebar - may not be joined. All groups heavily flooded with business spam (real estate, painting, landscaping, photography promos). Community content sparse but found 4 good posts to like. Two browser timeouts on reactions dialogs (Local Naperville and DG News & Comment) - recovered by closing tabs. No comments this run. No service requests spotted.",
+            "issues": "Browser CDP timeout twice when reactions dialog triggered. Naperville Talk still inaccessible. Heavy business spam across all groups."
+        },
+        {
+            "date": "2026-03-07",
+            "time": "15:05",
+            "type": "lurk",
+            "groups_visited": [
+                "What's Happening in Bolingbrook, IL",
+                "What's Happening in Naperville IL?",
+                "My Downers Grove",
+                "What's Going on In Naperville, IL"
+            ],
+            "actions_taken": [
+                {
+                    "action": "liked",
+                    "group": "What's Happening in Bolingbrook, IL",
+                    "post_type": "community - home/yard advice",
+                    "description": "Anonymous renter asking about muddy yard solutions for dogs, 7 reactions, 54 comments"
+                },
+                {
+                    "action": "liked",
+                    "group": "What's Happening in Naperville IL?",
+                    "post_type": "community - local magazine",
+                    "description": "Fox Valley Magazine (Admin) cat photo post"
+                },
+                {
+                    "action": "liked",
+                    "group": "My Downers Grove",
+                    "post_type": "community - food recommendation",
+                    "description": "Lizabeth Bailey Marty Homa asking for St. Patrick's Day corned beef restaurants (besides Ballydoyles), 8 reactions, 27 comments"
+                },
+                {
+                    "action": "liked",
+                    "group": "My Downers Grove",
+                    "post_type": "community - school sports",
+                    "description": "Bob Rakow (Moderator) sharing Benet Academy Sectional Champions basketball photos, 7 reactions"
+                },
+                {
+                    "action": "liked",
+                    "group": "My Downers Grove",
+                    "post_type": "community - local events",
+                    "description": "Bob Rakow (Moderator) sharing EQuality Downers Grove One Book One Town events starting week of March 10, 25 reactions, 9 comments, 2 shares"
+                }
+            ],
+            "scouted_leads": [
+                {
+                    "type": "scouted_lead",
+                    "group": "What's Happening in Downers Grove IL?",
+                    "post_description": "Audrey Pass looking for lawn care recommendations - major fungus issues damaged backyard, needs fertilization and treatment plan",
+                    "service_vertical": "landscaping",
+                    "post_age": "recent (seen in groups feed)",
+                    "engagement": "2 reactions, 11 comments",
+                    "post_url": "https://www.facebook.com/groups/926397887898594/posts/2177478906123813/"
+                },
+                {
+                    "type": "scouted_lead",
+                    "group": "What's Happening in Bolingbrook, IL",
+                    "post_description": "Jose Roman (Top contributor) looking for licensed and bonded electrician to install hard-wired flood light, reasonable pricing",
+                    "service_vertical": "electrician",
+                    "post_age": "recent (today)",
+                    "engagement": "8 reactions, 21 comments"
+                },
+                {
+                    "type": "scouted_lead",
+                    "group": "What's Happening in Bolingbrook, IL",
+                    "post_description": "Anonymous poster looking for someone to lay cement pad for shed (8x8 or 8x10), wants a quote",
+                    "service_vertical": "concrete",
+                    "post_age": "about 19 hours",
+                    "engagement": "12 reactions, 66 comments, 1 share"
+                }
+            ],
+            "notes": "Saturday afternoon run. Rotated to 4 groups not visited in the morning run. Browser timeout on Bolingbrook after first like (reactions dialog caused CDP hang) - recovered by closing tab and navigating fresh to next group. Naperville IL? still shows 'participation pending approval'. What's Going on In Naperville was all spam/marketplace posts - no community content. 5 likes across 3 groups. No comments this run. 3 scouted leads (landscaping, electrician, concrete). Spring home improvement season continues to generate leads.",
+            "issues": "Browser CDP timeout in Bolingbrook (recovered). What's Going on In Naperville flooded with marketplace/spam posts. Naperville Talk vanity URL still blocked."
+        },
+        {
+            "date": "2026-03-07",
+            "time": "09:07",
+            "type": "lurk",
+            "groups_visited": [
+                "Glen Ellyn - Wheaton Neighbors",
+                "What's Happening in Downers Grove IL?",
+                "What's Up Naperville",
+                "What's Happening in Wheaton, Glen Ellyn, Winfield and Warrenville"
+            ],
+            "actions_taken": [
+                {
+                    "action": "care_reaction",
+                    "group": "Glen Ellyn - Wheaton Neighbors",
+                    "post_type": "community - lost pet",
+                    "description": "Jane Jedlink lost dog Stella post in Winfield area (still active from Mar 2), 45 reactions, 9 comments, 47 shares"
+                },
+                {
+                    "action": "liked",
+                    "group": "Glen Ellyn - Wheaton Neighbors",
+                    "post_type": "community - vet recommendation",
+                    "description": "Kerry Aileen asking for favorite affordable vet, 5 reactions, 23 comments"
+                },
+                {
+                    "action": "liked",
+                    "group": "What's Happening in Downers Grove IL?",
+                    "post_type": "community - local business support",
+                    "description": "Lizzie Rose recommending Trend + Relic shop supporting 50+ small businesses, Vintage Shop Hop event Mar 6-7"
+                },
+                {
+                    "action": "liked",
+                    "group": "What's Up Naperville",
+                    "post_type": "community - arts/crafts event",
+                    "description": "Black Feather Arts & Crafts partner paint class at Byron Park District"
+                },
+                {
+                    "action": "liked",
+                    "group": "What's Happening in Wheaton, Glen Ellyn, Winfield and Warrenville",
+                    "post_type": "community - local bakery",
+                    "description": "Mad Batter Bakery & Confections Saturday morning donuts announcement, 320 W Main St, St. Charles"
+                }
+            ],
+            "scouted_leads": [],
+            "notes": "Saturday morning run. Rotated to 4 groups not visited yesterday. Direct vanity URLs still blocked - used numeric IDs from groups feed sidebar. Heavy business spam across all groups today (Nash Painting, Always Blessed Movers, lawn services cross-posting to multiple groups). Community content was sparse but found good engagement opportunities. 5 reactions/likes across 4 groups. No comments this run. No service requests spotted. No timeouts - smooth run.",
+            "issues": "Direct vanity group URLs still return 'content not available'. Multiple groups flooded with cross-posted business ads (same movers/painters/lawn service in 3+ groups)."
+        },
+        {
+            "date": "2026-03-06",
+            "time": "15:02",
+            "type": "lurk",
+            "groups_visited": [
+                "What's happening in Westmont, IL",
+                "What's Happening in Naperville IL?",
+                "Our Downers Grove",
+                "What's Going on In Naperville, IL"
+            ],
+            "actions_taken": [
+                {
+                    "action": "liked",
+                    "group": "What's happening in Westmont, IL",
+                    "post_type": "community - funny reel",
+                    "description": "Becky Rheintgen shared reel about bad generator install ('You Had One Job') from Oakwood Electric & Generator Westmont"
+                },
+                {
+                    "action": "liked",
+                    "group": "What's happening in Westmont, IL",
+                    "post_type": "community - local event",
+                    "description": "Tony & Tina's Deli hosting Girl Scout cookie sales tonight"
+                },
+                {
+                    "action": "liked",
+                    "group": "What's Happening in Naperville IL?",
+                    "post_type": "community - charity",
+                    "description": "Fox Valley Magazine (Admin) post about VAI's Naperville supporting GiGi's Playhouse Fox Valley for World Down Syndrome Day March 21"
+                },
+                {
+                    "action": "liked",
+                    "group": "What's Happening in Naperville IL?",
+                    "post_type": "community - sports/coaching",
+                    "description": "Gilbert Vega 'Proud coach!' reel with Lit - My Own Worst Enemy soundtrack"
+                },
+                {
+                    "action": "liked",
+                    "group": "What's Going on In Naperville, IL",
+                    "post_type": "community - local government",
+                    "description": "DuPage County Sheriff's Office announcing new K-9 explosives detection unit - Deputy Dante and Canine Jet graduation"
+                }
+            ],
+            "scouted_leads": [],
+            "notes": "Afternoon run. Successfully navigated to 4 groups using numeric ID URLs from sidebar (direct vanity URLs still blocked). Got 5 likes across 3 groups (Westmont x2, Naperville IL x2, Going on Naperville x1). Our Downers Grove had only business promos visible (barber, lawn service, handyman) - no community content to engage with. First time visiting Westmont group - had to dismiss welcome dialog and rules. One browser timeout when trying sidebar click, recovered by navigating directly. No comments this run. No service requests spotted.",
+            "issues": "One browser timeout on sidebar click (recovered). Direct vanity group URLs still return 'content not available'. Naperville IL? shows 'participation pending approval' banner but content is accessible."
+        },
+        {
+            "date": "2026-03-06",
+            "time": "09:08",
+            "type": "lurk",
+            "groups_visited": [
+                "Groups Feed (aggregated view)",
+                "What's Happening in Bolingbrook, IL",
+                "What's Happening In DuPage, Kane, Kendall, & Cook County IL",
+                "My Downers Grove"
+            ],
+            "actions_taken": [
+                {
+                    "action": "liked",
+                    "group": "What's Happening in Bolingbrook, IL",
+                    "post_type": "community - cake recommendation",
+                    "description": "Anonymous poster asking about ordering custom heart cakes from Walmart in Bolingbrook, 16 reactions, 26 comments"
+                },
+                {
+                    "action": "liked",
+                    "group": "What's Happening In DuPage, Kane, Kendall, & Cook County IL",
+                    "post_type": "community - local art",
+                    "description": "Emerald Tablet Collective sharing art piece done by Alexa Gutierrez"
+                },
+                {
+                    "action": "liked",
+                    "group": "What's Happening in Bolingbrook, IL",
+                    "post_type": "community - job search/pets",
+                    "description": "Anonymous poster looking for remote night job after Chase shifts to care for two pups, 87 reactions, 32 comments"
+                },
+                {
+                    "action": "liked",
+                    "group": "My Downers Grove",
+                    "post_type": "community - school news",
+                    "description": "Bob Rakow (Moderator) sharing DG District 58 Green Apple Award for teacher Matthew D'Angelo at Hillcrest"
+                },
+                {
+                    "action": "liked",
+                    "group": "My Downers Grove",
+                    "post_type": "community - school event",
+                    "description": "Bob Rakow sharing SMG Cheerleaders performance at Notre Dame North Stars Cheer Competition, 4 reactions, 1 comment"
+                }
+            ],
+            "scouted_leads": [
+                {
+                    "type": "scouted_lead",
+                    "group": "What's Happening in Bolingbrook, IL",
+                    "post_description": "Sana Ahmed (Rising contributor) asking for pest control recommendations, specifically for house ants coming in and out of cracks and baseboards",
+                    "service_vertical": "pest_control",
+                    "post_age": "recent (about 1 hour)",
+                    "engagement": "1 reaction, 17 comments",
+                    "post_url": "https://www.facebook.com/groups/104287120162473/posts/1829687720955729/"
+                }
+            ],
+            "notes": "Morning run. Used groups feed then navigated directly to My Downers Grove (first time direct nav worked in this session!). Got 5 likes across 3 groups (Bolingbrook x2, DuPage County, My Downers Grove x2). Browser timed out after ~8 min preventing Gary Sinise concert like and further browsing. No comments this run. Spotted 1 pest control service request.",
+            "issues": "Browser timeout after ~8 minutes - recurring pattern across all sessions"
+        },
+        {
+            "date": "2026-03-05",
+            "time": "17:25",
+            "type": "lurk",
+            "groups_visited": [
+                "Groups Feed (aggregated view)",
+                "What's Happening in Bolingbrook, IL",
+                "What's Happening in Downers Grove IL?",
+                "Glen Ellyn - Wheaton Neighbors",
+                "What's Up Naperville",
+                "Local Naperville"
+            ],
+            "actions_taken": [
+                {
+                    "action": "liked",
+                    "group": "What's Happening in Bolingbrook, IL",
+                    "post_type": "community - recycling complaint",
+                    "description": "Marcia Kubista Wirth Valade post about Flood Brothers recycling bins policy, 17 reactions, 37 comments"
+                },
+                {
+                    "action": "liked",
+                    "group": "What's Happening in Downers Grove IL?",
+                    "post_type": "community - local business promo",
+                    "description": "Jen Kracower Cafferty promoting St. Patrick's Day soap and candles at 1111 Elm Candle & Soap Shoppe, 17 N Cass Westmont"
+                },
+                {
+                    "action": "liked",
+                    "group": "Glen Ellyn - Wheaton Neighbors",
+                    "post_type": "community - product advice",
+                    "description": "Terri Bonelli Knudsen asking for coffee maker upgrade recommendations, 5 reactions, 73 comments"
+                }
+            ],
+            "scouted_leads": [
+                {
+                    "type": "scouted_lead",
+                    "group": "What's Happening in Bolingbrook, IL",
+                    "post_description": "Lars Eskesen (Rising contributor) looking for good reliable house cleaner with reasonable prices",
+                    "service_vertical": "house_cleaning",
+                    "post_age": "recent (within 2 hours)",
+                    "engagement": "3 reactions, 18 comments"
+                }
+            ],
+            "notes": "Evening run. Used groups feed again. Got 3 likes across 3 different groups (Bolingbrook, DG, Glen Ellyn-Wheaton). Browser timed out twice toward end of session preventing additional likes. No comments this run. Spotted 1 new service request for house cleaning.",
+            "issues": "Browser timeout after ~8 minutes of activity - intermittent connectivity to browser control service"
+        },
+        {
+            "date": "2026-03-05",
+            "time": "09:55",
+            "type": "lurk",
+            "groups_visited": [
+                "Groups Feed (aggregated view)",
+                "Glen Ellyn - Wheaton Neighbors",
+                "What's Up Naperville",
+                "What's Happening in Bolingbrook, IL",
+                "What's Happening in Wheaton, Glen Ellyn, Winfield and Warrenville",
+                "What's Happening In DuPage, Kane, Kendall, & Cook County IL",
+                "What's Happening in Downers Grove IL?"
+            ],
+            "actions_taken": [
+                {
+                    "action": "liked",
+                    "group": "What's Happening in Bolingbrook, IL",
+                    "post_type": "community - local business drama",
+                    "description": "Admin Elise Manzie post about Tailgaters Sports-Bar embarrassing incident, 603+ reactions, 341 comments"
+                },
+                {
+                    "action": "liked",
+                    "group": "What's Happening in Downers Grove IL?",
+                    "post_type": "community - local event",
+                    "description": "Erin Ritchie promoting Yoga Nidra & Sound Bath event at Good Juju Yoga in Westmont, Sun 3/15"
+                }
+            ],
+            "scouted_leads": [
+                {
+                    "type": "scouted_lead",
+                    "group": "Glen Ellyn - Wheaton Neighbors",
+                    "post_description": "Emily Handley looking for dog boarding/pet sitting for 10 days in mid-June for destination wedding",
+                    "service_vertical": "pet_care",
+                    "post_age": "2 hours",
+                    "engagement": "33 reactions, 59 comments"
+                },
+                {
+                    "type": "scouted_lead",
+                    "group": "What's Happening in Bolingbrook, IL",
+                    "post_description": "Anonymous poster looking for someone to sand and paint stair area after carpet removal",
+                    "service_vertical": "painting",
+                    "post_age": "21 hours",
+                    "engagement": "14 reactions, 37 comments"
+                },
+                {
+                    "type": "scouted_lead",
+                    "group": "What's Happening in Wheaton, Glen Ellyn, Winfield and Warrenville",
+                    "post_description": "Jaana Neunteufel looking for lawn service, bed edging, mulching, spring yard cleanup, hydrangea planting",
+                    "service_vertical": "landscaping",
+                    "post_age": "about 1 hour",
+                    "engagement": "18 reactions, 44 comments"
+                },
+                {
+                    "type": "scouted_lead",
+                    "group": "What's Happening in Bolingbrook, IL",
+                    "post_description": "Anonymous poster needs legal assistance for fender bender lawsuit, case management hearing guidance",
+                    "service_vertical": "legal",
+                    "post_age": "recent",
+                    "engagement": "2 reactions, 16 comments"
+                }
+            ],
+            "notes": "Used groups feed (aggregated view) successfully - direct group URLs still show 'content not available'. Heavy service request activity today - spring season driving landscaping and home improvement requests. No comments made this run, just 2 likes on casual community posts.",
+            "issues": "Direct group URLs still returning 'content not available' - using /groups/feed/ as workaround"
+        },
+        {
+            "date": "2026-03-04",
+            "time": "15:06",
+            "type": "lurk",
+            "groups_visited": [
+                "Home feed with content from Glen Ellyn - Wheaton Neighbors",
+                "What's Happening in Wheaton, Glen Ellyn, Winfield and Warrenville"
+            ],
+            "actions_taken": [
+                {
+                    "action": "liked",
+                    "group": "Glen Ellyn - Wheaton Neighbors",
+                    "post_type": "community - babysitting/nanny position offer",
+                    "description": "Mary Bischoff posting about summer babysitting availability"
+                }
+            ],
+            "scouted_leads": [
+                {
+                    "type": "scouted_lead",
+                    "group": "What's Happening in Wheaton, Glen Ellyn, Winfield and Warrenville",
+                    "post_description": "Lost dog post - Stella lost in Winfield area",
+                    "post_type": "community_help",
+                    "notes": "Good community engagement post - tried to react but browser timeout"
+                }
+            ],
+            "notes": "Browser timeout prevented full engagement. Successfully engaged with one post. Groups appear accessible via main feed but direct group URLs show 'content not available'.",
+            "issues": "Browser service timeout after ~10 minutes"
+        },
+        {
+            "date": "2026-03-20",
+            "time": "12:11",
+            "type": "lurk",
+            "groups_visited": [
+                "Contractor/Home Related Recommendations in Chicagoland",
+                "What's Happening in Bolingbrook, IL",
+                "Glen Ellyn - Wheaton Neighbors",
+                "My Downers Grove",
+                "What's Happening in Downers Grove IL?"
+            ],
+            "actions_taken": [
+                {
+                    "action": "liked",
+                    "group": "What's Happening in Bolingbrook, IL",
+                    "post_type": "community - scam warning",
+                    "description": "🦤_dodo6280 warning about phone scam with ticket stub image, 26 reactions, 23 comments"
+                },
+                {
+                    "action": "liked",
+                    "group": "Glen Ellyn - Wheaton Neighbors",
+                    "post_type": "community - lost dog",
+                    "description": "Denise Gergits sharing lost dog post in Glen Ellyn area, 8 reactions, 1 comment, 8 shares"
+                }
+            ],
+            "scouted_leads": [
+                {
+                    "type": "scouted_lead",
+                    "group": "What's Happening in Bolingbrook, IL",
+                    "post_description": "Anonymous poster needing electrician to add new wall outlet in office, asks for reliable and local",
+                    "service_vertical": "electrical",
+                    "post_age": "recent (comments 4h ago)",
+                    "engagement": "5 reactions, 33 comments, 1 share",
+                    "skip_reason": "Over 20 comment limit (33 comments)"
+                }
+            ],
+            "notes": "Friday noon run. Scanned 5 groups rotating from yesterday. Chicagoland Contractor Recommendations still completely dead — all posts 13-19+ weeks old (kitchen remodel, gas line, window repair, real estate photographer, quartz remnant, water damage, basement finishing). Not a single recent post. Bolingbrook dominated by scam warnings (2 separate posts about fake ticket/payment scams), kitchen remodel request (103 comments), party venue (60 comments), yard signs, tax person, voting/politics (106 comments), lash lift, lawn care (60 comments), Citgo gas price complaint, Brazilian steakhouse question, ICE community alert from admin. One electrician lead (wall outlet install) but 33 comments exceeded 20-comment limit. Glen Ellyn-Wheaton had senior music lesson photo (85 reactions), daycare request, moving company review (40 weeks old), birthday banners, YMCA kindergarten, Cosley Zoo food service jobs (43 comments), karate open house, landscaping teen help, facial recommendations (77 comments, commenting turned off), lost dog. My DG had video production internship request, lost dog Jupiter found (already liked), Musical Bingo fundraiser, Timothy Christian resale, another lost pet (16 weeks old). DG IL? was 100% business spam as always — Art Z Flooring tile ad on top. 2 likes across 2 groups. No comments. No service replies. 0 qualifying leads in our verticals (1 scouted electrical but over comment limit). Friday noon continues to be dominated by community events, lost pets, food recommendations, and business spam — very few home service requests.",
+            "issues": "Chicagoland Contractor Recommendations group remains completely dead — should consider deprioritizing from critical to medium. DG IL? continues to be 100% business spam. Two scam warning posts dominating Bolingbrook feed (ticket stub/QR code scam hitting multiple residents). Admin Elise Manzie posted ICE community alert in Bolingbrook — sensitive topic, stay away."
+        },
+        {
+            "date": "2026-03-20",
+            "time": "17:09",
+            "type": "lurk",
+            "groups_visited": [
+                "What's Happening in Naperville IL?",
+                "What's Happening in Wheaton, Glen Ellyn, Winfield and Warrenville",
+                "Local Naperville",
+                "Our Downers Grove",
+                "Naperville Talk"
+            ],
+            "actions_taken": [
+                {
+                    "action": "liked",
+                    "group": "Our Downers Grove",
+                    "post_type": "community - local history/heritage",
+                    "description": "Karla Sullivan sharing Downers Grove Historical Society 2026 Historian of the Year - Rich Kulovany, 5 reactions, 1 comment"
+                },
+                {
+                    "action": "liked",
+                    "group": "Our Downers Grove",
+                    "post_type": "community - local arts/music event",
+                    "description": "Dan D'Andrea SBC 13th Annual Voice Competition Finals with orchestra, Sun March 22 at 4pm, St Paul's UCC Church in Downers Grove"
+                }
+            ],
+            "scouted_leads": [],
+            "notes": "Friday 5 PM run. Scanned 5 groups rotating from noon run. Extremely heavy business spam day — KW Auto Spa (Wyatt Lisberg) cross-posted to EVERY group (Wheaton, Local Naperville, possibly more). Lynn Siemer Painted Tree Boutiques Easter Extravaganza also cross-posted to Naperville IL? and Local Naperville simultaneously. Naperville IL? STILL pending participation approval (going on 3+ weeks now). Naperville Talk ALSO still pending approval — defaults to Buy and Sell tab with marketplace theft drama (Chris Flores/Nattalie Hargrove). Wheaton group was 100% business spam: Amazon coupon question, Dosti Reiki meditation, B&B Balloons Easter, KW Auto Spa reel (from Feb 9), Swift Travel France deal, Uplift Garage door tune-up special. Local Naperville was 100% business spam: Painted Tree cross-post, KW Auto Spa cross-post, BM Exterior Cleaning power washing. Our Downers Grove had best community content: DG Historical Society Historian of the Year (liked), Windycityrecords Dave Matthews Live Trax reel, Dan D'Andrea SBC Voice Competition in DG (liked). 2 likes in 1 group. No comments. No service replies. 0 qualifying leads in our verticals (plumbing, electrical, HVAC, heating, pest, appliance). Friday 5 PM continues dead for home service requests — dominated by Easter event promos, business cross-posting spam, and community arts events.",
+            "issues": "KW Auto Spa (Wyatt Lisberg) cross-posting Feb 9 reel to ALL groups simultaneously. Lynn Siemer Painted Tree Boutiques also multi-group cross-posting. Naperville IL? and Naperville Talk BOTH still pending participation approval after 3+ weeks — should consider dropping from scan rotation until approved. Wheaton and Local Naperville both 100% business spam this run."
+        },
+        {
+            "date": "2026-03-21",
+            "time": "12:03",
+            "type": "lurk",
+            "groups_visited": [
+                "What's Happening in Bolingbrook, IL",
+                "Glen Ellyn - Wheaton Neighbors",
+                "Our Downers Grove",
+                "What's Happening In DuPage, Kane, Kendall, & Cook County IL",
+                "What's Happening in Woodridge, IL"
+            ],
+            "actions_taken": [
+                {
+                    "action": "liked",
+                    "group": "What's Happening in Bolingbrook, IL",
+                    "post_type": "community - school performance",
+                    "description": "BHS Theatre Matilda the Musical show day post with performance photos"
+                },
+                {
+                    "action": "liked",
+                    "group": "What's Happening in Woodridge, IL",
+                    "post_type": "community - found pet",
+                    "description": "Kasey Moss asking if anyone missing a cat with photo, 2 care reactions"
+                }
+            ],
+            "scouted_leads": [],
+            "notes": "Saturday noon run. Scanned 5 groups rotating from yesterday. Complete dead zone for home service requests — Saturday is dominated by Easter events (Angel Dog Alliance egg hunt at PetSmart Bolingbrook, White Fence Farm Easter items), pet adoptions (Humane Haven, Ruby Whiskers), BTS concert excitement, food (tres leches cake sales, El Gallito restaurant), car shopping (first car $1500-2000), apartments, OBGYN recommendations (both Bolingbrook and Glen Ellyn-Wheaton), video production internship, birthday banners, deck repair (56 comments over limit in GE-Wheaton), landscaping (36 comments), driveway sealing (20 comments), mulch delivery, auto body repair, part-time jobs. Our Downers Grove was 100% political content (Al Morris cross-posting from other groups about Naperville news, DeKalb Illinois Issues tax burden, Tony Cesare political commentary) plus GetFixLocal deck repair spam. DuPage County group was 100% spam (Rustic Fox Carol Stream shop, Wildwood Country live music Aurora, Total Restoration Construction roofing reel). Woodridge (first proper scan) was very low activity — found cat, piano lessons spam, ABC Roofing & Siding spam, sorted by New posts not Most relevant. 2 likes across 2 groups. No comments. No service replies. 0 qualifying leads in our verticals (plumbing, electrical, HVAC, heating, pest, appliance).",
+            "issues": "Saturday noon confirmed as worst time slot for home service requests. DuPage County group is 100% spam — may need to deprioritize. Woodridge group too small (4.9K) and spam-flooded, sorted by New posts. Our Downers Grove dominated by political cross-posts from Al Morris (Top contributor). Zero home service recommendation requests seen across all 5 groups today."
+        },
+        {
+            "date": "2026-03-21",
+            "time": "17:03",
+            "type": "lurk",
+            "groups_visited": [
+                "Contractor/Home Related Recommendations in Chicagoland",
+                "My Downers Grove",
+                "What's Happening in Downers Grove IL?",
+                "What's Happening in Wheaton, Glen Ellyn, Winfield and Warrenville",
+                "What's Happening in Naperville IL?"
+            ],
+            "actions_taken": [
+                {
+                    "action": "liked",
+                    "group": "My Downers Grove",
+                    "post_type": "community - local development news",
+                    "description": "Ian McClellan (Rising contributor) community update on former Fry's Electronics building becoming large-scale veterinary clinic and teaching hospital, 573 reactions, 63 comments, 75 shares, commenting turned off by moderator"
+                }
+            ],
+            "scouted_leads": [],
+            "notes": "Saturday 5 PM run. Scanned 5 groups rotating from noon run. Complete dead zone for home service requests — Saturday evening confirmed worst time slot. Chicagoland Contractor Recommendations STILL completely dead — only old posts visible (Cook County Leak Repair gov link, Doug Bayer/Revive Restoration scam warning from weeks ago, wallpaper installer, 13-week-old kitchen remodel). Not a single new post. My DG was community-heavy: Mahmoud Chahir chauffeur service spam on top, Sandra Lemenaitė stylist/balayage request (16 comments), young adult at Ogden/Finley intersection concern (23 comments, community care), Emma Swan pickup truck request, Ian McClellan Fry's Electronics vet clinic news (573 reactions, biggest post — liked), Anita Pekarik video internship, Riley OHara toddler carrier, Jupiter the lost dog found. DG IL? was 100% business spam: Jack White Affordable Painting & Epoxy LLC (cross-posted with 21 photos), Peter Fredsall Original Last Word Chicken nostalgia (13 reactions, 15 comments), Nature's Best Market berry sale. Wheaton group was 100% business spam/promos: Winfield Park District preschool open house, ScenicLemur5493 pool liner install request (not our vertical), Barbara's Elegant Touch wedding planner, Kevin Ketchum/Fox Valley Magazine Geneva Winery reel, Anthony Luna lawn care spam, Chicago's Hardscape reel. Naperville IL? STILL pending participation approval (going on 4+ weeks now), sorted by New posts, top post was Renata Donis food resource/charity. 1 like in 1 group. No comments. No service replies. 0 qualifying leads in our verticals (plumbing, electrical, HVAC, heating, pest, appliance).",
+            "issues": "Chicagoland Contractor Recommendations group remains completely dead — should be deprioritized from critical. Naperville IL? pending approval for 4+ weeks — consider dropping from scan rotation. Saturday 5 PM confirmed as dead time slot for home service requests — all groups dominated by business spam, nostalgia posts, Easter prep, and community events. Jack White Affordable Painting & Epoxy LLC cross-posting to DG IL? with 21-photo album."
+        },
+        {
+            "date": "2026-03-22",
+            "time": "09:14",
+            "type": "lurk",
+            "groups_visited": [
+                "What's Happening in Bolingbrook, IL",
+                "Glen Ellyn - Wheaton Neighbors",
+                "My Downers Grove",
+                "Downers Grove News and Comment",
+                "What's happening in Westmont, IL"
+            ],
+            "actions_taken": [
+                {
+                    "action": "liked",
+                    "group": "My Downers Grove",
+                    "post_type": "community - local business/charity",
+                    "description": "Dan Jackimek shoutout to Renew and Rise charity shop on Ogden Ave next to Graham Cracker Comics, 210 reactions, 23 comments, 19 shares"
+                }
+            ],
+            "scouted_leads": [],
+            "notes": "Sunday 9 AM run. Scanned 5 groups rotating from yesterday. Complete dead zone for home service requests — Sunday morning confirmed worst time slot. Bolingbrook dominated by politics (NO KINGS rally, 52 comments), gym recs (Planet Fitness), auto stuff (flat tire, car shopping x2, tow service), OBGYN recommendations, rental search, Papa Johns promo, fundraiser event flyer, and 1-week-old roofing meme (156 reactions). Glen Ellyn-Wheaton had carpeting/subfloor repair (31 comments), haircut blowout for bat mitzvah, spring yard cleanup (57 comments), vet surgeon for dog knee surgery, fencing installation (29 comments). My DG was nostalgia heavy — old grocery store at 63rd/Belmont (78 comments), stylist/balayage request (37 comments), Renew and Rise charity shop (210 reactions, liked), Emma Swan pickup truck request, lost dog Jupiter found, Ian McClellan Fry's vet clinic (722 reactions, already liked), Bob Rakow DG Historical Society. DG News & Comment was 100% spam — EB30X Fitness Studio reel, Nature's Best Market berry sale, Tina McDonald Santana Gathering for Peace event in Elmhurst. Westmont still sorted by New Posts — Juan Hernandez Prestige Outdoor Living landscaping spam on top. Browser tab hijacked to PuzzlePonder word game mid-session (same issue as March 15 X/Twitter redirect). 1 like in 1 group. No comments. No service replies. 0 qualifying leads in our verticals (plumbing, electrical, HVAC, heating, pest, appliance).",
+            "issues": "Sunday morning confirmed worst time slot for home service requests across all groups — dominated by politics, nostalgia, car shopping, food promos, and events. Browser tab redirected to puzzleponder.com/games/word-guess mid-session (similar to March 15 X/Twitter redirect issue — possible extension or ad redirect). Westmont still sorted by New Posts and 100% landscaping spam. Juan Hernandez Prestige Outdoor Living continues to cross-post landscaping spam to multiple groups."
+        },
+        {
+            "date": "2026-03-22",
+            "time": "12:04",
+            "type": "lurk",
+            "groups_visited": [
+                "What's Happening in Wheaton, Glen Ellyn, Winfield and Warrenville",
+                "What's Happening in Downers Grove IL?",
+                "Our Downers Grove",
+                "Local Naperville"
+            ],
+            "actions_taken": [
+                {
+                    "action": "liked",
+                    "group": "Our Downers Grove",
+                    "post_type": "community - youth/Easter event",
+                    "description": "BCA HUB Youth & Resource Center 6th Annual Easter Bunny Trunk Hop - sensory-friendly community event, calling for trunk hosts and vendors"
+                }
+            ],
+            "scouted_leads": [],
+            "notes": "Sunday noon run. Scanned 4 groups rotating from morning run (which covered Bolingbrook, Glen Ellyn-Wheaton, My DG, DG News & Comment, Westmont). Complete dead zone for home service requests — Sunday noon confirmed worst time slot. Wheaton/GE/Winfield/Warrenville was 100% business spam: Matt Kissane MDK Productions, Randy Brattin RKB Hardwood Floors, Kevin Ketchum/Fox Valley Magazine Squire Ale House review, Denise Lopez plate rack arrivals, KW Auto Spa (Wyatt Lisberg) Feb 19 reel STILL being cross-posted, Karla S Hoyos KSHBEAUTY esthetician, Jackie Johnson-Sample public awareness drama, Janice Golabek-Dillon lost pet cross-post from Glen Ellyn-Wheaton, Nicole Kolosowski Rustic Fox Carol Stream shop, Noel Gonzalez junk removal, Alvaro Figueroa carpet cleaning, Mad Batter Bakery donuts. DG IL? was 100% spam: Andreas Georgiades motivational quote spam, Tracey Figueroa/Tre Lux Wellness Japanese Scalp Spa, Tony Pedretti Railroad Show event, TWO Diaz Construction reels (Aug and Jan!), Peter Fredsall Last Word Chicken nostalgia. Our DG had BCA HUB Easter event x2 cross-posts (liked), Tony Pedretti Railroad Show cross-post, Erik Hall restaurant question (already liked), Heather Gibbs EB30X Fitness reel. Local Naperville was 100% spam: Lian Gutierrez Castellanos wedding photography reel, Ana Barraza spring cleanup/mulch landscaping, KW Auto Spa cross-post again. 1 like in 1 group. No comments. No service replies. 0 qualifying leads in our verticals (plumbing, electrical, HVAC, heating, pest, appliance).",
+            "issues": "Sunday noon confirmed worst time slot for home service requests. KW Auto Spa (Wyatt Lisberg) Feb 19 reel STILL being cross-posted to every group after 5+ weeks. BCA HUB cross-posting Easter event to Our DG twice (26 min and 44 min apart). Diaz Construction posting months-old reels (Aug and Jan) in DG IL?. All 4 groups 100% business spam with zero home service recommendation requests."
+        },
+        {
+            "date": "2026-03-23",
+            "time": "12:02",
+            "type": "lurk",
+            "groups_visited": [
+                "What's Happening in Bolingbrook, IL",
+                "Glen Ellyn - Wheaton Neighbors",
+                "My Downers Grove",
+                "What's Happening in Wheaton, Glen Ellyn, Winfield and Warrenville"
+            ],
+            "actions_taken": [
+                {
+                    "action": "liked",
+                    "group": "Glen Ellyn - Wheaton Neighbors",
+                    "post_type": "community - yard/brush pickup question",
+                    "description": "Jorge Guzman asking about brush and logs pickup on curb, 5 reactions, 5 comments"
+                },
+                {
+                    "action": "liked",
+                    "group": "My Downers Grove",
+                    "post_type": "community - school achievement",
+                    "description": "Bob Rakow (Moderator) sharing DGN Trojan Athletics Macy Ermitage breaking 41yo 3200m indoor track record at 10:39:32, 47 reactions, 3 comments"
+                }
+            ],
+            "scouted_leads": [],
+            "notes": "Monday noon run. Scanned 4 groups. Complete dead zone for home service requests in our verticals (plumbing, electrical, HVAC, heating, pest, appliance). Bolingbrook dominated by Golden Chopsticks restaurant closing (42 comments), No Kings political rally (101 comments, 104 reactions), kitchen remodel (135 comments, not our vertical), dog groomer request (44 comments), soccer teammate search, house hunting, fast food franchise for sale, power outage at 95th/Boughton, Bawarchi Ramadan specials, school performances, Easter events. Glen Ellyn-Wheaton was childcare requests (summer babysitter, nanny share), OBGYN recommendation (37 comments), specialty electrical back box fabrication (not our vertical), landscaping (56 comments over limit), brush pickup question (liked). My DG was YMCA swim promo, Bob Rakow DGN track records x2 (liked), upholstery cleaning (commenting turned off by moderator), carpet cleaning (commenting turned off by moderator), DG Historical Society 100 homes milestone, video internship, House Bill 1590 legislation. Wheaton/GE/Winfield/Warrenville was 100% spam -- Bertha Rodriguez Ojeda job fair posted TWICE, Simply South restaurant Rama Navami special. Browser timeout on reactions dialog in My DG (recovered with Escape). Monday noon is typically good but today dominated by food, politics, school achievements, childcare requests, and business spam. Both cleaning requests in My DG had commenting turned off by moderator Bob Rakow -- smart anti-spam move but blocks any engagement.",
+            "issues": "Both carpet cleaning and upholstery cleaning requests in My DG had commenting turned off by moderator Bob Rakow. Wheaton/GE/Winfield/Warrenville group completely flooded with spam -- Bertha Rodriguez Ojeda posted same job fair event TWICE. Browser CDP timeout on reactions dialog in My DG (recurring issue). Monday noon yielded zero home service leads in target verticals across all 4 groups."
+        },
+        {
+            "date": "2026-03-23",
+            "time": "17:04",
+            "type": "lurk",
+            "groups_visited": [
+                "What's Happening in Downers Grove IL?",
+                "Our Downers Grove",
+                "Local Naperville",
+                "Downers Grove News and Comment",
+                "What's happening in Westmont, IL"
+            ],
+            "actions_taken": [
+                {
+                    "action": "liked",
+                    "group": "Our Downers Grove",
+                    "post_type": "community - environmental/sustainability event",
+                    "description": "Julie Morici Companey / Greener Grove composting event at Lincoln Center tomorrow March 24 at 7pm - Phat Compost: Restoring Our Relationship with the Soil with Adam Schwartz"
+                }
+            ],
+            "scouted_leads": [],
+            "notes": "Monday 5 PM run. Scanned 5 groups rotating from noon run (which covered Bolingbrook, Glen Ellyn-Wheaton, My DG, Wheaton/GE/Winfield/Warrenville). Complete dead zone for home service requests — Monday 5 PM dominated by business spam across ALL groups. DG IL? was 100% spam: Inna Cleaning Service (North Shore), Joshua Wasso roofing reel with hashtags, RadiantParsnip8790 Amazon/AT&T door-to-door sales question (6 comments, not our vertical), Andreas Georgiades motivational quote spam, Irina Fatykhova piano/voice lessons. Our DG: Lincoln's Toy Show event Romeoville, Irene Schreiner Solid Foundations Therapy promo, DG Historical Society 100 homes milestone (already liked), Greener Grove composting event (liked), Al Morris/DeKalb Illinois Issues tax burden political cross-post (4 comments). Local Naperville: Prescolaire Naperville summer camp, KW Auto Spa (Wyatt Lisberg) STILL cross-posting Feb 9 reel (6+ weeks now!), anonymous power washing pricing question (7 comments — offering services not seeking), Anthony Andrews Tony Local Contractor ad, BDK Door garage door replacement. DG News & Comment: Adrian Castillo pressure washing/paver sealing, Rachel Pomykala Sweets & Decor More spring promo, Michael Symber teen art class, Nature's Best Market baguette sale, Tony Pedretti Railroad Show event. Westmont still sorted by New Posts: AM Direct Appliances business intro (La Grange), Suburbanite Bowl bowling promo, Zoomin Groomin National Puppy Day, Erin Ritchie Good Juju Yoga Women's Circle. 1 like in 1 group. No comments. No service replies. 0 qualifying leads in our verticals (plumbing, electrical, HVAC, heating, pest, appliance).",
+            "issues": "Monday 5 PM confirmed dead for home service requests across all 5 groups — 100% business spam, events, political cross-posts, and motivational quotes. KW Auto Spa (Wyatt Lisberg) still cross-posting Feb 9 reel after 6+ weeks. Westmont still sorted by New Posts and 100% spam. DG IL? still 100% business spam — continues to be most useless group."
+        },
+        {
+            "date": "2026-03-24",
+            "time": "17:03",
+            "type": "lurk",
+            "groups_visited": [
+                "What's Happening in Bolingbrook, IL",
+                "Glen Ellyn - Wheaton Neighbors",
+                "My Downers Grove",
+                "What's Happening in Wheaton, Glen Ellyn, Winfield and Warrenville"
+            ],
+            "actions_taken": [
+                {
+                    "action": "liked",
+                    "group": "Glen Ellyn - Wheaton Neighbors",
+                    "post_type": "community - injured animal rescue",
+                    "description": "Lisa Giese Krone injured animal (likely hit by car) needing rescue help, 220 reactions, 128 comments, 9 shares"
+                }
+            ],
+            "scouted_leads": [
+                {
+                    "type": "scouted_lead",
+                    "group": "What's Happening in Bolingbrook, IL",
+                    "post_description": "Safi Chaudhary (Top contributor) needs well pressure tank replaced, looking for plumber, Addison IL",
+                    "service_vertical": "plumbing",
+                    "post_age": "about 6 hours",
+                    "engagement": "10 reactions, 25 comments",
+                    "skip_reason": "Over 20 comment limit (25 comments), Addison IL is borderline service area"
+                }
+            ],
+            "notes": "Tuesday 5 PM run. Scanned 4 groups rotating from yesterday. Complete dead zone for home service requests in our verticals. Bolingbrook dominated by vehicle insurance (29 comments), kids ride-on disposal, car keys/fob, luxury vinyl plank flooring (34 comments), community drama (red ford guy recording, 58 reactions, 51 comments), sushi restaurant promos (All Blue Jumbo Crab 4 days old, Ko Sushi closing), barber shop reels (Tyrell Weathers and Emmanuel Robinson), e-verify job question, service hours for NJHS student, scrap metal for water heater disposal. One plumbing lead (Safi Chaudhary well pressure tank, Addison IL) but 25 comments exceeded 20-comment limit. Glen Ellyn-Wheaton had Pi Life restaurant closing question (22 comments), injured animal rescue (220 reactions, liked), Wheaton Nursery fire (67 reactions, 20 comments), massage therapist request (34 comments), senior photo/music gig (5 days old, 127 reactions), dog walker (17 comments), relocation recommendations (103 comments). My DG was kitchen cabinets (commenting turned off by moderator), DG Panthers football camp cancelled, Rotary Club scholarship reel, Renew and Rise charity (already liked, 342 reactions), broken glasses repair (commenting off). Wheaton/GE/Winfield/Warrenville was 100% business spam: Unreal Carpentry deck repair, Andreas Georgiades motivational quote spam (recurring), Mara's Flooring (Adrian Siciu) cross-posted reel from Jan 4 and Buffalo Grove Sale group. 1 like in 1 group. No comments. No service replies. 0 qualifying leads in our verticals (plumbing, electrical, HVAC, heating, pest, appliance).",
+            "issues": "Wheaton/GE/Winfield/Warrenville group continues to be 100% business spam — Unreal Carpentry, Andreas Georgiades, and Mara's Flooring dominating feed. Bob Rakow in My DG continues turning off commenting on contractor/service recommendation posts (kitchen cabinets, broken glasses) — effective anti-spam but blocks any engagement. Tuesday 5 PM yielded zero qualifying leads across 4 groups. Safi Chaudhary plumbing lead in Bolingbrook was in Addison IL (borderline) with 25 comments (over limit)."
+        },
+        {
+            "date": "2026-03-25",
+            "time": "09:08",
+            "type": "lurk",
+            "groups_visited": [
+                "What's Happening in Downers Grove IL?",
+                "Our Downers Grove",
+                "Local Naperville",
+                "Downers Grove News and Comment",
+                "What's Happening In DuPage, Kane, Kendall, & Cook County IL"
+            ],
+            "actions_taken": [
+                {
+                    "action": "liked",
+                    "group": "What's Happening in Downers Grove IL?",
+                    "post_type": "community - kids Easter event",
+                    "description": "Marta Sniezko at BIG Gymnastics hosting Easter Party with 900-egg hunt, obstacle course, bounce house, March 27 11am-12pm"
+                }
+            ],
+            "scouted_leads": [],
+            "notes": "Wednesday 9 AM run. Scanned 5 groups rotating from yesterday (which covered Bolingbrook, Glen Ellyn-Wheaton, My DG, Wheaton/GE/Winfield/Warrenville). Complete dead zone for home service requests — Wednesday 9 AM dominated by business spam across ALL groups. DG IL? was 100% spam: Ata Fashion Polish boutique, Wannemaker's BBQ Weber grill promo, Lawns By Us (El Vin) 708 number, BCA HUB flood prep checklist, Affordable Antiques reel, Glow IQ Boutique carboxy therapy (Oak Brook), Venezia Nail Spa 30% off, BK Drain Pros descaling ad, Michelle Alfaro Great Clips community outreach, BIG Gymnastics Easter Party (liked). Our DG: Tony Pedretti Railroad Show cross-post (again), Erik Hall restaurant question (already liked, now 50 comments), Slawek Polinski downersgroveliving.com reel, Karla Sullivan UCC Church live video, Juan De La Cruz Raise YOUR Lid Consulting, Sukun Arts paint nights, Buroff Asphalt Paving concrete ad. Local Naperville: Juan De La Cruz Midwest Lighting spring cleanup spam (cross-posted), Anthony DelCoiro J&K Home Improvement roofing/siding ad, Ashfaq Hussain Syed Eid Festival Qawali Night. DG News & Comment: Joe Rossi Nature's Best Market weekly sales, Tony Pedretti Railroad Show (cross-posted to 3+ groups today), Nanny Cher childcare group share, Juan Hernandez Prestige Outdoor Living landscaping spam. DuPage County: Freedom 1st Transportation handicap transport testimonial, Jody Borman Moreen Geneva Antique Market (57+ photos), Rosati's Pizza Elburn Wingsday promo. 1 like in 1 group. No comments. No service replies. 0 qualifying leads in our verticals (plumbing, electrical, HVAC, heating, pest, appliance).",
+            "issues": "Tony Pedretti Railroad Show cross-posted to Our DG, DG News & Comment, and likely more groups simultaneously with Wednesday bump comment. Juan De La Cruz cross-posting Midwest Lighting spring cleanup to Local Naperville and sharing Raise YOUR Lid Consulting to Our DG. Wednesday 9 AM confirmed as dead time slot for home service requests — 100% business spam, events, and contractor self-promotion across all 5 groups. No recommendation requests seen anywhere. BK Drain Pros continues to spam DG IL? with descaling ads."
+        },
+        {
+            "date": "2026-03-25",
+            "time": "17:08",
+            "type": "lurk",
+            "groups_visited": [
+                "What's Happening in Bolingbrook, IL",
+                "Glen Ellyn - Wheaton Neighbors",
+                "My Downers Grove",
+                "What's Happening in Wheaton, Glen Ellyn, Winfield and Warrenville"
+            ],
+            "actions_taken": [
+                {
+                    "action": "liked",
+                    "group": "Glen Ellyn - Wheaton Neighbors",
+                    "post_type": "community - local business fire",
+                    "description": "Carol Chamblin Wheaton Nursery fire post, sad to see local business experience fire before busy season, 101 reactions, 26 comments"
+                },
+                {
+                    "action": "liked",
+                    "group": "My Downers Grove",
+                    "post_type": "community - lost & found",
+                    "description": "Lauren Elizabeth found iPhone on corner of Prairie and Northcott while running, will take to DG police if owner not found, 12 reactions, 2 comments"
+                }
+            ],
+            "scouted_leads": [],
+            "notes": "Wednesday 5 PM run. Scanned 4 groups rotating from morning run (which covered DG IL?, Our DG, Local Naperville, DG News & Comment, DuPage County). Complete dead zone for home service requests — Wednesday 5 PM dominated by politics, community events, hit-and-runs, and business spam. Bolingbrook dominated by No Kings political rally (144 reactions, 183 comments), hit-and-run accident (452 reactions, 191 comments), gas prices (139 reactions, 502 comments), 7th grade tutor needed, Joliet buildout, NJHS service hours, solar panels, babysitter for twins, baptism cake (63 comments), seamstress prom dress, AAU programs. Glen Ellyn-Wheaton had pediatrician recommendation (16 comments), Yorktown Center Lombard redevelopment (89 reactions, 35 comments), Wheaton Nursery fire (101 reactions, liked), Dragon One restaurant closed/retired (13 comments), nail salon spam, dog walker (21 comments), new Glen Ellyn park (29 reactions), seafood restaurant (60 comments 1yr old), dog runner (20 comments). My DG was Republic cart delivery update from Bob Rakow, funny vehicle photo at Panera (106 reactions, Monty Python reference), DG Magazine volleyball story, Christa Brennan solar panel removal for roof (11 comments), new garbage bins question (31 comments), found iPhone (liked), dog walker request. Wheaton/GE/Winfield/Warrenville was 100% business spam — Cleaning Claws LLC (23 min ago), Kevin Ketchum/ECC Arts Center guitar reel, Bright Touch Cleaning Service (47 min ago), Mara's Flooring cross-post from Norridge (from December 2025!). 2 likes across 2 groups. No comments. No service replies. 0 qualifying leads in our verticals (plumbing, electrical, HVAC, heating, pest, appliance).",
+            "issues": "Wheaton/GE/Winfield/Warrenville continues to be 100% business spam — two cleaning service ads posted within 30 minutes of each other plus Mara's Flooring December cross-post still appearing. Wednesday 5 PM confirmed dead for home service requests across all 4 groups. Bolingbrook heavily political today — No Kings rally and gas prices dominating feed. Gas prices post by Beverly Jo Smith-Eskridge had 502 comments. Republic trash cart delivery dominating My DG feed."
+        },
+        {
+            "date": "2026-03-26",
+            "time": "17:01",
+            "type": "lurk",
+            "groups_visited": [
+                "What's Happening in Bolingbrook, IL",
+                "Glen Ellyn - Wheaton Neighbors",
+                "My Downers Grove",
+                "What's Happening in Downers Grove IL?",
+                "What's happening in Westmont, IL"
+            ],
+            "actions_taken": [
+                {
+                    "action": "liked",
+                    "group": "My Downers Grove",
+                    "post_type": "community - library volunteer event",
+                    "description": "Bob Rakow (Moderator) sharing DG Public Library 2nd Annual Volunteer Fair, Saturday March 28 10am-noon"
+                }
+            ],
+            "scouted_leads": [
+                {
+                    "type": "scouted_lead",
+                    "group": "Glen Ellyn - Wheaton Neighbors",
+                    "post_description": "Kaitlin Lichtfuss looking for contractor recommendation for foundation repair / possible black mold situation",
+                    "service_vertical": "mold_remediation/foundation",
+                    "post_age": "recent (comments 1h-4h ago)",
+                    "engagement": "5 reactions, 16 comments",
+                    "skip_reason": "Mold remediation and foundation repair not in Phase 2 qualifying verticals (plumbing, electrical, HVAC, heating, pest, appliance)"
+                }
+            ],
+            "notes": "Thursday 5 PM run. Scanned 5 groups rotating from yesterday. Complete dead zone for home service requests in our verticals. Bolingbrook dominated by No Kings political rally (152 reactions, 196 comments), birthday balloon display (46 comments), yard cleanup (30 comments), lawnmower service, quartz countertop, vehicle insurance (39 comments), baptism cake (81 comments), garage door keypad, Hello Shawarma restaurant (85 reactions), hit-and-run accident (475 reactions, 197 comments), mobile brake repair, ICIRR immigrant policy, library book sale, pet sitter — zero home service leads. Glen Ellyn-Wheaton had office buildout contractor (30 comments), gym recommendations (59 comments), Yorktown Center Lombard redevelopment (120 reactions, 50 comments), basketball hoop, foundation repair/mold (16 comments, scouted but not our vertical), landscaping leveling (53 comments), crochet class, cataract surgery — zero qualifying leads. My DG was aeration spam, running track question, Greener Grove Earth Week events, Bob Rakow DG Library Volunteer Fair (liked), golf club, DuPage Health measles alert, First Congregational UCC tornado relief — zero leads. DG IL? continues 100% business spam: esthetician school, Ogden Auto Service oil change, Harold Dawson jazz at Grand Dukes. Westmont still sorted by New Posts — Tallgrass Restaurant Easter Brunch from Lockport (not even local). 1 like in 1 group. No comments. No service replies. 0 qualifying leads in our verticals (plumbing, electrical, HVAC, heating, pest, appliance).",
+            "issues": "Thursday 5 PM confirmed dead for home service requests across all 5 groups — dominated by politics, food/restaurants, insurance, car accidents, community events, and business spam. Bolingbrook No Kings rally still generating massive engagement (196 comments). DG IL? remains completely useless — 100% business spam. Westmont still sorted by New Posts and flooded with non-local restaurant spam. Joseph Lee aeration spam hitting My DG now (cross-posting from other groups)."
+        },
+        {
+            "date": "2026-03-27",
+            "time": "17:04",
+            "type": "lurk",
+            "groups_visited": [
+                "What's Happening in Wheaton, Glen Ellyn, Winfield and Warrenville",
+                "Our Downers Grove",
+                "Local Naperville",
+                "Downers Grove News and Comment"
+            ],
+            "actions_taken": [
+                {
+                    "action": "liked",
+                    "group": "Downers Grove News and Comment",
+                    "post_type": "community - charity/donation",
+                    "description": "Cheri Peterson looking to donate women's clothing with tags to women's shelter, 2 reactions, 10 comments"
+                }
+            ],
+            "scouted_leads": [],
+            "notes": "Friday 5 PM run. Scanned 4 groups rotating from yesterday (which covered Bolingbrook, Glen Ellyn-Wheaton, My DG, DG IL?, Westmont). Complete dead zone for home service requests in our verticals. Wheaton/GE/Winfield/Warrenville was 100% business spam: Met group inc exterior light ad (MorroDe LasVillas), Ian McClellan Faywell apartment development Wheaton (community news, 4 reactions, 2 comments), Nick Kein real estate listing Warrenville, Mara's Flooring (Adrian Siciu) STILL cross-posting from other groups, TK Tom Painting (Tomasz Kolodziejczyk) 34-photo album, TJ Phillabaum TJ's Truck Services scrap metal, Lopez Manny Crossover Basketball spring break, Janet Dorler patio door/window replacement request (10 reactions, 42 comments — not our vertical, over comment limit), Kalista Cielak garage sale after loss, Nick Chiaramonte real estate Warrenville, Saul Fonseca Fonseca Landscaping. Our Downers Grove: Kirsten Swanson Kindly Social Spring Break Bunny Visits (2 days old), Windycityrecords New Release Friday music reel, Joyce Ostberg Native American Sites of Chicago Region YouTube series (Glen Ellyn/Lombard history), Community Adult Day Center spring Bloom Room, Ross Rolando O'Hare airport wait times (29 comments), Kelli Wunder Shoup martial arts Easter egg hunt Darien, Jack Nasatsky Eagle Youth Sports spring programs, Jerry Singh Nash Painting and Remodeling spam. Local Naperville was 100% spam: Jennifer Slown Timber Creek Residences snowbird pitch (18h old), Scott Gajewski real estate reel, PITA ZONE restaurant bowls, Ruby Whiskers Animal Rescue Easter adoption event Lockport, The Power Boys LLC power washing reel, Around Town Real Estate/Baird & Warner open houses, Nicole Olson J&J Power Washing gutter cleaning. DG News & Comment: Cheri Peterson clothing donation to shelter (liked), Joe Rossi Nature's Best Market pot pie, Syndi Como looking for contractor to build a room (6 reactions, 25 comments, 3 days old — not our vertical, construction), Maria Kasher YMCA Farmers Market manager job, Jerry Singh Nash Painting cross-posted. 1 like in 1 group. No comments. No service replies. 0 qualifying leads in our verticals (plumbing, electrical, HVAC, heating, pest, appliance).",
+            "issues": "Friday 5 PM confirmed dead for home service requests across all 4 groups — dominated by business spam, real estate, Easter events, restaurant promos, and construction. Nash Painting (Jerry Singh) cross-posting same ad to both Our DG and DG News & Comment. Mara's Flooring (Adrian Siciu) still cross-posting to Wheaton group. TK Tom Painting flooding Wheaton with 34-photo album. Local Naperville remains 100% business spam — worst group for community content. Janet Dorler window/door request in Wheaton had 42 comments (over limit) and not our vertical anyway. Syndi Como room-building request in DG News had 25 comments and not our vertical."
+        },
+        {
+            "timestamp": "2026-03-28T12:10:00",
+            "date": "2026-03-28",
+            "time": "12:10",
+            "type": "service_reply",
+            "group_name": "What's Happening in Bolingbrook, IL",
+            "post_snippet": "Betsy Rodriguez Ocasio: Looking for a registered electrician in the City of Bolingbrook",
+            "vertical": "electrical",
+            "template_used": "t4",
+            "score": 45,
+            "image_used": "electrical.png",
+            "phone": "(630) 318-3024",
+            "post_url": "https://www.facebook.com/groups/104287120162473/posts/1846658472591987/",
+            "post_age_hours": 2,
+            "comments_at_time": 26
+        },
+        {
+            "timestamp": "2026-03-28T17:10:00",
+            "date": "2026-03-28",
+            "time": "17:10",
+            "type": "lurk",
+            "groups_visited": [
+                "Glen Ellyn - Wheaton Neighbors",
+                "My Downers Grove",
+                "What's Happening in Downers Grove IL?",
+                "Our Downers Grove"
+            ],
+            "actions_taken": [],
+            "scouted_leads": [],
+            "notes": "Saturday 5 PM run. Scanned 4 groups rotating from noon run (which posted electrical service reply in Bolingbrook). Complete dead zone for home service requests — Saturday 5 PM dominated by politics (No Kings protest), community safety (fatal crash), Easter events, business spam, and personal services. Glen Ellyn-Wheaton: Faywell apartment update (75 comments), PitCrew Sharkos salmon restaurant, Ice Ice Baby ice cream shop reopening, health insurance broker request (15 comments, not our vertical), Downtown GE Easter Bunny event, Egg Your Yard Easter service, summer nanny from UofF, dog sitter August, digital marketing Paid Media Manager job (logged to employers-hiring-log), lash extensions (1 week old), Affordable Painting & Epoxy spam. My DG: No Kings protest (70 reactions, 25 comments), Bob Rakow House Bill 1590, fatal crash investigation (32 reactions, 23 comments), Chuck Derer cloud photo (already liked), Republic trash welcome email, menopause doctor (12 comments), lost cat Obi Wan (41 reactions, 23 shares). DG IL?: Nicole Goggin deleted/restricted post, Moe Salk GetFixLocal smart camera ad spam, Veronica Sabatka Murray gutter cleaning request (7 comments, not our vertical), Lindsay Kastning Photography spam. Our DG: Whiskey Wealth Wisdom podcast spam, DG Chiropractic reel spam, Anthony DelCoiro J&K Home Improvement roofing spam. 0 likes (already had prior like on cloud post). No comments. No service replies. 0 qualifying leads in our verticals (plumbing, electrical, HVAC, heating, pest, appliance).",
+            "issues": "Saturday 5 PM confirmed dead for home service requests across all 4 groups. DG IL? top post was deleted/restricted content — increasingly unreliable group. Our DG continues to be 100% business spam. GetFixLocal (Moe Salk) posting smart camera/doorbell/sump pump ad to DG IL? — competitor in our space. No Kings protest dominating My DG feed with heated political comments. Tim Alia digital marketing agency in Glen Ellyn hiring Paid Media Manager — logged to employers-hiring-log for Arcline pipeline."
+        },
+        {
+            "timestamp": "2026-03-29T09:08:00",
+            "date": "2026-03-29",
+            "time": "09:08",
+            "type": "lurk",
+            "groups_visited": [
+                "What's Happening in Bolingbrook, IL",
+                "Glen Ellyn - Wheaton Neighbors",
+                "My Downers Grove",
+                "What's Happening in Wheaton, Glen Ellyn, Winfield and Warrenville"
+            ],
+            "actions_taken": [
+                {
+                    "action": "liked",
+                    "group": "My Downers Grove",
+                    "post_type": "community - recreation/pickleball",
+                    "description": "Audra Pfeil looking for welcoming pickleball place after bad experience at Pickled Woodridge, 19 reactions, 27 comments"
+                }
+            ],
+            "scouted_leads": [
+                {
+                    "type": "scouted_lead",
+                    "group": "What's Happening in Bolingbrook, IL",
+                    "post_description": "Adebayo Oyebode needs carpenter to fix broken door architrave",
+                    "service_vertical": "handyman/carpentry",
+                    "post_age": "recent (comments 19-33 min ago)",
+                    "engagement": "2 reactions, 9 comments",
+                    "skip_reason": "Handyman/carpentry borderline vertical, Bolingbrook within 24h of yesterday's service reply (12:10 PM), cannot reply until 12:10 PM today"
+                }
+            ],
+            "notes": "Sunday 9 AM run. Scanned 4 groups (dropped What's Up Naperville — historically 100% spam). Complete dead zone for home service requests — Sunday morning confirmed worst time slot for 4th consecutive week. Bolingbrook dominated by tattoo artist for dog portrait (19 comments), pixie cut stylist (37 comments), bathroom deep clean (65 comments), No Kings protest SSIP reel (245 reactions, 93 comments), Congressman Foster at No Kings (539 reactions, 143 comments), driveway reseal (63 comments), hospital baby delivery (252 comments), lost dog Milo (4 reactions, 2 comments), birthday party display (114 comments), house rental in Spanish, Alpha Exteriors ONE contractor scam warning (22 reactions, 27 comments). One handyman-adjacent lead (door architrave, 9 comments) but Bolingbrook still within 24h reply window. Glen Ellyn-Wheaton: cat dermatologist (9 comments), GE Public Library book donations, new windows for house (58 comments over limit), Faywell apartment update (55 reactions, 78 comments), vet recommendation (82 comments, commenting turned off), photographer for 1yr photoshoot (49 comments, commenting off), PitCrew Sharkos salmon promo, Yorktown Center Lombard redevelopment update (142 reactions). My DG: Republic trash welcome email (22 comments, still dominating feed), school district D99 special needs complaint (79 reactions, 52 comments, sensitive), pickleball place request (19 reactions, 27 comments, liked). Wheaton/GE/Winfield/Warrenville: 100% business spam — Nha Nguyen brow tint posted TWICE in 4 minutes, author book signing event. 1 like in 1 group. No comments. No service replies. 0 qualifying leads in our verticals (plumbing, electrical, HVAC, heating, pest, appliance). 1 handyman-adjacent lead scouted but skipped due to 24h group cooldown.",
+            "issues": "Nha Nguyen posting brow tint spam TWICE to Wheaton group within 4 minutes — worst spam offender seen. Bolingbrook completely dominated by politics (No Kings protest/ICE) and personal services (tattoo, stylist, bathroom cleaning). Glen Ellyn-Wheaton admins turning off commenting on recommendation posts (vet, photographer). Sunday 9 AM confirmed worst time slot for home service requests for 4th consecutive week across all groups."
+        },
+        {
+            "timestamp": "2026-03-29T12:05:00",
+            "date": "2026-03-29",
+            "time": "12:05",
+            "type": "lurk",
+            "groups_visited": [
+                "What's Happening in Downers Grove IL?",
+                "Our Downers Grove",
+                "Local Naperville",
+                "Downers Grove News and Comment"
+            ],
+            "actions_taken": [],
+            "scouted_leads": [],
+            "notes": "Sunday noon run. Scanned 4 groups rotating from morning run (which covered Bolingbrook, Glen Ellyn-Wheaton, My DG, Wheaton/GE/Winfield/Warrenville). Complete dead zone for home service requests — Easter weekend Sunday noon confirmed worst possible time slot. DG IL? was 100% business spam: Always Blessed Movers, Refreshing Renovations spring exterior repair reel, BrightSide Theatre ASL performance promo (Julie Konkols Kornak), Jessjesscustomcreations LLC trailer decal reel. Our DG: Al Morris political cross-post from DuPage County Republicans (29 min ago), Gabriela Hernandez/Sprinkle Candles Easter Bunny popup at Bentleys Pet Stuff on Ogden Ave cross-posted from business page, Anna Gabriela horse and pony party rental. Page got hijacked into Reels viewer (OAN Beirut explosion video) when scrolling. Local Naperville: The Power Boys LLC power washing reel (from September!), Martinelli Meats delivery spam, Aldrovani Ruiz Professional Landscaping spring cleanup photos. DG News & Comment: Gabriela Hernandez Sprinkle Candles Easter Bunny cross-posted TWICE in same group, Anita Aaron Zawodniak looking for small concrete job replacing 3 pieces leading to front stoop (3 days old, 13 comments — not our vertical), Piotr Fied/Square Exteriors Inc spring siding season reel spam. 0 likes across 4 groups (no suitable community content). No comments. No service replies. 0 qualifying leads in our verticals (plumbing, electrical, HVAC, heating, pest, appliance).",
+            "issues": "Easter weekend Sunday noon is complete dead zone — all 4 groups 100% business spam, Easter events, political cross-posts, and contractor self-promotion. Gabriela Hernandez/Sprinkle Candles cross-posting Easter Bunny event to BOTH Our DG and DG News & Comment (posted twice in DG News & Comment). Browser got hijacked into Reels viewer when scrolling Our DG — OAN video autoplayed. The Power Boys LLC still posting September reel to Local Naperville. Al Morris continues political cross-posting to Our DG. Refreshing Renovations (847 number) posting spring repair reel to DG IL?. Zero home service recommendation requests seen across all 4 groups — Easter weekend is a complete washout for lead gen."
+        },
+        {
+            "timestamp": "2026-03-29T17:03:00",
+            "date": "2026-03-29",
+            "time": "17:03",
+            "type": "lurk",
+            "groups_visited": [
+                "What's Happening In DuPage, Kane, Kendall, & Cook County IL",
+                "What's Happening in Naperville IL?",
+                "What's happening in Westmont, IL",
+                "What's Happening in Woodridge, IL"
+            ],
+            "actions_taken": [
+                {
+                    "action": "liked",
+                    "group": "What's Happening in Woodridge, IL",
+                    "post_type": "community - local history/educational",
+                    "description": "Joyce Ostberg The Great Chicago Portage video exploring indigenous portage route, I&M Canal, and Chicago Sanitary Canal history"
+                }
+            ],
+            "scouted_leads": [],
+            "notes": "Sunday 5 PM run. Scanned 4 groups not visited today (DuPage County IL, Naperville IL?, Westmont, Woodridge). Complete dead zone for home service requests — Easter weekend Sunday 5 PM confirmed absolute worst time slot. DuPage County IL had Julie Roloff Bassett Zoom class spam (25 min old), Sue Begg/Wags 2 Wishes animal rescue post, Kevin Coyne No Kings political cross-post from DuPage County Republicans (6 reactions, 2 comments) — 100% spam and politics. Naperville IL? STILL pending participation approval (5+ weeks now), sorted by New Posts, top post Kirk Jansons/Batavia Creamery content not available, then Fox Valley Magazine admin posts — March 2026 Featured Dishes Part I (restaurant promos), Wurst Kitchen Sausage Company Aurora (Justa Coupla Guys podcast filming). Westmont still sorted by New Posts — Megan Levine dance program enrollment, H is for Hair salon promo at Phenix Salon Suites DG with hashtag spam, Joyce Ostberg Chicago Portage video. Woodridge sorted by New Posts — same Joyce Ostberg Chicago Portage cross-post (2h old), then Veronica Janoski posted Always Blessed Movers spam TWICE (back-to-back identical posts). 1 like in 1 group (Woodridge — Joyce Ostberg history video). No comments. No service replies. 0 qualifying leads in our verticals (plumbing, electrical, HVAC, heating, pest, appliance).",
+            "issues": "Easter weekend Sunday 5 PM confirmed absolute worst time slot for home service requests — all 4 groups 100% business spam, political cross-posts, and history content. Naperville IL? still pending approval after 5+ weeks — should be dropped from scan rotation. Veronica Janoski posted Always Blessed Movers ad TWICE in Woodridge back-to-back (identical posts). Joyce Ostberg continues cross-posting same Chicago Portage video to multiple groups (Westmont + Woodridge). H is for Hair salon posting to Westmont with excessive hashtag spam (#curly #curlynaturalhair #curlyhaircut #menshaircut #definedcurls #downersgrovehairstylist etc)."
+        },
+        {
+            "timestamp": "2026-03-30T09:20:00",
+            "date": "2026-03-30",
+            "time": "09:20",
+            "type": "service_reply",
+            "group_name": "Glen Ellyn - Wheaton Neighbors",
+            "post_snippet": "Katie Hefley: Looking for plumbing recommendations. Need to get my tub snaked but not looking to spend $500",
+            "vertical": "plumbing",
+            "template_used": "t2",
+            "score": 45,
+            "image_used": "plumbing.png",
+            "phone": "(630) 756-5104",
+            "post_url": "https://www.facebook.com/groups/2327310610879847/posts/4488764904734396/",
+            "post_age_hours": 3,
+            "comments_at_time": 31
+        },
+        {
+            "timestamp": "2026-03-30T17:09:00",
+            "date": "2026-03-30",
+            "time": "17:09",
+            "type": "lurk",
+            "groups_visited": [
+                "What's Happening in Downers Grove IL?",
+                "Our Downers Grove",
+                "Local Naperville",
+                "Downers Grove News and Comment",
+                "What's Happening In DuPage, Kane, Kendall, & Cook County IL"
+            ],
+            "actions_taken": [
+                {
+                    "action": "liked",
+                    "group": "Our Downers Grove",
+                    "post_type": "community - public safety",
+                    "description": "DuPage County Sheriff's Office community relations reel, connecting with community, 3 hours old"
+                },
+                {
+                    "action": "liked",
+                    "group": "Downers Grove News and Comment",
+                    "post_type": "community - animal rescue/charity",
+                    "description": "Gina Rivera sharing Fetching Tails Foundation dog rescue plea - Friday night emergency, please donate"
+                }
+            ],
+            "scouted_leads": [],
+            "notes": "Monday 5 PM run. Scanned 5 groups rotating from morning run (which covered Bolingbrook, Glen Ellyn-Wheaton, My DG, Wheaton/GE/Winfield/Warrenville and posted plumbing service reply in GE-Wheaton). Complete dead zone for home service requests — Monday 5 PM dominated by business spam across ALL groups. DG IL? was 100% spam: Andreas Georgiades Wheaton house for sale cross-post, BIG Gymnastics PTO partnership ad (Marta Sniezko), Blue Jay Appliance Services ad. Our DG: Peg Williams Reid math tutoring ad, Slawek Polinski Tivoli Bowl nostalgia photo 10 years ago (8 reactions), DuPage County Sheriff's Office community relations reel (liked), Al Morris DuPage County Republicans political cross-post (ambulance photo, 8 reactions, 10 comments, heated debate), Whiskey Wealth and Wisdom March Madness Final Four reel. Local Naperville: 100% business spam — Tina McDonald Santana The Gathering Lighthouse event (cross-posted to multiple groups), Ryan Wujcik AT&T wireless/TV/internet sales (Mike Jovic Astound Rep competing in comments), Absolute BBQ Naperville Vada Pav restaurant ad, Wreckroom Dekalb rage room reel. DG News & Comment: Tanya Hernandez Top Appliance Repair ad with Proverbs 16:3 Christian branding (815 number, not local DG), Gina Rivera Fetching Tails Foundation dog rescue donation plea (liked), Joe Rossi Nature's Best Market French sandwich Le Gouter reel. DuPage County: Tina McDonald Santana Gathering Lighthouse event cross-post (posted 4 min ago), Meagen Lee Floral flower preservation reel from Sycamore IL, Andreas Georgiades Wheaton house cross-post. 2 likes across 2 groups. No comments. No service replies. 0 qualifying leads in our verticals (plumbing, electrical, HVAC, heating, pest, appliance).",
+            "issues": "Tina McDonald Santana cross-posting Gathering Lighthouse event to BOTH Local Naperville AND DuPage County group simultaneously. Andreas Georgiades cross-posting same Wheaton house listing to DG IL? and DuPage County. Monday 5 PM confirmed dead for home service requests across all 5 groups — 100% business spam, political cross-posts, nostalgia posts, and animal charity. Ryan Wujcik AT&T sales post in Local Naperville spawned competing Astound Rep comment within 50 minutes. Top Appliance Repair using Christian branding (Proverbs 16:3) with 815 area code — not local DG business."
+        },
+        {
+            "timestamp": "2026-03-31T17:03:00",
+            "date": "2026-03-31",
+            "time": "17:03",
+            "type": "lurk",
+            "groups_visited": [
+                "What's Happening in Bolingbrook, IL",
+                "Glen Ellyn - Wheaton Neighbors",
+                "My Downers Grove",
+                "What's Happening in Wheaton, Glen Ellyn, Winfield and Warrenville"
+            ],
+            "actions_taken": [
+                {
+                    "action": "liked",
+                    "group": "My Downers Grove",
+                    "post_type": "community - home repair help",
+                    "description": "Terry Taylor Schneider asking for granite sink and countertop repair recommendations, 2 reactions, 1 comment"
+                },
+                {
+                    "action": "liked",
+                    "group": "My Downers Grove",
+                    "post_type": "community - car mechanic recommendation",
+                    "description": "Meg Es asking for local Honda car shop/mechanic recommendations with GIF, 3 reactions, 14 comments"
+                }
+            ],
+            "scouted_leads": [],
+            "notes": "Tuesday 5 PM run. Scanned 4 groups rotating from yesterday (which covered Bolingbrook/GE-Wheaton/My DG/Wheaton in AM, and DG IL?/Our DG/Local Naperville/DG News/DuPage County in PM). Complete dead zone for home service requests in our verticals — Tuesday 5 PM dominated by personal services, car shopping, school content, and business spam. Bolingbrook: basketball trainer, house buying with bad credit, lost wallet, lash masterclass spam, graduation tickets (16 comments), math tutor for union exam, storm chaser complaint (53 comments), photographer maternity (56 comments), paraprofessional career advice, car shopping $1500-2000 (23 comments), hospital induction question, check engine light EVAP Chevy Equinox (22 comments), Woof Animal Rescue foster ad. Glen Ellyn-Wheaton: fence repair from high winds (24 comments), restaurant recommendation (54 comments), roofing company (90 comments, not our vertical), electrical burning smell outside (12 comments, community alert not service request), lost glasses package, vet clinic (53 comments), Faywell apartments update (95 comments), health insurance broker (27 comments). My DG: granite sink/countertop repair (liked), Honda mechanic (liked), CPR/first aid class (13 comments), public adjuster storm recovery (32 comments), Bob Rakow O'Neill Middle School class photo. Wheaton/GE/Winfield/Warrenville: bush removal handyman (60 comments over limit, landscaping), Cruz Tree Services spam, Angelica Marie real estate listing spam. 2 likes in 1 group. No comments. No service replies. 0 qualifying leads in our verticals (plumbing, electrical, HVAC, heating, pest, appliance).",
+            "issues": "Tuesday 5 PM confirmed dead for home service requests across all 4 groups — dominated by personal services (photographer, stylist, basketball trainer), car-related posts (mechanic, check engine, car shopping), school content (graduation tickets, O'Neill Middle School), community alerts (storm chasers, electrical burning smell), and business spam (lash masterclass, tree services, real estate listings). Wheaton/GE/Winfield/Warrenville continues to be 100% business spam. March 31 marks 13 consecutive days without a qualifying home service lead in our verticals during 5 PM time slot (last qualifying lead was March 28 at 12:10 PM in Bolingbrook). Bush removal handyman post in Wheaton group had 60 comments — over limit even if it were our vertical."
+        },
+        {
+            "timestamp": "2026-04-01T09:08:00",
+            "date": "2026-04-01",
+            "time": "09:08",
+            "type": "lurk",
+            "groups_visited": [
+                "What's Happening in Bolingbrook, IL",
+                "Glen Ellyn - Wheaton Neighbors",
+                "My Downers Grove",
+                "What's Happening in Downers Grove IL?",
+                "Our Downers Grove"
+            ],
+            "actions_taken": [
+                {
+                    "action": "liked",
+                    "group": "What's Happening in Bolingbrook, IL",
+                    "post_type": "community - April Fools humor",
+                    "description": "Steve Boyles April Fools Day 5 ways to avoid being tricked post, 35 reactions (22 haha, 11 like)"
+                },
+                {
+                    "action": "liked",
+                    "group": "Glen Ellyn - Wheaton Neighbors",
+                    "post_type": "community - lost and found",
+                    "description": "Jill Kestler Gundersen found necklace at WashU Car Wash in Wheaton, looking for owner, 1 reaction"
+                }
+            ],
+            "scouted_leads": [],
+            "notes": "Wednesday 9 AM run. Scanned 5 groups rotating from yesterday. Complete dead zone for home service requests in our verticals (plumbing, electrical, HVAC, heating, pest, appliance). Bolingbrook dominated by paraprofessional career question, Meineke Car Care complaint (AC overcharge but auto not home HVAC), Independence Elementary school concerns (9 comments), K9s for Veterans housewares sale, Michael Carpanzano Village Picnic save the date, LivelyLizard9662 Filipina job seeker (caregiving, logged), sod/landscaping request (87 comments over limit, not our vertical), maternity/newborn photographer (59 comments), Congressman Foster No Kings (606 reactions, 157 comments, still dominating from 3 days ago), storm chaser complaints (56 comments), solar panels (32 comments), seamstress request (8 comments, in Spanish), Angel Dog Alliance puppy foster, Wags 2 Wishes animal rescue, Steve Boyles April Fools joke (liked), Sean Purcell driveway reseal (76 comments, not our vertical). Glen Ellyn-Wheaton had Lexus oil change/tire swap (auto, 35 comments), lost dog found, Wheaton Ignite CheerAbilities x2 (inclusive cheer for kids with disabilities), Ben Hinchey Synergy Soccer tryouts, Jill Kestler Gundersen found necklace at car wash (liked), Chicago Nation FC soccer game, Jimmy D Radzinski fence repair Glen Ellyn (35 comments, not our vertical), VASA gym hours (12 comments). My DG had Meg Es Honda mechanic (already liked, now 50 comments), Bob Rakow e-motorcycle warning from Village of DG, Liz Stockmal Sodaro Sam's Italian Villa memories (already liked, 28 reactions, 19 comments), Terry Taylor Schneider granite sink repair (already liked). DG IL? was 100% business spam as always — Kesar Salon & Spa April Bliss promo on top. Our DG had DG Historical Society Pine Hollow golf fundraiser, Jay Loren Salon & Spa hiring hairstylists/barbers (logged to employers-hiring-log). 2 likes across 2 groups. No comments. No service replies. 0 qualifying leads in our verticals (plumbing, electrical, HVAC, heating, pest, appliance).",
+            "issues": "Wednesday 9 AM confirmed dead for home service requests across all 5 groups — dominated by auto mechanic requests, school concerns, politics (No Kings still echoing from 3 days ago), April Fools content, youth sports signups, and business spam. DG IL? remains 100% business spam — Kesar Salon & Spa from Lisle flooding top of feed. Congressman Foster No Kings post in Bolingbrook still generating engagement at 606 reactions and 157 comments 3 days later. All sod/landscaping and driveway requests far exceed comment limits."
+        },
+        {
+            "timestamp": "2026-04-01T12:04:00",
+            "date": "2026-04-01",
+            "time": "12:04",
+            "type": "lurk",
+            "groups_visited": [
+                "What's Happening in Wheaton, Glen Ellyn, Winfield and Warrenville",
+                "Local Naperville",
+                "Downers Grove News and Comment",
+                "What's Happening In DuPage, Kane, Kendall, & Cook County IL",
+                "What's happening in Westmont, IL"
+            ],
+            "actions_taken": [
+                {
+                    "action": "liked",
+                    "group": "Downers Grove News and Comment",
+                    "post_type": "community - environmental/Earth Week events",
+                    "description": "Julie Morici Companey / Greener Grove Earth Week Events 2026 - community planting, trash talk, terrarium class, forester walk, multiple DG events April 10-26"
+                }
+            ],
+            "scouted_leads": [],
+            "notes": "Wednesday noon run. Scanned 5 groups rotating from morning run (which covered Bolingbrook, GE-Wheaton, My DG, DG IL?, Our DG). Complete dead zone for home service requests — Wednesday noon dominated by business spam across ALL groups. Wheaton/GE/Winfield/Warrenville was 100% business spam: Chau Tran/Venezia Nail Spa 30% off coupon (Ogden Ave DG), Taryn McCuan/Taryn Stephanie Photography maternity bump-to-baby package, Ian McClellan Glen Ellyn new park community update (10 reactions, 1 comment), Ronald Bry/CMAAA Coliseum Museum April activities, Angelica Marie/KW Inspire real estate listing Winfield ($420K), Erica Hauser/KW Inspire real estate Lake in the Hills, Priscilla Zitt/Illinois Valley Septic Service tips, Veronica Janoski/Always Blessed Movers ad. Local Naperville: Doug Dahlen/Century 21 real estate spam, Joe Salsbery motivational reel, Jennifer Slown/Timber Creek Residences senior living (still posting), Jaime Jay/Windy Acres Farm Geneva Easter reel, FYZICAL Therapy Bolingbrook proprioception ad. DG News & Comment: Huskie Exteriors April Fools contractor ad on top, Riddhi Gandhi/Sukun Arts mandala dot art class event, Julie Morici Companey/Greener Grove Earth Week (liked), Lindsey Thurston/Lindsey the Lawn Lady landscaping, Rachel Pomykala/Sweets & Decor More, Michael Vazquez/Premier Pressure Wash LLC posted TWO reels simultaneously. DuPage County: Bbqland Hanover Park halal restaurant lunch deal, Kevin Coyne/DuPage County Republicans No Kings post (9 reactions, 3 comments, politics), Regis Watson/Baird & Warner real estate sold in Naperville, Rachel Pomykala Sweets & Decor More cross-posted to this group too. Westmont still sorted by New Posts: BaseCamp Pub & Eatery spring/summer specials and happy hour. 1 like in 1 group. No comments. No service replies. 0 qualifying leads in our verticals (plumbing, electrical, HVAC, heating, pest, appliance).",
+            "issues": "Wednesday noon confirmed dead for home service requests across all 5 groups — 100% business spam, April Fools themed contractor ads, real estate listings, restaurant promos, politics, and event spam. Premier Pressure Wash LLC (Michael Vazquez) posted TWO identical reels to DG News & Comment simultaneously (garage wash and exterior cleaning). Rachel Pomykala Sweets & Decor More cross-posted to both DG News & Comment AND DuPage County group. Venezia Nail Spa posting expired coupon (valid until 3/25) in Wheaton group. Illinois Valley Septic Service spam reaching Wheaton group. Two KW Inspire real estate agents (Angelica Marie and Erica Hauser) both posting in Wheaton group simultaneously. April 1 marks 15th consecutive time slot without a qualifying home service lead in our verticals (last qualifying lead was March 30 at 09:20 in GE-Wheaton plumbing)."
+        },
+        {
+            "timestamp": "2026-04-01T17:10:00",
+            "date": "2026-04-01",
+            "time": "17:10",
+            "type": "lurk",
+            "groups_visited": [
+                "What's Happening in Bolingbrook, IL",
+                "Glen Ellyn - Wheaton Neighbors",
+                "My Downers Grove",
+                "What's Happening in Downers Grove IL?"
+            ],
+            "actions_taken": [
+                {
+                    "action": "liked",
+                    "group": "My Downers Grove",
+                    "post_type": "community - police officer benefit",
+                    "description": "Samantha Roti-Glynn police officer benefit fundraiser, agency supporting one of their own, 34 reactions, 2 comments, 4 shares"
+                }
+            ],
+            "scouted_leads": [],
+            "notes": "Wednesday 5 PM run. Scanned 4 groups rotating from noon run (which covered Wheaton/GE/Winfield/Warrenville, Local Naperville, DG News & Comment, DuPage County, Westmont). Complete dead zone for home service requests — Wednesday 5 PM dominated by April Fools content, personal services, community events, and business spam. Bolingbrook: DVD disposal question (18 comments), pedicure request, Buc-ees April Fools joke (56 reactions, 32 haha), wood floor sanding (15 comments, not our vertical), Dave's Hot Chicken hiring Lockport, real estate attorney (7 comments, not our vertical), stray animal/coyote debate (22 reactions, 28 comments), room rental, 7brew coupons (34 comments), dresser search, free furniture, GLP1 doctor referral, teacher vote, FunFlatables April Fools spam, Ricky's Rascals Easter adoption, car break-in Augusta Village (85 reactions), Independence Elementary school question. Glen Ellyn-Wheaton: patio design (69 comments over limit), roofing (92 comments over limit), birthday cakes (32 comments), fence repair Glen Ellyn (37 comments), Lexus oil change/tire swap auto (48 comments), Forest Apartments info (16 comments), lawn mowing (50 comments over limit), Pete's Ice Cream Bar. My DG: window tint removal (auto, 6 comments), Bob Rakow e-motorcycle warning (already liked AM), police officer benefit fundraiser (liked, 34 reactions). DG IL? was 100% business spam: Clarendon Hills park district Patch article, Edna Kyerr dresser cross-post from Bolingbrook, Storm Guard Roofing storm chaser ad. 1 like in 1 group. No comments. No service replies. 0 qualifying leads in our verticals (plumbing, electrical, HVAC, heating, pest, appliance).",
+            "issues": "Wednesday 5 PM confirmed dead for home service requests across all 4 groups — 17th consecutive time slot without qualifying lead (last: March 30 at 09:20 GE-Wheaton plumbing). Edna Kyerr cross-posting dresser search to both Bolingbrook and DG IL?. Storm Guard Roofing storm chaser spam in DG IL? (FREE drone inspections, 630-812-1716). Buc-ees April Fools post dominating Bolingbrook with 56 reactions. All recommendation requests in GE-Wheaton far exceed comment limits (patio 69, roofing 92, lawn 50, Lexus 48, fence 37, cakes 32)."
+        }
+    ],
+    "daily_counts": {
+        "2026-03-19": {
+            "likes": 3,
+            "comments": 0,
+            "groups_visited": 11
+        },
+        "2026-03-18": {
+            "likes": 2,
+            "comments": 0,
+            "groups_visited": 5
+        },
+        "2026-03-15": {
+            "likes": 2,
+            "comments": 0,
+            "groups_visited": 10
+        },
+        "2026-03-14": {
+            "likes": 4,
+            "comments": 0,
+            "groups_visited": 9
+        },
+        "2026-03-13": {
+            "likes": 6,
+            "comments": 0,
+            "groups_visited": 13
+        },
+        "2026-03-12": {
+            "likes": 5,
+            "comments": 0,
+            "groups_visited": 12
+        },
+        "2026-03-11": {
+            "likes": 8,
+            "comments": 0,
+            "groups_visited": 8
+        },
+        "2026-03-10": {
+            "likes": 6,
+            "comments": 0,
+            "groups_visited": 8
+        },
+        "2026-03-09": {
+            "likes": 6,
+            "comments": 0,
+            "groups_visited": 8
+        },
+        "2026-03-08": {
+            "likes": 9,
+            "comments": 0,
+            "groups_visited": 8
+        },
+        "2026-03-07": {
+            "likes": 10,
+            "comments": 0,
+            "groups_visited": 8
+        },
+        "2026-03-06": {
+            "likes": 10,
+            "comments": 0,
+            "groups_visited": 8
+        },
+        "2026-03-05": {
+            "likes": 5,
+            "comments": 0,
+            "groups_visited": 10
+        },
+        "2026-03-04": {
+            "likes": 1,
+            "comments": 0,
+            "groups_visited": 2
+        }
+    },
+    "templates_used": [],
+    "daily_counts.2026-03-22": {
+        "likes": 1,
+        "comments": 0,
+        "groups_visited": 5
+    }
+}

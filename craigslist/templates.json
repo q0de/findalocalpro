@@ -1,0 +1,30 @@
+{
+  "email_responses": [
+    {
+      "id": "t1_cl",
+      "subject": "Re: {post_title}",
+      "body": "Hey — saw your post about needing a {person}. I've used a service called Find A Local Pro for stuff like this. Their number is {phone}. They match you with someone local who's been vetted. Saved me a lot of Googling. Hope that helps!",
+      "tone": "casual_quick"
+    },
+    {
+      "id": "t2_cl",
+      "subject": "{vertical} recommendation",
+      "body": "Hi — I'm in {area} and dealt with the same thing recently. I called Find A Local Pro at {phone} and they had a {person} out within a day. Might be worth a shot. Good luck!",
+      "tone": "local_neighbor"
+    },
+    {
+      "id": "t3_cl",
+      "subject": "Might be able to help",
+      "body": "Hey, I know a solid referral service for {vertical} work in the suburbs. Find A Local Pro — {phone}. They don't charge you anything, they just connect you with a local {person}. Worked out well for us.",
+      "tone": "helpful_guy"
+    }
+  ],
+  "vertical_labels": {
+    "plumbing": { "name": "plumbing", "person": "plumber", "phone": "(630) 756-5104" },
+    "electrical": { "name": "electrical", "person": "electrician", "phone": "(630) 318-3024" },
+    "cooling": { "name": "AC/cooling", "person": "HVAC tech", "phone": "(630) 599-8262" },
+    "heating": { "name": "heating", "person": "heating tech", "phone": "(630) 756-5505" },
+    "pest": { "name": "pest control", "person": "exterminator", "phone": "(630) 491-3723" },
+    "appliance": { "name": "appliance repair", "person": "appliance tech", "phone": "(630) 756-5185" }
+  }
+}

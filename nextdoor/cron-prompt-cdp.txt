@@ -1,0 +1,149 @@
+# Nextdoor Lead Gen Bot - CDP Workaround Version
+# OpenClaw browser tool's snapshot/act are broken - use CDP directly via exec
+
+**DELIVERY:** Send summary to Telegram using message tool with action=send, channel=telegram, target=7981159684.
+
+**IDENTITY:** Miles Granite (d0main@protonmail.com) - genuine neighbor account, authorized automation.
+
+## ⚠️ BROWSER TOOL STATUS
+- **WORKING:** browser action=navigate, tabs, close with profile='openclaw'
+- **BROKEN:** browser action=snapshot, act (routes to wrong profile)
+- **WORKAROUND:** Use CDP (Chrome DevTools Protocol) via exec for page content and interactions
+
+## CDP HELPER FUNCTIONS (Use These)
+
+### Get Page Content
+```
+exec: command="curl -s http://127.0.0.1:18800/json/list | python3 -c '
+import json,sys,asyncio,websockets
+async def main():
+    tabs = json.load(sys.stdin)
+    target = next((t[\"id\"] for t in tabs if \"nextdoor\" in t.get(\"url\",\"\")), None)
+    if not target: print(\"No nextdoor tab\"); return
+    async with websockets.connect(f\"ws://127.0.0.1:18800/devtools/page/{target}\") as ws:
+        await ws.send(json.dumps({\"id\":1,\"method\":\"Runtime.evaluate\",\"params\":{\"expression\":\"document.body.innerText\",\"returnByValue\":True}}))
+        r = json.loads(await ws.recv())
+        print(r[\"result\"][\"result\"][\"value\"][:20000])
+asyncio.run(main())
+'", timeout=30
+```
+
+### Click Element by Selector
+```
+exec: command="curl -s http://127.0.0.1:18800/json/list | python3 -c '
+import json,sys,asyncio,websockets
+async def main():
+    tabs = json.load(sys.stdin)
+    target = next((t[\"id\"] for t in tabs if \"nextdoor\" in t.get(\"url\",\"\")), None)
+    if not target: return
+    async with websockets.connect(f\"ws://127.0.0.1:18800/devtools/page/{target}\") as ws:
+        js = \"document.querySelector(SELECTOR).click()\"
+        await ws.send(json.dumps({\"id\":1,\"method\":\"Runtime.evaluate\",\"params\":{\"expression\":js,\"returnByValue\":True}}))
+asyncio.run(main())
+'", timeout=30
+```
+
+### Type Text into Input
+```
+exec: command="curl -s http://127.0.0.1:18800/json/list | python3 -c '
+import json,sys,asyncio,websockets
+async def main():
+    tabs = json.load(sys.stdin)
+    target = next((t[\"id\"] for t in tabs if \"nextdoor\" in t.get(\"url\",\"\")), None)
+    if not target: return
+    async with websockets.connect(f\"ws://127.0.0.1:18800/devtools/page/{target}\") as ws:
+        js = \"document.querySelector(SELECTOR).value = TEXT; document.querySelector(SELECTOR).dispatchEvent(new Event('input', {bubbles:true}))\"
+        await ws.send(json.dumps({\"id\":1,\"method\":\"Runtime.evaluate\",\"params\":{\"expression\":js,\"returnByValue\":True}}))
+asyncio.run(main())
+'", timeout=30
+```
+
+## PHONE NUMBERS (ALWAYS INCLUDE)
+| Vertical | Number |
+|----------|--------|
+| Plumbing | (630) 756-5104 |
+| Electrical | (630) 318-3024 |
+| HVAC/Cooling | (630) 599-8262 |
+| Heating | (630) 756-5505 |
+| Pest Control | (630) 491-3723 |
+| Appliance | (630) 756-5185 |
+
+## DAILY LIMITS
+- Max 3 service responses/day
+- Max 6 total posts/day  
+- Min 2.5 hours between service responses
+- 3:1 organic-to-service ratio
+
+## WORKFLOW
+
+### STEP 1: Setup
+1. browser action=tabs - list all tabs
+2. browser action=close for any nextdoor.com tabs
+3. Read templates.json, scoring.json, activity-log.json
+
+### STEP 2: Navigate
+```
+browser action=navigate, targetUrl=https://nextdoor.com/news_feed/, profile=openclaw
+```
+
+### STEP 3: Get Content
+Use CDP exec (see helper above) to get page text. Parse posts manually from the text.
+
+### STEP 4: Score Leads
+Use scoring.json rules. Skip if score < 50 or post age > 48h or replies > 15.
+
+### STEP 5: Respond
+1. Navigate to specific post: `browser action=navigate, targetUrl=POST_URL`
+2. Use CDP to find comment box (querySelector for textarea/input)
+3. Use CDP to type response from templates.json
+4. Use CDP to click submit button
+5. Log to activity-log.json
+
+### STEP 6: Log Activity
+Append to ~/clawd/findalocalpro/nextdoor/activity-log.json:
+```json
+{
+  "date": "2026-03-02",
+  "time": "14:30:00",
+  "post_url": "https://nextdoor.com/p/...",
+  "post_author": "Name",
+  "service_type": "plumbing",
+  "template_used": "template-id",
+  "response_type": "service",
+  "score": 85,
+  "neighborhood": "Downers Grove",
+  "reply_count_when_posted": 3,
+  "post_age_hours": 4.5,
+  "phone_number_used": "(630) 756-5104",
+  "our_response": "Full text posted"
+}
+```
+
+### STEP 7: Cleanup
+browser action=close for all nextdoor tabs
+
+## SERVICE KEYWORDS
+- Plumbing: leak, clog, water heater, pipe, drain, flood, sewage
+- Electrical: outlet, panel, breaker, flickering, wiring, GFCI
+- HVAC: furnace, AC, air conditioner, heat, thermostat, cooling
+- Pest: ants, mice, rat, termite, wasp, bee, spider, bed bug
+- Appliance: dishwasher, washer, dryer, fridge, refrigerator, oven
+
+## TELEGRAM REPORT FORMAT
+🏠 NEXTDOOR ACTIVITY - [Date]
+
+📊 DAILY SUMMARY:
+• Service responses: X/3
+• Community engagement: X
+• Total: X/6
+
+🎯 SERVICE LEADS:
+• [Type]: [Neighborhood] - Score: X - Phone: (XXX) XXX-XXXX
+• [Type]: Skipped - [Reason]
+
+⚠️ TECHNICAL:
+• CDP workaround active
+• Browser tool snapshot/act disabled
+
+⏰ NEXT ACTIONS:
+• [Time until next response allowed]

@@ -1,0 +1,288 @@
+{
+  "channel": "patch",
+  "persona": "Danny Kowalski",
+  "phase": "lurk",
+  "account_created": true,
+  "communities_followed": ["Downers Grove"],
+  "daily_caps": {
+    "max_comments_per_day": 3,
+    "max_per_community_per_week": 2,
+    "min_hours_between_comments": 3,
+    "classifieds_repost_days": 21
+  },
+  "today": {
+    "date": "2026-03-08",
+    "comments_posted": 0,
+    "classifieds_posted": 0
+  },
+  "comments_history": [],
+  "classifieds_history": [],
+  "community_weekly_counts": {},
+  "account_email": "dkowalski.westmont.creole003@passmail.net",
+  "email_verified": false,
+  "lurk_sessions": [
+    {
+      "date": "2026-03-06",
+      "time": "11:00 AM",
+      "run_type": "lurk",
+      "communities_visited": ["Downers Grove", "Naperville"],
+      "articles_read": [
+        {
+          "title": "Everest Fusion Now Open In Downers Grove",
+          "url": "https://patch.com/illinois/downersgrove/everest-fusion-now-open-downers-grove",
+          "community": "Downers Grove",
+          "category": "restaurant opening",
+          "engagement_attempt": "comment_unavailable"
+        },
+        {
+          "title": "McCollum Park Closed Amid Playground Removal, Replacement", 
+          "url": "https://patch.com/illinois/downersgrove/mccollum-park-closed-amid-playground-removal-replacement",
+          "community": "Downers Grove",
+          "category": "park improvements",
+          "engagement_attempt": "comment_unavailable"
+        },
+        {
+          "title": "Matrix Club Owners Appeal Eviction Order In Naperville",
+          "url": "https://patch.com/illinois/naperville/matrix-club-owners-appeal-eviction-order-naperville", 
+          "community": "Naperville",
+          "category": "business news"
+        },
+        {
+          "title": "Minnie Bird's Newest Location Now Open In Naperville",
+          "url": "https://patch.com/illinois/naperville/minnie-birds-newest-location-now-open-naperville",
+          "community": "Naperville", 
+          "category": "restaurant opening"
+        },
+        {
+          "title": "Lane Reduction, Street Closure To Impact Traffic On Washington Street, 6th Avenue In Naperville",
+          "url": "https://patch.com/illinois/naperville/lane-reduction-street-closure-impact-traffic-washington-street-6th-avenue",
+          "community": "Naperville",
+          "category": "infrastructure"
+        }
+      ],
+      "comments_made": [],
+      "scouted_leads": [
+        {
+          "type": "scouted_lead",
+          "article_title": "Lane Reduction, Street Closure To Impact Traffic On Washington Street, 6th Avenue In Naperville",
+          "community": "Naperville", 
+          "potential_service": "infrastructure/road work",
+          "notes": "Street work ongoing - potential for related property damage or utility issues"
+        }
+      ],
+      "account_status": "logged_in_as_danny_kowalski",
+      "commenting_status": "disabled_or_verification_required",
+      "notes": "Successfully browsed two critical communities. Comments appear disabled on articles or account needs verification. Good lurk session - observed community topics and business openings for future engagement."
+    },
+    {
+      "date": "2026-03-06",
+      "time": "5:02 PM",
+      "run_type": "lurk",
+      "status": "failed",
+      "error": "browser_service_unavailable",
+      "planned_communities": ["Downers Grove", "Wheaton", "Glen Ellyn"],
+      "communities_visited": [],
+      "articles_read": [],
+      "comments_made": [],
+      "scouted_leads": [],
+      "account_status": "unknown",
+      "commenting_status": "unknown",
+      "notes": "Browser control service down (timeout after 20s). Could not complete lurk session. Gateway restart needed."
+    },
+    {
+      "date": "2026-03-07",
+      "time": "11:00 AM",
+      "run_type": "lurk",
+      "communities_visited": ["Downers Grove", "Naperville"],
+      "articles_read": [
+        {
+          "title": "Everest Fusion Now Open In Downers Grove",
+          "url": "https://patch.com/illinois/downersgrove/everest-fusion-now-open-downers-grove",
+          "community": "Downers Grove",
+          "category": "restaurant opening",
+          "engagement_attempt": "comment_unavailable"
+        },
+        {
+          "title": "McCollum Park Closed Amid Playground Removal, Replacement",
+          "url": "https://patch.com/illinois/downersgrove/mccollum-park-closed-amid-playground-removal-replacement",
+          "community": "Downers Grove",
+          "category": "park improvements",
+          "engagement_attempt": "comment_unavailable"
+        },
+        {
+          "title": "Matrix Club Owners Appeal Eviction Order In Naperville",
+          "url": "https://patch.com/illinois/naperville/matrix-club-owners-appeal-eviction-order-naperville",
+          "community": "Naperville",
+          "category": "business news"
+        },
+        {
+          "title": "Cops Warn Residents To Stay Vigilant After Necklace Stolen In Naperville Parking Lot",
+          "url": "https://patch.com/illinois/naperville/cops-warn-residents-stay-vigilant-after-necklace-stolen-naperville-parking-lot",
+          "community": "Naperville",
+          "category": "safety news"
+        },
+        {
+          "title": "Minnie Bird's Newest Location Now Open In Naperville",
+          "url": "https://patch.com/illinois/naperville/minnie-birds-newest-location-now-open-naperville",
+          "community": "Naperville",
+          "category": "restaurant opening"
+        }
+      ],
+      "comments_made": [],
+      "scouted_leads": [],
+      "account_status": "logged_in_as_danny_kowalski",
+      "commenting_status": "disabled_or_verification_required",
+      "notes": "Successfully browsed two critical communities (Downers Grove, Naperville). Account properly logged in as Danny Kowalski. Commenting appears disabled or requires additional verification - 'Join the conversation' buttons present but no comment forms appear when clicked. Good lurk session - observed new restaurant openings, park improvements, safety news, and business developments for future engagement once commenting is enabled."
+    },
+    {
+      "date": "2026-03-07",
+      "time": "5:01 PM",
+      "run_type": "lurk",
+      "status": "failed",
+      "error": "browser_service_unavailable",
+      "planned_communities": ["Wheaton", "Glen Ellyn", "Woodridge"],
+      "communities_visited": ["Downers Grove", "Wheaton"],
+      "articles_read": [
+        {
+          "title": "Spritz Stroll Comes To Downtown Wheaton",
+          "url": "https://patch.com/illinois/wheaton/spritz-stroll-comes-downtown-wheaton",
+          "community": "Wheaton",
+          "category": "community event",
+          "engagement_attempt": "browser_timeout"
+        },
+        {
+          "title": "Spectrios Institute Has Helped Over 40K Low Vision Patients As It Marks 40 Years",
+          "url": "https://patch.com/illinois/wheaton/spectrios-institute-has-helped-over-40k-low-vision-patients-it-marks-40-years",
+          "community": "Wheaton",
+          "category": "community milestone",
+          "engagement_attempt": "browser_timeout"
+        },
+        {
+          "title": "La Plaza Taqueria Seeks Approval To Serve Alcohol In Courtyard",
+          "url": "https://patch.com/illinois/wheaton/la-plaza-taqueria-seeks-approval-serve-alcohol-courtyard",
+          "community": "Wheaton",
+          "category": "restaurant expansion",
+          "engagement_attempt": "browser_timeout"
+        }
+      ],
+      "comments_made": [],
+      "scouted_leads": [],
+      "account_status": "logged_in_as_danny_kowalski",
+      "commenting_status": "unknown_browser_failed",
+      "notes": "Successfully logged in as Danny Kowalski and browsed Downers Grove and Wheaton. Browser service failed with timeout after 20s when attempting to click into Spritz Stroll article for commenting. Same browser timeout issue as March 6 5:02 PM session. Gateway restart needed."
+    },
+    {
+      "date": "2026-03-08",
+      "time": "11:00 AM",
+      "run_type": "lurk",
+      "communities_visited": ["Downers Grove", "Glen Ellyn", "Bolingbrook"],
+      "articles_read": [
+        {
+          "title": "Everest Fusion Now Open In Downers Grove",
+          "url": "https://patch.com/illinois/downersgrove/everest-fusion-now-open-downers-grove",
+          "community": "Downers Grove",
+          "category": "restaurant opening",
+          "engagement_attempt": "comment_unavailable"
+        },
+        {
+          "title": "Unlimited Trash Pickup Day Coming In April In Glen Ellyn",
+          "url": "https://patch.com/illinois/glenellyn/unlimited-trash-pickup-day-coming-april-glen-ellyn",
+          "community": "Glen Ellyn",
+          "category": "community service",
+          "engagement_attempt": "comment_unavailable"
+        },
+        {
+          "title": "College of DuPage Athletes Set New Indoor Pole Vault Records",
+          "url": "https://patch.com/illinois/glenellyn/college-dupage-athletes-set-new-indoor-pole-vault-records",
+          "community": "Glen Ellyn",
+          "category": "athletics",
+          "engagement_attempt": "observed_only"
+        },
+        {
+          "title": "A Tavola By Mancini Now Open In Downtown Glen Ellyn",
+          "url": "https://patch.com/illinois/glenellyn/tavola-mancini-now-open-downtown-glen-ellyn",
+          "community": "Glen Ellyn",
+          "category": "restaurant opening",
+          "engagement_attempt": "observed_only"
+        }
+      ],
+      "comments_made": [],
+      "scouted_leads": [],
+      "account_status": "logged_in_as_danny_kowalski",
+      "commenting_status": "disabled_or_verification_required",
+      "notes": "Successfully browsed three communities with good rotation (Downers Grove critical, Glen Ellyn high priority, Bolingbrook high priority). Account properly logged in as Danny Kowalski. Commenting remains disabled across all communities - 'Join the conversation' buttons present but clicking does not open comment forms. Bolingbrook had mostly serious news (pedestrian fatality, missing child case) inappropriate for light community engagement during lurk phase. Glen Ellyn unlimited trash pickup day article would be excellent for future helpful resident comment once commenting is enabled. Good lurk session observing community services and restaurant openings."
+    },
+    {
+      "date": "2026-03-08",
+      "time": "5:01 PM",
+      "run_type": "lurk",
+      "communities_visited": ["Downers Grove", "Wheaton", "Woodridge"],
+      "articles_read": [
+        {
+          "title": "Everest Fusion Now Open In Downers Grove",
+          "url": "https://patch.com/illinois/downersgrove/everest-fusion-now-open-downers-grove",
+          "community": "Downers Grove",
+          "category": "restaurant opening",
+          "engagement_attempt": "comment_unavailable"
+        },
+        {
+          "title": "Spectrios Institute Has Helped Over 40K Low Vision Patients As It Marks 40 Years",
+          "url": "https://patch.com/illinois/wheaton/spectrios-institute-has-helped-over-40k-low-vision-patients-it-marks-40-years",
+          "community": "Wheaton",
+          "category": "community milestone",
+          "engagement_attempt": "comment_unavailable"
+        },
+        {
+          "title": "La Plaza Taqueria Seeks Approval To Serve Alcohol In Courtyard",
+          "url": "https://patch.com/illinois/wheaton/la-plaza-taqueria-seeks-approval-serve-alcohol-courtyard",
+          "community": "Wheaton",
+          "category": "restaurant expansion",
+          "engagement_attempt": "observed_only"
+        },
+        {
+          "title": "Spritz Stroll Comes To Downtown Wheaton",
+          "url": "https://patch.com/illinois/wheaton/spritz-stroll-comes-downtown-wheaton",
+          "community": "Wheaton", 
+          "category": "community event",
+          "engagement_attempt": "observed_only"
+        },
+        {
+          "title": "Multiple Woodridge Home Sales Articles",
+          "url": "https://patch.com/illinois/woodridge",
+          "community": "Woodridge",
+          "category": "real estate",
+          "engagement_attempt": "observed_only"
+        },
+        {
+          "title": "Woodridge gymnast helps Team USA shine on international stage",
+          "url": "https://patch.com/illinois/woodridge/patch-am-woodridge-gymnast-helps-team-usa-shine-international-sta-nodx-20260303",
+          "community": "Woodridge",
+          "category": "athletics achievement",
+          "engagement_attempt": "observed_only"
+        }
+      ],
+      "comments_made": [],
+      "scouted_leads": [
+        {
+          "type": "scouted_lead",
+          "business_name": "Fourth Avenue Design Group",
+          "community": "Wheaton",
+          "potential_service": "interior design/custom cabinetry",
+          "location": "218 E Chicago Ave, Westmont, IL",
+          "phone": "(630) 874-0240",
+          "notes": "Featured local business on Wheaton Patch - interior design firm specializing in kitchen/bathroom remodels, custom cabinetry. Future home improvement lead potential."
+        },
+        {
+          "type": "scouted_lead",
+          "article_type": "real estate sales",
+          "community": "Woodridge",
+          "potential_service": "general home services",
+          "notes": "Multiple recent home sales articles ($970k, $700k, York Court, Patton Drive) - new homeowners may need services. Real estate activity indicator."
+        }
+      ],
+      "account_status": "logged_in_as_danny_kowalski",
+      "commenting_status": "disabled_or_verification_required",
+      "notes": "Successfully browsed three communities with good rotation (Downers Grove critical, Wheaton high priority, Woodridge medium priority). Account properly logged in as Danny Kowalski. Commenting remains consistently disabled across all communities - 'Join the conversation' buttons present but clicking does not open comment forms. Spectrios Institute article perfect for positive community milestone comment once commenting is enabled. Scouted interior design business and real estate activity for future lead development. Excellent lurk session observing community milestones, events, and business activity."
+    }
+  ]
+}

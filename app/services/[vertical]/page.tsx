@@ -160,6 +160,10 @@ export async function generateMetadata({ params }: { params: Promise<{ vertical:
   return {
     title: `${service.title} in Downers Grove, IL | FindALocalPro`,
     description: service.description,
+    keywords: `${service.title.toLowerCase()} Downers Grove, ${service.trade} DuPage County, licensed ${service.trade} near me, verified ${service.trade} Illinois`,
+    alternates: {
+      canonical: `https://findalocalpro.com/services/${vertical}`,
+    },
     openGraph: {
       title: `${service.title} in Downers Grove, IL`,
       description: service.description,

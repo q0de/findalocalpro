@@ -1,0 +1,237 @@
+{
+  "subreddits": [
+    {
+      "name": "r/ChicagoSuburbs",
+      "members": 60000,
+      "url": "https://www.reddit.com/r/ChicagoSuburbs/",
+      "priority": "critical",
+      "type": "local",
+      "campaign": "findalocalpro"
+    },
+    {
+      "name": "r/naperville",
+      "members": 8000,
+      "url": "https://www.reddit.com/r/naperville/",
+      "priority": "critical",
+      "type": "local",
+      "campaign": "findalocalpro"
+    },
+    {
+      "name": "r/chicago",
+      "members": 800000,
+      "url": "https://www.reddit.com/r/chicago/",
+      "priority": "medium",
+      "type": "local",
+      "campaign": "findalocalpro"
+    },
+    {
+      "name": "r/HomeImprovement",
+      "members": 5000000,
+      "url": "https://www.reddit.com/r/HomeImprovement/",
+      "priority": "medium",
+      "type": "national_vertical",
+      "campaign": "findalocalpro"
+    },
+    {
+      "name": "r/Plumbing",
+      "members": 200000,
+      "url": "https://www.reddit.com/r/Plumbing/",
+      "priority": "low",
+      "type": "vertical_cred",
+      "campaign": "findalocalpro"
+    },
+    {
+      "name": "r/electricians",
+      "members": 200000,
+      "url": "https://www.reddit.com/r/electricians/",
+      "priority": "low",
+      "type": "vertical_cred",
+      "campaign": "findalocalpro"
+    },
+    {
+      "name": "r/hvacadvice",
+      "members": 150000,
+      "url": "https://www.reddit.com/r/hvacadvice/",
+      "priority": "low",
+      "type": "vertical_cred",
+      "campaign": "findalocalpro"
+    },
+    {
+      "name": "r/pestcontrol",
+      "members": 50000,
+      "url": "https://www.reddit.com/r/pestcontrol/",
+      "priority": "low",
+      "type": "vertical_cred",
+      "campaign": "findalocalpro"
+    },
+    {
+      "name": "r/VideoEditing",
+      "members": 350000,
+      "url": "https://www.reddit.com/r/VideoEditing/",
+      "priority": "critical",
+      "type": "core_vertical",
+      "campaign": "greenscreenremover"
+    },
+    {
+      "name": "r/NewTubers",
+      "members": 400000,
+      "url": "https://www.reddit.com/r/NewTubers/",
+      "priority": "critical",
+      "type": "core_vertical",
+      "campaign": "greenscreenremover"
+    },
+    {
+      "name": "r/Unity3D",
+      "members": 500000,
+      "url": "https://www.reddit.com/r/Unity3D/",
+      "priority": "high",
+      "type": "technical",
+      "campaign": "greenscreenremover"
+    },
+    {
+      "name": "r/unrealengine",
+      "members": 400000,
+      "url": "https://www.reddit.com/r/unrealengine/",
+      "priority": "high",
+      "type": "technical",
+      "campaign": "greenscreenremover"
+    },
+    {
+      "name": "r/gamedev",
+      "members": 1500000,
+      "url": "https://www.reddit.com/r/gamedev/",
+      "priority": "medium",
+      "type": "technical",
+      "campaign": "greenscreenremover"
+    },
+    {
+      "name": "r/vfx",
+      "members": 150000,
+      "url": "https://www.reddit.com/r/vfx/",
+      "priority": "medium",
+      "type": "core_vertical",
+      "campaign": "greenscreenremover"
+    },
+    {
+      "name": "r/AfterEffects",
+      "members": 200000,
+      "url": "https://www.reddit.com/r/AfterEffects/",
+      "priority": "medium",
+      "type": "core_vertical",
+      "campaign": "greenscreenremover"
+    },
+    {
+      "name": "r/premiere",
+      "members": 100000,
+      "url": "https://www.reddit.com/r/premiere/",
+      "priority": "low",
+      "type": "core_vertical",
+      "campaign": "greenscreenremover"
+    },
+    {
+      "name": "r/filmmaking",
+      "members": 600000,
+      "url": "https://www.reddit.com/r/filmmaking/",
+      "priority": "low",
+      "type": "adjacent",
+      "campaign": "greenscreenremover"
+    },
+    {
+      "name": "r/obs",
+      "members": 200000,
+      "url": "https://www.reddit.com/r/obs/",
+      "priority": "low",
+      "type": "adjacent",
+      "campaign": "greenscreenremover"
+    }
+  ],
+  "search_keywords_greenscreen": [
+    "remove green screen",
+    "green screen removal",
+    "chroma key",
+    "chroma key online",
+    "remove background video",
+    "transparent video",
+    "WebM alpha",
+    "remove blue screen video",
+    "green screen free tool",
+    "green screen without software",
+    "transparent background video",
+    "VP8 alpha",
+    "keying video"
+  ],
+  "karma_farm_subreddits": [
+    {
+      "name": "r/CasualConversation",
+      "members": 2500000,
+      "why": "Low barrier, friendly community, easy karma for genuine conversation"
+    },
+    {
+      "name": "r/TooAfraidToAsk",
+      "members": 2000000,
+      "why": "Low moderation bar, helpful answers get upvoted fast"
+    },
+    {
+      "name": "r/OutOfTheLoop",
+      "members": 3000000,
+      "why": "Explaining things = easy karma, low threshold"
+    },
+    {
+      "name": "r/AskOldPeople",
+      "members": 400000,
+      "why": "Homeowner persona fits, small enough for low karma accounts"
+    },
+    {
+      "name": "r/ChicagoSuburbs",
+      "members": 60000,
+      "why": "Local sub, very low karma threshold, on-brand for DuPage homeowner"
+    },
+    {
+      "name": "r/pestcontrol",
+      "members": 50000,
+      "why": "Small trade sub, low threshold, on-brand homeowner advice"
+    },
+    {
+      "name": "r/Cooking",
+      "members": 5000000,
+      "why": "Huge but generally low karma threshold, everyone has opinions"
+    },
+    {
+      "name": "r/HomeDecorating",
+      "members": 400000,
+      "why": "On-brand, smaller community, homeowner advice valued"
+    },
+    {
+      "name": "r/Frugal",
+      "members": 2500000,
+      "why": "DIY/homeowner tips play well, practical advice gets upvotes"
+    },
+    {
+      "name": "r/CleaningTips",
+      "members": 1500000,
+      "why": "On-brand for homeowner, practical tips, low moderation"
+    },
+    {
+      "name": "r/internetparents",
+      "members": 800000,
+      "why": "Very welcoming, helpful answers always appreciated"
+    },
+    {
+      "name": "r/fixit",
+      "members": 150000,
+      "why": "Small, on-brand, homeowner repair advice, low karma threshold"
+    },
+    {
+      "name": "r/centuryhomes",
+      "members": 200000,
+      "why": "Perfect for DuPage bungalow persona, niche community"
+    },
+    {
+      "name": "r/lawncare",
+      "members": 400000,
+      "why": "On-brand homeowner sub, seasonal, specific advice valued"
+    }
+  ],
+  "karma_farm_notes": "KARMA FARMING MODE: Active until comment_karma >= 100. Switched to SMALLER subs with lower karma thresholds after getting blocked on all major subs at 42 karma. Mix of on-brand (home/trades) and general-friendly subs. Pure helpful comments only \u2014 ZERO promotional links. Target 5-6 comments per run across 3-4 subs.",
+  "scan_order_notes": "Always scan critical subs first. National subs for karma building only. Max 4 subs per cron run. Each run picks from ONE campaign (alternate between findalocalpro and greenscreenremover runs)."
+}

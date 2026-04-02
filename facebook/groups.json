@@ -1,0 +1,29 @@
+{
+  "groups": [
+    {"name": "What's Happening in Bolingbrook, IL", "members": 81000, "url": "https://www.facebook.com/groups/104287120162473/", "status": "joined", "priority": "high"},
+    {"name": "Glen Ellyn - Wheaton Neighbors", "members": 47000, "url": "https://www.facebook.com/groups/2327310610879847/", "status": "joined", "priority": "high"},
+    {"name": "What's Happening In DuPage, Kane, Kendall, & Cook County IL", "members": null, "url": "https://www.facebook.com/groups/640833643824480/", "status": "joined", "priority": "high"},
+    {"name": "What's Happening in Naperville IL?", "members": 92000, "url": "https://www.facebook.com/groups/604230789639685/", "status": "joined", "priority": "high"},
+    {"name": "My Downers Grove", "members": 26000, "url": "https://www.facebook.com/groups/565402193624801/", "status": "joined", "priority": "high"},
+    {"name": "What's Happening in Downers Grove IL?", "members": 16000, "url": "https://www.facebook.com/groups/926397887898594/", "status": "joined", "priority": "high"},
+    {"name": "What's Happening in Wheaton, Glen Ellyn, Winfield and Warrenville", "members": 21000, "url": "https://www.facebook.com/groups/1000666929977404/", "status": "joined", "priority": "high"},
+    {"name": "What's Up Naperville", "members": 12000, "url": "https://www.facebook.com/groups/955885524531477/", "status": "joined", "priority": "medium"},
+    {"name": "What's Going on In Naperville, IL", "members": 12000, "url": "https://www.facebook.com/groups/637909001385915/", "status": "joined", "priority": "medium"},
+    {"name": "What's happening in Westmont, IL", "members": 15000, "url": "https://www.facebook.com/groups/2209463325957479/", "status": "joined", "priority": "medium"},
+    {"name": "Local Naperville", "members": 19000, "url": "https://www.facebook.com/groups/localnaperville/", "status": "joined", "priority": "high"},
+    {"name": "Our Downers Grove", "members": 7700, "url": "https://www.facebook.com/groups/1156902214505256/", "status": "joined", "priority": "medium"},
+    {"name": "What's Happening DuPage County", "members": null, "url": "https://www.facebook.com/groups/whatshappeningdupagecounty/", "status": "joined", "priority": "medium"},
+    {"name": "Local Businesses Servicing Wheaton, Glen Ellyn, Lombard (+Central DuPage)", "members": 1500, "url": "https://www.facebook.com/groups/servicingcentraldupage/", "status": "joined", "priority": "medium"},
+    {"name": "Downers Grove News and Comment", "members": 9000, "url": "https://www.facebook.com/groups/390284931651737/", "status": "joined", "priority": "medium"},
+    {"name": "What's Happening in Woodridge, IL", "members": 4900, "url": "https://www.facebook.com/groups/338644700018547/", "status": "joined", "priority": "medium"},
+    {"name": "Downers Grove Local Businesses", "members": 2800, "url": "https://www.facebook.com/groups/322227239092126/", "status": "joined", "priority": "medium"},
+    {"name": "Downers grove community", "members": 757, "url": "https://www.facebook.com/groups/2844677542370644/", "status": "joined", "priority": "low"},
+    {"name": "What's Happening in DuPage & Will County", "members": null, "url": "https://www.facebook.com/groups/homesandevents/", "status": "joined", "priority": "medium"},
+    {"name": "What's Happening in Kane and DuPage Counties", "members": null, "url": "https://www.facebook.com/groups/whatshappeninginkanedupagecounty/", "status": "joined", "priority": "medium"},
+    {"name": "Contractor/Home Related Recommendations in Chicagoland", "members": 8500, "url": "https://www.facebook.com/groups/ChicagolandRecommendations/", "status": "joined", "priority": "critical"},
+    {"name": "Naperville Talk", "members": 42000, "url": "https://www.facebook.com/groups/853951971328591/", "status": "joined", "priority": "high"}
+  ],
+  "scan_order_notes": "Rotate through groups - scan top 6-8 priority groups per run, cycling through. Never scan all in one run (too suspicious).",
+  "engagement_mode": "active",
+  "engagement_notes": "Past lurker phase. Engage naturally: like posts, comment on home service recommendation threads, offer helpful advice. Keep FindALocalPro mentions organic and sparing — max 1 per run, only when directly relevant."
+}

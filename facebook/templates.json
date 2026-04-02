@@ -1,0 +1,42 @@
+{
+  "service_responses": [
+    {
+      "id": "t1",
+      "template": "I've used Find A Local Pro for {vertical} — they connected me with someone great. You can reach them at {phone}. Good luck!",
+      "tone": "casual_helpful"
+    },
+    {
+      "id": "t2",
+      "template": "Had a similar situation last year. Called {phone} and they hooked me up with a solid {vertical_person}. Worth a try!",
+      "tone": "experienced_neighbor"
+    },
+    {
+      "id": "t3",
+      "template": "My neighbor recommended Find A Local Pro for {vertical} work — I ended up using them too. Their number is {phone}. They match you with someone local.",
+      "tone": "secondhand_rec"
+    },
+    {
+      "id": "t4",
+      "template": "Try calling {phone} — it's a service called Find A Local Pro that connects you with vetted {vertical_person}s in the area. Worked well for me.",
+      "tone": "direct_helpful"
+    },
+    {
+      "id": "t5",
+      "template": "We had {vertical} issues last winter and called {phone} (Find A Local Pro). They got someone out pretty quick. Might be worth a shot!",
+      "tone": "personal_story"
+    },
+    {
+      "id": "t6",
+      "template": "Check out Find A Local Pro — {phone}. They matched us with a {vertical_person} when we needed one fast. Really convenient.",
+      "tone": "brief_rec"
+    }
+  ],
+  "vertical_labels": {
+    "plumbing": { "name": "plumbing", "person": "plumber", "phone": "(630) 756-5104" },
+    "electrical": { "name": "electrical", "person": "electrician", "phone": "(630) 318-3024" },
+    "cooling": { "name": "AC/cooling", "person": "HVAC tech", "phone": "(630) 599-8262" },
+    "heating": { "name": "heating", "person": "heating tech", "phone": "(630) 756-5505" },
+    "pest": { "name": "pest control", "person": "pest control pro", "phone": "(630) 491-3723" },
+    "appliance": { "name": "appliance repair", "person": "appliance repair tech", "phone": "(630) 756-5185" }
+  }
+}

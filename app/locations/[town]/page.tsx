@@ -301,7 +301,7 @@ export default async function LocationPage({ params }: { params: Promise<{ town:
           <Breadcrumbs
             items={[
               { label: 'Home', href: '/' },
-              { label: 'Locations' },
+              { label: 'Locations', href: '/directory' },
               { label: town.name },
             ]}
           />

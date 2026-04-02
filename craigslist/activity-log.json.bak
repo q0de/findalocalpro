@@ -1,0 +1,287 @@
+{
+  "account": {
+    "email": null,
+    "persona": "Tom Brannigan",
+    "created": null,
+    "phase": "not_created"
+  },
+  "daily_caps": {
+    "emails_max": 3,
+    "min_hours_between": 2,
+    "same_section_max": 1
+  },
+  "activity": [
+    {
+      "date": "2026-03-06",
+      "time": "12:02 PM",
+      "searches_performed": [
+        "need plumber",
+        "plumber needed", 
+        "AC repair",
+        "furnace repair",
+        "appliance repair",
+        "pest control",
+        "electrician"
+      ],
+      "posts_found": 0,
+      "qualifying_leads": 0,
+      "drafts_sent": 0,
+      "emails_sent": 0,
+      "notes": "Craigslist wanted ads section very quiet for home services in Chicago area. Found posts from out-of-area locations (Milwaukee, Detroit, Cincinnati, Green Bay, Battle Creek) but none in DuPage County territory."
+    },
+    {
+      "date": "2026-03-07",
+      "time": "12:02 PM",
+      "searches_performed": [
+        "electrical work",
+        "HVAC help",
+        "washing machine repair",
+        "need electrician",
+        "pest control"
+      ],
+      "posts_found": 4,
+      "qualifying_leads": 0,
+      "drafts_sent": 0,
+      "emails_sent": 0,
+      "notes": "Another quiet day for home service requests in DuPage area. Found: Home remodeling post in Gary, IN (electrical mentioned but outside territory, 3/2). Two electric scooter posts in Northlake (not electrical services, 3/3). Trade truck for electrician work in Mt Clemens, MI (outside territory, 3/1). Critter removal request in Cincinnati (outside territory, posted 5hrs ago). No qualifying leads in DuPage County."
+    },
+    {
+      "date": "2026-03-07",
+      "time": "12:24 PM",
+      "searches_performed": [
+        "need plumber",
+        "AC repair", 
+        "electrical work",
+        "pest control",
+        "need electrician"
+      ],
+      "regions_scanned": [
+        "Chicago",
+        "Indianapolis", 
+        "Detroit"
+      ],
+      "posts_found": 5,
+      "qualifying_leads": 1,
+      "drafts_sent": 1,
+      "emails_sent": 1,
+      "notes": "Found 1 qualifying lead: Gary, IN home remodeling/electrical work (score 40, posted 3/2). Other posts: 2x electric scooter requests (not services), 1x pest control B2B networking (not consumer), 1x electrician offering trade services (not requesting). Sent 1 draft to Telegram for approval using template t2_cl. APPROVED and sent via Proton Bridge at 12:44 PM."
+    },
+    {
+      "date": "2026-03-09",
+      "time": "12:03 PM",
+      "searches_performed": [
+        "need plumber",
+        "electrical work",
+        "AC repair",
+        "pest control"
+      ],
+      "regions_scanned": [
+        "Chicago",
+        "Indianapolis",
+        "Milwaukee"
+      ],
+      "posts_found": 8,
+      "qualifying_leads": 1,
+      "drafts_sent": 1,
+      "emails_sent": 0,
+      "notes": "Wanted ads sections generally quiet. Chicago: No results for 'need plumber', found 8 results for 'electrical work' but mostly scooter requests and previously emailed Gary post (7918529412). Indianapolis & Milwaukee: No results for AC repair or pest control. Found 1 qualifying lead: South Pekin, IL handyman for house rehab (plumbing, electrical, drywall) - score 50, updated yesterday. Sent 1 draft to Telegram using template t1_cl."
+    }
+    {
+      "date": "2026-03-10",
+      "time": "12:07 PM",
+      "searches_performed": [
+        "need plumber",
+        "plumber needed",
+        "need electrician",
+        "HVAC help",
+        "washing machine"
+      ],
+      "regions_scanned": [
+        "Chicago",
+        "Cincinnati", 
+        "Columbus",
+        "Indianapolis"
+      ],
+      "posts_found": 1,
+      "qualifying_leads": 1,
+      "drafts_sent": 1,
+      "emails_sent": 0,
+      "notes": "Wanted ads sections continue to be quiet across all regions. Chicago: No local results for plumbing/electrical searches. Found 1 qualifying Detroit metro lead: Shelby Township manufactured home plumber needed (post 7920005104, score 50, posted 3/9). Cincinnati & Columbus: No relevant results. Indianapolis: Found vintage washing machine collector posts (not repair services). Sent 1 draft to Telegram using template t2_cl for Shelby Township plumber request."
+    },
+    {
+      "date": "2026-03-11",
+      "time": "12:03 PM",
+      "searches_performed": [
+        "need plumber",
+        "electrician wanted",
+        "furnace repair",
+        "appliance repair",
+        "washing machine",
+        "HVAC help",
+        "pest control"
+      ],
+      "regions_scanned": [
+        "Chicago",
+        "Detroit",
+        "St. Louis",
+        "Milwaukee",
+        "Indianapolis",
+        "Columbus"
+      ],
+      "posts_found": 3,
+      "qualifying_leads": 0,
+      "drafts_sent": 0,
+      "emails_sent": 0,
+      "notes": "Another quiet day across all regions for genuine consumer home service requests. Found: 1x Mt Clemens electrician offering trade services (not requesting service, post 7903176661), 1x Cincinnati pest control B2B networking post (not consumer, post 7900089612), several vintage washing machine collector posts in Milwaukee. No qualifying consumer leads found."
+    },
+    {
+      "date": "2026-03-12",
+      "time": "12:08 PM", 
+      "searches_performed": [
+        "need plumber",
+        "electrician wanted", 
+        "furnace repair",
+        "appliance repair",
+        "pest control"
+      ],
+      "regions_scanned": [
+        "Chicago",
+        "Indianapolis",
+        "Milwaukee", 
+        "Detroit",
+        "Cincinnati"
+      ],
+      "posts_found": 6,
+      "qualifying_leads": 1,
+      "drafts_sent": 0,
+      "emails_sent": 0,
+      "notes": "Browser timeout issues prevented full examination of leads. Chicago: No results for 'need plumber' or local results for 'electrician wanted'. Indianapolis: Found 2 old plumbing posts from St Louis area (2/24 and 2/19, too old). Milwaukee: No furnace repair results. Detroit: Found appliance repair post from Ravenswood (3/8, too old). Cincinnati: Found 1 promising lead 'Wanted: Critter removal company' posted 3/11 (1 day old) but couldn't examine due to browser timeout. Needs follow-up."
+    },
+    {
+      "date": "2026-03-13",
+      "time": "12:08 PM",
+      "searches_performed": [
+        "need plumber",
+        "electrical work",
+        "pest control",
+        "AC repair", 
+        "furnace repair"
+      ],
+      "regions_scanned": [
+        "Chicago",
+        "Detroit",
+        "Milwaukee",
+        "Cincinnati",
+        "St. Louis"
+      ],
+      "posts_found": 5,
+      "qualifying_leads": 1,
+      "drafts_sent": 1,
+      "emails_sent": 0,
+      "notes": "Wanted ads continue quiet pattern. Chicago: No results for 'need plumber', found electrical work posts (previously emailed Gary post + 2 scooter posts, not services). Detroit: Found South Pekin IL handyman rehab post (7911138296, updated 3/11, score 55) - multi-service request (plumbing, electrical, drywall). Milwaukee: No AC repair results (only taxidermy/coin equipment). St. Louis: No furnace repair results. Cincinnati: Pest control post was B2B networking (company seeking referrals, not consumer). Sent 1 draft to Telegram using template t1_cl for South Pekin handyman."
+    },
+    {
+      "date": "2026-03-14",
+      "time": "12:10 PM",
+      "searches_performed": [
+        "need plumber",
+        "electrical work",
+        "AC repair", 
+        "pest control",
+        "appliance repair"
+      ],
+      "regions_scanned": [
+        "Chicago",
+        "Indianapolis",
+        "Detroit",
+        "Milwaukee"
+      ],
+      "posts_found": 4,
+      "qualifying_leads": 1,
+      "drafts_sent": 1,
+      "emails_sent": 0,
+      "notes": "Wanted ads continue quiet pattern. Chicago: No results for 'need plumber', found electrical work posts (previously emailed Gary post 7918529412 + 2 electric scooter posts, not services, + Northern Michigan skilled worker offering services, not requesting). Found South Pekin IL handyman rehab post (7911138296, updated 5 hours ago, score 45) - needs plumbing, electrical, drywall for house rehab. Indianapolis: No results for AC repair (only coin equipment from Detroit). Detroit: No pest control (only Cincinnati B2B networking post 7900089612). Milwaukee: No appliance repair results (only Battle Creek posts). Sent 1 draft to Telegram using template t3_cl for South Pekin handyman."
+    },
+    {
+      "date": "2026-03-16",
+      "time": "12:08 PM",
+      "searches_performed": [
+        "need plumber",
+        "need electrician",
+        "AC repair",
+        "pest control",
+        "appliance repair",
+        "need plumber",
+        "HVAC help",
+        "furnace repair"
+      ],
+      "regions_scanned": [
+        "Chicago",
+        "Detroit",
+        "St. Louis",
+        "Milwaukee",
+        "Indianapolis",
+        "Cincinnati",
+        "Columbus"
+      ],
+      "posts_found": 3,
+      "qualifying_leads": 1,
+      "drafts_sent": 1,
+      "emails_sent": 0,
+      "notes": "Wanted ads remain quiet across all regions. Chicago: No results for 'need plumber' or 'need electrician'. Detroit: No AC repair results (coin equipment only). St. Louis: Navigation issues (redirected to Facebook). Milwaukee: Found 1 qualifying lead - Battle Creek appliance repair (post 7918758385, score 45, posted 13 days ago but updated 6 hours ago). Indianapolis: No plumber results (nearby St. Louis posts too old - 2/24 and 2/19). Cincinnati: No HVAC help results. Columbus: No furnace repair results. Sent 1 draft to Telegram using template t2_cl for Battle Creek appliance repair."
+    },
+    {
+      "date": "2026-03-17",
+      "time": "12:10 PM",
+      "searches_performed": [
+        "need plumber",
+        "AC repair",
+        "pest control",
+        "appliance repair",
+        "need electrician"
+      ],
+      "regions_scanned": [
+        "Chicago",
+        "Indianapolis",
+        "Detroit"
+      ],
+      "posts_found": 9,
+      "qualifying_leads": 2,
+      "drafts_sent": 2,
+      "emails_sent": 0,
+      "notes": "Two strong qualifying leads found today. Post 7921745830: Pittsburgh LED mirror install (Upper St. Clair/Bethel Park, PA), score 55, posted 4hrs ago, $300-400 budget. Post 7920022719: Buffalo breaker replacement (North Tonawanda, NY), score 40, updated 1 day ago, $100 budget. Both electrical work - templates t2_cl and t1_cl used. Cincinnati pest control post was B2B networking (not consumer). Other posts: appliance service offers, electric scooters, trade offers - not consumer requests."
+    },
+    {
+      "date": "2026-03-19",
+      "time": "12:09 PM",
+      "searches_performed": [
+        "plumbing help",
+        "need electrician", 
+        "HVAC help",
+        "need plumber",
+        "appliance repair",
+        "pest control",
+        "washing machine",
+        "furnace repair",
+        "mice"
+      ],
+      "regions_scanned": [
+        "Chicago",
+        "Indianapolis",
+        "Detroit",
+        "Milwaukee",
+        "Columbus",
+        "St. Louis",
+        "Cincinnati"
+      ],
+      "posts_found": 7,
+      "qualifying_leads": 0,
+      "drafts_sent": 0,
+      "emails_sent": 0,
+      "notes": "Wanted ads sections continue quiet pattern across all regions. Chicago: Zero local results for plumbing help, need electrician, HVAC help. Indianapolis: Found 2 old St. Louis plumbing posts (2/24, 2/19, too old). Detroit: Battle Creek appliance repair post 7918758385 found again (already contacted 3/16), Ravenswood post was service provider offering repair, not consumer request. Milwaukee: No pest control results. Columbus: Found vintage washing machine collector posts (not repair). St. Louis: No furnace repair results. Cincinnati: Mice search returned vinyl record collector post. No new qualifying consumer leads found."
+    }
+  ],
+  "emailed_post_ids": ["7918529412"],
+  "last_template_used": "t2_cl",
+  "template_cooldown_days": 3
+}

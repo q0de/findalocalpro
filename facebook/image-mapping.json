@@ -1,0 +1,43 @@
+{
+  "description": "Maps service verticals to branded images for Facebook replies",
+  "updated": "2026-03-19",
+  "images_dir": "~/clawd/findalocalpro/facebook/images",
+  "mapping": {
+    "plumbing": {
+      "image": "plumbing.png",
+      "phone": "(630) 756-5104",
+      "keywords": ["plumber", "plumbing", "leak", "pipe", "drain", "water heater", "sump pump", "faucet", "toilet", "sewer"]
+    },
+    "electrical": {
+      "image": "electrical.png",
+      "phone": "(630) 318-3024",
+      "keywords": ["electrician", "electrical", "outlet", "wiring", "panel", "circuit", "breaker", "light fixture"]
+    },
+    "hvac_cooling": {
+      "image": "hvac-cooling.png",
+      "phone": "(630) 599-8262",
+      "keywords": ["hvac", "ac", "air conditioning", "cooling", "air conditioner", "central air", "a/c"]
+    },
+    "heating": {
+      "image": "heating.png",
+      "phone": "(630) 756-5505",
+      "keywords": ["heating", "furnace", "boiler", "heat", "radiator", "heater"]
+    },
+    "pest_control": {
+      "image": "pest-control.png",
+      "phone": "(630) 491-3723",
+      "keywords": ["pest", "exterminator", "bugs", "insects", "mice", "rats", "termites", "ants", "roaches", "bed bugs", "rodent"]
+    },
+    "appliance": {
+      "image": "appliance.png",
+      "phone": "(630) 756-5185",
+      "keywords": ["appliance", "washer", "dryer", "refrigerator", "oven", "dishwasher", "stove", "microwave", "freezer"]
+    },
+    "general": {
+      "image": "general-ivr.png",
+      "phone": "(630) 407-1727",
+      "keywords": ["general", "home repair", "handyman"],
+      "note": "Fallback for unclear verticals — routes through IVR"
+    }
+  }
+}
