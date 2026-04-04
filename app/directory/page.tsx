@@ -8,9 +8,17 @@ export const metadata: Metadata = {
   openGraph: {
     title: 'Verified Local Pros — Directory',
     description: 'Browse verified, licensed home service professionals in DuPage County, IL.',
+    type: 'website',
     url: 'https://findalocalpro.com/directory',
     images: [{ url: 'https://findalocalpro.com/og-image.png', width: 1200, height: 630 }],
   },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Verified Local Pros — Directory',
+    description: 'Browse verified, licensed home service professionals in DuPage County, IL.',
+    images: ['https://findalocalpro.com/og-image.png'],
+  },
+  alternates: { canonical: 'https://findalocalpro.com/directory' },
 };
 
 interface Provider {

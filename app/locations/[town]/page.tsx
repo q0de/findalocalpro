@@ -222,17 +222,25 @@ export async function generateMetadata({ params }: { params: Promise<{ town: str
   const town = towns[townSlug];
   if (!town) return { title: 'Location Not Found | FindALocalPro' };
 
-  const title = `Verified Home Service Pros in ${town.name}, ${town.state} | FindALocalPro`;
-  const description = `Find licensed, verified plumbers, electricians, HVAC techs & roofers in ${town.name}, ${town.state}. Every pro checked against 4 government databases. Free for homeowners. (630) 407-1727`;
+  const title = `Verified Home Pros in ${town.name}, ${town.state} | FindALocalPro`;
+  const description = `Find licensed plumbers, electricians, HVAC techs & roofers in ${town.name}, ${town.state}. Every pro checked against 4 databases. Free.`;
+  const ogTitle = `Verified Home Pros in ${town.name}, ${town.state}`;
 
   return {
     title,
     description,
     openGraph: {
-      title: `Verified Home Pros in ${town.name}, ${town.state}`,
+      title: ogTitle,
       description,
+      type: 'website',
       url: `https://findalocalpro.com/locations/${townSlug}`,
       images: [{ url: 'https://findalocalpro.com/og-image.png', width: 1200, height: 630 }],
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: ogTitle,
+      description,
+      images: ['https://findalocalpro.com/og-image.png'],
     },
     alternates: {
       canonical: `https://findalocalpro.com/locations/${townSlug}`,

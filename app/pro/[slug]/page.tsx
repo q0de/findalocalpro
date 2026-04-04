@@ -98,18 +98,29 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   const tradeLabel = tradeLabels[provider.trade] || provider.trade;
   const score = Math.round(provider.trust_score || 0);
 
+  const pageTitle = `${provider.name} — ${tradeLabel} Pro | FindALocalPro`.slice(0, 60);
+  const pageDesc = `${provider.name} — Trust Score ${score}/100. Verified ${tradeLabel.toLowerCase()} pro in DuPage County, IL. License, BBB & contractor score checked.`.slice(0, 155);
+  const ogTitle = `${provider.name} — Verified ${tradeLabel} Pro`;
+  const ogDesc = `Trust Score ${score}/100. Verified ${tradeLabel.toLowerCase()} pro in DuPage County, IL.`;
+
   return {
-    title: `${provider.name} — Verified ${tradeLabel} Pro | FindALocalPro`,
-    description: `${provider.name} — Trust Score ${score}/100. Verified ${tradeLabel.toLowerCase()} professional in DuPage County, IL. License, BBB rating, and contractor score checked.`,
+    title: pageTitle,
+    description: pageDesc,
     alternates: {
       canonical: `https://findalocalpro.com/pro/${slug}`,
     },
     openGraph: {
-      title: `${provider.name} — Verified ${tradeLabel} Pro`,
-      description: `Trust Score ${score}/100. Verified ${tradeLabel.toLowerCase()} pro in DuPage County, IL.`,
+      title: ogTitle,
+      description: ogDesc,
       type: 'website',
       url: `https://findalocalpro.com/pro/${slug}`,
       images: [{ url: 'https://findalocalpro.com/og-image.png', width: 1200, height: 630 }],
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: ogTitle,
+      description: ogDesc,
+      images: ['https://findalocalpro.com/og-image.png'],
     },
   };
 }

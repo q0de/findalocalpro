@@ -5,12 +5,20 @@ import { Footer } from '@/components/Footer';
 import Breadcrumbs from '@/components/Breadcrumbs';
 
 export const metadata: Metadata = {
-  title: 'Contact FindALocalPro — Downers Grove, IL | (630) 407-1727',
-  description: 'Contact FindALocalPro for verified home service professionals in Downers Grove and DuPage County, IL. Call (630) 407-1727 or use our free matching service.',
+  title: 'Contact Us — Downers Grove, IL | FindALocalPro',
+  description: 'Contact FindALocalPro for verified home service pros in DuPage County, IL. Call (630) 407-1727 or use our free matching service.',
   openGraph: {
-    title: 'Contact FindALocalPro — Downers Grove, IL',
+    title: 'Contact Us — Downers Grove, IL',
     description: 'Get connected with verified home service professionals. Call (630) 407-1727.',
+    type: 'website',
     url: 'https://findalocalpro.com/contact',
+    images: [{ url: 'https://findalocalpro.com/og-image.png', width: 1200, height: 630 }],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Contact Us — Downers Grove, IL',
+    description: 'Get connected with verified home service professionals. Call (630) 407-1727.',
+    images: ['https://findalocalpro.com/og-image.png'],
   },
   alternates: { canonical: 'https://findalocalpro.com/contact' },
 };

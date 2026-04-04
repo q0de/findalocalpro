@@ -6,7 +6,21 @@ import { ChatSection } from '../ChatSection';
 
 export const metadata: Metadata = {
   title: 'Get Matched With a Verified Pro | FindALocalPro',
-  description: 'Tell us what you need and we\'ll connect you with a licensed, verified home service professional in 60 seconds. Free, no obligation.',
+  description: 'Tell us what you need and we\'ll connect you with a licensed, verified home service pro in 60 seconds. Free, no obligation.',
+  openGraph: {
+    title: 'Get Matched With a Verified Pro',
+    description: 'Connect with a licensed home service professional in 60 seconds. Free, no obligation.',
+    type: 'website',
+    url: 'https://findalocalpro.com/get-matched',
+    images: [{ url: 'https://findalocalpro.com/og-image.png', width: 1200, height: 630 }],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Get Matched With a Verified Pro',
+    description: 'Connect with a licensed home service professional in 60 seconds. Free, no obligation.',
+    images: ['https://findalocalpro.com/og-image.png'],
+  },
+  alternates: { canonical: 'https://findalocalpro.com/get-matched' },
 };
 
 export default function GetMatchedPage() {

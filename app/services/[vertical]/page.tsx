@@ -170,18 +170,28 @@ export async function generateMetadata({ params }: { params: Promise<{ vertical:
   const service = verticals[vertical];
   if (!service) return { title: 'Service Not Found | FindALocalPro' };
 
+  const ogTitle = `${service.title} in Downers Grove, IL`;
+  const safeDesc = service.description.slice(0, 155);
+
   return {
     title: `${service.title} in Downers Grove, IL | FindALocalPro`,
-    description: service.description,
+    description: safeDesc,
     keywords: `${service.title.toLowerCase()} Downers Grove, ${service.trade} DuPage County, licensed ${service.trade} near me, verified ${service.trade} Illinois`,
     alternates: {
       canonical: `https://findalocalpro.com/services/${vertical}`,
     },
     openGraph: {
-      title: `${service.title} in Downers Grove, IL`,
-      description: service.description,
+      title: ogTitle,
+      description: safeDesc,
+      type: 'website',
       url: `https://findalocalpro.com/services/${vertical}`,
       images: [{ url: 'https://findalocalpro.com/og-image.png', width: 1200, height: 630 }],
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: ogTitle,
+      description: safeDesc,
+      images: ['https://findalocalpro.com/og-image.png'],
     },
   };
 }

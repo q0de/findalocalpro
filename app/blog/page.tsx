@@ -6,12 +6,20 @@ import Breadcrumbs from '@/components/Breadcrumbs';
 import { blogPosts } from '@/lib/blog-posts';
 
 export const metadata: Metadata = {
-  title: 'Home Service Tips & Guides for DuPage County | FindALocalPro Blog',
-  description: 'Expert guides on hiring contractors, home maintenance, and protecting your investment. Local tips for Downers Grove, Naperville, and DuPage County homeowners.',
+  title: 'Home Service Tips & Guides | FindALocalPro Blog',
+  description: 'Expert guides on hiring contractors, home maintenance, and protecting your investment. Tips for DuPage County homeowners.',
   openGraph: {
     title: 'FindALocalPro Blog — Home Service Tips & Guides',
-    description: 'Expert guides for DuPage County homeowners on hiring contractors, home maintenance, and protecting your investment.',
+    description: 'Expert guides for DuPage County homeowners on hiring contractors and home maintenance.',
+    type: 'website',
     url: 'https://findalocalpro.com/blog',
+    images: [{ url: 'https://findalocalpro.com/og-image.png', width: 1200, height: 630 }],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'FindALocalPro Blog — Home Service Tips & Guides',
+    description: 'Expert guides for DuPage County homeowners on hiring contractors and home maintenance.',
+    images: ['https://findalocalpro.com/og-image.png'],
   },
   alternates: { canonical: 'https://findalocalpro.com/blog' },
 };

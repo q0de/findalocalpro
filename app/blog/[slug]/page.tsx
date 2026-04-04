@@ -16,17 +16,27 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   const post = getBlogPost(slug);
   if (!post) return { title: 'Post Not Found | FindALocalPro' };
 
+  const safeTitle = `${post.title} | FindALocalPro`.slice(0, 60);
+  const safeDesc = post.description.slice(0, 155);
+
   return {
-    title: `${post.title} | FindALocalPro`,
-    description: post.description,
+    title: safeTitle,
+    description: safeDesc,
     openGraph: {
       title: post.title,
-      description: post.description,
+      description: safeDesc,
       type: 'article',
       url: `https://findalocalpro.com/blog/${post.slug}`,
       publishedTime: post.publishedDate,
       modifiedTime: post.modifiedDate,
       authors: ['FindALocalPro Team'],
+      images: [{ url: 'https://findalocalpro.com/og-image.png', width: 1200, height: 630 }],
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: post.title,
+      description: safeDesc,
+      images: ['https://findalocalpro.com/og-image.png'],
     },
     alternates: { canonical: `https://findalocalpro.com/blog/${post.slug}` },
   };

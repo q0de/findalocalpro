@@ -38,6 +38,16 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     priority: 0.8,
   }));
 
+  // Service + location combo pages (72 total)
+  const comboPages: MetadataRoute.Sitemap = verticals.flatMap(v =>
+    locationSlugs.map(loc => ({
+      url: `https://findalocalpro.com/services/${v}/${loc}`,
+      lastModified: now,
+      changeFrequency: 'weekly' as const,
+      priority: 0.7,
+    }))
+  );
+
   // Dynamic provider pages from Supabase
   let providerPages: MetadataRoute.Sitemap = [];
   try {
@@ -78,5 +88,5 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     })),
   ];
 
-  return [...staticPages, ...methodologyPage, ...locationPages, ...servicePages, ...blogPages, ...providerPages];
+  return [...staticPages, ...methodologyPage, ...locationPages, ...servicePages, ...comboPages, ...blogPages, ...providerPages];
 }

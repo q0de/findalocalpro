@@ -5,8 +5,8 @@ import { ScrollProgress } from '@/components/ScrollProgress';
 import './globals.css';
 
 export const metadata: Metadata = {
-  title: 'Verified Home Pros in Downers Grove & DuPage County, IL | FindALocalPro',
-  description: 'Every contractor verified against 4 government databases — IDFPR license, BBB, IL SOS registration & BuildZoom. 11 verified pros across plumbing, HVAC, electrical & roofing. Free for homeowners. (630) 407-1727',
+  title: 'Verified Home Pros in DuPage County, IL | FindALocalPro',
+  description: 'Every contractor verified against 4 government databases. Licensed plumbers, HVAC techs, electricians & roofers. Free for homeowners.',
   keywords: 'verified contractors Downers Grove, licensed plumber DuPage County, HVAC repair Downers Grove IL, electrician near me Downers Grove, roofing contractor DuPage, home service professionals Illinois',
   openGraph: {
     title: 'Verified Home Pros in Downers Grove & DuPage County | FindALocalPro',

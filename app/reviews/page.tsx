@@ -8,8 +8,21 @@ import { SUPABASE_URL, SUPABASE_ANON } from '@/lib/supabase';
 export const revalidate = 3600; // Refresh every hour
 
 export const metadata: Metadata = {
-  title: 'Reviews & Testimonials | FindALocalPro — Downers Grove, IL',
-  description: 'See what DuPage County homeowners say about FindALocalPro. Real reviews from real customers matched with verified, licensed contractors.',
+  title: 'Reviews & Testimonials | FindALocalPro',
+  description: 'See what DuPage County homeowners say about FindALocalPro. Real reviews from real customers matched with verified contractors.',
+  openGraph: {
+    title: 'Reviews & Testimonials | FindALocalPro',
+    description: 'Real reviews from DuPage County homeowners matched with verified contractors.',
+    type: 'website',
+    url: 'https://findalocalpro.com/reviews',
+    images: [{ url: 'https://findalocalpro.com/og-image.png', width: 1200, height: 630 }],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Reviews & Testimonials | FindALocalPro',
+    description: 'Real reviews from DuPage County homeowners matched with verified contractors.',
+    images: ['https://findalocalpro.com/og-image.png'],
+  },
   alternates: { canonical: 'https://findalocalpro.com/reviews' },
 };
 

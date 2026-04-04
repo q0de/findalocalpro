@@ -5,12 +5,20 @@ import { Footer } from '@/components/Footer';
 import Breadcrumbs from '@/components/Breadcrumbs';
 
 export const metadata: Metadata = {
-  title: 'Our Verification Methodology — How We Verify Every Contractor | FindALocalPro',
-  description: 'How FindALocalPro verifies every contractor against 4 government databases: IDFPR license, IL Secretary of State, BBB, and BuildZoom. Learn how our Trust Score works.',
+  title: 'Verification Methodology | FindALocalPro',
+  description: 'How we verify every contractor against 4 government databases: IDFPR, IL SOS, BBB, and BuildZoom. Learn how Trust Scores work.',
   openGraph: {
-    title: 'Our Verification Methodology | FindALocalPro',
+    title: 'Verification Methodology | FindALocalPro',
     description: 'How we verify every contractor against 4 government databases and calculate Trust Scores.',
+    type: 'website',
     url: 'https://findalocalpro.com/methodology',
+    images: [{ url: 'https://findalocalpro.com/og-image.png', width: 1200, height: 630 }],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Verification Methodology | FindALocalPro',
+    description: 'How we verify every contractor against 4 government databases and calculate Trust Scores.',
+    images: ['https://findalocalpro.com/og-image.png'],
   },
   alternates: { canonical: 'https://findalocalpro.com/methodology' },
 };

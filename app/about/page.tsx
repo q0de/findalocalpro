@@ -5,12 +5,20 @@ import { Footer } from '@/components/Footer';
 import Breadcrumbs from '@/components/Breadcrumbs';
 
 export const metadata: Metadata = {
-  title: 'About FindALocalPro — How We Verify Home Service Professionals',
-  description: 'FindALocalPro checks every contractor against 4 government databases: IDFPR state licensing, IL Secretary of State, BBB, and BuildZoom. Learn how our verification works.',
+  title: 'About Us — How We Verify Contractors | FindALocalPro',
+  description: 'We check every contractor against 4 government databases: IDFPR, IL SOS, BBB, and BuildZoom. Learn how our verification works.',
   openGraph: {
-    title: 'About FindALocalPro — How We Verify Home Service Professionals',
+    title: 'About Us — How We Verify Contractors',
     description: 'Every pro verified against 4 public databases. Learn our process.',
+    type: 'website',
     url: 'https://findalocalpro.com/about',
+    images: [{ url: 'https://findalocalpro.com/og-image.png', width: 1200, height: 630 }],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'About Us — How We Verify Contractors',
+    description: 'Every pro verified against 4 public databases. Learn our process.',
+    images: ['https://findalocalpro.com/og-image.png'],
   },
   alternates: { canonical: 'https://findalocalpro.com/about' },
 };
