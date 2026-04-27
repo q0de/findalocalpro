@@ -24,63 +24,72 @@ const TELEGRAM_BOT_TOKEN = process.env.TELEGRAM_BOT_TOKEN;
 const TELEGRAM_CHAT_ID = process.env.TELEGRAM_CHAT_ID;
 const RESEND_WEBHOOK_SECRET = process.env.RESEND_WEBHOOK_SECRET;
 
+// Category → emoji mapping (matches Twilio voice-webhook style)
+const CATEGORY_ICON: Record<string, string> = {
+  "pest-control": "🐛",
+  "pest control": "🐛",
+  "refrigeration-hvac": "❄️",
+  "plumbing": "🔧",
+  "hood-ventilation": "🏗️",
+  "commercial-cleaning": "🧹",
+  "handyman": "🛠️",
+  "default": "📧",
+};
+
+function catIcon(category: string): string {
+  return CATEGORY_ICON[category] || CATEGORY_ICON.default;
+}
+
 // Extract restaurant name from subject line patterns
 function extractRestaurantName(subject: string): string {
-  // "[TEST] About the April 23, 2026 CDPH report at SWEET BEAN"
   const atMatch = subject.match(/at\s+(.+)$/i);
   if (atMatch) return atMatch[1].trim();
-
-  // "[TEST] Re-inspection clock started — SWEET BEAN"
   const dashMatch = subject.match(/—\s+(.+)$/);
   if (dashMatch) return dashMatch[1].trim();
-
   return "Unknown Restaurant";
 }
 
 // Extract category from the /call/ URL if clicked
 function extractCategory(url: string): string {
   const match = url.match(/\/call\/([\w-]+)/);
-  if (match) return match[1].replace(/-/g, " ");
+  if (match) return match[1];
   return "";
 }
 
-const EVENT_CONFIG: Record<string, { emoji: string; template: (data: any, restaurant: string) => string }> = {
+const EVENT_CONFIG: Record<string, { template: (data: any, restaurant: string) => string }> = {
   "email.delivered": {
-    emoji: "📬",
     template: (data, restaurant) =>
-      `📬 <b>Delivered</b> to ${restaurant}\n📧 ${data.to?.[0] || "unknown"}`,
+      `📬 *DELIVERED*\n📧 ${restaurant}\n📩 ${data.to?.[0] || "unknown"}`,
   },
   "email.opened": {
-    emoji: "👀",
     template: (data, restaurant) =>
-      `👀 <b>${restaurant}</b> opened the email!`,
+      `👀 *OPENED!*\n📧 ${restaurant}\n📩 ${data.to?.[0] || "unknown"}`,
   },
   "email.clicked": {
-    emoji: "🔗",
     template: (data, restaurant) => {
       const link = data.click?.link || "";
       const category = extractCategory(link);
       if (category) {
-        return `🔗 <b>${restaurant}</b> tapped the phone number (${category})! 🎯📞`;
+        const icon = catIcon(category);
+        const label = category.replace(/-/g, " ");
+        return `📞 *PHONE TAP!*\n${icon} ${label}\n📧 ${restaurant}\n📩 ${data.to?.[0] || "unknown"}\n🎯 Hot lead — expecting call`;
       }
-      if (link.includes("findalocalpro.com/directory")) {
-        return `🌐 <b>${restaurant}</b> clicked through to browse FindALocalPro! 🎯`;
+      if (link.includes("/directory")) {
+        return `🌐 *SITE VISIT!*\n📧 ${restaurant}\n📩 ${data.to?.[0] || "unknown"}\n🔗 Browsing pro directory`;
       }
-      if (link.includes("findalocalpro.com")) {
-        return `🌐 <b>${restaurant}</b> visited FindALocalPro.com`;
+      if (link.includes("findalocalpro")) {
+        return `🌐 *SITE VISIT*\n📧 ${restaurant}\n📩 ${data.to?.[0] || "unknown"}`;
       }
-      return `🔗 <b>${restaurant}</b> clicked a link: ${link}`;
+      return `🔗 *LINK CLICK*\n📧 ${restaurant}\n🔗 ${link}`;
     },
   },
   "email.bounced": {
-    emoji: "📭",
     template: (data, restaurant) =>
-      `📭 <b>Bounced</b> — ${restaurant}\n📧 ${data.to?.[0] || "unknown"}\n⚠️ Bad email address, removing from list`,
+      `📭 *BOUNCED*\n📧 ${restaurant}\n📩 ${data.to?.[0] || "unknown"}\n⚠️ Bad email — auto-removed`,
   },
   "email.complained": {
-    emoji: "🚫",
     template: (data, restaurant) =>
-      `🚫 <b>Spam complaint</b> — ${restaurant}\n📧 ${data.to?.[0] || "unknown"}\n⚠️ Auto-suppressed from future sends`,
+      `🚫 *SPAM COMPLAINT*\n📧 ${restaurant}\n📩 ${data.to?.[0] || "unknown"}\n⚠️ Auto-suppressed from future sends`,
   },
 };
 
@@ -99,7 +108,7 @@ async function sendTelegram(message: string): Promise<{ ok: boolean; error?: str
       body: JSON.stringify({
         chat_id: TELEGRAM_CHAT_ID,
         text: message,
-        parse_mode: "HTML",
+        parse_mode: "Markdown",
         disable_web_page_preview: true,
       }),
     });
@@ -130,8 +139,7 @@ export async function POST(request: NextRequest) {
     const restaurant = extractRestaurantName(data.subject || "");
     const message = config.template(data, restaurant);
 
-    // Add header
-    const fullMessage = `🦞 <b>FindALocalPro Outreach</b>\n\n${message}`;
+    const fullMessage = `📨 *FindALocalPro Outreach*\n\n${message}`;
 
     const tgResult = await sendTelegram(fullMessage);
 
