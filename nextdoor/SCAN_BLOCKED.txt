@@ -1,0 +1,20 @@
+NEXTDOOR SCAN BLOCKED - April 9, 2026 2:02 PM
+
+ISSUE: Browser automation completely non-functional
+- Chrome processes running (PID 95819) but debugging API unresponsive
+- curl to http://127.0.0.1:18800/api/tabs returns empty
+- curl to http://127.0.0.1:18800/api/snapshot returns empty
+- Restart attempted but still no response from debugging endpoints
+
+IMPACT: 
+- Cannot perform keyword searches for service leads
+- Cannot scroll feed for new posts
+- Cannot post comments or upload branded images
+- Cannot monitor notifications for replies
+
+MESSAGING ALSO DOWN:
+- ClawdBot messaging API at 127.0.0.1:8200 unreachable
+- Cannot send Telegram report to Shaquille Oatmeal
+
+TIMESTAMP: 2026-04-09T14:02:00-05:00
+STATUS: BLOCKED - Manual intervention required

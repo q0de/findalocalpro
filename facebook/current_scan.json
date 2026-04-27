@@ -1,0 +1,40 @@
+{
+  "scan_timestamp": "2026-04-09T17:05:47.160347",
+  "selected_groups": [
+    {
+      "name": "Contractor/Home Related Recommendations in Chicagoland",
+      "members": 8500,
+      "url": "https://www.facebook.com/groups/ChicagolandRecommendations/",
+      "status": "joined",
+      "priority": "critical"
+    },
+    {
+      "name": "What's Happening in Bolingbrook, IL",
+      "members": 81000,
+      "url": "https://www.facebook.com/groups/104287120162473/",
+      "status": "joined",
+      "priority": "high"
+    },
+    {
+      "name": "Glen Ellyn - Wheaton Neighbors",
+      "members": 47000,
+      "url": "https://www.facebook.com/groups/2327310610879847/",
+      "status": "joined",
+      "priority": "high"
+    },
+    {
+      "name": "What's Happening In DuPage, Kane, Kendall, & Cook County IL",
+      "members": null,
+      "url": "https://www.facebook.com/groups/640833643824480/",
+      "status": "joined",
+      "priority": "high"
+    },
+    {
+      "name": "What's Up Naperville",
+      "members": 12000,
+      "url": "https://www.facebook.com/groups/955885524531477/",
+      "status": "joined",
+      "priority": "medium"
+    }
+  ]
+}

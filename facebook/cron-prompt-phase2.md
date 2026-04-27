@@ -71,20 +71,22 @@ Pick 4-6 groups from groups.json with status=joined. Prioritize:
 For each selected group:
 1. browser action=navigate, targetUrl=<group_url>, profile=openclaw, timeoutMs=60000
 2. browser action=snapshot, profile=openclaw, compact=true
-3. Look for posts matching recommendation_keywords AND service keywords from scoring.json
-4. Score each post:
+3. **Read the FULL text of every post** — not just the headline or primary topic.
+4. **Keyword scan:** Check the ENTIRE post body against ALL keywords in scoring.json (plumbing, electrical, cooling, heating, pest, appliance, mold). A post about "landscaping and need an outlet installed" IS an electrical lead. A post about "remodeling bathroom and toilet won't flush" IS a plumbing lead. The primary topic does NOT determine the vertical — the keywords do.
+5. Score each post:
    - Has question mark: +10
    - Has recommendation keyword (recommend, anyone know, looking for, etc): +20
-   - Has service keyword (plumber, electrician, HVAC, AC, heating, pest control, appliance repair): +15
+   - Has service keyword from ANY vertical in scoring.json: +15 (per matching vertical)
    - Appears to be in target area (DuPage, Lombard, Downers Grove, Naperville, etc): +10
-5. **AUTO-SKIP if:**
+6. **AUTO-SKIP if:**
    - Score < 35 (too weak)
    - Post age > 48 hours (stale)
    - Replies > 20 (crowded)
    - Already responded (check activity-log.json dedup hash)
-   - Not in our verticals (no plumber/electrician/HVAC/pest/appliance keywords)
+   - **Zero matching keywords from ANY vertical in scoring.json after scanning the FULL post text** — do NOT skip based on the post's "main topic" alone
 
 ### STEP 6: Compose & POST Response with Image (Auto Mode)
+**IMPORTANT:** If a post mentions multiple verticals (e.g., landscaping + electrical outlet), respond ONLY for the qualifying vertical. Match the correct phone number and image to the specific service keyword that triggered the lead.
 For qualifying posts (score >= 35, not skipped):
 1. **Identify the vertical** from keywords (plumbing, electrical, hvac_cooling, heating, pest_control, appliance)
 2. **Select a template** from templates.json — check templates_used in activity-log.json to avoid repeating within 3 days

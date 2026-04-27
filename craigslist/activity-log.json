@@ -579,6 +579,642 @@
             "drafts_sent": 0,
             "emails_sent": 0,
             "notes": "Wanted ads continue extremely quiet pattern across all 6 regions scanned. Chicago: Zero local results for need plumber, AC repair, pest control. Found Gary electrical post 7918529412 (already emailed), 2x electric scooter posts (not services), Elgin contractor seeking subs (not consumer), South Pekin handyman post 7911138296 (already drafted multiple times, skipped). Indianapolis: Zero local results for AC repair. Detroit: Zero local results for pest control. St. Louis: Found Union electrical panel install post 7916272398 but too old (posted month ago, updated 7 days ago, violates 48hr rule). Milwaukee: Found Battle Creek appliance repair posts 7918758385 (already contacted 3/16) and 7918971113 (too old). Cincinnati: Mice search returned vinyl record collector post (not pest control). No new qualifying consumer leads found."
+        },
+        {
+            "date": "2026-04-02",
+            "time": "12:14 PM",
+            "searches_performed": [
+                "need plumber",
+                "need electrician",
+                "appliance repair",
+                "pest control",
+                "AC repair"
+            ],
+            "regions_scanned": [
+                "Chicago",
+                "Detroit",
+                "Milwaukee",
+                "Indianapolis",
+                "Cincinnati"
+            ],
+            "posts_found": 8,
+            "qualifying_leads": 0,
+            "drafts_sent": 0,
+            "emails_sent": 0,
+            "notes": "Wanted ads continue extremely quiet pattern across all 5 regions scanned. Chicago: Zero local results for need plumber, pest control. Electrical work showed meat saw equipment + Mt Clemens trade post (not consumer). Appliance repair showed Battle Creek posts (7918758385 already contacted 3/16, 7918971113 too old). Detroit: North Tonawanda plumber 7914381649 already drafted 3/21, zero AC repair results. Milwaukee: Same Battle Creek appliance posts. Indianapolis: Found 3 St Louis Metro East plumbing posts (all previously contacted - 2 emailed 3/20, 1 drafted 3/27). Cincinnati: Pest control search returned social media/marketing B2B posts (not consumer requests). No new qualifying consumer leads found."
+        },
+        {
+            "date": "2026-04-03",
+            "time": "12:10 PM",
+            "searches_performed": [
+                "plumber needed",
+                "need electrician",
+                "AC repair",
+                "furnace repair",
+                "appliance repair",
+                "pest control",
+                "mice",
+                "washing machine"
+            ],
+            "regions_scanned": [
+                "Chicago",
+                "Detroit",
+                "Indianapolis",
+                "Milwaukee",
+                "St. Louis",
+                "Cincinnati",
+                "Columbus"
+            ],
+            "posts_found": 8,
+            "qualifying_leads": 0,
+            "drafts_sent": 0,
+            "emails_sent": 0,
+            "notes": "Wanted ads continue extremely quiet pattern across all 7 regions scanned. Chicago: Zero local plumber results, found Shelby Township post already drafted 3/10, electrical search showed meat saw equipment (not service). Detroit: Zero AC repair results. Indianapolis: Zero furnace repair results. Milwaukee: Zero local appliance repair, Battle Creek posts already contacted/too old. St. Louis: Zero pest control results. Cincinnati: Zero mice results. Columbus: Found 5 vintage Maytag wringer washer collector posts from 3/28 (too old, not repair requests). No new qualifying consumer leads found."
+        },
+        {
+            "date": "2026-04-04",
+            "time": "12:09 PM",
+            "searches_performed": [
+                "need plumber",
+                "electrical work",
+                "AC repair",
+                "pest control",
+                "appliance repair",
+                "furnace repair",
+                "mice",
+                "washing machine",
+                "plumber needed"
+            ],
+            "regions_scanned": [
+                "Chicago",
+                "Indianapolis",
+                "Detroit",
+                "Milwaukee",
+                "St. Louis",
+                "Cincinnati",
+                "Columbus"
+            ],
+            "posts_found": 1,
+            "qualifying_leads": 0,
+            "drafts_sent": 0,
+            "emails_sent": 0,
+            "notes": "Wanted ads continue extremely quiet pattern across all 7 regions scanned. Only significant post found was South Pekin IL handyman post 7911138296 (updated 5hrs ago) but already drafted multiple times (3/9, 3/13, 3/14, 3/22) so skipped. Chicago: Zero local results for need plumber/plumber needed. Electrical work showed 2x Northlake scooter posts + Elgin contractor seeking subs (not consumer). Detroit: Pest control showed only Cincinnati B2B marketing posts. Milwaukee: Only Battle Creek appliance posts already contacted 3/16. St. Louis: Zero furnace repair results. Cincinnati: Mice search returned vinyl records post. Columbus: 5 vintage Maytag wringer washer collector posts from 3/28 (too old). Shelby Township plumber 7920005104 appeared but already drafted 3/10 and too old (3/8). No new qualifying consumer leads found."
+        },
+        {
+            "date": "2026-04-05",
+            "time": "17:08",
+            "regions_scanned": [
+                "chicago",
+                "indianapolis",
+                "milwaukee"
+            ],
+            "searches_performed": [
+                "need plumber",
+                "plumber needed",
+                "need electrician",
+                "AC repair"
+            ],
+            "posts_found": [
+                {
+                    "title": "NEEDS GUTTERS CLEANED - TWO STORY HOUSE -I will pay $180",
+                    "url": "https://indianapolis.craigslist.org/wan/d/indianapolis-needs-gutters-cleaned-two/7919579378.html",
+                    "area": "Zionsville, IN",
+                    "service_type": "home_maintenance",
+                    "score": 0,
+                    "reason": "Too old (30 days)"
+                },
+                {
+                    "title": "Handyman Wanted--Must Be Insured",
+                    "url": "https://indianapolis.craigslist.org/wan/d/indianapolis-handyman-wanted-must-be/7901827442.html",
+                    "area": "SE Indy, IN",
+                    "service_type": "handyman",
+                    "score": 0,
+                    "reason": "Too old (120 days)"
+                },
+                {
+                    "title": "Need Some PVC Fittings Replaced",
+                    "url": "https://milwaukee.craigslist.org/wan/d/hartland-need-some-pvc-fittings-replaced/7925255504.html",
+                    "area": "Hartland, WI",
+                    "service_type": "plumbing",
+                    "score": 0,
+                    "reason": "Too old (3 days)"
+                }
+            ],
+            "qualifying_drafts": 0,
+            "emails_sent": 0,
+            "notes": "All service posts found were older than 48-hour limit. Need to scan more frequently or adjust criteria."
+        },
+        {
+            "date": "2026-04-05",
+            "time": "12:13",
+            "regions_scanned": [
+                "chicago",
+                "stlouis",
+                "cincinnati"
+            ],
+            "searches_performed": [
+                "need plumber",
+                "need electrician",
+                "AC repair",
+                "appliance repair"
+            ],
+            "posts_found": [
+                {
+                    "title": "WANTED SECURITY SURVEILLANCE CAMERAS INSTALLED",
+                    "url": "https://chicago.craigslist.org/sox/wan/d/chicago-heights-wanted-security/7913984434.html",
+                    "area": "south chicagoland",
+                    "service_type": "security_camera_install",
+                    "score": 0,
+                    "reason": "Too old (posted 2026-02-09)"
+                },
+                {
+                    "title": "I am looking for professional plumber",
+                    "url": "https://stlouis.craigslist.org/wan/d/new-athens-am-looking-for-professional/7919979672.html",
+                    "area": "Metro East",
+                    "service_type": "plumbing",
+                    "score": 0,
+                    "reason": "Too old (posted 2026-03-08)"
+                },
+                {
+                    "title": "I need experienced plumber for new install",
+                    "url": "https://stlouis.craigslist.org/wan/d/new-athens-need-experienced-plumber-for/7916206230.html",
+                    "area": "Metro East",
+                    "service_type": "plumbing",
+                    "score": 0,
+                    "reason": "Too old (posted 2026-02-19)"
+                },
+                {
+                    "title": "I am looking for plumber or carpenter near Belleville",
+                    "url": "https://stlouis.craigslist.org/wan/d/new-athens-am-looking-for-plumber-or/7922867011.html",
+                    "area": "Belleville / Metro East",
+                    "service_type": "plumbing_or_carpentry",
+                    "score": 0,
+                    "reason": "Too old (posted 2026-03-22)"
+                },
+                {
+                    "title": "Wanted -Electrician to Install and Hook Up Service wires 150 amp panel",
+                    "url": "https://stlouis.craigslist.org/wan/d/cedar-hill-wanted-electrician-to/7916272398.html",
+                    "area": "Union",
+                    "service_type": "electrical",
+                    "score": 0,
+                    "reason": "Too old (posted 2026-02-19)"
+                },
+                {
+                    "title": "Handyman to repair stone wall and steps",
+                    "url": "https://cincinnati.craigslist.org/wan/d/cincinnati-handyman-to-repair-stone/7921769306.html",
+                    "area": "Colerain Township",
+                    "service_type": "handyman_masonry",
+                    "score": 0,
+                    "reason": "Too old (posted 2026-03-17); phone present (-10); says no text/email"
+                }
+            ],
+            "qualifying_drafts": 0,
+            "emails_sent": 0,
+            "notes": "Fallback web scan only. Browser automation / Telegram message tool unavailable in this session. No posts under 48 hours found among reviewed service leads; no drafts created."
+        },
+        {
+            "date": "2026-04-07",
+            "time": "12:08 PM",
+            "searches_performed": [
+                "need plumber",
+                "need electrician",
+                "AC repair",
+                "appliance repair",
+                "pest control",
+                "furnace repair",
+                "washing machine",
+                "mice"
+            ],
+            "regions_scanned": [
+                "chicago",
+                "indianapolis",
+                "milwaukee",
+                "detroit",
+                "stlouis",
+                "cincinnati"
+            ],
+            "posts_found": 0,
+            "qualifying_leads": 0,
+            "drafts_sent": 0,
+            "emails_sent": 0,
+            "notes": "Craigslist scanner attempted web search fallback due to browser tool unavailability. No fresh consumer leads found across 6 regions for home service requests. Search results returned only service provider ads and apartment rentals, not consumer requests. Pattern continues from previous scans - wanted ads sections remain extremely quiet for home services."
+        },
+        {
+            "date": "2026-04-08",
+            "time": "12:03 PM",
+            "searches_performed": [
+                "need plumber",
+                "plumber needed",
+                "need electrician",
+                "electrical work",
+                "AC repair",
+                "appliance repair",
+                "pest control",
+                "furnace repair"
+            ],
+            "regions_scanned": [
+                "chicago",
+                "indianapolis",
+                "milwaukee",
+                "detroit"
+            ],
+            "posts_found": 3,
+            "qualifying_leads": 3,
+            "drafts_sent": 3,
+            "emails_sent": 0,
+            "notes": "Strong day with 3 qualifying leads from Detroit metro area: Ecorse flat roof replacement (score 50), Berkley carport repair (score 50), Roseville landscaper/handyman (score 50). All posts under 48hrs old. Chicago/Indianapolis/Milwaukee quiet. Sent 3 drafts to Telegram for approval."
+        },
+        {
+            "date": "2026-04-09",
+            "time": "12:06 PM",
+            "searches_performed": [
+                "need plumber",
+                "plumber needed",
+                "need electrician",
+                "electrical work",
+                "AC repair",
+                "appliance repair",
+                "pest control",
+                "furnace repair"
+            ],
+            "regions_scanned": [
+                "chicago",
+                "detroit",
+                "milwaukee",
+                "indianapolis",
+                "stlouis",
+                "cincinnati"
+            ],
+            "posts_found": [
+                {
+                    "title": "ISO SOMEONE WHO DOES MOBILITY SCOOTER WORK",
+                    "url": "https://indianapolis.craigslist.org/wan/d/indianapolis-iso-someone-who-does/7926434095.html",
+                    "area": "Indianapolis, IN",
+                    "service_type": "mobility_scooter_repair",
+                    "score": 0,
+                    "reason": "Not in target verticals (plumbing, electrical, HVAC, pest, appliance)"
+                },
+                {
+                    "title": "Trade Truck or Car for Electrician Work",
+                    "url": "https://detroit.craigslist.org/mcb/wan/d/clinton-township-trade-truck-or-car-for/7903176661.html",
+                    "area": "Clinton Township, MI",
+                    "service_type": "electrical",
+                    "score": 0,
+                    "reason": "Too old (posted 2025-12-18, updated 2026-04-06)"
+                }
+            ],
+            "qualifying_leads": 0,
+            "drafts_sent": 0,
+            "emails_sent": 0,
+            "notes": "Fallback web scan only. Browser automation unavailable in this session. Wanted ads sections continue extremely quiet pattern across all 6 regions for home service requests. Found 1 mobility scooter repair request in Indianapolis from yesterday, but not in our target verticals. Detroit electrical trade post too old (posted Dec 2025). No qualifying consumer leads found."
+        },
+        {
+            "date": "2026-04-10",
+            "time": "12:01 PM",
+            "searches_performed": [
+                "need plumber",
+                "need electrician",
+                "AC repair",
+                "appliance repair"
+            ],
+            "regions_scanned": [
+                "chicago",
+                "detroit",
+                "milwaukee"
+            ],
+            "posts_found": [
+                {
+                    "title": "6801 Hobart Vertical Meat Saw - 200-230Volts, 3PH, 3HP",
+                    "url": "https://chicago.craigslist.org/search/waa?purveyor=owner&query=need%20electrician",
+                    "area": "Chicago, IL",
+                    "service_type": "equipment_listing",
+                    "score": 0,
+                    "reason": "Not a consumer home service request"
+                },
+                {
+                    "title": "Trade Truck or Car for Electrician Work",
+                    "url": "https://detroit.craigslist.org/search/waa?purveyor=owner&query=need%20electrician",
+                    "area": "Clinton Township, MI",
+                    "service_type": "electrical",
+                    "score": 0,
+                    "reason": "Too old / trade offer, not a fresh qualifying consumer request"
+                }
+            ],
+            "qualifying_leads": 0,
+            "drafts_sent": 0,
+            "emails_sent": 0,
+            "notes": "Fallback web scan only. Browser automation and Telegram message tools unavailable in this session. Most Craigslist search pages returned empty/loading content via web fetch, preventing reliable full review. No qualifying consumer leads found among visible results."
+        },
+        {
+            "date": "2026-04-12",
+            "time": "12:00 PM",
+            "searches_performed": [
+                "need plumber",
+                "need electrician",
+                "AC repair",
+                "appliance repair"
+            ],
+            "regions_scanned": [
+                "chicago",
+                "detroit",
+                "milwaukee",
+                "indianapolis"
+            ],
+            "posts_found": [
+                {
+                    "title": "Trade Truck or Car for Electrician Work",
+                    "url": "https://detroit.craigslist.org/mcb/wan/d/clinton-township-trade-truck-or-car-for/7903176661.html",
+                    "area": "Clinton Township, MI",
+                    "service_type": "electrical",
+                    "score": 0,
+                    "reason": "Too old / trade offer, not a qualifying consumer request"
+                }
+            ],
+            "qualifying_leads": 0,
+            "drafts_sent": 0,
+            "emails_sent": 0,
+            "notes": "Fallback web scan only. Required browser and Telegram message tools were unavailable in this session. Craigslist fetch mostly returned loading pages; only visible result was an old Detroit electrical trade post, which is not a qualifying consumer lead. No drafts created."
+        },
+        {
+            "date": "2026-04-13",
+            "time": "12:01 PM",
+            "searches_performed": [
+                "need plumber",
+                "need electrician",
+                "AC repair",
+                "appliance repair",
+                "pest control"
+            ],
+            "regions_scanned": [
+                "chicago",
+                "detroit",
+                "milwaukee",
+                "indianapolis"
+            ],
+            "posts_found": [
+                {
+                    "title": "6801 Hobart Vertical Meat Saw - 200-230Volts, 3PH, 3HP",
+                    "url": "https://chicago.craigslist.org/search/waa?purveyor=owner&query=need%20electrician",
+                    "area": "Chicago, IL",
+                    "service_type": "equipment_listing",
+                    "score": 0,
+                    "reason": "Not a consumer home service request"
+                }
+            ],
+            "qualifying_leads": 0,
+            "drafts_sent": 0,
+            "emails_sent": 0,
+            "notes": "Fallback web scan only. Required browser and Telegram message tools were unavailable in this session. Craigslist fetch mostly returned loading pages; only visible result was a Chicago equipment listing, not a qualifying consumer lead. No drafts created."
+        },
+        {
+            "date": "2026-04-14",
+            "time": "12:08 PM",
+            "searches_performed": [
+                "need plumber",
+                "need electrician",
+                "appliance repair",
+                "plumber"
+            ],
+            "regions_scanned": [
+                "chicago",
+                "indianapolis",
+                "detroit",
+                "milwaukee"
+            ],
+            "posts_found": [
+                {
+                    "title": "Trade Truck or Car for Electrician Work",
+                    "url": "https://detroit.craigslist.org/mcb/wan/d/clinton-township-trade-truck-or-car-for/7903176661.html",
+                    "area": "Clinton Township, MI",
+                    "service_type": "electrical",
+                    "score": 0,
+                    "reason": "Too old / trade offer, not a qualifying consumer request"
+                }
+            ],
+            "qualifying_leads": 0,
+            "drafts_sent": 0,
+            "emails_sent": 0,
+            "notes": "Fallback web scan only. OpenClaw browser automation failed in this session with CDP protocol errors, and most Craigslist result pages returned loading states via web fetch. Reviewed Chicago, Indianapolis, Detroit, and Milwaukee searches; only visible service-related result was an old Detroit electrical trade post, which is not a qualifying consumer request. No drafts created and no Telegram approval requests sent."
+        },
+        {
+            "date": "2026-04-15",
+            "time": "12:10 PM",
+            "searches_performed": [
+                "need plumber",
+                "plumber needed",
+                "need electrician",
+                "AC repair"
+            ],
+            "regions_scanned": [
+                "chicago",
+                "detroit"
+            ],
+            "posts_found": 0,
+            "qualifying_leads": 0,
+            "drafts_sent": 0,
+            "emails_sent": 0,
+            "notes": "Fallback web scan only. Required browser automation tools were unavailable in this session. Craigslist consistently returned loading states via web_fetch across multiple regions (Chicago, Detroit), suggesting anti-bot protection blocking automated access. No consumer leads could be evaluated. Browser automation needed for reliable Craigslist scanning."
+        },
+        {
+            "date": "2026-04-16",
+            "time": "12:00 PM",
+            "searches_performed": [
+                "need plumber",
+                "plumber needed",
+                "need electrician",
+                "AC repair"
+            ],
+            "regions_scanned": [
+                "chicago",
+                "detroit",
+                "milwaukee"
+            ],
+            "posts_found": 0,
+            "qualifying_leads": 0,
+            "drafts_sent": 0,
+            "emails_sent": 0,
+            "notes": "Fallback-only session. Required browser automation and Telegram message tools were unavailable, so Craigslist could not be scanned reliably and no approval messages could be sent. No emails sent."
+        },
+        {
+            "date": "2026-04-17",
+            "time": "12:00 PM",
+            "searches_performed": [
+                "need plumber",
+                "need electrician",
+                "AC repair",
+                "appliance repair",
+                "plumber needed",
+                "pest control"
+            ],
+            "regions_scanned": [
+                "chicago",
+                "detroit",
+                "milwaukee",
+                "indianapolis",
+                "stlouis"
+            ],
+            "posts_found": [
+                {
+                    "title": "6801 Hobart Vertical Meat Saw - 200-230Volts, 3PH, 3HP",
+                    "url": "https://chicago.craigslist.org/search/waa?purveyor=owner&query=need%20electrician",
+                    "area": "Chicago, IL",
+                    "service_type": "equipment_listing",
+                    "score": 0,
+                    "reason": "Not a consumer home service request"
+                }
+            ],
+            "qualifying_leads": 0,
+            "drafts_sent": 0,
+            "emails_sent": 0,
+            "notes": "Fallback web scan only. Required browser automation and Telegram message tools were unavailable in this session. Craigslist search pages mostly returned loading states/anti-bot placeholders across Chicago, Detroit, Milwaukee, Indianapolis, and St. Louis. Only visible service-adjacent result was a Chicago equipment listing, which is not a qualifying consumer home service request. No drafts created and no emails sent."
+        },
+        {
+            "date": "2026-04-18",
+            "time": "12:01 PM",
+            "searches_performed": [
+                "need plumber",
+                "need electrician",
+                "AC repair",
+                "appliance repair"
+            ],
+            "regions_scanned": [
+                "chicago",
+                "detroit",
+                "milwaukee",
+                "indianapolis"
+            ],
+            "posts_found": [
+                {
+                    "title": "Trade Truck or Car for Electrician Work",
+                    "url": "https://detroit.craigslist.org/mcb/wan/d/clinton-township-trade-truck-or-car-for/7903176661.html",
+                    "area": "Clinton Township, MI",
+                    "service_type": "electrical",
+                    "score": 0,
+                    "reason": "Too old / trade offer, not a qualifying consumer request"
+                }
+            ],
+            "qualifying_leads": 0,
+            "drafts_sent": 0,
+            "emails_sent": 0,
+            "notes": "Fallback web scan only. Required browser automation and Telegram message tools were unavailable in this session. Craigslist search pages mostly returned loading states/anti-bot placeholders across Chicago, Detroit, Milwaukee, and Indianapolis. Only visible service-related result was an old Detroit electrical trade post, which is not a qualifying consumer request. No drafts created and no emails sent."
+        },
+        {
+            "date": "2026-04-19",
+            "time": "12:00 PM",
+            "searches_performed": [
+                "need plumber",
+                "need electrician",
+                "AC repair",
+                "appliance repair"
+            ],
+            "regions_scanned": [
+                "chicago",
+                "detroit",
+                "indianapolis",
+                "milwaukee"
+            ],
+            "posts_found": [
+                {
+                    "title": "Trade Truck or Car for Electrician Work",
+                    "url": "https://detroit.craigslist.org/mcb/wan/d/clinton-township-trade-truck-or-car-for/7903176661.html",
+                    "area": "Clinton Township, MI",
+                    "service_type": "electrical",
+                    "score": 0,
+                    "reason": "Too old / trade offer, not a qualifying consumer request"
+                }
+            ],
+            "qualifying_leads": 0,
+            "drafts_sent": 0,
+            "emails_sent": 0,
+            "notes": "Fallback web scan only. Required browser automation and Telegram message tools were unavailable in this session. Craigslist search pages mostly returned loading states/anti-bot placeholders across Chicago, Detroit, Indianapolis, and Milwaukee. Only visible service-related result was an old Detroit electrical trade post, which is not a qualifying consumer request. No drafts created and no emails sent."
+        },
+        {
+            "date": "2026-04-20",
+            "time": "12:01 PM",
+            "searches_performed": [
+                "need plumber",
+                "need electrician",
+                "AC repair",
+                "appliance repair"
+            ],
+            "regions_scanned": [
+                "chicago",
+                "detroit",
+                "indianapolis",
+                "milwaukee"
+            ],
+            "posts_found": [
+                {
+                    "title": "Trade Truck or Car for Electrician Work",
+                    "url": "https://detroit.craigslist.org/mcb/wan/d/clinton-township-trade-truck-or-car-for/7903176661.html",
+                    "area": "Clinton Township, MI",
+                    "service_type": "electrical",
+                    "score": 0,
+                    "reason": "Too old / trade offer, not a qualifying consumer request"
+                }
+            ],
+            "qualifying_leads": 0,
+            "drafts_sent": 0,
+            "emails_sent": 0,
+            "notes": "Fallback web scan only. Required browser automation and Telegram message tools were unavailable in this session. Craigslist search pages mostly returned loading states/anti-bot placeholders across Chicago, Indianapolis, and Milwaukee. Only visible service-related result was an old Detroit electrical trade post, which is not a qualifying consumer request. No drafts created and no emails sent."
+        },
+        {
+            "date": "2026-04-21",
+            "time": "12:00 PM",
+            "searches_performed": [
+                "need plumber",
+                "need electrician",
+                "AC repair",
+                "appliance repair"
+            ],
+            "regions_scanned": [
+                "chicago",
+                "detroit",
+                "indianapolis",
+                "milwaukee"
+            ],
+            "posts_found": [
+                {
+                    "title": "Trade Truck or Car for Electrician Work",
+                    "url": "https://detroit.craigslist.org/mcb/wan/d/clinton-township-trade-truck-or-car-for/7903176661.html",
+                    "area": "Clinton Township, MI",
+                    "service_type": "electrical",
+                    "score": 0,
+                    "reason": "Too old / trade offer, not a qualifying consumer request"
+                }
+            ],
+            "qualifying_leads": 0,
+            "drafts_sent": 0,
+            "emails_sent": 0,
+            "notes": "Fallback web scan only. Required browser and Telegram message tools were unavailable in this session. Craigslist search pages mostly returned loading states/anti-bot placeholders across Chicago, Indianapolis, and Milwaukee. Only visible service-related result was an old Detroit electrical trade post, which is not a qualifying consumer request. No drafts created and no emails sent."
+        },
+        {
+            "date": "2026-04-23",
+            "time": "12:02 PM",
+            "searches_performed": [
+                "need plumber",
+                "need electrician",
+                "AC repair"
+            ],
+            "regions_scanned": [
+                "chicago",
+                "detroit",
+                "milwaukee"
+            ],
+            "posts_found": [
+                {
+                    "title": "Trade Truck or Car for Electrician Work",
+                    "url": "https://detroit.craigslist.org/mcb/wan/d/clinton-township-trade-truck-or-car-for/7903176661.html",
+                    "area": "Clinton Township, MI",
+                    "service_type": "electrical",
+                    "score": 0,
+                    "reason": "Too old / trade offer, not a qualifying consumer request"
+                }
+            ],
+            "qualifying_leads": 0,
+            "drafts_sent": 0,
+            "emails_sent": 0,
+            "notes": "Fallback web scan only. Required browser automation and Telegram message tools were unavailable in this session. Craigslist search pages mostly returned loading states/anti-bot placeholders across Chicago and Milwaukee; Detroit showed only an old electrical trade post, which is not a qualifying consumer request. No drafts created and no emails sent."
         }
     ],
     "emailed_post_ids": [

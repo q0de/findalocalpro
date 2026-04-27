@@ -58,9 +58,18 @@ const EVENT_CONFIG: Record<string, { emoji: string; template: (data: any, restau
   "email.clicked": {
     emoji: "🔗",
     template: (data, restaurant) => {
-      const category = extractCategory(data.click?.link || "");
-      const catLabel = category ? ` (${category})` : "";
-      return `🔗 <b>${restaurant}</b> clicked the phone number${catLabel}! 🎯`;
+      const link = data.click?.link || "";
+      const category = extractCategory(link);
+      if (category) {
+        return `🔗 <b>${restaurant}</b> tapped the phone number (${category})! 🎯📞`;
+      }
+      if (link.includes("findalocalpro.com/directory")) {
+        return `🌐 <b>${restaurant}</b> clicked through to browse FindALocalPro! 🎯`;
+      }
+      if (link.includes("findalocalpro.com")) {
+        return `🌐 <b>${restaurant}</b> visited FindALocalPro.com`;
+      }
+      return `🔗 <b>${restaurant}</b> clicked a link: ${link}`;
     },
   },
   "email.bounced": {
