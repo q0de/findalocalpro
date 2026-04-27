@@ -84,23 +84,35 @@ const EVENT_CONFIG: Record<string, { emoji: string; template: (data: any, restau
   },
 };
 
-async function sendTelegram(message: string) {
+async function sendTelegram(message: string): Promise<{ ok: boolean; error?: string }> {
   if (!TELEGRAM_BOT_TOKEN || !TELEGRAM_CHAT_ID) {
-    console.error("Missing Telegram config");
-    return;
+    const err = `Missing config: token=${!!TELEGRAM_BOT_TOKEN} chat=${!!TELEGRAM_CHAT_ID}`;
+    console.error(err);
+    return { ok: false, error: err };
   }
 
   const url = `https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage`;
-  await fetch(url, {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({
-      chat_id: TELEGRAM_CHAT_ID,
-      text: message,
-      parse_mode: "HTML",
-      disable_web_page_preview: true,
-    }),
-  });
+  try {
+    const res = await fetch(url, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        chat_id: TELEGRAM_CHAT_ID,
+        text: message,
+        parse_mode: "HTML",
+        disable_web_page_preview: true,
+      }),
+    });
+    const data = await res.json();
+    if (!data.ok) {
+      console.error("Telegram error:", JSON.stringify(data));
+      return { ok: false, error: data.description || "unknown" };
+    }
+    return { ok: true };
+  } catch (e: any) {
+    console.error("Telegram fetch error:", e.message);
+    return { ok: false, error: e.message };
+  }
 }
 
 export async function POST(request: NextRequest) {
@@ -121,9 +133,9 @@ export async function POST(request: NextRequest) {
     // Add header
     const fullMessage = `🦞 <b>FindALocalPro Outreach</b>\n\n${message}`;
 
-    await sendTelegram(fullMessage);
+    const tgResult = await sendTelegram(fullMessage);
 
-    return NextResponse.json({ ok: true, event: eventType });
+    return NextResponse.json({ ok: true, event: eventType, telegram: tgResult });
   } catch (error) {
     console.error("Webhook error:", error);
     return NextResponse.json({ error: "Internal error" }, { status: 500 });
