@@ -1,8 +1,10 @@
 import type { NextConfig } from 'next';
 
 const nextConfig: NextConfig = {
-  // Enable React strict mode
-  reactStrictMode: true,
+  turbopack: {
+    root: __dirname,
+  },
+  outputFileTracingRoot: __dirname,
 };
 
 export default nextConfig;
