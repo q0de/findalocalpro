@@ -26,7 +26,7 @@
     "pest_control": {
       "image": "pest-control.png",
       "phone": "(630) 491-3723",
-      "keywords": ["pest", "exterminator", "bugs", "insects", "mice", "rats", "termites", "ants", "roaches", "bed bugs", "rodent"]
+      "keywords": ["pest", "exterminator", "bugs", "insects", "termites", "ants", "roaches", "cockroaches", "bed bugs", "wasps", "bees", "spiders", "earwigs", "carpenter ants"]
     },
     "appliance": {
       "image": "appliance.png",

@@ -98,6 +98,9 @@ Skip if: Score < 50, Post age > 48 hours, Replies > 15, Already responded
 ### STEP 7: Select & Respond (COMMENT POSTING PROCEDURE)
 This is the critical step. Follow EXACTLY:
 
+0. **Pest safety preflight:** Before drafting or posting ANY pest-control reply, run:
+   `cd ~/clawd && ./findalocalpro/nextdoor/nextdoor-pest-safety-audit.py --text "<post text + proposed reply>" --vertical pest_control --json`
+   If it returns `block_not_covered_animal_removal` or exits nonzero: STOP. Do not draft, type, submit, retry, or include it as a best lead. Log as `not_covered_animal_removal`.
 1. **Navigate** to post URL: browser action=navigate, targetUrl=<post_url>, profile=openclaw, timeoutMs=60000
 2. **Snapshot** to find comment box: browser action=snapshot, profile=openclaw, compact=true
    - Find the comment textbox ref (e.g. "e15" or similar)
@@ -113,14 +116,24 @@ This is the critical step. Follow EXACTLY:
 
 ### STEP 8: Log to ~/clawd/findalocalpro/nextdoor/activity-log.json
 
+### STEP 8B: Post-run safety audit
+After logging, run:
+`cd ~/clawd && ./findalocalpro/nextdoor/nextdoor-pest-safety-audit.py --since-hours 72 --queue-delete --json`
+If `violation_count > 0`, immediately alert Shaquille Oatmeal with the queued item(s). Do NOT keep posting. Do NOT delete automatically unless Shaquille has explicitly approved deletion for that item or has enabled automatic deletion policy.
+
 ### STEP 9: Close nextdoor tabs
 
 ## SERVICE KEYWORDS
 - Plumbing: leak, dripping, clog, drain, pipe, burst, water heater, toilet, sink, flood, sewage, sump pump
 - Electrical: outlet, socket, switch, panel, breaker, fuse, flickering, wiring, GFCI, electrician
 - HVAC: furnace, heater, heating, AC, air conditioner, cooling, thermostat, HVAC, vent, duct
-- Pest: ants, mice, rats, termites, wasps, bees, spiders, bed bugs, cockroaches, exterminator
+- Pest: BUGS/INSECTS ONLY — ants, termites, wasps, bees, spiders, bed bugs, cockroaches, roaches, earwigs, carpenter ants, exterminator for insects
 - Appliance: dishwasher, washer, dryer, refrigerator, fridge, oven, stove, microwave, disposal
+
+## HARD PEST EXCLUSIONS — DO NOT REPLY / DO NOT CLASSIFY AS PEST
+FindALocalPro pest coverage is for bugs/insects only. It does NOT cover animal removal or wildlife.
+Skip and log as `not_covered_animal_removal` if the post is about: wildlife, animal removal, animal control, birds, bats, raccoons, squirrels, chipmunks, skunks, possums/opossums, coyotes, rabbits/bunnies, deer, groundhogs, moles, voles, snakes, mice, mouse, rats, rodents, nest removal for animals, attic animals, garage animals, humane/no-kill animal requests, or dead animal/deer remains.
+Only consider pest-control replies when the actual problem is insects/bugs.
 
 ## VOICE (Miles Granite)
 - Natural neighbor tone, not salesy

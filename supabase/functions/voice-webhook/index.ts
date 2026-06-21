@@ -33,13 +33,14 @@ const SERVICE_TO_NEED_ID: Record<string, string> = {
 };
 
 // ── Dedicated vertical numbers → skip IVR, bridge directly ──
-const VERTICAL_NUMBERS: Record<string, { service: string; needId: string; audio: string }> = {
+const VERTICAL_NUMBERS: Record<string, { service: string; needId: string; audio: string; skipIntro?: boolean }> = {
   "+16307565104": { service: "plumbing", needId: "10000-", audio: "direct_plumbing" },
   "+16303183024": { service: "electrical", needId: "5000-", audio: "direct_electrical" },
   "+16305998262": { service: "air conditioning", needId: "584-", audio: "direct_cooling" },
   "+16307565505": { service: "hvac", needId: "583-", audio: "direct_heating" },
   "+16304913723": { service: "pest control", needId: "6000-", audio: "direct_pest_control" },
-  "+16307565185": { service: "appliance repair", needId: "149-", audio: "direct_appliance" },
+  // Canary: true no-friction flow. Tracking still happens via logCall, logElocalPing, and Dial status callback.
+  "+16307565185": { service: "appliance repair", needId: "149-", audio: "direct_appliance", skipIntro: true },
 };
 
 // ── Vertical-specific icons for Telegram ────────────────────
@@ -872,9 +873,9 @@ Deno.serve(async (req: Request) => {
     if (elocalResponse.status === "success" && elocalResponse.phone_number) {
       await notifyTelegram(`🎉 *Dedicated Line Call!*\n📱 ${from}\n${svcIcon(verticalMatch.service)} ${verticalMatch.service}\n📍 Zip: ${zipCode} (from area code)\n💰 Bid: $${elocalResponse.price}\n📞 Bridging to ${elocalResponse.phone_number}`);
       
+      const introTwiML = verticalMatch.skipIntro ? "" : `\n  <Play>${AUDIO_BASE}/${verticalMatch.audio}.mp3</Play>`;
       twiml = `<?xml version="1.0" encoding="UTF-8"?>
-<Response>
-  <Play>${AUDIO_BASE}/${verticalMatch.audio}.mp3</Play>
+<Response>${introTwiML}
   <Dial callerId="${to}" timeout="30" action="${WEBHOOK_BASE}/voice-webhook/status" method="POST">
     <Number>${elocalResponse.phone_number}</Number>
   </Dial>

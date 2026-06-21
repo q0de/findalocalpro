@@ -5,3 +5,18 @@ dist
 .env*.local
 webhook/.env
 .next
+
+# Local Nextdoor/proxy runtime state
+nextdoor/pa-proxy/
+nextdoor/*activity-log*.json
+nextdoor/*.bak-*
+nextdoor/safety-delete-*.jsonl
+nextdoor/tmp-*
+
+# Supabase CLI runtime state
+supabase/.temp/
+
+# Local scratch/output
+tmp/
+data/
+*.log
