@@ -7,7 +7,7 @@
 **Primary customer:** Local home-service business owners, starting with plumbers, electricians, HVAC, appliance repair, pest control, handyman, roofing, and similar high-intent service categories.  
 **Owner-facing promise:** We monitor the local internet for people who need your service, help turn those signals into booked jobs, and keep you aware of reputation risks before they cost you business.
 
-FindALocalPro already has active local demand infrastructure through SEO pages, eLocal routing, dedicated call flows, and Nextdoor lead discovery. The Neighborhood Demand Engine expands the partner package from “featured placement and Nextdoor replies” into a broader, higher-value monthly service: local demand monitoring, reputation alerts, call tracking, weekly reporting, and lightweight competitive intelligence.
+FindALocalPro already has active local demand infrastructure through SEO pages, eLocal routing, dedicated call flows, and Nextdoor lead discovery. The Neighborhood Demand Engine expands the partner package from ‚Äúfeatured placement and Nextdoor replies‚Äù into a broader, higher-value monthly service: local demand monitoring, reputation alerts, call tracking, weekly reporting, and lightweight competitive intelligence.
 
 The goal is to make the partner offer feel hard to pass up because the business owner sees multiple channels working together on their behalf, not just one lead source.
 
@@ -24,7 +24,7 @@ Local home-service owners miss demand because it is scattered across many places
 - Competitors get repeatedly recommended in neighborhood conversations.
 - Owners do not have a simple weekly view of what happened locally.
 
-Most contractors do not have time to monitor all of this. Agencies sell SEO, ads, or review management separately, but small local operators often need a simple, practical “watch the neighborhood and tell me where the money is” service.
+Most contractors do not have time to monitor all of this. Agencies sell SEO, ads, or review management separately, but small local operators often need a simple, practical ‚Äúwatch the neighborhood and tell me where the money is‚Äù service.
 
 ---
 
@@ -35,7 +35,7 @@ Most contractors do not have time to monitor all of this. Agencies sell SEO, ads
 1. Increase perceived value of the FindALocalPro partner package.
 2. Justify a recurring monthly price point beyond pay-per-lead economics.
 3. Create a defensible local-growth service that combines lead generation, reputation monitoring, and market intelligence.
-4. Generate partner retention through visible weekly output, not vague “SEO is working” promises.
+4. Generate partner retention through visible weekly output, not vague ‚ÄúSEO is working‚Äù promises.
 5. Start with manual/semi-automated operations before building a full dashboard.
 
 ### Customer goals
@@ -54,10 +54,10 @@ Most contractors do not have time to monitor all of this. Agencies sell SEO, ads
 - Building a full client portal for v1.
 - Fully autonomous posting on every social platform.
 - Guaranteeing booked jobs or revenue.
-- Replacing the owner’s CRM.
+- Replacing the owner‚Äôs CRM.
 - Running paid ads.
 - Managing full social media content calendars.
-- Acting as the business owner’s personal social media account without review/approval where platform risk is high.
+- Acting as the business owner‚Äôs personal social media account without review/approval where platform risk is high.
 
 ---
 
@@ -113,10 +113,10 @@ Recommended public phrasing:
 
 **Examples:**
 
-- “Need a plumber in Downers Grove.”
-- “Any recommendations for an electrician?”
-- “Looking for someone to fix my AC.”
-- “Who does appliance repair near Naperville?”
+- ‚ÄúNeed a plumber in Downers Grove.‚Äù
+- ‚ÄúAny recommendations for an electrician?‚Äù
+- ‚ÄúLooking for someone to fix my AC.‚Äù
+- ‚ÄúWho does appliance repair near Naperville?‚Äù
 
 **Capabilities:**
 
@@ -154,7 +154,7 @@ Recommended public phrasing:
 
 ### 7.3 Google Review Monitoring
 
-**Description:** Watch the partner’s Google reviews and flag changes.
+**Description:** Watch the partner‚Äôs Google reviews and flag changes.
 
 **Capabilities:**
 
@@ -228,7 +228,7 @@ Recommended public phrasing:
 
 **Example insight:**
 
-> “This week, ABC Plumbing was recommended 4 times in Naperville threads, usually for emergency drain cleaning. We should emphasize same-day drain cleaning in your responses and GBP posts.”
+> ‚ÄúThis week, ABC Plumbing was recommended 4 times in Naperville threads, usually for emergency drain cleaning. We should emphasize same-day drain cleaning in your responses and GBP posts.‚Äù
 
 ---
 
@@ -241,7 +241,7 @@ Recommended public phrasing:
 - SMS review request template.
 - Email review request template.
 - Job-completion follow-up script.
-- Weekly reminder: “Ask these customers for reviews.”
+- Weekly reminder: ‚ÄúAsk these customers for reviews.‚Äù
 
 **Optional future enhancement:** Owner submits completed jobs, FindALocalPro generates review request drafts.
 
@@ -292,7 +292,187 @@ Recommended public phrasing:
 
 ---
 
-## 8. Owner View / Reporting UX
+## 8. Monitoring and Routing Architecture
+
+This section documents how the Neighborhood Demand Engine actually works operationally. It is intentionally separate from the owner-facing product description so sales language stays clean while the implementation remains clear.
+
+### 8.1 Monitoring inputs
+
+The engine combines owned FindALocalPro demand signals, neighborhood-platform monitoring, phone/SMS routing, and partner reputation checks.
+
+**Primary v1 inputs:**
+
+- **Nextdoor monitoring:** scheduled lane-specific scans for Illinois / Downers Grove-Naperville, Pennsylvania / Warrington-Bucks, and Pennsylvania / Franconia-Montgomery. Scans identify homeowner service requests, classify service category, check geography, dedupe prior posts, and either log observed demand or prepare guarded replies.
+- **Reply monitoring:** follow-up checks on previously engaged threads to catch homeowner responses like ‚Äúwho should I call?‚Äù or ‚Äúcan you send the number?‚Äù
+- **Twilio voice calls:** inbound calls to general or vertical-specific FindALocalPro numbers. Calls are handled by Supabase Edge Functions, logged, optionally pinged to eLocal, and bridged when eligible.
+- **Twilio SMS:** inbound texts to tracking numbers are parsed for service and ZIP when possible, logged, auto-replied to, and can trigger callback flows.
+- **FindALocalPro/eLocal lead events:** service demand, ping responses, call status, billable-call status, and routing outcomes are stored for reporting.
+- **Partner reputation sources:** Google reviews, Google Business Profile hygiene, and competitor mentions are monitored manually/semi-automatically in v1.
+
+### 8.2 Nextdoor monitoring workflow
+
+Nextdoor is treated as a monitored demand source, not a reckless posting surface. The workflow is: detect, classify, verify, dedupe, act, log, report.
+
+1. Scheduled scan opens the correct lane/profile and verifies account geography before doing anything.
+2. Candidate posts are classified by service category, urgency, town/neighborhood, and supportability.
+3. Dedupe checks prevent repeat replies on the same account; cross-account matches are warnings, not automatic global blocks.
+4. Unsafe categories or ambiguous requests are observed only. Examples: animal/wildlife removal under pest, out-of-market jobs, unsupported scopes, or stale posts.
+5. If eligible, the system drafts or submits a text-only local reply using strict guardrails.
+6. Every detected opportunity, posted reply, skipped lead, and follow-up is written to activity logs and/or Supabase demand tables.
+7. Reply-monitor jobs revisit active threads and escalate homeowner follow-ups.
+
+**Current guardrails:**
+
+- Keep Illinois, Warrington, and Franconia accounts/profiles separate. Never mix geography or persona context.
+- Verify visible Nextdoor location before posting.
+- No image/card/brand/link unless explicitly approved for that channel.
+- No em dashes in public replies.
+- No raw browser Enter-key fallback. Posting must go through the guarded CDP helper.
+- Submit mode requires exact target URL, author, distinctive phrase, strict matched container, one textarea, and one Comment button.
+- Local submit lock must be intentionally unlocked for posting; otherwise preflight/draft checks can run without posting.
+- Activity logs and tracking IDs connect replies back to phone number used, vertical, source thread, and outcome when known.
+
+### 8.3 Twilio and webhook architecture
+
+FindALocalPro uses Twilio numbers as trackable intake lines. Twilio points voice and SMS events to Supabase Edge Functions. The webhooks decide whether a caller enters the general IVR, skips directly to a vertical route, receives an SMS response, or gets bridged to eLocal/partner routing.
+
+**Core webhook endpoints:**
+
+- `voice-webhook`: handles inbound calls, IVR, dedicated-line direct routing, eLocal pings, Dial bridges, call-status updates, and Telegram/internal alerts.
+- `voice-webhook/status`: handles Twilio Dial callbacks and updates bridge/billable-call status. Parent-call callbacks without `DialCallStatus` are ignored so they do not falsely mark a bridge as failed.
+- `sms-webhook`: handles inbound texts, service/ZIP parsing, lead logging, auto-replies, and callback triggers where appropriate.
+
+**Security note:** The PRD should list public phone numbers, service mappings, and webhook behavior, but not Twilio Account SIDs, auth tokens, Supabase service-role keys, Telegram bot tokens, eLocal API keys, or Proton Pass details. Those remain in secrets storage and internal ops docs.
+
+### 8.4 Current tracking numbers and vertical mapping
+
+#### Illinois / Downers Grove-Naperville
+
+| Use | Public number | E.164 | Service | eLocal Need ID | Current behavior |
+|---|---:|---:|---|---|---|
+| General / IVR | (630) 407-1727 | `+16304071727` | Menu-based | Varies | Plays general FindALocalPro IVR and gathers service choice |
+| Plumbing | (630) 756-5104 | `+16307565104` | Plumbing | `10000-` | Dedicated line, skips intro/IVR, direct routing |
+| Electrical | (630) 318-3024 | `+16303183024` | Electrical | `5000-` | Dedicated line, skips intro/IVR, direct routing |
+| AC / Cooling | (630) 599-8262 | `+16305998262` | Air conditioning | `584-` | Dedicated line, skips intro/IVR, direct routing |
+| Heating | (630) 756-5505 | `+16307565505` | HVAC/heating | `583-` | Dedicated line, skips intro/IVR, direct routing |
+| Pest control | (630) 491-3723 | `+16304913723` | Pest control | `6000-` | Dedicated line, skips intro/IVR, direct routing; animal/wildlife requests are safety-filtered before posting |
+| Appliance repair | (630) 756-5185 | `+16307565185` | Appliance repair | `149-` | Dedicated line, skips intro/IVR, direct routing canary |
+
+#### Pennsylvania / Warrington-Bucks and Franconia-Montgomery
+
+| Use | Public number | E.164 | Service | eLocal Need ID | Current behavior |
+|---|---:|---:|---|---|---|
+| General / PA fallback | (267) 493-0981 | `+12674930981` | General fallback | Varies | Existing PA general/Dad Nextdoor tracking line; do not use for unsupported categories without confirmed eLocal mapping |
+| Plumbing | (267) 485-5856 | `+12674855856` | Plumbing | `10000-` | Dedicated line with PA ZIP override, skips intro/IVR |
+| Electrical | (445) 290-2178 | `+14452902178` | Electrical | `5000-` | Dedicated line with PA ZIP override, skips intro/IVR |
+| AC / Cooling | (267) 376-7398 | `+12673767398` | Air conditioning | `584-` | Dedicated line with PA ZIP override, skips intro/IVR |
+| Heating | (267) 802-2142 | `+12678022142` | HVAC/heating | `583-` | Dedicated line with PA ZIP override, skips intro/IVR |
+| Pest control | (267) 435-3632 | `+12674353632` | Pest control | `6000-` | Dedicated line with PA ZIP override, skips intro/IVR; animal/wildlife requests are safety-filtered before posting |
+| Appliance repair | (445) 222-1424 | `+14452221424` | Appliance repair | `149-` | Dedicated line with PA ZIP override, skips intro/IVR |
+
+### 8.5 Call flow
+
+**General IVR flow:**
+
+1. Caller dials the general FindALocalPro number.
+2. Twilio sends the call to `voice-webhook`.
+3. The webhook plays the FindALocalPro audio greeting/menu and gathers service selection.
+4. If the selected service has a confirmed eLocal Need ID, the webhook maps it to that campaign. If not, the request is blocked from eLocal routing instead of being coerced into plumbing, AC, or another unrelated category.
+5. The lead/call is logged in Supabase.
+6. Telegram/internal alert is sent.
+7. If routing is available, the webhook pings eLocal and bridges the call. Otherwise the caller receives the appropriate fallback/not-yet-live flow.
+8. `voice-webhook/status` receives Dial results and updates the lead/call outcome.
+
+**Dedicated vertical-line flow:**
+
+1. Homeowner sees or receives a service-specific number from a FindALocalPro reply/report/channel.
+2. Caller dials that dedicated number.
+3. Twilio sends the call to `voice-webhook`; the called number identifies the service immediately.
+4. The webhook skips the IVR/menu, infers ZIP from market/area-code/default mapping, pings eLocal with the mapped Need ID, logs the event, sends alerting, and bridges where eligible.
+5. Dial status callbacks update `elocal_leads`/call outcome records for weekly reporting.
+
+**SMS flow:**
+
+1. Homeowner texts a FindALocalPro tracking number.
+2. Twilio sends the message to `sms-webhook`.
+3. The webhook parses service, ZIP, and free-text intent. Dedicated numbers can infer service even when the text is vague.
+4. The interaction is logged, an auto-reply is sent, and callback/routing can be triggered when there is enough information.
+5. The event appears in internal alerts and partner reporting.
+
+### 8.6 Data stores and logs
+
+The monitoring layer should preserve enough data to prove value in the weekly Neighborhood Demand Report.
+
+**Existing/active records:**
+
+- `service_demand_events`: captured homeowner demand signals by market, service, source, URL/post, and status.
+- `elocal_leads`: eLocal ping/routing rows, call bridge outcomes, payout/billable-call status where available.
+- `leads`: general lead capture from voice/SMS/landing-page style flows.
+- `call_logs`: Twilio call sync records for source, duration, status, and missed/answered analysis.
+- Nextdoor activity logs: lane-specific JSON logs for observed opportunities, posted replies, skipped posts, follow-ups, phone number used, and tracking IDs.
+
+**Partner-reporting records to add or formalize:**
+
+- `partners`
+- `partner_opportunities`
+- `partner_alerts`
+- `partner_reviews`
+- `partner_reports`
+- `competitor_mentions`
+
+### 8.7 Alerting and reporting outputs
+
+**Internal real-time alerts:**
+
+- New inbound call/SMS.
+- IVR menu selection or dedicated-line service inference.
+- eLocal ping/routing result.
+- Dial bridge outcome, including missed/busy/no-answer cases.
+- Hot Nextdoor opportunity or homeowner follow-up.
+- Account/lane blocker, login problem, suspension indicator, or webhook health failure.
+
+**Owner-facing outputs:**
+
+- Immediate hot-lead alert when timing matters.
+- Weekly Neighborhood Demand Report with opportunities found, actions taken, calls routed, missed calls, review alerts, competitor mentions, and recommended next moves.
+- Monthly recap for partners on higher tiers.
+
+### 8.8 Health checks and operational readiness
+
+The engine depends on monitoring lanes and webhooks staying healthy. V1 operations should include:
+
+- Scheduled webhook smoke test for voice and SMS endpoints; alert immediately if either is not HTTP 200.
+- Lane preflight before Nextdoor scans/replies: CDP reachable, logged in, correct market visible, forbidden markets absent.
+- Reply-monitor preflight before posting/drafting on any thread.
+- Local lane locks to avoid two jobs posting from the same account at once.
+- Activity-log normalization after scan/reply jobs so reporting can aggregate outcomes.
+- Twilio call sync into `call_logs` for missed/answered call reporting.
+- Weekly review of demand-event counts, lead rows, webhook failures, and safety skips.
+
+### 8.9 V1 implementation boundary
+
+For the initial partner product, this architecture should remain semi-automated and operator-supervised. The goal is reliable monitoring, routing, alerting, and reporting, not fully autonomous social-platform behavior.
+
+V1 should ship with:
+
+- Existing Nextdoor lane monitoring and guarded reply workflow.
+- Existing Twilio/Supabase voice and SMS webhooks.
+- Dedicated phone number mapping by market/service.
+- Service-demand and eLocal lead logging.
+- Internal Telegram/operator alerts.
+- Weekly Neighborhood Demand Report generation.
+
+V2 can add:
+
+- Partner dashboard.
+- GBP API integration after partner authorization.
+- More automated Facebook/local group monitoring.
+- Partner-specific tracking lines and routing rules.
+- Automated report generation from normalized database views.
+
+---
+
+## 9. Owner View / Reporting UX
 
 ### V1: Email-first reporting
 
@@ -328,7 +508,7 @@ Potential dashboard modules:
 
 ---
 
-## 9. Pricing Recommendation
+## 10. Pricing Recommendation
 
 ### Recommended founding offer
 
@@ -376,7 +556,7 @@ Recommendation: start with flat pricing first. Add success fees only when tracki
 
 ---
 
-## 10. MVP Scope
+## 11. MVP Scope
 
 ### MVP must include
 
@@ -402,7 +582,7 @@ Recommendation: start with flat pricing first. Add success fees only when tracki
 
 ---
 
-## 11. Data Model Concepts
+## 12. Data Model Concepts
 
 Potential tables/records:
 
@@ -487,7 +667,7 @@ Potential tables/records:
 
 ---
 
-## 12. Report Template
+## 13. Report Template
 
 # Neighborhood Demand Report
 
@@ -529,7 +709,7 @@ Potential tables/records:
 
 ---
 
-## 13. Operational Workflow
+## 14. Operational Workflow
 
 ### Weekly workflow
 
@@ -552,7 +732,7 @@ Potential tables/records:
 
 ---
 
-## 14. Success Metrics
+## 15. Success Metrics
 
 ### Partner-facing metrics
 
@@ -576,7 +756,7 @@ Potential tables/records:
 
 ---
 
-## 15. Risks and Mitigations
+## 16. Risks and Mitigations
 
 ### Platform risk
 
@@ -605,7 +785,7 @@ Potential tables/records:
 
 ---
 
-## 16. Launch Plan
+## 17. Launch Plan
 
 ### Phase 1: Internal MVP
 
@@ -638,7 +818,7 @@ Potential tables/records:
 
 ---
 
-## 17. Sales Positioning
+## 18. Sales Positioning
 
 ### Short pitch
 
@@ -664,7 +844,7 @@ Potential tables/records:
 
 ---
 
-## 18. Open Questions
+## 19. Open Questions
 
 1. Which vertical should be the first paid test, plumbing, appliance repair, or another category?
 2. Should call tracking be mandatory or optional for partners?
@@ -675,7 +855,7 @@ Potential tables/records:
 
 ---
 
-## 19. Recommendation
+## 20. Recommendation
 
 Launch this as a high-touch service first, not software.
 
