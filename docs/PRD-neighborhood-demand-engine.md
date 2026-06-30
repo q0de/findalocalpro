@@ -7,7 +7,7 @@
 **Primary customer:** Local home-service business owners, starting with plumbers, electricians, HVAC, appliance repair, pest control, handyman, roofing, and similar high-intent service categories.  
 **Owner-facing promise:** We monitor the local internet for people who need your service, help turn those signals into booked jobs, and keep you aware of reputation risks before they cost you business.
 
-FindALocalPro already has active local demand infrastructure through SEO pages, eLocal routing, dedicated call flows, and Nextdoor lead discovery. The Neighborhood Demand Engine expands the partner package from ‚Äúfeatured placement and Nextdoor replies‚Äù into a broader, higher-value monthly service: local demand monitoring, reputation alerts, call tracking, weekly reporting, and lightweight competitive intelligence.
+FindALocalPro already has active local demand infrastructure through SEO pages, eLocal routing, dedicated call flows, and Nextdoor lead discovery. The Neighborhood Demand Engine expands the partner package from "featured placement and Nextdoor replies" into a broader, higher-value monthly service: local demand monitoring, reputation alerts, call tracking, weekly reporting, and lightweight competitive intelligence.
 
 The goal is to make the partner offer feel hard to pass up because the business owner sees multiple channels working together on their behalf, not just one lead source.
 
@@ -24,7 +24,7 @@ Local home-service owners miss demand because it is scattered across many places
 - Competitors get repeatedly recommended in neighborhood conversations.
 - Owners do not have a simple weekly view of what happened locally.
 
-Most contractors do not have time to monitor all of this. Agencies sell SEO, ads, or review management separately, but small local operators often need a simple, practical ‚Äúwatch the neighborhood and tell me where the money is‚Äù service.
+Most contractors do not have time to monitor all of this. Agencies sell SEO, ads, or review management separately, but small local operators often need a simple, practical "watch the neighborhood and tell me where the money is" service.
 
 ---
 
@@ -35,7 +35,7 @@ Most contractors do not have time to monitor all of this. Agencies sell SEO, ads
 1. Increase perceived value of the FindALocalPro partner package.
 2. Justify a recurring monthly price point beyond pay-per-lead economics.
 3. Create a defensible local-growth service that combines lead generation, reputation monitoring, and market intelligence.
-4. Generate partner retention through visible weekly output, not vague ‚ÄúSEO is working‚Äù promises.
+4. Generate partner retention through visible weekly output, not vague "SEO is working" promises.
 5. Start with manual/semi-automated operations before building a full dashboard.
 
 ### Customer goals
@@ -54,10 +54,10 @@ Most contractors do not have time to monitor all of this. Agencies sell SEO, ads
 - Building a full client portal for v1.
 - Fully autonomous posting on every social platform.
 - Guaranteeing booked jobs or revenue.
-- Replacing the owner‚Äôs CRM.
+- Replacing the owner's CRM.
 - Running paid ads.
 - Managing full social media content calendars.
-- Acting as the business owner‚Äôs personal social media account without review/approval where platform risk is high.
+- Acting as the business owner's personal social media account without review/approval where platform risk is high.
 
 ---
 
@@ -113,10 +113,10 @@ Recommended public phrasing:
 
 **Examples:**
 
-- ‚ÄúNeed a plumber in Downers Grove.‚Äù
-- ‚ÄúAny recommendations for an electrician?‚Äù
-- ‚ÄúLooking for someone to fix my AC.‚Äù
-- ‚ÄúWho does appliance repair near Naperville?‚Äù
+- "Need a plumber in Downers Grove."
+- "Any recommendations for an electrician?"
+- "Looking for someone to fix my AC."
+- "Who does appliance repair near Naperville?"
 
 **Capabilities:**
 
@@ -154,7 +154,7 @@ Recommended public phrasing:
 
 ### 7.3 Google Review Monitoring
 
-**Description:** Watch the partner‚Äôs Google reviews and flag changes.
+**Description:** Watch the partner's Google reviews and flag changes.
 
 **Capabilities:**
 
@@ -228,7 +228,7 @@ Recommended public phrasing:
 
 **Example insight:**
 
-> ‚ÄúThis week, ABC Plumbing was recommended 4 times in Naperville threads, usually for emergency drain cleaning. We should emphasize same-day drain cleaning in your responses and GBP posts.‚Äù
+> "This week, ABC Plumbing was recommended 4 times in Naperville threads, usually for emergency drain cleaning. We should emphasize same-day drain cleaning in your responses and GBP posts."
 
 ---
 
@@ -241,7 +241,7 @@ Recommended public phrasing:
 - SMS review request template.
 - Email review request template.
 - Job-completion follow-up script.
-- Weekly reminder: ‚ÄúAsk these customers for reviews.‚Äù
+- Weekly reminder: "Ask these customers for reviews."
 
 **Optional future enhancement:** Owner submits completed jobs, FindALocalPro generates review request drafts.
 
@@ -303,7 +303,7 @@ The engine combines owned FindALocalPro demand signals, neighborhood-platform mo
 **Primary v1 inputs:**
 
 - **Nextdoor monitoring:** scheduled lane-specific scans for Illinois / Downers Grove-Naperville, Pennsylvania / Warrington-Bucks, and Pennsylvania / Franconia-Montgomery. Scans identify homeowner service requests, classify service category, check geography, dedupe prior posts, and either log observed demand or prepare guarded replies.
-- **Reply monitoring:** follow-up checks on previously engaged threads to catch homeowner responses like ‚Äúwho should I call?‚Äù or ‚Äúcan you send the number?‚Äù
+- **Reply monitoring:** follow-up checks on previously engaged threads to catch homeowner responses like "who should I call?" or "can you send the number?"
 - **Twilio voice calls:** inbound calls to general or vertical-specific FindALocalPro numbers. Calls are handled by Supabase Edge Functions, logged, optionally pinged to eLocal, and bridged when eligible.
 - **Twilio SMS:** inbound texts to tracking numbers are parsed for service and ZIP when possible, logged, auto-replied to, and can trigger callback flows.
 - **FindALocalPro/eLocal lead events:** service demand, ping responses, call status, billable-call status, and routing outcomes are stored for reporting.
