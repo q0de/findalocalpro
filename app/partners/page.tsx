@@ -3,6 +3,7 @@ import Link from 'next/link';
 import { PartnerApplicationForm } from './PartnerApplicationForm';
 import { PartnerHeroTitle } from './PartnerHeroTitle';
 import { PartnerHeroVisual } from './PartnerHeroVisual';
+import { PartnerScrollAnimator } from './PartnerScrollAnimator';
 
 export const metadata: Metadata = {
   title: 'Neighborhood Demand Engine | FindALocalPro Partners',
@@ -61,6 +62,7 @@ export default async function PartnersPage({ searchParams }: PartnersPageProps) 
 
   return (
     <div className="partner-page partner-standalone">
+      <PartnerScrollAnimator />
       <header className="partner-site-nav">
         <Link href="/" className="partner-brand" aria-label="FindALocalPro home">
           <span>F</span>

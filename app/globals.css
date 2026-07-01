@@ -4042,6 +4042,37 @@ details[open] > p {
   }
 }
 
+@keyframes partnerRevealIn {
+  0% {
+    opacity: 0;
+    filter: blur(10px);
+    transform: translateY(34px) scale(0.985);
+  }
+  68% {
+    opacity: 1;
+    filter: blur(0);
+    transform: translateY(-2px) scale(1.002);
+  }
+  100% {
+    opacity: 1;
+    filter: blur(0);
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes partnerRevealPanelIn {
+  0% {
+    opacity: 0;
+    filter: blur(8px);
+    transform: translateY(32px) rotateX(5deg) scale(0.985);
+  }
+  100% {
+    opacity: 1;
+    filter: blur(0);
+    transform: translateY(0) rotateX(0deg) scale(1);
+  }
+}
+
 @keyframes heroTitleWordSettle {
   0% {
     opacity: 1;
@@ -4103,7 +4134,7 @@ details[open] > p {
 .partner-standalone .partner-included,
 .partner-standalone .partner-final-cta,
 .partner-standalone .partner-footer {
-  animation: partnerPageSectionIn 0.7s cubic-bezier(0.2, 0.8, 0.2, 1) both;
+  animation: none;
 }
 
 .partner-standalone .partner-stats-section {
@@ -4114,7 +4145,7 @@ details[open] > p {
 .partner-standalone .partner-flow-grid > article,
 .partner-standalone .partner-included-grid > article,
 .partner-standalone .partner-faq-list > details {
-  animation: partnerPageItemIn 0.55s cubic-bezier(0.18, 0.9, 0.26, 1.08) both;
+  animation: none;
 }
 
 .partner-standalone .partner-stats-grid > article:nth-child(2),
@@ -4138,19 +4169,49 @@ details[open] > p {
   animation-delay: 210ms;
 }
 
-@supports (animation-timeline: view()) {
-  .partner-standalone .partner-stats-section,
-  .partner-standalone .partner-section,
-  .partner-standalone .partner-included,
-  .partner-standalone .partner-final-cta,
-  .partner-standalone .partner-footer,
-  .partner-standalone .partner-stats-grid > article,
-  .partner-standalone .partner-flow-grid > article,
-  .partner-standalone .partner-included-grid > article,
-  .partner-standalone .partner-faq-list > details {
-    animation-timeline: view();
-    animation-range: entry 8% cover 28%;
-  }
+.partner-standalone.is-reveal-ready .partner-reveal {
+  opacity: 0;
+  filter: blur(10px);
+  transform: translateY(34px) scale(0.985);
+  transform-origin: center top;
+  will-change: opacity, filter, transform;
+}
+
+.partner-standalone.is-reveal-ready .partner-reveal.is-visible {
+  opacity: 1;
+  filter: none;
+  transform: translateY(0) scale(1);
+  animation: partnerRevealIn 0.78s cubic-bezier(0.18, 0.86, 0.24, 1) both;
+  animation-delay: calc(var(--reveal-index, 0) * 45ms);
+}
+
+.partner-standalone.is-reveal-ready .partner-report-document.partner-reveal,
+.partner-standalone.is-reveal-ready .partner-pricing-box.partner-reveal,
+.partner-standalone.is-reveal-ready .partner-form-shell.partner-reveal {
+  transform: translateY(32px) rotateX(5deg) scale(0.985);
+  transform-style: preserve-3d;
+}
+
+.partner-standalone.is-reveal-ready .partner-report-document.partner-reveal.is-visible,
+.partner-standalone.is-reveal-ready .partner-pricing-box.partner-reveal.is-visible,
+.partner-standalone.is-reveal-ready .partner-form-shell.partner-reveal.is-visible {
+  animation-name: partnerRevealPanelIn;
+}
+
+.partner-standalone.is-reveal-ready .partner-report-body section.partner-reveal.is-visible {
+  animation-duration: 0.58s;
+}
+
+.partner-standalone.is-reveal-ready .partner-final-cta.partner-reveal.is-visible {
+  animation-duration: 0.9s;
+}
+
+.partner-standalone.is-reveal-reduced .partner-reveal,
+.partner-standalone.is-reveal-reduced .partner-reveal.is-visible {
+  opacity: 1;
+  filter: none;
+  transform: none;
+  animation: none;
 }
 
 .partner-standalone,
