@@ -292,6 +292,34 @@ Recommended public phrasing:
 
 ---
 
+### 7.11 Search Demand Intelligence
+
+**Description:** Monitor search-demand signals and turn them into simple owner-facing recommendations. This should stay lightweight in v1: useful plain-English insights, not a complex analytics dashboard.
+
+**Potential inputs:**
+
+- Google Search Console queries and pages, if the site/account is connected.
+- Google autocomplete and People Also Ask research for service/town pages.
+- Google Trends or seasonal search checks for categories like AC repair, sump pumps, pest control, roofing, and appliance repair.
+- FindALocalPro SEO page performance by town/service.
+- Call and lead outcomes from tracked numbers.
+
+**Owner-facing value:**
+
+The engine should translate search data into easy actions, for example:
+
+> "More homeowners around Naperville are searching for emergency plumbing help this month. We recommend highlighting same-day leak repair and drain cleaning this week."
+
+> "Your AC repair page is getting seen, but not enough people are clicking. We should make the headline more urgent and add a same-day service section."
+
+**V1 boundary:**
+
+- No advanced keyword dashboards for partners.
+- No overwhelming charts unless they directly support a plain-English recommendation.
+- Use search data to improve pages, choose categories, prioritize towns, and explain demand trends in the weekly report.
+
+---
+
 ## 8. Monitoring and Routing Architecture
 
 This section documents how the Neighborhood Demand Engine actually works operationally. It is intentionally separate from the owner-facing product description so sales language stays clean while the implementation remains clear.
@@ -308,6 +336,7 @@ The engine combines owned FindALocalPro demand signals, neighborhood-platform mo
 - **Twilio SMS:** inbound texts to tracking numbers are parsed for service and ZIP when possible, logged, auto-replied to, and can trigger callback flows.
 - **FindALocalPro/eLocal lead events:** service demand, ping responses, call status, billable-call status, and routing outcomes are stored for reporting.
 - **Partner reputation sources:** Google reviews, Google Business Profile hygiene, and competitor mentions are monitored manually/semi-automatically in v1.
+- **Search-demand sources:** Google Search Console, autocomplete/People Also Ask research, Google Trends, and FindALocalPro SEO page performance can be checked to identify rising services, towns, and page-improvement opportunities.
 
 ### 8.2 Nextdoor monitoring workflow
 
@@ -434,7 +463,7 @@ The monitoring layer should preserve enough data to prove value in the weekly Ne
 **Owner-facing outputs:**
 
 - Immediate hot-lead alert when timing matters.
-- Weekly Neighborhood Demand Report with opportunities found, actions taken, calls routed, missed calls, review alerts, competitor mentions, and recommended next moves.
+- Weekly Neighborhood Demand Report with opportunities found, actions taken, calls routed, missed calls, review alerts, competitor mentions, simple search-demand insights, and recommended next moves.
 - Monthly recap for partners on higher tiers.
 
 ### 8.8 Health checks and operational readiness
@@ -682,6 +711,7 @@ Potential tables/records:
 - Reviews needing attention: {{reviews_attention_count}}
 - Top demand category: {{top_category}}
 - Top demand town: {{top_town}}
+- Search demand note: {{plain_english_search_demand_note}}
 
 ## New Local Opportunities
 
@@ -703,6 +733,14 @@ Potential tables/records:
 
 {{competitor_mentions}}
 
+## Search Demand Snapshot
+
+{{plain_english_search_demand_summary}}
+
+Example:
+
+> More homeowners near {{top_town}} are searching for {{top_category}} help this week. We recommend emphasizing {{recommended_offer_or_service_angle}} in your page copy, replies, and call-to-action.
+
 ## Recommended Next Moves
 
 {{recommendations}}
@@ -718,9 +756,11 @@ Potential tables/records:
 3. Check Google reviews.
 4. Check GBP/Q&A manually or through available integration.
 5. Summarize competitor mentions.
-6. Generate Neighborhood Demand Report.
-7. Send to owner.
-8. Log report in partner_reports.
+6. Check lightweight search-demand signals, such as Search Console, autocomplete/PAA, Trends, and page performance where available.
+7. Convert the findings into plain-English recommendations.
+8. Generate Neighborhood Demand Report.
+9. Send to owner.
+10. Log report in partner_reports.
 
 ### Real-time workflow
 
@@ -742,6 +782,8 @@ Potential tables/records:
 - Reviews responded to.
 - Review count/rating trend.
 - Competitor mention share.
+- Search-demand opportunities identified.
+- Recommended actions completed.
 - Booked-job feedback where available.
 
 ### FindALocalPro business metrics
@@ -767,6 +809,11 @@ Potential tables/records:
 
 **Risk:** Weekly reports become too manual.  
 **Mitigation:** Standardize data collection and report generation early. Automate summaries only after manual process is stable.
+
+### Insight overload risk
+
+**Risk:** Contractors get overwhelmed by keyword metrics, charts, and too many recommendations.  
+**Mitigation:** Translate demand signals into plain-English summaries and limit each report to the few actions most likely to matter that week.
 
 ### Attribution disputes
 
@@ -807,6 +854,7 @@ Potential tables/records:
 - Automate report draft generation.
 - Add Google review monitoring workflow.
 - Add competitor mention tracking.
+- Add lightweight search-demand checks and plain-English recommendation generation.
 - Create public sales copy on partner page.
 
 ### Phase 4: Expand
@@ -822,7 +870,7 @@ Potential tables/records:
 
 ### Short pitch
 
-> We help local contractors catch homeowner demand that shows up across Nextdoor, search, reviews, calls, and local conversations. Every week you get a simple report showing what people asked for, what we did, what leads came in, and what reputation issues need attention.
+> We help local contractors catch homeowner demand that shows up across Nextdoor, Google search, reviews, calls, and local conversations. Every week you get a simple report showing what people asked for, what we did, what leads came in, where demand is rising, and what to do next.
 
 ### Offer bullets
 
@@ -830,6 +878,7 @@ Potential tables/records:
 - We help route qualified opportunities to you.
 - We watch your reviews and flag reputation issues.
 - We track local competitors getting recommended.
+- We turn local search and neighborhood demand into simple weekly action items.
 - We give you a weekly Neighborhood Demand Report.
 - You get featured placement on FindALocalPro.
 - You get hot alerts when something cannot wait until Monday.
