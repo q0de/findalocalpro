@@ -1,9 +1,11 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import { PartnerApplicationForm } from './PartnerApplicationForm';
+import { PartnerCopyVersionControl } from './PartnerCopyVersionControl';
 import { PartnerHeroTitle } from './PartnerHeroTitle';
 import { PartnerHeroVisual } from './PartnerHeroVisual';
 import { PartnerScrollAnimator } from './PartnerScrollAnimator';
+import { PartnerStatsBackgroundControl } from './PartnerStatsBackgroundControl';
 
 export const metadata: Metadata = {
   title: 'Neighborhood Demand Engine | FindALocalPro Partners',
@@ -44,8 +46,16 @@ const stats = [
   ['5', 'Competitor mentions', 'Where rivals were recommended'],
 ];
 
+const economics = [
+  ['/partners/economics/booked-jobs.webp', '1-3 jobs', 'Can cover the month', 'For many urgent-service trades, a few booked calls can offset the founding price.'],
+  ['/partners/economics/protected-lane.webp', '1 partner', 'Protected by trade', 'Where approved, your local category is not sold to a direct competitor.'],
+  ['/partners/economics/flat-fee.webp', 'No auction', 'Flat monthly fee', 'No shared-lead bidding. You get monitoring, alerts, and reporting.'],
+  ['/partners/economics/fast-signals.webp', 'Fast signals', 'Timing wins work', 'Hot threads, missed calls, bad reviews, and competitor mentions are worth catching early.'],
+];
+
 const faqs = [
   ['Is this pay-per-lead?', 'No. This is a flat monthly market-watch service, not a per-lead marketplace. You are not bidding against other contractors or paying for each contact — you get monitoring, alerts, call tracking, and a weekly report for one predictable price.'],
+  ['Can this pay for itself?', 'For many home-service trades, yes, it can. A small number of booked jobs can cover the founding price, especially in higher-value categories like plumbing, HVAC, electrical, appliance repair, and similar urgent services. We still do not guarantee booked jobs or revenue.'],
   ['Do you guarantee booked jobs?', 'No, and we will never promise that. We surface local opportunities, demand signals, and reputation alerts, and we route and track calls where applicable. What you do with that timing and information is what turns it into booked work.'],
   ['Is my territory exclusive?', 'Where approved, yes. We limit enrollment by trade and territory and protect approved partners from having a direct competitor signed up in the same area. Availability depends on your specific category and ZIPs, which is why we review before confirming.'],
   ['Do you post on social platforms as my business?', 'No. We monitor public local conversations and signals and tell you where the opportunities are. We never post or message as your business — you stay in control of how and when you respond.'],
@@ -96,6 +106,7 @@ export default async function PartnersPage({ searchParams }: PartnersPageProps) 
       <main>
         <section className="partner-standalone-hero">
           <span className="partner-neighborhood-bg" aria-hidden="true" />
+          <PartnerCopyVersionControl />
           <PartnerHeroVisual />
           <div className="partner-shell partner-hero-grid">
             <div className="partner-hero-panel">
@@ -104,12 +115,12 @@ export default async function PartnersPage({ searchParams }: PartnersPageProps) 
                 Founding Partner enrollment — limited by trade & territory
               </p>
               <PartnerHeroTitle />
-              <p className="partner-hero-lede">
+              <p className="partner-hero-lede" data-copy-key="heroLede">
                 We monitor local conversations, review signals, and tracked calls for your trade and territory — then send you the opportunities, alerts, and weekly reports that help turn local demand into booked work.
               </p>
               <div className="partner-hero-actions">
-                <a href="#apply" className="partner-primary-button">Apply for a Founding Partner Spot <span>→</span></a>
-                <a href="#report" className="partner-secondary-button">See the Weekly Report</a>
+                <a href="#apply" className="partner-primary-button"><span data-copy-key="primaryCta">Apply for a Founding Partner Spot</span> <span>→</span></a>
+                <a href="#report" className="partner-secondary-button" data-copy-key="secondaryCta">See the Weekly Report</a>
               </div>
               <div className="partner-trust-row">
                 <span>✓ Apply first, pay after approval</span>
@@ -123,7 +134,10 @@ export default async function PartnersPage({ searchParams }: PartnersPageProps) 
           <div className="partner-shell">
             <div className="partner-stats-heading">
               <span>A recent week in one territory</span>
-              <small>Illustrative example · signals found, not guaranteed jobs</small>
+              <div className="partner-stats-heading-tools">
+                <small data-copy-key="recentWeekHelper">Illustrative example · signals found, not guaranteed jobs</small>
+                <PartnerStatsBackgroundControl placement="inline" />
+              </div>
             </div>
             <div className="partner-stats-grid">
               {stats.map(([value, label, detail]) => (
@@ -137,12 +151,39 @@ export default async function PartnersPage({ searchParams }: PartnersPageProps) 
           </div>
         </section>
 
+        <section className="partner-section partner-economics-section" aria-labelledby="partner-economics-heading">
+          <div className="partner-shell">
+            <div className="partner-section-heading">
+              <span>Why the math can work</span>
+              <h2 id="partner-economics-heading">A few good calls can justify the whole month.</h2>
+              <p>
+                This is built for trades where one timely homeowner call matters. You are not buying random shared leads — you are buying a protected monitoring lane with weekly proof of work.
+              </p>
+            </div>
+            <div className="partner-economics-grid">
+              {economics.map(([image, value, title, body], index) => (
+                <article key={title}>
+                  <span className="partner-economics-image" data-economics-visual={index + 1} aria-hidden="true">
+                    <img src={image} alt="" />
+                  </span>
+                  <b>{value}</b>
+                  <h3>{title}</h3>
+                  <p>{body}</p>
+                </article>
+              ))}
+            </div>
+            <p className="partner-economics-note">
+              No booked-job guarantee. The value is earlier visibility, category protection where approved, and a clear report showing what happened locally every week.
+            </p>
+          </div>
+        </section>
+
         <section id="how" className="partner-section">
           <div className="partner-shell">
             <div className="partner-section-heading">
               <span>How it works</span>
-              <h2>A local market watch that runs while you're on the job.</h2>
-              <p>No dashboard to babysit. We do the watching and bring you what's worth your time.</p>
+              <h2 data-copy-key="howHeading">A local market watch that runs while you're on the job.</h2>
+              <p data-copy-key="howBody">No dashboard to babysit. We do the watching and bring you what's worth your time.</p>
             </div>
             <div className="partner-flow-grid">
               {flow.map(([number, title, body]) => (
@@ -160,8 +201,8 @@ export default async function PartnersPage({ searchParams }: PartnersPageProps) 
           <div className="partner-shell partner-split">
             <div className="partner-sticky-copy">
               <span className="partner-section-label">The weekly Neighborhood Demand Report</span>
-              <h2>One clear read on your local market — every Monday.</h2>
-              <p>
+              <h2 data-copy-key="reportHeading">One clear read on your local market — every Monday.</h2>
+              <p data-copy-key="reportBody">
                 A done-for-you briefing, not a dashboard you have to log into. Seven sections, written for a busy owner who has five minutes between jobs.
               </p>
               <div className="partner-report-bullets">
@@ -252,14 +293,15 @@ export default async function PartnersPage({ searchParams }: PartnersPageProps) 
           <div className="partner-shell partner-split">
             <div>
               <span className="partner-section-label">Founding Partner Plan</span>
-              <h2>Founding pricing — locked in while we open your territory.</h2>
-              <p>
+              <h2 data-copy-key="pricingHeading">Founding pricing — locked in while we open your territory.</h2>
+              <p data-copy-key="pricingBody">
                 We're enrolling a first wave of partners by trade and territory. Founding partners help us calibrate the service in their market — so the price reflects that, and it's lower than the standard rate.
               </p>
               <ul className="partner-pricing-points">
-                <li>Apply first — you only pay after you're approved</li>
-                <li>Limited by trade and territory</li>
-                <li>Territory / category exclusivity where approved</li>
+                <li>Apply first — no payment until your category and territory are approved</li>
+                <li>One approved partner per trade and territory where available</li>
+                <li>Founding price designed to be covered by a small number of booked jobs</li>
+                <li>Flat monthly service, not shared-lead bidding</li>
               </ul>
             </div>
             <aside className="partner-pricing-box">
@@ -267,13 +309,27 @@ export default async function PartnersPage({ searchParams }: PartnersPageProps) 
                 <span>Founding Partner</span>
                 <small>Limited spots</small>
               </div>
+              <div className="partner-pricing-anchor" aria-label="Founding partner discount">
+                <span data-copy-key="priceAnchorLabel">Full-service pilot value</span>
+                <b className="partner-pricing-old">
+                  <span className="sr-only">$1,000 per month</span>
+                  <span className="partner-pricing-old-text" aria-hidden="true">$1,000 / month</span>
+                </b>
+                <span className="partner-pricing-ticker" aria-hidden="true">
+                  <span>$1,000</span>
+                  <span>$850</span>
+                  <span>$650</span>
+                  <span>$497</span>
+                </span>
+                <i data-copy-key="priceDropLabel">founding price drops to</i>
+              </div>
               <div className="partner-pricing-price">
                 <b>$497</b>
                 <small>/ month</small>
               </div>
               <p>for your first 3 months</p>
               <div className="partner-pricing-standard">Then <strong>$750 / month</strong> standard rate</div>
-              <a href="#apply" className="partner-primary-button">Apply for a Founding Partner Spot</a>
+              <a href="#apply" className="partner-primary-button" data-copy-key="primaryCta">Apply for a Founding Partner Spot</a>
               <p className="partner-pricing-note">No payment due today. We review your trade & territory, then confirm availability before anything is charged.</p>
             </aside>
           </div>
@@ -283,7 +339,7 @@ export default async function PartnersPage({ searchParams }: PartnersPageProps) 
           <div className="partner-shell">
             <div className="partner-section-heading is-light">
               <span>What's included</span>
-              <h2>Everything in one done-for-you service.</h2>
+              <h2 data-copy-key="includedHeading">Everything in one done-for-you service.</h2>
             </div>
             <div className="partner-included-grid">
               {included.map(([title, body]) => (
@@ -300,8 +356,8 @@ export default async function PartnersPage({ searchParams }: PartnersPageProps) 
           <div className="partner-shell partner-apply-grid">
             <div>
               <span className="partner-section-label">Apply</span>
-              <h2>Claim your trade & territory.</h2>
-              <p>
+              <h2 data-copy-key="applyHeading">Claim your trade & territory.</h2>
+              <p data-copy-key="applyBody">
                 Apply first — there's no payment today. We review availability in your area and confirm before anything is charged.
               </p>
               <ol className="partner-apply-steps">
@@ -335,7 +391,7 @@ export default async function PartnersPage({ searchParams }: PartnersPageProps) 
           <div className="partner-shell">
             <h2>A founding spot in your territory won't stay open long.</h2>
             <p>Apply now — no payment today. We'll confirm availability for your trade and area.</p>
-            <a href="#apply" className="partner-primary-button">Apply for a Founding Partner Spot <span>→</span></a>
+            <a href="#apply" className="partner-primary-button"><span data-copy-key="primaryCta">Apply for a Founding Partner Spot</span> <span>→</span></a>
           </div>
         </section>
       </main>

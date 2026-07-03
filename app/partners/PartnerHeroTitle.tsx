@@ -12,7 +12,7 @@ const words = [
 
 export function PartnerHeroTitle() {
   return (
-    <h1 className="partner-hero-title">
+    <h1 className="partner-hero-title" data-copy-key="heroTitle">
       {words.map(([word, isGreen], index) => (
         <span
           className={`partner-hero-title-word${isGreen ? ' is-green' : ''}`}

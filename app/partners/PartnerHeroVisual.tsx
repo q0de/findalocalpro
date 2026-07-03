@@ -79,17 +79,16 @@ export function PartnerHeroVisual() {
     const neighborhoodTimer = window.setTimeout(() => {
       const hero = getHero();
       hero?.classList.add('is-neighborhood-ready');
-      setNeighborhoodFinal();
-    }, 80);
+    }, 140);
     const neighborhoodSettledTimer = window.setTimeout(() => {
       const hero = getHero();
       hero?.classList.add('is-neighborhood-settled');
       setNeighborhoodFinal('important');
-    }, 2000);
-    const pinTimer = window.setTimeout(() => setPinReady(true), 1800);
-    const iconTimer = window.setTimeout(() => setIconReady(true), 2220);
-    const pinSettledTimer = window.setTimeout(() => setPinSettled(true), 2480);
-    const iconSettledTimer = window.setTimeout(() => setIconSettled(true), 2680);
+    }, 2450);
+    const pinTimer = window.setTimeout(() => setPinReady(true), 2200);
+    const iconTimer = window.setTimeout(() => setIconReady(true), 2580);
+    const pinSettledTimer = window.setTimeout(() => setPinSettled(true), 2920);
+    const iconSettledTimer = window.setTimeout(() => setIconSettled(true), 3120);
 
     return () => {
       const hero = getHero();

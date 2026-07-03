@@ -7,6 +7,7 @@ const revealSelectors = [
   '.partner-stats-grid > article',
   '.partner-section > .partner-shell',
   '.partner-section-heading',
+  '.partner-economics-grid > article',
   '.partner-flow-grid > article',
   '.partner-report-section .partner-sticky-copy',
   '.partner-report-document',
