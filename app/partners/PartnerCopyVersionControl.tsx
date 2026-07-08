@@ -61,7 +61,7 @@ const copyVariants: Record<CopyVariant, Record<CopyKey, string>> = {
     reportHeading: 'Every Monday, know what happened locally and what to do next.',
     reportBody: 'The weekly Neighborhood Demand Report is the v1 owner view: opportunities found, actions taken, calls routed, reputation alerts, competitor mentions, and recommended next moves.',
     pricingHeading: 'Founding pricing — discounted while we calibrate your market.',
-    pricingBody: 'Founding partners help us tune the service by trade and territory. You get the high-touch Neighborhood Demand Engine for $497/month for your first 3 months before the $750/month standard rate.',
+    pricingBody: 'Founding partners help us tune the service by trade and territory. You get the high-touch Neighborhood Demand Engine for a $500/mo founding pilot for 90 days before the $750/mo standard rate.',
     priceAnchorLabel: 'Premium service value',
     priceDropLabel: 'founding price drops to',
     includedHeading: 'One done-for-you local demand service.',

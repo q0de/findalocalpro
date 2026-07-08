@@ -35,7 +35,7 @@ const included = [
   ['Weekly Neighborhood Demand Report', 'Your seven-section briefing on opportunities, actions, calls, and next moves.'],
   ['Google review monitoring', 'We flag new reviews and prepare professional response drafts for your approval.'],
   ['Competitor mention watch', 'Know when and where rivals get recommended in your local channels.'],
-  ['Review request templates', 'Ready-to-send templates to turn happy customers into 5-star reviews.'],
+  ['Company-fit messaging', 'Reply drafts, review requests, and follow-up wording matched to your brand voice and service style.'],
   ['Territory & category exclusivity', "Where approved, we won't enroll a direct competitor in your protected area."],
 ];
 
@@ -44,6 +44,27 @@ const stats = [
   ['9', 'Calls / leads routed', 'Tracked & recorded where applicable'],
   ['3', 'Reviews flagged', 'With response drafts ready'],
   ['5', 'Competitor mentions', 'Where rivals were recommended'],
+];
+
+const localOpportunities = [
+  {
+    temperature: 'Hot',
+    area: 'Travis Heights',
+    detail: 'Water heater leaking, wants same-day. 6 replies, no provider booked.',
+    source: 'Nextdoor',
+  },
+  {
+    temperature: 'Warm',
+    area: 'Bouldin Creek',
+    detail: 'Repeated "low water pressure" search activity in cluster.',
+    source: 'Search signal',
+  },
+  {
+    temperature: 'Warm',
+    area: 'Zilker',
+    detail: 'Homeowner asking for repipe recommendations after slab leak.',
+    source: 'Nextdoor',
+  },
 ];
 
 const economics = [
@@ -58,9 +79,10 @@ const faqs = [
   ['Can this pay for itself?', 'For many home-service trades, yes, it can. A small number of booked jobs can cover the founding price, especially in higher-value categories like plumbing, HVAC, electrical, appliance repair, and similar urgent services. We still do not guarantee booked jobs or revenue.'],
   ['Do you guarantee booked jobs?', 'No, and we will never promise that. We surface local opportunities, demand signals, and reputation alerts, and we route and track calls where applicable. What you do with that timing and information is what turns it into booked work.'],
   ['Is my territory exclusive?', 'Where approved, yes. We limit enrollment by trade and territory and protect approved partners from having a direct competitor signed up in the same area. Availability depends on your specific category and ZIPs, which is why we review before confirming.'],
+  ['Can the messaging sound like my company?', 'Yes. During onboarding we learn your tone, service standards, offers, and do-not-say rules, then prepare response drafts, review requests, and follow-up wording that fit your company. You approve or edit before anything is sent.'],
   ['Do you post on social platforms as my business?', 'No. We monitor public local conversations and signals and tell you where the opportunities are. We never post or message as your business — you stay in control of how and when you respond.'],
   ['What happens after I apply?', 'We review availability and fit for your trade and territory, usually within one business day. If your area is open and it is a good match, we confirm your founding spot and onboard you. No payment is charged until you are approved.'],
-  ['Why is the founding price lower?', 'Founding partners help us calibrate the service in their local market, so we lock in a lower rate of $497/month for the first 3 months before the standard $750/month rate. It is a genuine trial of a high-touch service, not a discount gimmick.'],
+  ['Why is the founding price lower?', 'Founding partners help us calibrate the service in their local market, so we start with a $500/mo founding pilot for 90 days before the $750/mo standard rate. It is a genuine trial of a high-touch service, not a discount gimmick.'],
 ];
 
 type PartnersPageProps = {
@@ -239,9 +261,14 @@ export default async function PartnersPage({ searchParams }: PartnersPageProps) 
                 <section>
                   <span>New local opportunities</span>
                   <div className="partner-opportunity-list">
-                    <p><em className="is-hot">Hot</em><strong>Travis Heights</strong> — water heater leaking, wants same-day. 6 replies, no provider booked. <small>Nextdoor</small></p>
-                    <p><em>Warm</em><strong>Bouldin Creek</strong> — repeated "low water pressure" search activity in cluster. <small>Search signal</small></p>
-                    <p><em>Warm</em><strong>Zilker</strong> — homeowner asking for repipe recommendations after slab leak. <small>Nextdoor</small></p>
+                    {localOpportunities.map((opportunity) => (
+                      <article key={`${opportunity.area}-${opportunity.source}`} className="partner-opportunity-row">
+                        <em className={opportunity.temperature === 'Hot' ? 'is-hot' : undefined}>{opportunity.temperature}</em>
+                        <strong>{opportunity.area}</strong>
+                        <p>{opportunity.detail}</p>
+                        <small>{opportunity.source}</small>
+                      </article>
+                    ))}
                   </div>
                 </section>
 
@@ -250,7 +277,7 @@ export default async function PartnersPage({ searchParams }: PartnersPageProps) 
                   <div className="partner-check-list">
                     <p><b>✓</b> Sent 6 hot alerts; you responded to 4 within the hour.</p>
                     <p><b>✓</b> Drafted 2 review responses for your approval.</p>
-                    <p><b>✓</b> Sent 3 review-request templates to recent completed jobs.</p>
+                    <p><b>✓</b> Prepared 3 review-request messages in your company voice.</p>
                   </div>
                 </section>
 
@@ -307,30 +334,39 @@ export default async function PartnersPage({ searchParams }: PartnersPageProps) 
             <aside className="partner-pricing-box">
               <div className="partner-pricing-badge-row">
                 <span>Founding Partner</span>
-                <small>Limited spots</small>
+                <small><i aria-hidden="true" />Limited spots</small>
               </div>
               <div className="partner-pricing-anchor" aria-label="Founding partner discount">
-                <span data-copy-key="priceAnchorLabel">Full-service pilot value</span>
-                <b className="partner-pricing-old">
-                  <span className="sr-only">$1,000 per month</span>
-                  <span className="partner-pricing-old-text" aria-hidden="true">$1,000 / month</span>
-                </b>
-                <span className="partner-pricing-ticker" aria-hidden="true">
-                  <span>$1,000</span>
-                  <span>$850</span>
-                  <span>$650</span>
-                  <span>$497</span>
-                </span>
-                <i data-copy-key="priceDropLabel">founding price drops to</i>
+                <div className="partner-pricing-anchor-head">
+                  <span data-copy-key="priceAnchorLabel">Full-service pilot value</span>
+                  <div className="partner-pricing-anchor-value">
+                    <b className="partner-pricing-old">
+                      <span className="sr-only">$1,000 per month</span>
+                      <span className="partner-pricing-old-text" aria-hidden="true">
+                        <span className="partner-pricing-old-amount">$1,000</span>
+                        <span className="partner-pricing-old-unit">/ month</span>
+                      </span>
+                    </b>
+                  </div>
+                </div>
               </div>
+              <p className="partner-pricing-drop-label" data-copy-key="priceDropLabel">founding price drops to</p>
               <div className="partner-pricing-price">
-                <b>$497</b>
+                <b aria-label="$500 per month">
+                  <span className="sr-only">$500</span>
+                  <span className="partner-price-count" aria-hidden="true">
+                    <span>$1,000</span>
+                    <span>$850</span>
+                    <span>$650</span>
+                    <span>$500</span>
+                  </span>
+                </b>
                 <small>/ month</small>
               </div>
-              <p>for your first 3 months</p>
-              <div className="partner-pricing-standard">Then <strong>$750 / month</strong> standard rate</div>
-              <a href="#apply" className="partner-primary-button" data-copy-key="primaryCta">Apply for a Founding Partner Spot</a>
-              <p className="partner-pricing-note">No payment due today. We review your trade & territory, then confirm availability before anything is charged.</p>
+              <p className="partner-pricing-duration"><span aria-hidden="true">✓</span>founding pilot for 90 days</p>
+              <div className="partner-pricing-standard"><img src="/partners/pricing-shield.png" alt="" aria-hidden="true" /><p>Then <strong>$750 / mo</strong> standard</p></div>
+              <a href="#apply" className="partner-primary-button"><span className="partner-pricing-cta-icon" aria-hidden="true">›</span><span data-copy-key="primaryCta">Apply for a Founding Partner Spot</span></a>
+              <p className="partner-pricing-note"><img src="/partners/pricing-no-payment.png" alt="" aria-hidden="true" />No payment due today. We review your trade & territory, then confirm availability before anything is charged.</p>
             </aside>
           </div>
         </section>

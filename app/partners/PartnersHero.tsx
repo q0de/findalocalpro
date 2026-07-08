@@ -38,7 +38,7 @@ export function PartnersHero() {
               </Link>
             </div>
             <p className="text-sm font-bold text-slate-400 mt-4">
-              $497/month for the first 3 months. Then $750/month standard. Apply first, pay after approval.
+              $500/mo founding pilot for 90 days. Then $750/mo standard. Apply first, pay after approval.
             </p>
           </div>
 
