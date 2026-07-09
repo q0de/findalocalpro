@@ -4469,6 +4469,16 @@ details[open] > p {
   }
 }
 
+@keyframes partnerPricingPanelFloat {
+  0%,
+  100% {
+    transform: translateY(0) rotateX(0deg) scale(1);
+  }
+  50% {
+    transform: translateY(-8px) rotateX(0deg) scale(1);
+  }
+}
+
 @keyframes pricingHandStrike {
   0% {
     opacity: 0;
@@ -4711,6 +4721,12 @@ details[open] > p {
   animation-name: partnerRevealPanelIn;
 }
 
+.partner-standalone.is-reveal-ready .partner-pricing-box.partner-reveal.is-visible {
+  animation:
+    partnerRevealPanelIn 0.78s cubic-bezier(0.18, 0.86, 0.24, 1) both,
+    partnerPricingPanelFloat 7.8s ease-in-out 1.05s infinite;
+}
+
 .partner-standalone.is-reveal-ready .partner-report-body section.partner-reveal.is-visible {
   animation-duration: 0.58s;
 }
@@ -4764,9 +4780,11 @@ details[open] > p {
   border: 1px solid rgba(180, 255, 119, 0.46);
   box-shadow:
     inset 0 1px 0 rgba(255, 255, 255, 0.62),
-    inset 0 -8px 14px rgba(43, 110, 14, 0.22),
-    0 3px 0 #3f7e18,
-    0 18px 28px -18px rgba(126, 193, 61, 0.9),
+    inset 0 -10px 15px rgba(43, 110, 14, 0.26),
+    inset 0 -1px 0 rgba(210, 255, 109, 0.72),
+    0 4px 0 #3f7e18,
+    0 0 0 1px rgba(193, 255, 112, 0.28),
+    0 18px 30px -16px rgba(126, 193, 61, 0.96),
     0 28px 56px -34px rgba(45, 199, 255, 0.55);
   text-shadow: 0 1px 0 rgba(255, 255, 255, 0.24);
   transition:
@@ -4794,15 +4812,16 @@ details[open] > p {
 .partner-standalone .partner-hero-actions .partner-primary-button::after {
   content: "";
   position: absolute;
-  left: 16px;
-  right: 16px;
-  bottom: -12px;
+  left: 10px;
+  right: 10px;
+  bottom: -13px;
   z-index: -2;
-  height: 24px;
+  height: 30px;
   border-radius: 50%;
-  background: rgba(126, 193, 61, 0.48);
-  filter: blur(14px);
-  opacity: 0.72;
+  background:
+    radial-gradient(ellipse at center, rgba(183, 255, 88, 0.72), rgba(126, 193, 61, 0.36) 45%, transparent 74%);
+  filter: blur(15px);
+  opacity: 0.88;
   transition:
     opacity 180ms ease,
     transform 180ms ease;
@@ -4864,6 +4883,21 @@ details[open] > p {
 .partner-standalone .partner-pricing-section {
   position: relative;
   overflow: hidden;
+  background:
+    linear-gradient(90deg, rgba(232, 238, 246, 0.98) 0%, rgba(232, 238, 246, 0.82) 42%, rgba(232, 238, 246, 0.18) 100%),
+    #e8eef6;
+}
+
+.partner-standalone .partner-pricing-section::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background:
+    linear-gradient(90deg, rgba(232, 238, 246, 0.82) 0%, rgba(232, 238, 246, 0.32) 36%, rgba(232, 238, 246, 0) 72%),
+    url("/partners/pricing-grid-bg.png") 68% center / 132% auto no-repeat;
+  opacity: 1;
 }
 
 .partner-standalone .partner-pricing-section h2 {
@@ -4910,42 +4944,41 @@ details[open] > p {
   padding: 34px;
   color: #dce8f8;
   background:
-    radial-gradient(circle at 82% 10%, rgba(37, 133, 228, 0.22), transparent 28%) padding-box,
-    linear-gradient(153deg, #07172f 0%, #031028 54%, #061931 100%) padding-box,
-    linear-gradient(134deg, rgba(178, 214, 255, 0.58) 0%, rgba(70, 104, 152, 0.34) 28%, rgba(26, 70, 127, 0.32) 64%, rgba(44, 168, 255, 0.9) 100%) border-box,
+    radial-gradient(circle at 84% 8%, rgba(45, 174, 255, 0.16), transparent 26%) padding-box,
+    linear-gradient(153deg, #031126 0%, #04142b 52%, #071c36 100%) padding-box,
+    conic-gradient(from 168deg at 98% 2%, rgba(45, 174, 255, 0.98) 0deg, rgba(135, 204, 255, 0.62) 18deg, rgba(37, 88, 150, 0.3) 76deg, rgba(24, 66, 125, 0.26) 186deg, rgba(169, 205, 247, 0.44) 282deg, rgba(45, 174, 255, 0.98) 360deg) border-box,
     radial-gradient(circle at 44% 45%, rgba(126, 193, 61, 0.12), transparent 23%),
-    radial-gradient(circle at 94% -2%, rgba(45, 160, 255, 0.32), transparent 22%),
+    radial-gradient(circle at 96% -2%, rgba(45, 174, 255, 0.26), transparent 23%),
     radial-gradient(circle at 12% 84%, rgba(45, 199, 255, 0.08), transparent 28%);
   background-clip: padding-box, padding-box, border-box, padding-box, padding-box, padding-box;
   border: 1px solid transparent;
-  border-radius: 22px;
+  border-radius: 26px;
   box-shadow:
-    0 0 0 1px rgba(196, 226, 255, 0.09) inset,
-    0 0 0 2px rgba(39, 93, 164, 0.18),
-    0 0 22px rgba(43, 150, 255, 0.24),
-    0 0 54px rgba(35, 130, 255, 0.17),
-    0 0 92px rgba(35, 130, 255, 0.09),
-    0 32px 82px -44px rgba(0, 12, 34, 0.9);
+    0 0 0 1px rgba(211, 234, 255, 0.08) inset,
+    0 0 24px rgba(43, 150, 255, 0.15),
+    0 0 70px rgba(35, 130, 255, 0.1),
+    0 34px 86px -42px rgba(0, 10, 28, 0.94),
+    0 52px 118px -68px rgba(0, 0, 0, 0.9);
 }
 
 .partner-standalone .partner-pricing-box::before {
   content: "";
   position: absolute;
-  inset: 0;
+  inset: 1px;
   pointer-events: none;
-  border-radius: inherit;
+  border-radius: calc(26px - 1px);
   background:
-    linear-gradient(137deg, rgba(234, 247, 255, 0.3), rgba(158, 199, 255, 0.12) 9%, transparent 24%),
-    radial-gradient(ellipse at 95% 1%, rgba(71, 183, 255, 0.88), rgba(71, 183, 255, 0.22) 12%, transparent 31%),
-    linear-gradient(90deg, transparent 76%, rgba(47, 169, 255, 0.2) 100%),
-    linear-gradient(180deg, rgba(178, 216, 255, 0.24), transparent 19%);
+    radial-gradient(ellipse at 100% 0%, rgba(70, 190, 255, 0.72), rgba(70, 190, 255, 0.2) 15%, transparent 30%),
+    linear-gradient(90deg, rgba(231, 244, 255, 0.2) 0%, rgba(148, 194, 255, 0.1) 22%, rgba(45, 174, 255, 0.28) 100%);
   mask:
     linear-gradient(#000 0 0) content-box,
     linear-gradient(#000 0 0);
   mask-composite: exclude;
   padding: 1px;
-  opacity: 0.9;
-  filter: drop-shadow(0 0 10px rgba(67, 173, 255, 0.34));
+  opacity: 0.7;
+  box-shadow:
+    0 0 18px rgba(67, 173, 255, 0.16) inset,
+    0 0 0 1px rgba(190, 224, 255, 0.08) inset;
 }
 
 .partner-standalone .partner-pricing-box::after {
@@ -4957,11 +4990,13 @@ details[open] > p {
   height: 1px;
   pointer-events: none;
   background: linear-gradient(90deg, transparent, rgba(117, 168, 231, 0.2) 14%, rgba(117, 168, 231, 0.24) 50%, transparent);
+  opacity: 0.82;
 }
 
 .partner-standalone .partner-pricing-badge-row {
   display: flex;
   align-items: center;
+  justify-content: center;
   gap: 14px;
   margin: 0;
 }
@@ -5021,11 +5056,11 @@ details[open] > p {
 }
 
 .partner-standalone .partner-pricing-anchor {
+  display: none;
   position: relative;
-  display: grid;
   gap: 16px;
   margin: 26px 0 0;
-  padding: 16px 20px 18px;
+  padding: 5px 20px 14px;
   color: #9aa79e;
   background:
     radial-gradient(circle at 84% 12%, rgba(66, 154, 255, 0.16), transparent 33%) padding-box,
@@ -5072,25 +5107,25 @@ details[open] > p {
   z-index: 1;
   display: block;
   width: 100%;
-  text-align: left;
+  text-align: center;
 }
 
 .partner-standalone .partner-pricing-anchor-value {
   display: grid;
   width: 100%;
-  justify-items: start;
+  justify-items: center;
   gap: 8px;
   min-width: 0;
   margin-top: 10px;
   padding-top: 0;
-  text-align: left;
+  text-align: center;
 }
 
 .partner-standalone .partner-pricing-old {
   position: relative;
   z-index: 1;
   display: block;
-  justify-self: start;
+  justify-self: center;
   width: max-content;
   max-width: 100%;
   min-height: 0;
@@ -5117,7 +5152,7 @@ details[open] > p {
   font-weight: 800;
   line-height: 0.9;
   text-transform: none;
-  transform-origin: left center;
+  transform-origin: center center;
 }
 
 .partner-standalone .partner-pricing-old-amount {
@@ -5151,33 +5186,40 @@ details[open] > p {
   animation: pricingStrikeIn 0.46s cubic-bezier(0.22, 0.8, 0.22, 1) 0.34s forwards;
 }
 
-.partner-standalone .partner-pricing-drop-label {
-  margin: 22px 0 0;
-  color: #9df542;
-  font-size: clamp(20px, 2vw, 25px);
+.partner-standalone .partner-pricing-section .partner-pricing-drop-label {
+  width: fit-content;
+  max-width: 100%;
+  margin: 50px auto 0;
+  color: #9bf044;
+  font-family: "Archivo", system-ui, sans-serif;
+  font-size: clamp(11px, 1vw, 14px);
   font-weight: 800;
   letter-spacing: 0.06em;
-  line-height: 1.05;
+  line-height: 1;
   font-style: normal;
+  text-align: center;
+  text-transform: uppercase;
   text-shadow:
-    0 0 12px rgba(157, 245, 66, 0.22),
-    0 2px 14px rgba(0, 0, 0, 0.28);
+    0 0 6px rgba(155, 240, 68, 0.42),
+    0 0 18px rgba(155, 240, 68, 0.28),
+    0 2px 14px rgba(0, 0, 0, 0.34);
 }
 
 .partner-standalone .partner-pricing-price {
   position: relative;
   z-index: 1;
-  display: flex;
+  display: grid;
   align-items: flex-end;
-  gap: 14px;
-  margin: 8px 0 0;
+  justify-content: center;
+  gap: 0;
+  margin: 10px 0 0;
   filter: drop-shadow(0 0 20px rgba(126, 193, 61, 0.2));
 }
 
 .partner-standalone .partner-pricing-price b {
   position: relative;
   display: inline-block;
-  min-width: clamp(190px, 18vw, 255px);
+  min-width: clamp(166px, 15vw, 210px);
   min-height: clamp(70px, 7vw, 96px);
   color: #d8ff70;
   background: linear-gradient(180deg, #f5ffd4 0%, #d8ff70 36%, #aaff3f 72%, #8cdf35 100%);
@@ -5209,8 +5251,15 @@ details[open] > p {
   background: linear-gradient(180deg, #f5ffd4 0%, #d8ff70 36%, #aaff3f 72%, #8cdf35 100%);
   background-clip: text;
   -webkit-background-clip: text;
+  paint-order: stroke fill;
+  -webkit-text-stroke: 1px rgba(244, 255, 211, 0.58);
   transform-origin: left center;
   animation: pricingCountStep 0.36s cubic-bezier(0.18, 0.86, 0.2, 1) both;
+  text-shadow:
+    1px 1px 0 rgba(87, 150, 34, 0.36),
+    -1px -1px 0 rgba(255, 255, 238, 0.34),
+    0 0 16px rgba(215, 255, 106, 0.42),
+    0 0 34px rgba(126, 193, 61, 0.36);
   -webkit-text-fill-color: transparent;
 }
 
@@ -5235,37 +5284,44 @@ details[open] > p {
 }
 
 .partner-standalone .partner-pricing-price small {
-  padding-bottom: 10px;
+  position: absolute;
+  left: calc(50% + min(20vw, 276px) / 2 + 6px);
+  bottom: 9px;
+  padding-bottom: 9px;
   color: #cfd6cf;
+  opacity: 0.78;
   font-size: 19px;
   font-weight: 800;
   animation: pricingUnitIn 0.42s ease-out 2.28s both;
 }
 
-.partner-standalone .partner-pricing-duration {
+.partner-standalone .partner-pricing-section .partner-pricing-duration {
   display: flex;
   align-items: center;
-  gap: 10px;
-  margin: 18px 0 0;
+  justify-content: center;
+  gap: 6px;
+  margin: 10px 0 0;
   color: #ffffff !important;
-  font-size: 16px;
-  font-weight: 700;
-  line-height: 1.5;
-  text-shadow: 0 0 18px rgba(255, 255, 255, 0.14);
+  font-size: 10px;
+  font-weight: 650;
+  letter-spacing: 0.06em;
+  line-height: 1.35;
+  text-transform: uppercase;
+  text-shadow: 0 0 10px rgba(255, 255, 255, 0.1);
 }
 
-.partner-standalone .partner-pricing-duration span {
+.partner-standalone .partner-pricing-section .partner-pricing-duration span {
   display: inline-flex;
   flex: none;
   align-items: center;
   justify-content: center;
-  width: 22px;
-  height: 22px;
+  width: 18px;
+  height: 18px;
   color: #b7ff58;
   border: 1px solid rgba(160, 196, 239, 0.18);
   border-radius: 50%;
   box-shadow: 0 0 18px rgba(126, 193, 61, 0.18);
-  font-size: 12px;
+  font-size: 10px;
   font-weight: 900;
 }
 
@@ -5274,7 +5330,7 @@ details[open] > p {
   align-items: center;
   justify-content: center;
   gap: 14px;
-  margin: 24px 0 0;
+  margin: 46px 0 0;
   padding: 18px;
   color: #cfd6cf;
   background:
@@ -5322,6 +5378,7 @@ details[open] > p {
 
 .partner-standalone .partner-pricing-box .partner-primary-button {
   position: relative;
+  isolation: isolate;
   justify-content: center;
   gap: 10px;
   width: 100%;
@@ -5333,9 +5390,13 @@ details[open] > p {
   border: 1px solid rgba(222, 255, 116, 0.8);
   border-radius: 11px;
   box-shadow:
-    0 0 30px rgba(126, 193, 61, 0.34),
+    inset 0 1px 0 rgba(255, 255, 255, 0.62),
+    inset 0 -10px 15px rgba(43, 110, 14, 0.26),
+    inset 0 -1px 0 rgba(210, 255, 109, 0.72),
+    0 0 0 1px rgba(193, 255, 112, 0.28),
     0 5px 0 #4b891a,
-    0 2px 0 rgba(255, 255, 255, 0.48) inset;
+    0 0 34px rgba(126, 193, 61, 0.42),
+    0 20px 34px -18px rgba(126, 193, 61, 0.95);
   font-size: 16px;
   text-align: center;
   transform: translateY(0);
@@ -5345,13 +5406,40 @@ details[open] > p {
     transform 200ms ease;
 }
 
+.partner-standalone .partner-pricing-box .partner-primary-button::after {
+  content: "";
+  position: absolute;
+  left: 10px;
+  right: 10px;
+  bottom: -13px;
+  z-index: -1;
+  height: 30px;
+  border-radius: 50%;
+  background:
+    radial-gradient(ellipse at center, rgba(183, 255, 88, 0.72), rgba(126, 193, 61, 0.36) 45%, transparent 74%);
+  filter: blur(15px);
+  opacity: 0.88;
+  transition:
+    opacity 200ms ease,
+    transform 200ms ease;
+}
+
 .partner-standalone .partner-pricing-box .partner-primary-button:hover {
   filter: brightness(1.04) saturate(1.08);
   transform: translateY(-2px);
   box-shadow:
-    0 0 42px rgba(126, 193, 61, 0.44),
+    inset 0 1px 0 rgba(255, 255, 255, 0.68),
+    inset 0 -10px 16px rgba(43, 110, 14, 0.22),
+    inset 0 -1px 0 rgba(224, 255, 130, 0.82),
+    0 0 0 1px rgba(208, 255, 124, 0.34),
+    0 0 48px rgba(126, 193, 61, 0.5),
     0 7px 0 #4b891a,
-    0 2px 0 rgba(255, 255, 255, 0.58) inset;
+    0 24px 42px -18px rgba(126, 193, 61, 1);
+}
+
+.partner-standalone .partner-pricing-box .partner-primary-button:hover::after {
+  opacity: 1;
+  transform: scaleX(1.08);
 }
 
 .partner-standalone .partner-pricing-cta-icon {
@@ -5766,11 +5854,11 @@ details[open] > p {
 
   .partner-standalone .partner-pricing-box {
     padding: 28px 22px;
-    border-radius: 22px;
+    border-radius: 24px;
   }
 
   .partner-standalone .partner-pricing-badge-row {
-    align-items: flex-start;
+    align-items: center;
     flex-direction: column;
     gap: 10px;
   }
@@ -5780,21 +5868,21 @@ details[open] > p {
   }
 
   .partner-standalone .partner-pricing-anchor {
-    padding: 16px 18px 18px;
+    padding: 5px 18px 14px;
   }
 
   .partner-standalone .partner-pricing-anchor-head {
     display: block;
     width: 100%;
-    text-align: left;
+    text-align: center;
   }
 
   .partner-standalone .partner-pricing-anchor-value {
     width: 100%;
-    justify-items: start;
+    justify-items: center;
     min-width: 0;
     margin-top: 10px;
-    text-align: left;
+    text-align: center;
   }
 
   .partner-standalone .partner-pricing-old-amount {
@@ -5807,11 +5895,13 @@ details[open] > p {
   }
 
   .partner-standalone .partner-pricing-price small {
+    left: calc(50% + 210px / 2 + 5px);
+    bottom: 8px;
     font-size: 18px;
   }
 
   .partner-standalone .partner-pricing-price {
-    gap: 10px;
+    gap: 0;
   }
 
   .partner-standalone .partner-economics-grid article {
@@ -5831,7 +5921,7 @@ details[open] > p {
   }
 
   .partner-standalone .partner-pricing-price b {
-    min-width: 172px;
+    min-width: 154px;
     min-height: 68px;
     font-size: 70px;
     letter-spacing: -2.5px;
@@ -5948,6 +6038,7 @@ details[open] > p {
   .partner-standalone .partner-marker-icon-stack .material-symbols-outlined,
   .partner-standalone .partner-marker-icon-stack .partner-marker-icon,
   .partner-standalone .partner-map-pin,
+  .partner-standalone .partner-pricing-box,
   .partner-standalone .partner-pricing-old-text,
   .partner-standalone .partner-pricing-price b,
   .partner-standalone .partner-pricing-price small,
