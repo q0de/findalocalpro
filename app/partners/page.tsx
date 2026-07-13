@@ -4,6 +4,10 @@ import { PartnerApplicationForm } from './PartnerApplicationForm';
 import { PartnerCopyVersionControl } from './PartnerCopyVersionControl';
 import { PartnerHeroTitle } from './PartnerHeroTitle';
 import { PartnerHeroVisual } from './PartnerHeroVisual';
+import { PartnerPricingBorderControl } from './PartnerPricingBorderControl';
+import { PartnerPriceCounter } from './PartnerPriceCounter';
+import { PartnerPricingUnitControl } from './PartnerPricingUnitControl';
+import { PartnerPricingWidthControl } from './PartnerPricingWidthControl';
 import { PartnerScrollAnimator } from './PartnerScrollAnimator';
 import { PartnerStatsBackgroundControl } from './PartnerStatsBackgroundControl';
 
@@ -129,6 +133,7 @@ export default async function PartnersPage({ searchParams }: PartnersPageProps) 
         <section className="partner-standalone-hero">
           <span className="partner-neighborhood-bg" aria-hidden="true" />
           <PartnerCopyVersionControl />
+          <PartnerPricingWidthControl />
           <PartnerHeroVisual />
           <div className="partner-shell partner-hero-grid">
             <div className="partner-hero-panel">
@@ -331,43 +336,79 @@ export default async function PartnersPage({ searchParams }: PartnersPageProps) 
                 <li>Flat monthly service, not shared-lead bidding</li>
               </ul>
             </div>
-            <aside className="partner-pricing-box">
-              <div className="partner-pricing-badge-row">
-                <span>Founding Partner</span>
-                <small><i aria-hidden="true" />Limited spots</small>
-              </div>
-              <div className="partner-pricing-anchor" aria-label="Founding partner discount">
-                <div className="partner-pricing-anchor-head">
-                  <span data-copy-key="priceAnchorLabel">Full-service pilot value</span>
-                  <div className="partner-pricing-anchor-value">
-                    <b className="partner-pricing-old">
-                      <span className="sr-only">$1,000 per month</span>
-                      <span className="partner-pricing-old-text" aria-hidden="true">
-                        <span className="partner-pricing-old-amount">$1,000</span>
-                        <span className="partner-pricing-old-unit">/ month</span>
-                      </span>
-                    </b>
+            <div className="partner-pricing-card-column">
+              <PartnerPricingBorderControl />
+              <PartnerPricingUnitControl />
+              <aside className="partner-pricing-box is-price-intro">
+                <svg className="partner-pricing-rim" viewBox="0 0 1000 1300" preserveAspectRatio="none" aria-hidden="true" focusable="false">
+                  <defs>
+                    <linearGradient id="partnerPricingBaseRim" x1="0" y1="0" x2="1" y2="1">
+                      <stop offset="0%" stopColor="#a7cfff" stopOpacity="0.32" />
+                      <stop offset="35%" stopColor="#4777b4" stopOpacity="0.2" />
+                      <stop offset="70%" stopColor="#244b82" stopOpacity="0.16" />
+                      <stop offset="100%" stopColor="#168eea" stopOpacity="0.38" />
+                    </linearGradient>
+                    <linearGradient id="partnerPricingHotRim" x1="0" y1="0" x2="1" y2="1">
+                      <stop offset="0%" stopColor="#2f76bd" stopOpacity="0" />
+                      <stop offset="35%" stopColor="#179cff" stopOpacity="0.65" />
+                      <stop offset="62%" stopColor="#8fe7ff" stopOpacity="1" />
+                      <stop offset="78%" stopColor="#dff8ff" stopOpacity="1" />
+                      <stop offset="100%" stopColor="#1b91ff" stopOpacity="0.15" />
+                    </linearGradient>
+                    <filter id="partnerPricingRimGlow" x="-20%" y="-20%" width="140%" height="140%">
+                      <feGaussianBlur stdDeviation="5" result="blur" />
+                      <feMerge>
+                        <feMergeNode in="blur" />
+                        <feMergeNode in="SourceGraphic" />
+                      </feMerge>
+                    </filter>
+                  </defs>
+                  <rect x="2" y="2" width="996" height="1296" rx="48" fill="none" stroke="url(#partnerPricingBaseRim)" strokeWidth="2" />
+                  <path d="M 735 2 H 952 Q 998 2 998 48 V 250" fill="none" stroke="url(#partnerPricingHotRim)" strokeWidth="3" strokeLinecap="round" filter="url(#partnerPricingRimGlow)" />
+                  <path d="M 835 2 H 955 Q 998 2 998 45" fill="none" stroke="#dff8ff" strokeOpacity="0.85" strokeWidth="0.8" strokeLinecap="round" />
+                </svg>
+                <div className="partner-pricing-surface">
+                  <div className="partner-pricing-badge-row">
+                    <span>Founding Partner</span>
+                    <small><i aria-hidden="true" />Limited spots</small>
                   </div>
+                  <div className="partner-pricing-anchor" aria-label="Founding partner discount">
+                    <div className="partner-pricing-anchor-head">
+                      <span data-copy-key="priceAnchorLabel">Full-service pilot value</span>
+                      <div className="partner-pricing-anchor-value">
+                        <b className="partner-pricing-old">
+                          <span className="sr-only">$1,000 per month</span>
+                          <span className="partner-pricing-old-text" aria-hidden="true">
+                            <span className="partner-pricing-old-amount">$1,000</span>
+                            <span className="partner-pricing-old-unit">/ month</span>
+                          </span>
+                        </b>
+                      </div>
+                    </div>
+                  </div>
+                  <p className="partner-pricing-drop-label" data-copy-key="priceDropLabel">founding price drops to</p>
+                  <div className="partner-pricing-price">
+                    <b>
+                      <PartnerPriceCounter />
+                    </b>
+                    <small>/ month</small>
+                    <span className="partner-price-sparkles" aria-hidden="true">
+                      <i />
+                      <i />
+                      <i />
+                      <i />
+                      <i />
+                      <i />
+                      <i />
+                    </span>
+                  </div>
+                  <p className="partner-pricing-duration"><span aria-hidden="true">✓</span>founding pilot for 90 days</p>
+                  <div className="partner-pricing-standard"><img src="/partners/pricing-shield.png" alt="" aria-hidden="true" /><p>Then <strong>$750 / mo</strong> standard</p></div>
+                  <a href="#apply" className="partner-primary-button"><span className="partner-pricing-cta-icon" aria-hidden="true">›</span><span data-copy-key="primaryCta">Apply for a Founding Partner Spot</span></a>
+                  <p className="partner-pricing-note"><img src="/partners/pricing-no-payment.png" alt="" aria-hidden="true" />No payment due today. We review your trade & territory, then confirm availability before anything is charged.</p>
                 </div>
-              </div>
-              <p className="partner-pricing-drop-label" data-copy-key="priceDropLabel">founding price drops to</p>
-              <div className="partner-pricing-price">
-                <b aria-label="$500 per month">
-                  <span className="sr-only">$500</span>
-                  <span className="partner-price-count" aria-hidden="true">
-                    <span>$1,000</span>
-                    <span>$850</span>
-                    <span>$650</span>
-                    <span>$500</span>
-                  </span>
-                </b>
-                <small>/ month</small>
-              </div>
-              <p className="partner-pricing-duration"><span aria-hidden="true">✓</span>founding pilot for 90 days</p>
-              <div className="partner-pricing-standard"><img src="/partners/pricing-shield.png" alt="" aria-hidden="true" /><p>Then <strong>$750 / mo</strong> standard</p></div>
-              <a href="#apply" className="partner-primary-button"><span className="partner-pricing-cta-icon" aria-hidden="true">›</span><span data-copy-key="primaryCta">Apply for a Founding Partner Spot</span></a>
-              <p className="partner-pricing-note"><img src="/partners/pricing-no-payment.png" alt="" aria-hidden="true" />No payment due today. We review your trade & territory, then confirm availability before anything is charged.</p>
-            </aside>
+              </aside>
+            </div>
           </div>
         </section>
 
