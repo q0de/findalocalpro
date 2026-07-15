@@ -81,6 +81,18 @@ type TrackedReply = {
   lane?: string;
   timestamp?: string;
   posted_at?: string;
+  post_url?: string;
+  url?: string;
+  post_id?: string;
+  need?: string;
+  reply?: string;
+  reply_text?: string;
+  comment?: string;
+  status?: string;
+  author?: string;
+  author_name?: string;
+  area?: string;
+  neighborhood?: string;
 };
 
 type ActivityLogData = {
@@ -271,7 +283,7 @@ function arrayFromLogValue(value: unknown): ScanRun[] {
 
 function repliesFromRun(run: ScanRun): TrackedReply[] {
   const groups = [run.posted, run.posted_leads, run.posted_responses, run.replies];
-  return groups
+  const nestedReplies = groups
     .flatMap((group) => (Array.isArray(group) ? group : []))
     .filter((reply) => reply && typeof reply === 'object')
     .map((reply) => ({
@@ -280,6 +292,12 @@ function repliesFromRun(run: ScanRun): TrackedReply[] {
       lane: reply.lane || run.lane || run.source_account,
       timestamp: reply.timestamp || reply.posted_at || run.timestamp || run.local_time,
     }));
+
+  const standaloneReply = (run as TrackedReply).tracking_id || (run as TrackedReply).reply_text || (run as TrackedReply).comment || (run as TrackedReply).reply
+    ? [{ ...(run as TrackedReply), market: run.market, lane: run.lane || run.source_account, timestamp: run.timestamp || run.local_time }]
+    : [];
+
+  return [...nestedReplies, ...standaloneReply];
 }
 
 async function getActivityLogData(rangeDays: number): Promise<ActivityLogData> {
@@ -516,6 +534,66 @@ function VariantTable({ rows }: { rows: ReturnType<typeof buildVariantRows> }) {
             ))}
             {!rows.length ? (
               <tr><td colSpan={5} className="px-5 py-8 text-center font-semibold text-slate-400">No tracked variants found in local activity logs for this range.</td></tr>
+            ) : null}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  );
+}
+
+function ReplyAttributionTable({ replies }: { replies: TrackedReply[] }) {
+  const rows = [...replies]
+    .sort((a, b) => (parseDate(b.timestamp || b.posted_at)?.getTime() || 0) - (parseDate(a.timestamp || a.posted_at)?.getTime() || 0))
+    .slice(0, 25);
+
+  return (
+    <div className="overflow-hidden rounded-3xl border border-slate-200 bg-white shadow-sm">
+      <div className="border-b border-slate-100 p-5">
+        <h2 className="text-lg font-black text-slate-950">Posted reply attribution</h2>
+        <p className="mt-1 text-sm text-slate-500">Exactly what we said, where it was posted, which variant it used, and whether it has a tracked success yet.</p>
+      </div>
+      <div className="overflow-x-auto">
+        <table className="w-full min-w-[1100px] text-left text-sm">
+          <thead className="bg-slate-50 text-xs font-black uppercase tracking-wide text-slate-500">
+            <tr>
+              <th className="px-5 py-3">Posted</th>
+              <th className="px-5 py-3">Market</th>
+              <th className="px-5 py-3">Vertical</th>
+              <th className="px-5 py-3">Variant</th>
+              <th className="px-5 py-3">Status</th>
+              <th className="px-5 py-3">Phone</th>
+              <th className="px-5 py-3">What we said</th>
+              <th className="px-5 py-3">Post</th>
+            </tr>
+          </thead>
+          <tbody className="divide-y divide-slate-100 align-top">
+            {rows.map((reply, index) => {
+              const href = reply.post_url || reply.url;
+              const text = reply.reply_text || reply.comment || reply.reply || '';
+              const when = parseDate(reply.timestamp || reply.posted_at);
+              const market = normalizeMarket(reply.market || reply.lane || reply.area || reply.neighborhood);
+              const rowKey = reply.tracking_id || `${reply.post_id || href || 'reply'}-${index}`;
+              return (
+                <tr key={rowKey}>
+                  <td className="px-5 py-4 whitespace-nowrap text-xs font-semibold text-slate-500">{when ? when.toLocaleDateString('en-US', { month: 'short', day: 'numeric' }) : 'unknown'}</td>
+                  <td className="px-5 py-4 font-semibold text-slate-700">{titleize(market)}</td>
+                  <td className="px-5 py-4 font-semibold text-slate-700">{titleize(normalizeBucket(reply.vertical || reply.service))}</td>
+                  <td className="px-5 py-4">
+                    <div className="font-black text-slate-900">{titleize(reply.reply_variant_id || 'untracked')}</div>
+                    <div className="text-xs font-semibold text-slate-400">{titleize(reply.reply_variant_family || 'unknown')}</div>
+                  </td>
+                  <td className="px-5 py-4 font-semibold text-slate-700">{titleize(reply.conversion_status || reply.status || 'unknown')}</td>
+                  <td className="px-5 py-4 whitespace-nowrap font-mono text-xs text-slate-600">{reply.tracking_phone || reply.tracking_phone_e164 || '—'}</td>
+                  <td className="px-5 py-4 max-w-xl text-slate-700">{text || '—'}</td>
+                  <td className="px-5 py-4 whitespace-nowrap">
+                    {href ? <a className="font-black text-emerald-700 underline" href={href}>Open</a> : <span className="text-slate-400">—</span>}
+                  </td>
+                </tr>
+              );
+            })}
+            {!rows.length ? (
+              <tr><td colSpan={8} className="px-5 py-8 text-center font-semibold text-slate-400">No posted replies found in activity logs for this range.</td></tr>
             ) : null}
           </tbody>
         </table>
@@ -829,6 +907,7 @@ export default async function LeadDashboardPage({ searchParams }: { searchParams
               <ScoreTable title="Market control panel" subtitle="Illinois vs PA lanes, with Supabase demand/calls plus local scan-log demand/post counts where available." rows={scorecards.markets} />
               <ScoreTable title="Vertical control panel" subtitle="Which categories produce demand, replies, calls, billable calls, and actual estimated revenue." rows={scorecards.verticals} />
               <VariantTable rows={variantRows} />
+              <ReplyAttributionTable replies={activity.replies} />
             </section>
           </>
         ) : null}
