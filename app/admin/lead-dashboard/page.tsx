@@ -37,9 +37,21 @@ type ELocalLead = {
   zip_code?: string;
 };
 
+type ELocalCampaignResult = {
+  call_date?: string;
+  category_name?: string;
+  call_price?: number | string;
+  gross_call_value?: number | string;
+  payable_status?: string;
+  payable_status_reason?: string;
+  is_adjusted?: string;
+  matched_elocal_lead_id?: string;
+};
+
 type DashboardData = {
   demand: DemandEvent[];
   leads: ELocalLead[];
+  campaignResults: ELocalCampaignResult[];
   errors: string[];
   usingServiceKey: boolean;
 };
@@ -262,7 +274,7 @@ async function getDashboardData(): Promise<DashboardData> {
   const usingServiceKey = key !== SUPABASE_ANON;
   const errors: string[] = [];
 
-  const [demand, leads] = await Promise.all([
+  const [demand, leads, campaignResults] = await Promise.all([
     supabaseGet<DemandEvent>('service_demand_events?select=observed_at,created_at,platform,source_account,market,state,vertical,subcategory,action_taken,replied,score,skip_reason&order=created_at.desc&limit=5000', key).catch((error) => {
       errors.push(`service_demand_events: ${error.message}`);
       return [];
@@ -271,9 +283,10 @@ async function getDashboardData(): Promise<DashboardData> {
       errors.push(`elocal_leads: ${error.message}`);
       return [];
     }),
+    supabaseGet<ELocalCampaignResult>('elocal_campaign_results?select=call_date,category_name,call_price,gross_call_value,payable_status,payable_status_reason,is_adjusted,matched_elocal_lead_id&order=call_date.desc&limit=1000', key).catch(() => []),
   ]);
 
-  return { demand, leads, errors, usingServiceKey };
+  return { demand, leads, campaignResults, errors, usingServiceKey };
 }
 
 function arrayFromLogValue(value: unknown): ScanRun[] {
@@ -805,18 +818,22 @@ export default async function LeadDashboardPage({ searchParams }: { searchParams
 
   const rangeDays = parseRange(params?.range);
   const activeTab = parseTab(params?.tab);
-  const [{ demand, leads, errors, usingServiceKey }, activity] = await Promise.all([
+  const [{ demand, leads, campaignResults, errors, usingServiceKey }, activity] = await Promise.all([
     getDashboardData(),
     getActivityLogData(rangeDays),
   ]);
   const recentDemand = demand.filter((row) => withinDays(parseDate(row.logged_at || row.observed_at || row.created_at), rangeDays));
   const recentLeads = leads.filter((row) => withinDays(parseDate(row.created_at), rangeDays));
+  const recentCampaignResults = campaignResults.filter((row) => withinDays(parseDate(row.call_date), rangeDays));
 
   const replied = recentDemand.filter((row) => row.replied || row.action_taken === 'replied' || row.action_taken === 'posted').length;
   const skipped = recentDemand.filter((row) => String(row.action_taken || '').includes('skipped') || String(row.action_taken || '').includes('block')).length;
   const billable = recentLeads.filter((row) => row.billable).length;
   const bridged = recentLeads.filter((row) => ['bridged', 'completed'].includes(String(row.call_status || ''))).length;
   const estimatedRevenue = sumBy(recentLeads.filter((row) => row.billable), (row) => numberValue(row.bid_price));
+  const actualPayout = sumBy(recentCampaignResults, (row) => numberValue(row.call_price));
+  const payableResults = recentCampaignResults.filter((row) => String(row.payable_status || '').toLowerCase().includes('payable') && !String(row.payable_status || '').toLowerCase().includes('non')).length;
+  const unpayableResults = recentCampaignResults.filter((row) => String(row.payable_status || '').toLowerCase().includes('non') || String(row.payable_status || '').toLowerCase().includes('unpayable')).length;
 
   const days = lastNDays(rangeDays);
   const series = days.map((day) => ({
@@ -831,6 +848,8 @@ export default async function LeadDashboardPage({ searchParams }: { searchParams
   const actions = countBy(recentDemand, (row) => row.action_taken);
   const leadStatuses = countBy(recentLeads, (row) => row.call_status);
   const leadServices = countBy(recentLeads, (row) => row.service_category);
+  const payoutStatuses = countBy(recentCampaignResults, (row) => row.payable_status);
+  const payoutReasons = countBy(recentCampaignResults, (row) => row.payable_status_reason || row.is_adjusted);
   const scorecards = buildScorecards(recentDemand, recentLeads, activity);
   const variantRows = buildVariantRows(activity.replies);
   const recommendations = buildRecommendations(scorecards.verticals, scorecards.markets, variantRows);
@@ -878,7 +897,7 @@ export default async function LeadDashboardPage({ searchParams }: { searchParams
               <MetricCard label="Demand observed" value={recentDemand.length.toLocaleString()} hint={`Last ${rangeDays} days`} />
               <MetricCard label="Public replies" value={replied.toLocaleString()} hint={`${pct(replied, recentDemand.length)} reply rate`} />
               <MetricCard label="eLocal calls/leads" value={recentLeads.length.toLocaleString()} hint={`${bridged} bridged/completed`} />
-              <MetricCard label="Billable revenue" value={money(estimatedRevenue)} hint={`${billable} billable calls`} />
+              <MetricCard label={recentCampaignResults.length ? 'eLocal payout truth' : 'Billable revenue'} value={money(recentCampaignResults.length ? actualPayout : estimatedRevenue)} hint={recentCampaignResults.length ? `${payableResults} payable / ${unpayableResults} unpayable from eLocal` : `${billable} estimated billable calls`} />
             </section>
 
             <section className="mb-6 grid gap-4 sm:grid-cols-3">
@@ -929,6 +948,14 @@ export default async function LeadDashboardPage({ searchParams }: { searchParams
             <div className="rounded-3xl border border-slate-200 bg-white p-5 shadow-sm">
               <h2 className="mb-4 text-lg font-black">eLocal status</h2>
               <BarList rows={leadStatuses.length ? leadStatuses : [['no elocal rows visible', 0]]} />
+            </div>
+            <div className="rounded-3xl border border-slate-200 bg-white p-5 shadow-sm">
+              <h2 className="mb-4 text-lg font-black">eLocal payout status</h2>
+              <BarList rows={payoutStatuses.length ? payoutStatuses : [['no campaign-results rows imported', 0]]} />
+            </div>
+            <div className="rounded-3xl border border-slate-200 bg-white p-5 shadow-sm">
+              <h2 className="mb-4 text-lg font-black">eLocal payout reasons</h2>
+              <BarList rows={payoutReasons.length ? payoutReasons : [['no payout reasons imported', 0]]} limit={10} />
             </div>
             <div className="rounded-3xl border border-slate-200 bg-white p-5 shadow-sm lg:col-span-2">
               <h2 className="mb-4 text-lg font-black">eLocal service mix</h2>
