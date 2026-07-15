@@ -324,7 +324,7 @@ function normalizeMarket(value?: string) {
   if (raw.includes('warrington') || raw.includes('bucks')) return 'Pennsylvania / Warrington-Bucks';
   if (raw.includes('illinois') || raw.includes('downers') || raw.includes('naperville') || raw.includes('dupage') || raw.includes('chicago')) return 'Illinois / Downers Grove-Naperville';
   if (raw === 'pa' || raw.includes('pennsylvania')) return 'Pennsylvania / unknown';
-  return titleize(raw.replace(/[^a-z0-9]+/g, ' ').trim() || 'unknown');
+  return 'unknown';
 }
 
 function leadMarket(row: ELocalLead) {
