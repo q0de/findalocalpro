@@ -444,10 +444,10 @@ function buildRecommendations(verticalRows: ScorecardRow[], marketRows: Scorecar
 
 function MetricCard({ label, value, hint }: { label: string; value: string; hint?: string }) {
   return (
-    <div className="rounded-3xl border border-slate-200 bg-white p-5 shadow-sm">
+    <div className="rounded-3xl border border-slate-800 bg-slate-900/80 p-5 shadow-sm shadow-black/20">
       <div className="text-sm font-medium text-slate-500">{label}</div>
-      <div className="mt-2 text-3xl font-black tracking-tight text-slate-950">{value}</div>
-      {hint ? <div className="mt-2 text-xs font-semibold uppercase tracking-wide text-slate-400">{hint}</div> : null}
+      <div className="mt-2 text-3xl font-black tracking-tight text-white">{value}</div>
+      {hint ? <div className="mt-2 text-xs font-semibold uppercase tracking-wide text-slate-500">{hint}</div> : null}
     </div>
   );
 }
@@ -461,11 +461,11 @@ function BarList({ rows, limit = 8 }: { rows: [string, number][]; limit?: number
       {shown.map(([label, value]) => (
         <div key={label}>
           <div className="mb-1 flex items-center justify-between gap-4 text-sm">
-            <span className="truncate font-semibold text-slate-700">{titleize(label)}</span>
+            <span className="truncate font-semibold text-slate-300">{titleize(label)}</span>
             <span className="tabular-nums text-slate-500">{value}</span>
           </div>
-          <div className="h-2 overflow-hidden rounded-full bg-slate-100">
-            <div className="h-full rounded-full bg-slate-950" style={{ width: `${Math.max(3, (value / max) * 100)}%` }} />
+          <div className="h-2 overflow-hidden rounded-full bg-slate-800">
+            <div className="h-full rounded-full bg-emerald-400" style={{ width: `${Math.max(3, (value / max) * 100)}%` }} />
           </div>
         </div>
       ))}
@@ -477,14 +477,14 @@ function ScoreTable({ title, subtitle, rows }: { title: string; subtitle: string
   const shown = rows.slice(0, 10);
 
   return (
-    <div className="overflow-hidden rounded-3xl border border-slate-200 bg-white shadow-sm">
-      <div className="border-b border-slate-100 p-5">
-        <h2 className="text-lg font-black text-slate-950">{title}</h2>
+    <div className="overflow-hidden rounded-3xl border border-slate-800 bg-slate-900/80 shadow-sm shadow-black/20">
+      <div className="border-b border-slate-800 p-5">
+        <h2 className="text-lg font-black text-white">{title}</h2>
         <p className="mt-1 text-sm text-slate-500">{subtitle}</p>
       </div>
       <div className="overflow-x-auto">
         <table className="w-full min-w-[760px] text-left text-sm">
-          <thead className="bg-slate-50 text-xs font-black uppercase tracking-wide text-slate-500">
+          <thead className="bg-emerald-400/70 text-xs font-black uppercase tracking-wide text-slate-500">
             <tr>
               <th className="px-5 py-3">Segment</th>
               <th className="px-5 py-3 text-right">Demand</th>
@@ -495,20 +495,20 @@ function ScoreTable({ title, subtitle, rows }: { title: string; subtitle: string
               <th className="px-5 py-3 text-right">Calls / replies</th>
             </tr>
           </thead>
-          <tbody className="divide-y divide-slate-100">
+          <tbody className="divide-y divide-slate-800">
             {shown.map((row) => (
               <tr key={row.label}>
-                <td className="px-5 py-4 font-black text-slate-900">{titleize(row.label)}</td>
-                <td className="px-5 py-4 text-right tabular-nums text-slate-600">{row.demand || row.scanDemand || 0}</td>
-                <td className="px-5 py-4 text-right tabular-nums text-slate-600">{row.replies || row.scanPosts || 0}</td>
-                <td className="px-5 py-4 text-right tabular-nums text-slate-600">{row.calls}</td>
-                <td className="px-5 py-4 text-right tabular-nums text-slate-600">{row.billable}</td>
-                <td className="px-5 py-4 text-right font-black tabular-nums text-slate-950">{money(row.revenue)}</td>
-                <td className="px-5 py-4 text-right tabular-nums text-slate-600">{pct(row.calls, row.replies || row.scanPosts || 0)}</td>
+                <td className="px-5 py-4 font-black text-slate-100">{titleize(row.label)}</td>
+                <td className="px-5 py-4 text-right tabular-nums text-slate-300">{row.demand || row.scanDemand || 0}</td>
+                <td className="px-5 py-4 text-right tabular-nums text-slate-300">{row.replies || row.scanPosts || 0}</td>
+                <td className="px-5 py-4 text-right tabular-nums text-slate-300">{row.calls}</td>
+                <td className="px-5 py-4 text-right tabular-nums text-slate-300">{row.billable}</td>
+                <td className="px-5 py-4 text-right font-black tabular-nums text-white">{money(row.revenue)}</td>
+                <td className="px-5 py-4 text-right tabular-nums text-slate-300">{pct(row.calls, row.replies || row.scanPosts || 0)}</td>
               </tr>
             ))}
             {!shown.length ? (
-              <tr><td colSpan={7} className="px-5 py-8 text-center font-semibold text-slate-400">No data visible for this range.</td></tr>
+              <tr><td colSpan={7} className="px-5 py-8 text-center font-semibold text-slate-500">No data visible for this range.</td></tr>
             ) : null}
           </tbody>
         </table>
@@ -519,14 +519,14 @@ function ScoreTable({ title, subtitle, rows }: { title: string; subtitle: string
 
 function VariantTable({ rows }: { rows: ReturnType<typeof buildVariantRows> }) {
   return (
-    <div className="overflow-hidden rounded-3xl border border-slate-200 bg-white shadow-sm">
-      <div className="border-b border-slate-100 p-5">
-        <h2 className="text-lg font-black text-slate-950">Reply variant performance</h2>
+    <div className="overflow-hidden rounded-3xl border border-slate-800 bg-slate-900/80 shadow-sm shadow-black/20">
+      <div className="border-b border-slate-800 p-5">
+        <h2 className="text-lg font-black text-white">Reply variant performance</h2>
         <p className="mt-1 text-sm text-slate-500">Tracked Nextdoor wording experiments from local activity logs. Success means a call was attributed back to the reply.</p>
       </div>
       <div className="overflow-x-auto">
         <table className="w-full min-w-[560px] text-left text-sm">
-          <thead className="bg-slate-50 text-xs font-black uppercase tracking-wide text-slate-500">
+          <thead className="bg-emerald-400/70 text-xs font-black uppercase tracking-wide text-slate-500">
             <tr>
               <th className="px-5 py-3">Variant</th>
               <th className="px-5 py-3">Family</th>
@@ -535,18 +535,18 @@ function VariantTable({ rows }: { rows: ReturnType<typeof buildVariantRows> }) {
               <th className="px-5 py-3 text-right">Rate</th>
             </tr>
           </thead>
-          <tbody className="divide-y divide-slate-100">
+          <tbody className="divide-y divide-slate-800">
             {rows.slice(0, 10).map((row) => (
               <tr key={row.label}>
-                <td className="px-5 py-4 font-black text-slate-900">{titleize(row.label)}</td>
-                <td className="px-5 py-4 text-slate-600">{titleize(row.family)}</td>
-                <td className="px-5 py-4 text-right tabular-nums text-slate-600">{row.posted}</td>
-                <td className="px-5 py-4 text-right tabular-nums text-slate-600">{row.successes}</td>
-                <td className="px-5 py-4 text-right font-black tabular-nums text-slate-950">{pct(row.successes, row.posted)}</td>
+                <td className="px-5 py-4 font-black text-slate-100">{titleize(row.label)}</td>
+                <td className="px-5 py-4 text-slate-300">{titleize(row.family)}</td>
+                <td className="px-5 py-4 text-right tabular-nums text-slate-300">{row.posted}</td>
+                <td className="px-5 py-4 text-right tabular-nums text-slate-300">{row.successes}</td>
+                <td className="px-5 py-4 text-right font-black tabular-nums text-white">{pct(row.successes, row.posted)}</td>
               </tr>
             ))}
             {!rows.length ? (
-              <tr><td colSpan={5} className="px-5 py-8 text-center font-semibold text-slate-400">No tracked variants found in local activity logs for this range.</td></tr>
+              <tr><td colSpan={5} className="px-5 py-8 text-center font-semibold text-slate-500">No tracked variants found in local activity logs for this range.</td></tr>
             ) : null}
           </tbody>
         </table>
@@ -561,14 +561,14 @@ function ReplyAttributionTable({ replies }: { replies: TrackedReply[] }) {
     .slice(0, 25);
 
   return (
-    <div className="overflow-hidden rounded-3xl border border-slate-200 bg-white shadow-sm">
-      <div className="border-b border-slate-100 p-5">
-        <h2 className="text-lg font-black text-slate-950">Posted reply attribution</h2>
+    <div className="overflow-hidden rounded-3xl border border-slate-800 bg-slate-900/80 shadow-sm shadow-black/20">
+      <div className="border-b border-slate-800 p-5">
+        <h2 className="text-lg font-black text-white">Posted reply attribution</h2>
         <p className="mt-1 text-sm text-slate-500">Exactly what we said, where it was posted, which variant it used, and whether it has a tracked success yet.</p>
       </div>
       <div className="overflow-x-auto">
         <table className="w-full min-w-[1100px] text-left text-sm">
-          <thead className="bg-slate-50 text-xs font-black uppercase tracking-wide text-slate-500">
+          <thead className="bg-emerald-400/70 text-xs font-black uppercase tracking-wide text-slate-500">
             <tr>
               <th className="px-5 py-3">Posted</th>
               <th className="px-5 py-3">Market</th>
@@ -580,7 +580,7 @@ function ReplyAttributionTable({ replies }: { replies: TrackedReply[] }) {
               <th className="px-5 py-3">Post</th>
             </tr>
           </thead>
-          <tbody className="divide-y divide-slate-100 align-top">
+          <tbody className="divide-y divide-slate-800 align-top">
             {rows.map((reply, index) => {
               const href = reply.post_url || reply.url;
               const text = reply.reply_text || reply.comment || reply.reply || '';
@@ -590,23 +590,23 @@ function ReplyAttributionTable({ replies }: { replies: TrackedReply[] }) {
               return (
                 <tr key={rowKey}>
                   <td className="px-5 py-4 whitespace-nowrap text-xs font-semibold text-slate-500">{when ? when.toLocaleDateString('en-US', { month: 'short', day: 'numeric' }) : 'unknown'}</td>
-                  <td className="px-5 py-4 font-semibold text-slate-700">{titleize(market)}</td>
-                  <td className="px-5 py-4 font-semibold text-slate-700">{titleize(normalizeBucket(reply.vertical || reply.service))}</td>
+                  <td className="px-5 py-4 font-semibold text-slate-300">{titleize(market)}</td>
+                  <td className="px-5 py-4 font-semibold text-slate-300">{titleize(normalizeBucket(reply.vertical || reply.service))}</td>
                   <td className="px-5 py-4">
-                    <div className="font-black text-slate-900">{titleize(reply.reply_variant_id || 'untracked')}</div>
-                    <div className="text-xs font-semibold text-slate-400">{titleize(reply.reply_variant_family || 'unknown')}</div>
+                    <div className="font-black text-slate-100">{titleize(reply.reply_variant_id || 'untracked')}</div>
+                    <div className="text-xs font-semibold text-slate-500">{titleize(reply.reply_variant_family || 'unknown')}</div>
                   </td>
-                  <td className="px-5 py-4 font-semibold text-slate-700">{titleize(reply.conversion_status || reply.status || 'unknown')}</td>
-                  <td className="px-5 py-4 whitespace-nowrap font-mono text-xs text-slate-600">{reply.tracking_phone || reply.tracking_phone_e164 || '—'}</td>
-                  <td className="px-5 py-4 max-w-xl text-slate-700">{text || '—'}</td>
+                  <td className="px-5 py-4 font-semibold text-slate-300">{titleize(reply.conversion_status || reply.status || 'unknown')}</td>
+                  <td className="px-5 py-4 whitespace-nowrap font-mono text-xs text-slate-300">{reply.tracking_phone || reply.tracking_phone_e164 || '—'}</td>
+                  <td className="px-5 py-4 max-w-xl text-slate-300">{text || '—'}</td>
                   <td className="px-5 py-4 whitespace-nowrap">
-                    {href ? <a className="font-black text-emerald-700 underline" href={href}>Open</a> : <span className="text-slate-400">—</span>}
+                    {href ? <a className="font-black text-emerald-700 underline" href={href}>Open</a> : <span className="text-slate-500">—</span>}
                   </td>
                 </tr>
               );
             })}
             {!rows.length ? (
-              <tr><td colSpan={8} className="px-5 py-8 text-center font-semibold text-slate-400">No posted replies found in activity logs for this range.</td></tr>
+              <tr><td colSpan={8} className="px-5 py-8 text-center font-semibold text-slate-500">No posted replies found in activity logs for this range.</td></tr>
             ) : null}
           </tbody>
         </table>
@@ -617,17 +617,17 @@ function ReplyAttributionTable({ replies }: { replies: TrackedReply[] }) {
 
 function RecommendationPanel({ items }: { items: string[] }) {
   return (
-    <section className="mb-6 rounded-3xl border border-emerald-200 bg-emerald-50 p-5 shadow-sm">
+    <section className="mb-6 rounded-3xl border border-emerald-500/30 bg-emerald-500/10 p-5 shadow-sm">
       <div className="mb-4 flex items-center justify-between gap-4">
         <div>
-          <h2 className="text-lg font-black text-emerald-950">Recommendations</h2>
-          <p className="text-sm text-emerald-800">Auto-generated from demand, replies, calls, billable status, and tracked variants.</p>
+          <h2 className="text-lg font-black text-emerald-100">Recommendations</h2>
+          <p className="text-sm text-emerald-200">Auto-generated from demand, replies, calls, billable status, and tracked variants.</p>
         </div>
-        <div className="hidden rounded-full bg-emerald-950 px-3 py-1 text-xs font-black uppercase tracking-wide text-white sm:block">Control panel</div>
+        <div className="hidden rounded-full bg-emerald-400 px-3 py-1 text-xs font-black uppercase tracking-wide text-slate-950 sm:block">Control panel</div>
       </div>
       <div className="grid gap-3 md:grid-cols-2">
         {items.map((item) => (
-          <div key={item} className="rounded-2xl border border-emerald-200 bg-white p-4 text-sm font-semibold leading-6 text-slate-800">
+          <div key={item} className="rounded-2xl border border-emerald-500/20 bg-slate-950/40 p-4 text-sm font-semibold leading-6 text-slate-200">
             {item}
           </div>
         ))}
@@ -651,8 +651,8 @@ function TabControls({ activeTab, rangeDays }: { activeTab: DashboardTab; rangeD
           href={dashboardHref(tab.id, rangeDays)}
           className={`rounded-3xl border p-5 shadow-sm transition ${
             activeTab === tab.id
-              ? 'border-slate-950 bg-slate-950 text-white'
-              : 'border-slate-200 bg-white text-slate-700 hover:border-slate-400 hover:text-slate-950'
+              ? 'border-emerald-400 bg-emerald-400 text-slate-950 shadow-emerald-500/20'
+              : 'border-slate-200 bg-white text-slate-300 hover:border-slate-400 hover:text-white'
           }`}
         >
           <div className="text-lg font-black">{tab.label}</div>
@@ -672,8 +672,8 @@ function RangeControls({ rangeDays, activeTab }: { rangeDays: number; activeTab:
           href={dashboardHref(activeTab, days)}
           className={`rounded-full px-4 py-2 text-sm font-black transition ${
             rangeDays === days
-              ? 'bg-slate-950 text-white shadow-sm'
-              : 'border border-slate-200 bg-white text-slate-600 hover:border-slate-400 hover:text-slate-950'
+              ? 'bg-emerald-400 text-slate-950 shadow-sm shadow-emerald-500/20'
+              : 'border border-slate-800 bg-slate-900/80 text-slate-300 hover:border-emerald-500/60 hover:text-white'
           }`}
         >
           {days}d
@@ -693,34 +693,34 @@ function LineChart({ values, rangeDays }: { values: { label: string; demand: num
   const path = (key: 'demand' | 'replies' | 'calls') => values.map((v, idx) => `${idx === 0 ? 'M' : 'L'} ${x(idx)} ${y(v[key])}`).join(' ');
 
   return (
-    <div className="overflow-hidden rounded-3xl border border-slate-200 bg-white p-5 shadow-sm">
+    <div className="overflow-hidden rounded-3xl border border-slate-800 bg-slate-900/80 p-5 shadow-sm shadow-black/20">
       <div className="mb-4 flex flex-wrap items-center justify-between gap-3">
         <div>
-          <h2 className="text-lg font-black text-slate-950">{rangeDays}-day trend</h2>
+          <h2 className="text-lg font-black text-white">{rangeDays}-day trend</h2>
           <p className="text-sm text-slate-500">Demand observed, public replies, and eLocal calls/leads.</p>
         </div>
         <div className="flex flex-wrap gap-3 text-xs font-bold uppercase tracking-wide">
-          <span className="text-slate-950">● Demand</span>
+          <span className="text-white">● Demand</span>
           <span className="text-blue-600">● Replies</span>
           <span className="text-emerald-600">● Calls</span>
         </div>
       </div>
       <svg viewBox={`0 0 ${width} ${height}`} className="h-64 w-full">
         {[0, 0.25, 0.5, 0.75, 1].map((tick) => (
-          <line key={tick} x1={padding} x2={width - padding} y1={padding + tick * (height - padding * 2)} y2={padding + tick * (height - padding * 2)} stroke="#e2e8f0" strokeWidth="1" />
+          <line key={tick} x1={padding} x2={width - padding} y1={padding + tick * (height - padding * 2)} y2={padding + tick * (height - padding * 2)} stroke="#1e293b" strokeWidth="1" />
         ))}
-        <path d={path('demand')} fill="none" stroke="#020617" strokeWidth="4" strokeLinecap="round" strokeLinejoin="round" />
+        <path d={path('demand')} fill="none" stroke="#f8fafc" strokeWidth="4" strokeLinecap="round" strokeLinejoin="round" />
         <path d={path('replies')} fill="none" stroke="#2563eb" strokeWidth="4" strokeLinecap="round" strokeLinejoin="round" />
         <path d={path('calls')} fill="none" stroke="#059669" strokeWidth="4" strokeLinecap="round" strokeLinejoin="round" />
         {values.map((v, idx) => (
           <g key={v.label}>
-            <circle cx={x(idx)} cy={y(v.demand)} r="3" fill="#020617" />
+            <circle cx={x(idx)} cy={y(v.demand)} r="3" fill="#f8fafc" />
             <circle cx={x(idx)} cy={y(v.replies)} r="3" fill="#2563eb" />
             <circle cx={x(idx)} cy={y(v.calls)} r="3" fill="#059669" />
           </g>
         ))}
       </svg>
-      <div className="mt-1 grid grid-cols-3 text-xs font-semibold text-slate-400 sm:grid-cols-6">
+      <div className="mt-1 grid grid-cols-3 text-xs font-semibold text-slate-500 sm:grid-cols-6">
         {values.filter((_, idx) => idx % 5 === 0 || idx === values.length - 1).map((v) => (
           <span key={v.label}>{v.label.slice(5)}</span>
         ))}
@@ -739,10 +739,10 @@ function FocusLineChart({ values }: { values: { label: string; replies: number; 
   const path = (key: 'replies' | 'calls') => values.map((v, idx) => `${idx === 0 ? 'M' : 'L'} ${x(idx)} ${y(v[key])}`).join(' ');
 
   return (
-    <div className="overflow-hidden rounded-3xl border border-blue-100 bg-white p-5 shadow-sm">
+    <div className="overflow-hidden rounded-3xl border border-blue-500/20 bg-slate-900/80 p-5 shadow-sm shadow-black/20">
       <div className="mb-4 flex flex-wrap items-center justify-between gap-3">
         <div>
-          <h2 className="text-lg font-black text-slate-950">Reply + call focus</h2>
+          <h2 className="text-lg font-black text-white">Reply + call focus</h2>
           <p className="text-sm text-slate-500">Same dates, separate scale. This is the zoomed-in view for the tiny lines.</p>
         </div>
         <div className="flex flex-wrap gap-3 text-xs font-bold uppercase tracking-wide">
@@ -752,7 +752,7 @@ function FocusLineChart({ values }: { values: { label: string; replies: number; 
       </div>
       <svg viewBox={`0 0 ${width} ${height}`} className="h-60 w-full">
         {[0, 0.25, 0.5, 0.75, 1].map((tick) => (
-          <line key={tick} x1={padding} x2={width - padding} y1={padding + tick * (height - padding * 2)} y2={padding + tick * (height - padding * 2)} stroke="#e2e8f0" strokeWidth="1" />
+          <line key={tick} x1={padding} x2={width - padding} y1={padding + tick * (height - padding * 2)} y2={padding + tick * (height - padding * 2)} stroke="#1e293b" strokeWidth="1" />
         ))}
         <path d={path('replies')} fill="none" stroke="#2563eb" strokeWidth="4" strokeLinecap="round" strokeLinejoin="round" />
         <path d={path('calls')} fill="none" stroke="#059669" strokeWidth="4" strokeLinecap="round" strokeLinejoin="round" />
@@ -763,7 +763,7 @@ function FocusLineChart({ values }: { values: { label: string; replies: number; 
           </g>
         ))}
       </svg>
-      <div className="mt-1 grid grid-cols-3 text-xs font-semibold text-slate-400 sm:grid-cols-6">
+      <div className="mt-1 grid grid-cols-3 text-xs font-semibold text-slate-500 sm:grid-cols-6">
         {values.filter((_, idx) => idx % Math.max(1, Math.ceil(values.length / 6)) === 0 || idx === values.length - 1).map((v) => (
           <span key={v.label}>{v.label.slice(5)}</span>
         ))}
@@ -776,7 +776,7 @@ function AuthGate({ error }: { error?: string }) {
   const configured = Boolean(getDashboardPassword());
 
   return (
-    <main className="min-h-screen bg-slate-950 px-6 py-16 text-white">
+    <main className="min-h-screen bg-emerald-400 px-6 py-16 text-white">
       <div className="mx-auto max-w-md rounded-3xl border border-white/10 bg-white/10 p-8 shadow-2xl backdrop-blur">
         <div className="text-sm font-black uppercase tracking-[0.25em] text-emerald-300">FindALocalPro</div>
         <h1 className="mt-3 text-3xl font-black tracking-tight">Lead dashboard</h1>
@@ -793,10 +793,10 @@ function AuthGate({ error }: { error?: string }) {
               type="password"
               autoComplete="current-password"
               placeholder="Dashboard password"
-              className="w-full rounded-2xl border border-white/10 bg-white px-4 py-3 text-slate-950 outline-none ring-emerald-300 focus:ring-4"
+              className="w-full rounded-2xl border border-white/10 bg-white px-4 py-3 text-white outline-none ring-emerald-300 focus:ring-4"
             />
             {error ? <div className="text-sm font-semibold text-red-300">Wrong password. Annoying, but that is the point.</div> : null}
-            <button className="w-full rounded-2xl bg-emerald-400 px-4 py-3 font-black text-slate-950 transition hover:bg-emerald-300">
+            <button className="w-full rounded-2xl bg-emerald-400 px-4 py-3 font-black text-white transition hover:bg-emerald-300">
               Open dashboard
             </button>
           </form>
@@ -858,9 +858,9 @@ export default async function LeadDashboardPage({ searchParams }: { searchParams
   const updatedAt = new Date().toLocaleString('en-US', { timeZone: 'America/Chicago', dateStyle: 'medium', timeStyle: 'short' });
 
   return (
-    <main className="min-h-screen bg-slate-50 px-5 py-8 text-slate-950">
+    <main className="min-h-screen bg-[radial-gradient(circle_at_top,_#12332d,_#020617_42%)] px-5 py-8 text-white">
       <div className="mx-auto max-w-7xl">
-        <header className="mb-8 flex flex-col justify-between gap-4 rounded-[2rem] bg-slate-950 p-7 text-white shadow-xl md:flex-row md:items-end">
+        <header className="mb-8 flex flex-col justify-between gap-4 rounded-[2rem] border border-slate-800 bg-slate-950/80 p-7 text-white shadow-xl md:flex-row md:items-end">
           <div>
             <div className="text-sm font-black uppercase tracking-[0.25em] text-emerald-300">FindALocalPro</div>
             <h1 className="mt-2 text-4xl font-black tracking-tight md:text-5xl">Lead dashboard</h1>
@@ -873,7 +873,7 @@ export default async function LeadDashboardPage({ searchParams }: { searchParams
         </header>
 
         {errors.length || activity.errors.length || !usingServiceKey ? (
-          <div className="mb-6 rounded-3xl border border-amber-200 bg-amber-50 p-5 text-sm text-amber-950">
+          <div className="mb-6 rounded-3xl border border-amber-400/30 bg-amber-400/10 p-5 text-sm text-amber-100">
             <div className="font-black">Data warning</div>
             {!usingServiceKey ? <p className="mt-1">Using the anon Supabase key. Set <code>SUPABASE_SERVICE_KEY</code> for full internal rows.</p> : null}
             {errors.map((error) => <p key={error} className="mt-1 font-mono text-xs">{error}</p>)}
@@ -883,9 +883,9 @@ export default async function LeadDashboardPage({ searchParams }: { searchParams
 
         <TabControls activeTab={activeTab} rangeDays={rangeDays} />
 
-        <section className="mb-6 flex flex-col justify-between gap-3 rounded-3xl border border-slate-200 bg-white p-5 shadow-sm md:flex-row md:items-center">
+        <section className="mb-6 flex flex-col justify-between gap-3 rounded-3xl border border-slate-800 bg-slate-900/80 p-5 shadow-sm shadow-black/20 md:flex-row md:items-center">
           <div>
-            <h2 className="text-lg font-black text-slate-950">Date range</h2>
+            <h2 className="text-lg font-black text-white">Date range</h2>
             <p className="text-sm text-slate-500">Tighten it up when the graph is too zoomed out. Shocking concept, I know.</p>
           </div>
           <RangeControls rangeDays={rangeDays} activeTab={activeTab} />
@@ -933,31 +933,31 @@ export default async function LeadDashboardPage({ searchParams }: { searchParams
 
         {activeTab === 'breakdowns' ? (
           <section className="grid gap-6 lg:grid-cols-2">
-            <div className="rounded-3xl border border-slate-200 bg-white p-5 shadow-sm">
+            <div className="rounded-3xl border border-slate-800 bg-slate-900/80 p-5 shadow-sm shadow-black/20">
               <h2 className="mb-4 text-lg font-black">Demand by vertical</h2>
               <BarList rows={verticals} />
             </div>
-            <div className="rounded-3xl border border-slate-200 bg-white p-5 shadow-sm">
+            <div className="rounded-3xl border border-slate-800 bg-slate-900/80 p-5 shadow-sm shadow-black/20">
               <h2 className="mb-4 text-lg font-black">Demand by market</h2>
               <BarList rows={markets} />
             </div>
-            <div className="rounded-3xl border border-slate-200 bg-white p-5 shadow-sm">
+            <div className="rounded-3xl border border-slate-800 bg-slate-900/80 p-5 shadow-sm shadow-black/20">
               <h2 className="mb-4 text-lg font-black">Action funnel</h2>
               <BarList rows={actions} />
             </div>
-            <div className="rounded-3xl border border-slate-200 bg-white p-5 shadow-sm">
+            <div className="rounded-3xl border border-slate-800 bg-slate-900/80 p-5 shadow-sm shadow-black/20">
               <h2 className="mb-4 text-lg font-black">eLocal status</h2>
               <BarList rows={leadStatuses.length ? leadStatuses : [['no elocal rows visible', 0]]} />
             </div>
-            <div className="rounded-3xl border border-slate-200 bg-white p-5 shadow-sm">
+            <div className="rounded-3xl border border-slate-800 bg-slate-900/80 p-5 shadow-sm shadow-black/20">
               <h2 className="mb-4 text-lg font-black">eLocal payout status</h2>
               <BarList rows={payoutStatuses.length ? payoutStatuses : [['no campaign-results rows imported', 0]]} />
             </div>
-            <div className="rounded-3xl border border-slate-200 bg-white p-5 shadow-sm">
+            <div className="rounded-3xl border border-slate-800 bg-slate-900/80 p-5 shadow-sm shadow-black/20">
               <h2 className="mb-4 text-lg font-black">eLocal payout reasons</h2>
               <BarList rows={payoutReasons.length ? payoutReasons : [['no payout reasons imported', 0]]} limit={10} />
             </div>
-            <div className="rounded-3xl border border-slate-200 bg-white p-5 shadow-sm lg:col-span-2">
+            <div className="rounded-3xl border border-slate-800 bg-slate-900/80 p-5 shadow-sm shadow-black/20 lg:col-span-2">
               <h2 className="mb-4 text-lg font-black">eLocal service mix</h2>
               <BarList rows={leadServices.length ? leadServices : [['no elocal rows visible', 0]]} limit={10} />
             </div>
