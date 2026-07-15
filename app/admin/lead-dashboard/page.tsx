@@ -130,6 +130,7 @@ const RANGE_OPTIONS = [7, 14, 30, 90];
 const TAB_OPTIONS = ['overview', 'control-panel', 'breakdowns'] as const;
 
 type DashboardTab = typeof TAB_OPTIONS[number];
+type DashboardTheme = 'dark' | 'light';
 
 function getDashboardPassword() {
   return process.env.INTERNAL_DASHBOARD_PASSWORD || process.env.LEAD_DASHBOARD_PASSWORD || '';
@@ -247,8 +248,12 @@ function parseTab(value?: string): DashboardTab {
   return TAB_OPTIONS.includes(value as DashboardTab) ? (value as DashboardTab) : 'overview';
 }
 
-function dashboardHref(tab: DashboardTab, rangeDays: number) {
-  return `/admin/lead-dashboard?tab=${tab}&range=${rangeDays}`;
+function parseTheme(value?: string): DashboardTheme {
+  return value === 'light' ? 'light' : 'dark';
+}
+
+function dashboardHref(tab: DashboardTab, rangeDays: number, theme: DashboardTheme) {
+  return `/admin/lead-dashboard?tab=${tab}&range=${rangeDays}&theme=${theme}`;
 }
 
 async function supabaseGet<T>(path: string, key: string): Promise<T[]> {
@@ -636,7 +641,7 @@ function RecommendationPanel({ items }: { items: string[] }) {
   );
 }
 
-function TabControls({ activeTab, rangeDays }: { activeTab: DashboardTab; rangeDays: number }) {
+function TabControls({ activeTab, rangeDays, theme }: { activeTab: DashboardTab; rangeDays: number; theme: DashboardTheme }) {
   const tabs: { id: DashboardTab; label: string; description: string }[] = [
     { id: 'overview', label: 'Overview', description: 'KPIs and trend' },
     { id: 'control-panel', label: 'Control panel', description: 'Markets, verticals, recommendations' },
@@ -648,7 +653,7 @@ function TabControls({ activeTab, rangeDays }: { activeTab: DashboardTab; rangeD
       {tabs.map((tab) => (
         <a
           key={tab.id}
-          href={dashboardHref(tab.id, rangeDays)}
+          href={dashboardHref(tab.id, rangeDays, theme)}
           className={`rounded-3xl border p-5 shadow-sm transition ${
             activeTab === tab.id
               ? 'border-emerald-400 bg-emerald-400 text-slate-950 shadow-emerald-500/20'
@@ -663,13 +668,13 @@ function TabControls({ activeTab, rangeDays }: { activeTab: DashboardTab; rangeD
   );
 }
 
-function RangeControls({ rangeDays, activeTab }: { rangeDays: number; activeTab: DashboardTab }) {
+function RangeControls({ rangeDays, activeTab, theme }: { rangeDays: number; activeTab: DashboardTab; theme: DashboardTheme }) {
   return (
     <div className="flex flex-wrap gap-2">
       {RANGE_OPTIONS.map((days) => (
         <a
           key={days}
-          href={dashboardHref(activeTab, days)}
+          href={dashboardHref(activeTab, days, theme)}
           className={`rounded-full px-4 py-2 text-sm font-black transition ${
             rangeDays === days
               ? 'bg-emerald-400 text-slate-950 shadow-sm shadow-emerald-500/20'
@@ -680,6 +685,60 @@ function RangeControls({ rangeDays, activeTab }: { rangeDays: number; activeTab:
         </a>
       ))}
     </div>
+  );
+}
+
+function DashboardThemeOverrides() {
+  return (
+    <style dangerouslySetInnerHTML={{ __html: `
+      .dashboard-light {
+        background: radial-gradient(circle at top, #ecfdf5, #f8fafc 42%) !important;
+        color: #0f172a !important;
+      }
+      .dashboard-light .bg-slate-950\\/80,
+      .dashboard-light .bg-slate-900\\/80,
+      .dashboard-light .bg-slate-950\\/40 {
+        background-color: rgba(255, 255, 255, 0.92) !important;
+      }
+      .dashboard-light .bg-white\\/10 {
+        background-color: rgba(15, 23, 42, 0.06) !important;
+      }
+      .dashboard-light .border-slate-800,
+      .dashboard-light .border-white\\/10 {
+        border-color: #e2e8f0 !important;
+      }
+      .dashboard-light .divide-slate-800 > :not([hidden]) ~ :not([hidden]) {
+        border-color: #e2e8f0 !important;
+      }
+      .dashboard-light .bg-slate-800 {
+        background-color: #e2e8f0 !important;
+      }
+      .dashboard-light .text-white,
+      .dashboard-light .text-slate-100,
+      .dashboard-light .text-slate-200,
+      .dashboard-light .text-slate-300 {
+        color: #0f172a !important;
+      }
+      .dashboard-light .text-slate-400,
+      .dashboard-light .text-slate-500 {
+        color: #64748b !important;
+      }
+      .dashboard-light .text-emerald-100,
+      .dashboard-light .text-emerald-200,
+      .dashboard-light .text-emerald-300 {
+        color: #047857 !important;
+      }
+      .dashboard-light .bg-emerald-400,
+      .dashboard-light .bg-emerald-400\\/70 {
+        background-color: #10b981 !important;
+      }
+      .dashboard-light .text-slate-950 {
+        color: #020617 !important;
+      }
+      .dashboard-light .shadow-black\\/20 {
+        box-shadow: 0 12px 30px rgba(15, 23, 42, 0.08) !important;
+      }
+    ` }} />
   );
 }
 
@@ -806,7 +865,7 @@ function AuthGate({ error }: { error?: string }) {
   );
 }
 
-export default async function LeadDashboardPage({ searchParams }: { searchParams?: Promise<{ error?: string; range?: string; tab?: string }> }) {
+export default async function LeadDashboardPage({ searchParams }: { searchParams?: Promise<{ error?: string; range?: string; tab?: string; theme?: string }> }) {
   const password = getDashboardPassword();
   const params = await searchParams;
   const cookieStore = await cookies();
@@ -818,6 +877,7 @@ export default async function LeadDashboardPage({ searchParams }: { searchParams
 
   const rangeDays = parseRange(params?.range);
   const activeTab = parseTab(params?.tab);
+  const theme = parseTheme(params?.theme);
   const [{ demand, leads, campaignResults, errors, usingServiceKey }, activity] = await Promise.all([
     getDashboardData(),
     getActivityLogData(rangeDays),
@@ -858,7 +918,8 @@ export default async function LeadDashboardPage({ searchParams }: { searchParams
   const updatedAt = new Date().toLocaleString('en-US', { timeZone: 'America/Chicago', dateStyle: 'medium', timeStyle: 'short' });
 
   return (
-    <main className="min-h-screen bg-[radial-gradient(circle_at_top,_#12332d,_#020617_42%)] px-5 py-8 text-white">
+    <main className={`dashboard-${theme} min-h-screen bg-[radial-gradient(circle_at_top,_#12332d,_#020617_42%)] px-5 py-8 text-white`}>
+      <DashboardThemeOverrides />
       <div className="mx-auto max-w-7xl">
         <header className="mb-8 flex flex-col justify-between gap-4 rounded-[2rem] border border-slate-800 bg-slate-950/80 p-7 text-white shadow-xl md:flex-row md:items-end">
           <div>
@@ -866,9 +927,14 @@ export default async function LeadDashboardPage({ searchParams }: { searchParams
             <h1 className="mt-2 text-4xl font-black tracking-tight md:text-5xl">Lead dashboard</h1>
             <p className="mt-3 max-w-2xl text-slate-300">Demand capture, posting funnel, and eLocal call health. Basically: is the home-service machine machine-ing?</p>
           </div>
-          <div className="rounded-2xl bg-white/10 px-4 py-3 text-sm text-slate-300">
-            <div className="font-bold text-white">Updated {updatedAt} CT</div>
-            <div>{usingServiceKey ? 'Server key active' : 'Anon key fallback'}</div>
+          <div className="flex flex-col gap-3 sm:items-end">
+            <a className="rounded-full border border-white/10 bg-white/10 px-4 py-2 text-sm font-black text-white transition hover:border-emerald-300" href={dashboardHref(activeTab, rangeDays, theme === 'dark' ? 'light' : 'dark')}>
+              {theme === 'dark' ? 'Light mode' : 'Dark mode'}
+            </a>
+            <div className="rounded-2xl bg-white/10 px-4 py-3 text-sm text-slate-300">
+              <div className="font-bold text-white">Updated {updatedAt} CT</div>
+              <div>{usingServiceKey ? 'Server key active' : 'Anon key fallback'}</div>
+            </div>
           </div>
         </header>
 
@@ -881,14 +947,14 @@ export default async function LeadDashboardPage({ searchParams }: { searchParams
           </div>
         ) : null}
 
-        <TabControls activeTab={activeTab} rangeDays={rangeDays} />
+        <TabControls activeTab={activeTab} rangeDays={rangeDays} theme={theme} />
 
         <section className="mb-6 flex flex-col justify-between gap-3 rounded-3xl border border-slate-800 bg-slate-900/80 p-5 shadow-sm shadow-black/20 md:flex-row md:items-center">
           <div>
             <h2 className="text-lg font-black text-white">Date range</h2>
             <p className="text-sm text-slate-500">Tighten it up when the graph is too zoomed out. Shocking concept, I know.</p>
           </div>
-          <RangeControls rangeDays={rangeDays} activeTab={activeTab} />
+          <RangeControls rangeDays={rangeDays} activeTab={activeTab} theme={theme} />
         </section>
 
         {activeTab === 'overview' ? (
