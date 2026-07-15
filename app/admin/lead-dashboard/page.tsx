@@ -316,15 +316,25 @@ async function getActivityLogData(rangeDays: number): Promise<ActivityLogData> {
   };
 }
 
+function normalizeMarket(value?: string) {
+  const raw = (value || '').toLowerCase().trim();
+  if (!raw) return 'unknown';
+  if (raw.includes('boyertown')) return 'Pennsylvania / Boyertown';
+  if (raw.includes('franconia') || raw.includes('montgomery')) return 'Pennsylvania / Franconia-Montgomery';
+  if (raw.includes('warrington') || raw.includes('bucks')) return 'Pennsylvania / Warrington-Bucks';
+  if (raw.includes('illinois') || raw.includes('downers') || raw.includes('naperville') || raw.includes('dupage') || raw.includes('chicago')) return 'Illinois / Downers Grove-Naperville';
+  if (raw === 'pa' || raw.includes('pennsylvania')) return 'Pennsylvania / unknown';
+  return titleize(raw.replace(/[^a-z0-9]+/g, ' ').trim() || 'unknown');
+}
+
 function leadMarket(row: ELocalLead) {
   const source = String(row.source || '').toLowerCase();
-  if (source.includes('warrington')) return 'Pennsylvania / Warrington-Bucks';
-  if (source.includes('franconia')) return 'Pennsylvania / Franconia-Montgomery';
-  if (source.includes('boyertown')) return 'Pennsylvania / Boyertown';
-  if (source.includes('illinois') || source.includes('chicago') || source.includes('dupage')) return 'Illinois';
+  const sourceMarket = normalizeMarket(source);
+  if (sourceMarket !== 'unknown') return sourceMarket;
+
   const zip = String(row.zip_code || '');
-  if (/^60|^61/.test(zip)) return 'Illinois';
-  if (/^18|^19/.test(zip)) return 'Pennsylvania';
+  if (/^60|^61/.test(zip)) return 'Illinois / Downers Grove-Naperville';
+  if (/^18|^19/.test(zip)) return 'Pennsylvania / unknown';
   return 'unknown';
 }
 
@@ -343,7 +353,7 @@ function buildScorecards(recentDemand: DemandEvent[], recentLeads: ELocalLead[],
     v.demand += 1;
     if (repliedEvent) v.replies += 1;
 
-    const m = row(markets, event.market || event.state || 'unknown');
+    const m = row(markets, normalizeMarket(event.market || event.state || event.source_account || 'unknown'));
     m.demand += 1;
     if (repliedEvent) m.replies += 1;
   }
@@ -362,7 +372,7 @@ function buildScorecards(recentDemand: DemandEvent[], recentLeads: ELocalLead[],
   }
 
   for (const run of activity.runs) {
-    const m = row(markets, run.market || run.lane || run.source_account || 'unknown');
+    const m = row(markets, normalizeMarket(run.market || run.lane || run.source_account || 'unknown'));
     m.scanDemand = (m.scanDemand || 0) + numberValue(run.service_demand_events_logged ?? run.service_events_logged ?? run.logged_service_demand_events);
     m.scanPosts = (m.scanPosts || 0) + numberValue(run.posted_count ?? run.posted_this_run);
   }
