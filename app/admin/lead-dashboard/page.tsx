@@ -479,7 +479,7 @@ function ScoreTable({ title, subtitle, rows }: { title: string; subtitle: string
               <th className="px-5 py-3 text-right">Calls</th>
               <th className="px-5 py-3 text-right">Billable</th>
               <th className="px-5 py-3 text-right">Revenue</th>
-              <th className="px-5 py-3 text-right">Reply → call</th>
+              <th className="px-5 py-3 text-right">Calls / replies</th>
             </tr>
           </thead>
           <tbody className="divide-y divide-slate-100">
@@ -905,7 +905,7 @@ export default async function LeadDashboardPage({ searchParams }: { searchParams
 
             <section className="mb-6 grid gap-6">
               <ScoreTable title="Market control panel" subtitle="Illinois vs PA lanes, with Supabase demand/calls plus local scan-log demand/post counts where available." rows={scorecards.markets} />
-              <ScoreTable title="Vertical control panel" subtitle="Which categories produce demand, replies, calls, billable calls, and actual estimated revenue." rows={scorecards.verticals} />
+              <ScoreTable title="Vertical control panel" subtitle="Category-level demand/replies from logged posts plus eLocal calls/revenue by service. Calls are not reply-attributed yet, so treat this as directional until the attribution table is in Supabase." rows={scorecards.verticals} />
               <VariantTable rows={variantRows} />
               <ReplyAttributionTable replies={activity.replies} />
             </section>
