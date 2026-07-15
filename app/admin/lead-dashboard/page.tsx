@@ -652,7 +652,7 @@ function TabControls({ activeTab, rangeDays }: { activeTab: DashboardTab; rangeD
           className={`rounded-3xl border p-5 shadow-sm transition ${
             activeTab === tab.id
               ? 'border-emerald-400 bg-emerald-400 text-slate-950 shadow-emerald-500/20'
-              : 'border-slate-200 bg-white text-slate-300 hover:border-slate-400 hover:text-white'
+              : 'border-slate-800 bg-slate-900/80 text-slate-300 hover:border-emerald-500/60 hover:text-white'
           }`}
         >
           <div className="text-lg font-black">{tab.label}</div>
