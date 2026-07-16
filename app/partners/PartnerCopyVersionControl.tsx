@@ -61,12 +61,12 @@ const copyVariants: Record<CopyVariant, Record<CopyKey, string>> = {
     reportHeading: 'Every Monday, know what happened locally and what to do next.',
     reportBody: 'The weekly Neighborhood Demand Report is the v1 owner view: opportunities found, actions taken, calls routed, reputation alerts, competitor mentions, and recommended next moves.',
     pricingHeading: 'Founding pricing — discounted while we calibrate your market.',
-    pricingBody: 'Founding partners help us tune the service by trade and territory. You get the high-touch Neighborhood Demand Engine for a $500/mo founding pilot for 90 days before the $750/mo standard rate.',
+    pricingBody: 'Founding partners help us tune the service by trade and territory. The first three monthly billing cycles are $500 before the ongoing $750/mo standard rate.',
     priceAnchorLabel: 'Premium service value',
     priceDropLabel: 'founding price drops to',
     includedHeading: 'One done-for-you local demand service.',
     applyHeading: 'Apply to protect your trade & territory.',
-    applyBody: 'Apply first — no payment today. We review your category, service area, and exclusivity before anything is charged.',
+    applyBody: 'Apply and complete secure $500 checkout. We review your category, service area, and exclusivity immediately, with a full refund if we cannot approve it.',
   },
   current: {
     heroTitle: renderHeroTitle(heroTitleCurrent),
@@ -84,7 +84,7 @@ const copyVariants: Record<CopyVariant, Record<CopyKey, string>> = {
     priceDropLabel: 'founding price drops to',
     includedHeading: 'Everything in one done-for-you service.',
     applyHeading: 'Claim your trade & territory.',
-    applyBody: "Apply first — there's no payment today. We review availability in your area and confirm before anything is charged.",
+    applyBody: 'Apply and complete secure $500 checkout. We review availability in your area and refund the payment in full if we cannot approve it.',
   },
 };
 

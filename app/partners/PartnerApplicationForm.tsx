@@ -66,7 +66,7 @@ export function PartnerApplicationForm() {
   const [captured, setCaptured] = useState('');
   const [justCompleted, setJustCompleted] = useState<number | null>(null);
   const [submitting, setSubmitting] = useState(false);
-  const [submitted, setSubmitted] = useState(false);
+  const [applicationId, setApplicationId] = useState('');
   const [error, setError] = useState('');
   const [reviewGlowScope, setReviewGlowScope] = useState<'all' | 0 | 1 | 2 | null>(null);
   const firstFieldRef = useRef<HTMLInputElement>(null);
@@ -102,6 +102,7 @@ export function PartnerApplicationForm() {
 
   const setField = <K extends keyof PartnerForm>(key: K, value: PartnerForm[K]) => {
     setError('');
+    setApplicationId('');
     setForm((current) => ({ ...current, [key]: value }));
   };
 
@@ -172,31 +173,39 @@ export function PartnerApplicationForm() {
     setError('');
 
     try {
-      const response = await fetch('/api/partners', {
+      let savedApplicationId = applicationId;
+      if (!savedApplicationId) {
+        const applicationResponse = await fetch('/api/partners', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(form),
+        });
+        const applicationResult = await applicationResponse.json() as { applicationId?: string; error?: string };
+        if (!applicationResponse.ok || !applicationResult.applicationId) {
+          throw new Error(applicationResult.error || 'Application could not be saved.');
+        }
+        savedApplicationId = applicationResult.applicationId;
+        setApplicationId(savedApplicationId);
+      }
+
+      const checkoutResponse = await fetch('/api/checkout/partner', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(form),
+        body: JSON.stringify({ applicationId: savedApplicationId }),
       });
-
-      if (!response.ok) throw new Error('Submission failed');
-      setSubmitted(true);
-    } catch {
-      setError('That did not send cleanly. Please try again or email hello@findalocalpro.com.');
+      const checkoutResult = await checkoutResponse.json() as { url?: string; error?: string };
+      if (!checkoutResponse.ok || !checkoutResult.url) {
+        throw new Error(checkoutResult.error || 'Secure checkout could not be opened.');
+      }
+      window.location.assign(checkoutResult.url);
+    } catch (submitError) {
+      setError(submitError instanceof Error
+        ? submitError.message
+        : 'That did not send cleanly. Please try again or email hello@findalocalpro.com.');
     } finally {
       setSubmitting(false);
     }
   };
-
-  if (submitted) {
-    return (
-      <section className="partner-form-shell partner-form-success" aria-live="polite">
-        <div className="partner-success-mark">✓</div>
-        <p className="form-eyebrow">Application received</p>
-        <h2>Thanks — we&apos;re checking availability in your territory now.</h2>
-        <p>You&apos;ll hear from us within one business day. No payment is due until you&apos;re approved.</p>
-      </section>
-    );
-  }
 
   if (step < steps.length - 1) {
     return (
@@ -275,7 +284,7 @@ export function PartnerApplicationForm() {
             {step > 0 && <button type="button" className="partner-intake-back" onClick={goBack} disabled={phase !== 'idle'}>← Back</button>}
             <button className="partner-intake-next" disabled={!canAdvance[step] || phase !== 'idle'}>Save & continue <span>→</span></button>
           </div>
-          <p className="partner-intake-footnote">No payment today. Your answers stay editable before you apply.</p>
+          <p className="partner-intake-footnote">Your answers stay editable. Payment happens only after the final review step.</p>
         </form>
       </section>
     );
@@ -325,9 +334,9 @@ export function PartnerApplicationForm() {
         </fieldset>
 
         <label className="consent-check"><input type="checkbox" checked={form.confirmed} onChange={(event) => setField('confirmed', event.target.checked)} required /><span>I confirm my business is licensed and insured where required for my trade and territory.</span></label>
-        {error && <p className="form-error">{error}</p>}
-        <button className={`form-submit partner-submit ${submitting ? 'is-submitting' : ''}`} disabled={submitting || !form.confirmed}>{submitting ? 'Sending...' : 'Apply for a Founding Partner Spot'}</button>
-        <p className="partner-form-note">No payment due today. By applying you agree to be contacted about availability in your territory.</p>
+        {error && <p className="form-error" role="alert">{error}</p>}
+        <button className={`form-submit partner-submit ${submitting ? 'is-submitting' : ''}`} disabled={submitting || !form.confirmed}>{submitting ? 'Opening secure checkout...' : 'Continue to secure checkout — $500'}</button>
+        <p className="partner-form-note">Stripe charges $500 today. If your trade or territory cannot be approved, we cancel the subscription and issue a full refund.</p>
       </form>
     </section>
   );

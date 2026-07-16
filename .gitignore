@@ -5,3 +5,4 @@ dist
 .env*.local
 webhook/.env
 .next
+*.tsbuildinfo

@@ -38,7 +38,7 @@ export function PartnersHero() {
               </Link>
             </div>
             <p className="text-sm font-bold text-slate-400 mt-4">
-              $500/mo founding pilot for 90 days. Then $750/mo standard. Apply first, pay after approval.
+              $500/mo for the first 3 billing cycles, then $750/mo. Full refund if your territory cannot be approved.
             </p>
           </div>
 

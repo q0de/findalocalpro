@@ -10,6 +10,16 @@ export type PricingBorderMode = 'classic' | 'balanced' | 'specular' | 'dark' | '
 export type PricingUnitMode = 'under' | 'side' | 'inline';
 export type ReportBackdropMode = 'map' | 'abstract';
 export type ScreenStartupMode = 'signal-line' | 'wipe-down' | 'fade';
+export type HowHotspotPreview = 0 | 1 | 2 | 3 | 4;
+export type HowFocusMode = 'off' | 'spotlight';
+export type HowHotspotPosition = {
+  x: number;
+  y: number;
+  size: number;
+  perspective: number;
+  tilt: number;
+  skew: number;
+};
 
 export type PartnerDesignReviewValue = {
   heroVisualMode: HeroVisualMode;
@@ -30,6 +40,14 @@ export type PartnerDesignReviewValue = {
   setScreenStartupMode: Dispatch<SetStateAction<ScreenStartupMode>>;
   reportReplayCycle: number;
   replayReport: () => void;
+  howHotspotPreview: HowHotspotPreview;
+  setHowHotspotPreview: Dispatch<SetStateAction<HowHotspotPreview>>;
+  howHotspotPositions: HowHotspotPosition[];
+  setHowHotspotPositions: Dispatch<SetStateAction<HowHotspotPosition[]>>;
+  saveHowHotspotPositions: () => void;
+  resetHowHotspotPositions: () => void;
+  howFocusMode: HowFocusMode;
+  setHowFocusMode: Dispatch<SetStateAction<HowFocusMode>>;
 };
 
 export const PartnerDesignReviewContext = createContext<PartnerDesignReviewValue | null>(null);
