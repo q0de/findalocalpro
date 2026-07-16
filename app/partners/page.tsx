@@ -1,16 +1,16 @@
 import type { Metadata } from 'next';
+import type { CSSProperties } from 'react';
 import Link from 'next/link';
 import { PartnerApplicationForm } from './PartnerApplicationForm';
-import { PartnerCopyVersionControl } from './PartnerCopyVersionControl';
+import { PartnerDesignReviewProvider } from './PartnerDesignReview';
 import { PartnerHeroTitle } from './PartnerHeroTitle';
 import { PartnerHeroVisual } from './PartnerHeroVisual';
-import { PartnerPricingBorderControl } from './PartnerPricingBorderControl';
 import { PartnerPriceCounter } from './PartnerPriceCounter';
-import { PartnerPricingUnitControl } from './PartnerPricingUnitControl';
-import { PartnerPricingWidthControl } from './PartnerPricingWidthControl';
+import { PartnerReportDisplay } from './PartnerReportDisplay';
 import { PartnerScrollAnimator } from './PartnerScrollAnimator';
-import { PartnerStatsBackgroundControl } from './PartnerStatsBackgroundControl';
 
+// Next.js route metadata intentionally lives beside the page component.
+// eslint-disable-next-line react-refresh/only-export-components
 export const metadata: Metadata = {
   title: 'Neighborhood Demand Engine | FindALocalPro Partners',
   description: 'A done-for-you local market watch service for contractors: opportunity monitoring, hot alerts, call tracking, reputation watch, and weekly reports.',
@@ -25,10 +25,34 @@ export const metadata: Metadata = {
 };
 
 const flow = [
-  ['01', 'Monitor local demand', 'We watch neighborhood conversations, search & call activity, and review signals for your trade and territory.'],
-  ['02', 'Alert you when timing matters', 'Hot alerts hit your phone the moment a real opportunity appears — before the thread fills with other names.'],
-  ['03', 'Route & track calls', 'Dedicated call tracking captures and records inbound demand where applicable, so nothing slips.'],
-  ['04', 'Send the weekly report', 'Every week: opportunities found, actions taken, calls routed, reputation alerts, and recommended next moves.'],
+  {
+    number: '01',
+    icon: 'radar',
+    kicker: 'Always watching',
+    title: 'Monitor local demand',
+    body: 'We watch neighborhood conversations, search and call activity, and review signals for your trade and territory.',
+  },
+  {
+    number: '02',
+    icon: 'notifications_active',
+    kicker: 'Right-time alerts',
+    title: 'Alert you when timing matters',
+    body: 'A hot opportunity reaches you while it is still actionable — before the thread fills with other names.',
+  },
+  {
+    number: '03',
+    icon: 'phone_in_talk',
+    kicker: 'Demand captured',
+    title: 'Route & track calls',
+    body: 'Dedicated call tracking captures and records inbound demand where applicable, so nothing slips.',
+  },
+  {
+    number: '04',
+    icon: 'description',
+    kicker: 'Every Monday',
+    title: 'Send the weekly report',
+    body: 'See what surfaced, what we acted on, which calls came in, and the next moves worth making.',
+  },
 ];
 
 const included = [
@@ -44,30 +68,41 @@ const included = [
 ];
 
 const stats = [
-  ['14', 'Opportunities found', 'Neighborhood posts & search signals'],
-  ['9', 'Calls / leads routed', 'Tracked & recorded where applicable'],
-  ['3', 'Reviews flagged', 'With response drafts ready'],
-  ['5', 'Competitor mentions', 'Where rivals were recommended'],
-];
-
-const localOpportunities = [
   {
-    temperature: 'Hot',
-    area: 'Travis Heights',
-    detail: 'Water heater leaking, wants same-day. 6 replies, no provider booked.',
-    source: 'Nextdoor',
+    value: '14',
+    label: 'Opportunities found',
+    detail: 'Neighborhood posts & search signals',
+    icon: 'priority_high',
+    trend: '+18%',
+    trendValue: 18,
+    sparkline: '2,31 14,22 25,26 38,11 51,20 66,5 82,14 95,4 112,4',
   },
   {
-    temperature: 'Warm',
-    area: 'Bouldin Creek',
-    detail: 'Repeated "low water pressure" search activity in cluster.',
-    source: 'Search signal',
+    value: '9',
+    label: 'Calls / leads routed',
+    detail: 'Tracked & recorded where applicable',
+    icon: 'call',
+    trend: '+12%',
+    trendValue: 12,
+    sparkline: '2,32 16,25 28,29 42,15 56,18 70,7 84,14 98,4 112,4',
   },
   {
-    temperature: 'Warm',
-    area: 'Zilker',
-    detail: 'Homeowner asking for repipe recommendations after slab leak.',
-    source: 'Nextdoor',
+    value: '3',
+    label: 'Reviews flagged',
+    detail: 'With response drafts ready',
+    icon: 'star',
+    trend: '+7%',
+    trendValue: 7,
+    sparkline: '2,30 15,24 27,27 39,16 52,21 65,9 79,13 93,5 112,5',
+  },
+  {
+    value: '5',
+    label: 'Competitor mentions',
+    detail: 'Where rivals were recommended',
+    icon: 'alternate_email',
+    trend: '+9%',
+    trendValue: 9,
+    sparkline: '2,31 14,26 26,28 40,17 53,22 67,10 81,15 96,5 112,5',
   },
 ];
 
@@ -84,7 +119,7 @@ const faqs = [
   ['Do you guarantee booked jobs?', 'No, and we will never promise that. We surface local opportunities, demand signals, and reputation alerts, and we route and track calls where applicable. What you do with that timing and information is what turns it into booked work.'],
   ['Is my territory exclusive?', 'Where approved, yes. We limit enrollment by trade and territory and protect approved partners from having a direct competitor signed up in the same area. Availability depends on your specific category and ZIPs, which is why we review before confirming.'],
   ['Can the messaging sound like my company?', 'Yes. During onboarding we learn your tone, service standards, offers, and do-not-say rules, then prepare response drafts, review requests, and follow-up wording that fit your company. You approve or edit before anything is sent.'],
-  ['Do you post on social platforms as my business?', 'No. We monitor public local conversations and signals and tell you where the opportunities are. We never post or message as your business — you stay in control of how and when you respond.'],
+  ['Do you post on social platforms as my business?', 'We can support both approaches. With your approval and within agreed guidelines, we can help publish or respond through your business profiles. FindALocalPro can also participate as its own entity to surface and recommend your business in relevant local conversations. You stay in control of the messaging, platforms, and level of involvement.'],
   ['What happens after I apply?', 'We review availability and fit for your trade and territory, usually within one business day. If your area is open and it is a good match, we confirm your founding spot and onboard you. No payment is charged until you are approved.'],
   ['Why is the founding price lower?', 'Founding partners help us calibrate the service in their local market, so we start with a $500/mo founding pilot for 90 days before the $750/mo standard rate. It is a genuine trial of a high-touch service, not a discount gimmick.'],
 ];
@@ -97,7 +132,8 @@ export default async function PartnersPage({ searchParams }: PartnersPageProps) 
   const checkoutStatus = (await searchParams)?.checkout;
 
   return (
-    <div className="partner-page partner-standalone">
+    <PartnerDesignReviewProvider>
+      <div className="partner-page partner-standalone">
       <PartnerScrollAnimator />
       <header className="partner-site-nav">
         <Link href="/" className="partner-brand" aria-label="FindALocalPro home">
@@ -130,53 +166,73 @@ export default async function PartnersPage({ searchParams }: PartnersPageProps) 
       )}
 
       <main>
-        <section className="partner-standalone-hero">
-          <span className="partner-neighborhood-bg" aria-hidden="true" />
-          <PartnerCopyVersionControl />
-          <PartnerPricingWidthControl />
-          <PartnerHeroVisual />
-          <div className="partner-shell partner-hero-grid">
-            <div className="partner-hero-panel">
-              <p className="partner-kicker">
-                <span className="partner-live-dot"><i /></span>
-                Founding Partner enrollment — limited by trade & territory
-              </p>
-              <PartnerHeroTitle />
-              <p className="partner-hero-lede" data-copy-key="heroLede">
-                We monitor local conversations, review signals, and tracked calls for your trade and territory — then send you the opportunities, alerts, and weekly reports that help turn local demand into booked work.
-              </p>
-              <div className="partner-hero-actions">
-                <a href="#apply" className="partner-primary-button"><span data-copy-key="primaryCta">Apply for a Founding Partner Spot</span> <span>→</span></a>
-                <a href="#report" className="partner-secondary-button" data-copy-key="secondaryCta">See the Weekly Report</a>
-              </div>
-              <div className="partner-trust-row">
-                <span>✓ Apply first, pay after approval</span>
-                <span>✓ Territory & category exclusivity where approved</span>
+        <div className="partner-intro-stage">
+          <section className="partner-standalone-hero">
+            <span className="partner-neighborhood-bg" aria-hidden="true" />
+            <PartnerHeroVisual />
+            <div className="partner-shell partner-hero-grid">
+              <div className="partner-hero-panel">
+                <p className="partner-kicker">
+                  <span className="partner-live-dot"><i /></span>
+                  Founding Partner enrollment — limited by trade & territory
+                </p>
+                <PartnerHeroTitle />
+                <p className="partner-hero-lede" data-copy-key="heroLede">
+                  We monitor local conversations, review signals, and tracked calls for your trade and territory — then send you the opportunities, alerts, and weekly reports that help turn local demand into booked work.
+                </p>
+                <div className="partner-hero-actions">
+                  <a href="#apply" className="partner-primary-button"><span data-copy-key="primaryCta">Apply for a Founding Partner Spot</span> <span>→</span></a>
+                  <a href="#report" className="partner-secondary-button" data-copy-key="secondaryCta">See the Weekly Report</a>
+                </div>
+                <div className="partner-trust-row">
+                  <span>✓ Apply first, pay after approval</span>
+                  <span>✓ Territory & category exclusivity where approved</span>
+                </div>
               </div>
             </div>
-          </div>
-        </section>
+          </section>
 
-        <section className="partner-stats-section" aria-label="Recent territory example">
-          <div className="partner-shell">
-            <div className="partner-stats-heading">
-              <span>A recent week in one territory</span>
-              <div className="partner-stats-heading-tools">
+          <section className="partner-stats-section" aria-label="Recent territory example">
+            <div className="partner-shell">
+              <div className="partner-stats-heading">
+                <div className="partner-stats-heading-title">
+                  <span className="partner-stats-heading-icon material-symbols-outlined" aria-hidden="true">monitoring</span>
+                  <span>A recent week in one territory</span>
+                </div>
                 <small data-copy-key="recentWeekHelper">Illustrative example · signals found, not guaranteed jobs</small>
-                <PartnerStatsBackgroundControl placement="inline" />
+              </div>
+              <div className="partner-stats-grid">
+                {stats.map((stat) => (
+                  <article className="partner-stat-card" key={stat.label}>
+                    <span className="partner-stat-icon" data-stat-icon={stat.icon} aria-hidden="true">
+                      <span className="partner-stat-icon-glyph material-symbols-outlined">{stat.icon}</span>
+                    </span>
+                    <div className="partner-stat-copy">
+                      <b className="partner-stat-value">{stat.value}</b>
+                      <span className="partner-stat-label">{stat.label}</span>
+                      <small className="partner-stat-detail">{stat.detail}</small>
+                    </div>
+                    <div className="partner-stat-trend" aria-label={`${stat.trend} illustrative weekly trend`}>
+                      <svg viewBox="0 0 114 36" aria-hidden="true" focusable="false">
+                        <polyline points={stat.sparkline} pathLength="1" />
+                      </svg>
+                      <span
+                        className="partner-stat-trend-value"
+                        aria-hidden="true"
+                        style={{
+                          '--partner-trend-target': stat.trendValue,
+                          '--partner-trend-number': stat.trendValue,
+                        } as CSSProperties}
+                      >
+                        {stat.trend}
+                      </span>
+                    </div>
+                  </article>
+                ))}
               </div>
             </div>
-            <div className="partner-stats-grid">
-              {stats.map(([value, label, detail]) => (
-                <article key={label}>
-                  <b>{value}</b>
-                  <span>{label}</span>
-                  <small>{detail}</small>
-                </article>
-              ))}
-            </div>
-          </div>
-        </section>
+          </section>
+        </div>
 
         <section className="partner-section partner-economics-section" aria-labelledby="partner-economics-heading">
           <div className="partner-shell">
@@ -205,21 +261,39 @@ export default async function PartnersPage({ searchParams }: PartnersPageProps) 
           </div>
         </section>
 
-        <section id="how" className="partner-section">
+        <section id="how" className="partner-section partner-how-section">
           <div className="partner-shell">
             <div className="partner-section-heading">
               <span>How it works</span>
               <h2 data-copy-key="howHeading">A local market watch that runs while you're on the job.</h2>
               <p data-copy-key="howBody">No dashboard to babysit. We do the watching and bring you what's worth your time.</p>
             </div>
-            <div className="partner-flow-grid">
-              {flow.map(([number, title, body]) => (
-                <article key={title}>
-                  <span>{number}</span>
-                  <h3>{title}</h3>
-                  <p>{body}</p>
-                </article>
-              ))}
+            <div className="partner-how-stage">
+              <div className="partner-how-illustration" aria-hidden="true" />
+              <div className="partner-how-hotspots" aria-hidden="true">
+                <span /><span /><span /><span />
+              </div>
+              <div className="partner-flow-grid">
+                {flow.map(({ number, icon, kicker, title, body }, index) => (
+                  <article
+                    key={title}
+                    tabIndex={0}
+                    style={{ '--partner-flow-index': index } as CSSProperties}
+                  >
+                    <div className="partner-flow-card-top">
+                      <span>{number}</span>
+                      <i className="material-symbols-outlined" aria-hidden="true">{icon}</i>
+                    </div>
+                    <small>{kicker}</small>
+                    <h3>{title}</h3>
+                    <p>{body}</p>
+                  </article>
+                ))}
+              </div>
+              <p className="partner-how-stage-note">
+                <span className="material-symbols-outlined" aria-hidden="true">bolt</span>
+                One connected loop — from signal found to action taken.
+              </p>
             </div>
           </div>
         </section>
@@ -238,86 +312,7 @@ export default async function PartnersPage({ searchParams }: PartnersPageProps) 
                 ))}
               </div>
             </div>
-            <div className="partner-report-document">
-              <header>
-                <div>
-                  <span>Neighborhood Demand Report</span>
-                  <b>Rivertown Plumbing & Drain</b>
-                </div>
-                <p>Week of Jun 22-28<br />Territory · 78704 + 4 ZIPs</p>
-              </header>
-
-              <div className="partner-report-body">
-                <section>
-                  <span>Executive snapshot</span>
-                  <p>Demand was up week-over-week, driven by heat-wave plumbing and water-heater chatter. Nine inbound calls were tracked and one reputation issue needs your sign-off.</p>
-                  <div className="partner-report-metrics">
-                    {[
-                      ['14', 'Opportunities'],
-                      ['9', 'Calls routed'],
-                      ['3', 'Reviews flagged'],
-                      ['5', 'Competitor refs'],
-                    ].map(([value, label]) => (
-                      <article key={label}><b>{value}</b><small>{label}</small></article>
-                    ))}
-                  </div>
-                </section>
-
-                <section>
-                  <span>New local opportunities</span>
-                  <div className="partner-opportunity-list">
-                    {localOpportunities.map((opportunity) => (
-                      <article key={`${opportunity.area}-${opportunity.source}`} className="partner-opportunity-row">
-                        <em className={opportunity.temperature === 'Hot' ? 'is-hot' : undefined}>{opportunity.temperature}</em>
-                        <strong>{opportunity.area}</strong>
-                        <p>{opportunity.detail}</p>
-                        <small>{opportunity.source}</small>
-                      </article>
-                    ))}
-                  </div>
-                </section>
-
-                <section>
-                  <span>Actions taken</span>
-                  <div className="partner-check-list">
-                    <p><b>✓</b> Sent 6 hot alerts; you responded to 4 within the hour.</p>
-                    <p><b>✓</b> Drafted 2 review responses for your approval.</p>
-                    <p><b>✓</b> Prepared 3 review-request messages in your company voice.</p>
-                  </div>
-                </section>
-
-                <section>
-                  <span>Calls & lead outcomes</span>
-                  <div className="partner-call-table">
-                    <div><b>Tracked call</b><b>Length</b><b>Status</b></div>
-                    <div><span>Bouldin Creek — "no hot water"</span><span>4:12</span><strong>Qualified</strong></div>
-                    <div><span>South Lamar — quote request</span><span>2:48</span><strong>Booked</strong></div>
-                    <div><span>Missed — voicemail left</span><span>0:38</span><strong className="is-warn">Follow up</strong></div>
-                  </div>
-                </section>
-
-                <section>
-                  <span className="is-alert">Reputation alerts</span>
-                  <div className="partner-reputation-alert">
-                    <strong>New 3★ Google review</strong> mentioning a scheduling mix-up. A calm, professional response draft is ready — approve or edit in one tap.
-                  </div>
-                </section>
-
-                <section>
-                  <span>Competitor watch</span>
-                  <p>A nearby competitor was recommended in 5 threads this week, mostly for emergency response speed. Two of those threads are still open — see recommended moves.</p>
-                </section>
-
-                <section>
-                  <span>Recommended next moves</span>
-                  <div className="partner-check-list">
-                    <p><b>→</b> Reply to the 2 open Zilker repipe threads while they're warm.</p>
-                    <p><b>→</b> Approve the 3★ response draft to protect your rating.</p>
-                    <p><b>→</b> Consider a same-day emergency line — competitors are winning on speed.</p>
-                  </div>
-                </section>
-              </div>
-            </div>
+            <PartnerReportDisplay />
           </div>
         </section>
 
@@ -337,8 +332,6 @@ export default async function PartnersPage({ searchParams }: PartnersPageProps) 
               </ul>
             </div>
             <div className="partner-pricing-card-column">
-              <PartnerPricingBorderControl />
-              <PartnerPricingUnitControl />
               <aside className="partner-pricing-box is-price-intro">
                 <svg className="partner-pricing-rim" viewBox="0 0 1000 1300" preserveAspectRatio="none" aria-hidden="true" focusable="false">
                   <defs>
@@ -479,6 +472,7 @@ export default async function PartnersPage({ searchParams }: PartnersPageProps) 
           <p>A local market-watch service. We surface opportunities, signals, and reputation alerts — we do not guarantee booked jobs or revenue. partners.findalocalpro.com</p>
         </div>
       </footer>
-    </div>
+      </div>
+    </PartnerDesignReviewProvider>
   );
 }

@@ -23,7 +23,7 @@ export function PartnerPriceCounter() {
   const animationRef = useRef<number | null>(null);
   const countdownTimerRef = useRef<number | null>(null);
   const settleTimerRef = useRef<number | null>(null);
-  const hasPlayedRef = useRef(false);
+  const isPricingInViewRef = useRef(false);
 
   const stopAnimation = useCallback(() => {
     if (animationRef.current !== null) {
@@ -85,6 +85,17 @@ export function PartnerPriceCounter() {
     }, COUNTDOWN_DELAY_MS);
   }, [stopAnimation]);
 
+  const reset = useCallback(() => {
+    stopAnimation();
+    const pricingBox = buttonRef.current?.closest('.partner-pricing-box');
+    pricingBox?.classList.add('is-price-intro');
+    pricingBox?.classList.remove('is-price-counting', 'is-price-settled');
+    setIsIntroducing(false);
+    setIsCounting(false);
+    setIsPopping(false);
+    setPrice(START_PRICE);
+  }, [stopAnimation]);
+
   useEffect(() => {
     const button = buttonRef.current;
     const pricingBox = button?.closest('.partner-pricing-box');
@@ -94,13 +105,20 @@ export function PartnerPriceCounter() {
     const observer = new IntersectionObserver(
       (entries) => {
         const entry = entries[0];
-        if (entry?.isIntersecting && !hasPlayedRef.current) {
-          hasPlayedRef.current = true;
+        if (!entry) return;
+
+        if (entry.intersectionRatio >= 0.32 && !isPricingInViewRef.current) {
+          isPricingInViewRef.current = true;
           play();
-          observer.disconnect();
+          return;
+        }
+
+        if (entry.intersectionRatio <= 0.08 && isPricingInViewRef.current) {
+          isPricingInViewRef.current = false;
+          reset();
         }
       },
-      { rootMargin: '0px 0px -14% 0px', threshold: 0.28 },
+      { rootMargin: '0px 0px -14% 0px', threshold: [0.08, 0.32] },
     );
 
     observer.observe(pricingBox);
@@ -110,7 +128,7 @@ export function PartnerPriceCounter() {
       pricingBox.classList.remove('is-price-counting', 'is-price-settled');
       stopAnimation();
     };
-  }, [play, stopAnimation]);
+  }, [play, reset, stopAnimation]);
 
   const countdownProgress = (START_PRICE - price) / (START_PRICE - END_PRICE);
   const countdownScaleX = 1 + (1 - countdownProgress) * 0.3;
