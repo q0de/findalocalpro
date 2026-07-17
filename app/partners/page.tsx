@@ -1,320 +1,492 @@
 import type { Metadata } from 'next';
+import type { CSSProperties } from 'react';
 import Link from 'next/link';
-import { Header } from '@/components/Header';
-import { Footer } from '@/components/Footer';
+import { PartnerApplicationForm } from './PartnerApplicationForm';
+import { PartnerDesignReviewProvider } from './PartnerDesignReview';
+import { PartnerHeroTitle } from './PartnerHeroTitle';
+import { PartnerHeroVisual } from './PartnerHeroVisual';
+import { PartnerPriceCounter } from './PartnerPriceCounter';
+import { PartnerReportDisplay } from './PartnerReportDisplay';
+import { PartnerScrollAnimator } from './PartnerScrollAnimator';
+import { getStripe } from '@/lib/stripe';
 
+// Next.js route metadata intentionally lives beside the page component.
+// eslint-disable-next-line react-refresh/only-export-components
 export const metadata: Metadata = {
-  title: 'Local Partner Program | FindALocalPro',
-  description: 'Exclusive local sponsor slots for plumbers, HVAC companies, electricians, and other trusted home-service providers.',
-  alternates: { canonical: 'https://partners.findalocalpro.com' },
+  title: 'Neighborhood Demand Engine | FindALocalPro Partners',
+  description: 'A done-for-you local market watch service for contractors: opportunity monitoring, hot alerts, call tracking, reputation watch, and weekly reports.',
+  alternates: { canonical: 'https://findalocalpro.com/partners' },
   openGraph: {
-    title: 'FindALocalPro Local Partner Program',
-    description: 'Get recommended when local homeowners ask for your service. One provider per trade per area.',
-    url: 'https://partners.findalocalpro.com',
+    title: 'Neighborhood Demand Engine by FindALocalPro',
+    description: 'Catch local homeowner demand before your competitors do with monitoring, alerts, call tracking, and weekly reports.',
     type: 'website',
+    url: 'https://findalocalpro.com/partners',
+    images: [{ url: 'https://findalocalpro.com/og-image.png', width: 1200, height: 630 }],
   },
 };
 
-const verticals = [
-  { name: 'Plumbing', demand: '547 tracked asks', note: 'Leaks, drains, water heaters, sump pumps' },
-  { name: 'HVAC', demand: '187 tracked asks', note: 'AC, heating, furnaces, emergency cooling' },
-  { name: 'Electrical', demand: '253 tracked asks', note: 'Panels, outlets, fixtures, troubleshooting' },
+const flow = [
+  {
+    number: '01',
+    icon: 'radar',
+    kicker: 'Always watching',
+    title: 'Monitor local demand',
+    body: 'We watch neighborhood conversations, search and call activity, and review signals for your trade and territory.',
+  },
+  {
+    number: '02',
+    icon: 'notifications_active',
+    kicker: 'Right-time alerts',
+    title: 'Alert you when timing matters',
+    body: 'A hot opportunity reaches you while it is still actionable — before the thread fills with other names.',
+  },
+  {
+    number: '03',
+    icon: 'phone_in_talk',
+    kicker: 'Demand captured',
+    title: 'Route & track calls',
+    body: 'Dedicated call tracking captures and records inbound demand where applicable, so nothing slips.',
+  },
+  {
+    number: '04',
+    icon: 'description',
+    kicker: 'Every Monday',
+    title: 'Send the weekly report',
+    body: 'See what surfaced, what we acted on, which calls came in, and the next moves worth making.',
+  },
 ];
 
-const futureVerticals = ['Pest control', 'Appliance repair', 'Handyman', 'Roofing / gutters', 'Lawn / landscaping / trees', 'Concrete / masonry'];
+const included = [
+  ['Local opportunity monitoring', 'Starting with Nextdoor & local neighborhood conversations for your trade and area.'],
+  ['Hot lead alerts', 'Real-time notifications the moment a timely opportunity appears in your territory.'],
+  ['Featured FindALocalPro placement', 'Priority visibility for your business across the FindALocalPro network.'],
+  ['Dedicated call tracking', 'Tracked, recorded inbound calls where applicable, so no demand goes unmeasured.'],
+  ['Weekly Neighborhood Demand Report', 'Your seven-section briefing on opportunities, actions, calls, and next moves.'],
+  ['Google review monitoring', 'We flag new reviews and prepare professional response drafts for your approval.'],
+  ['Competitor mention watch', 'Know when and where rivals get recommended in your local channels.'],
+  ['Company-fit messaging', 'Reply drafts, review requests, and follow-up wording matched to your brand voice and service style.'],
+  ['Territory & category exclusivity', "Where approved, we won't enroll a direct competitor in your protected area."],
+];
 
-const howItWorks = [
+const stats = [
   {
-    title: 'We monitor local demand',
-    body: 'FindALocalPro tracks homeowner service requests across local neighborhood channels and service-intent conversations.',
-    icon: 'radar',
+    value: '14',
+    label: 'Opportunities found',
+    detail: 'Neighborhood posts & search signals',
+    icon: 'priority_high',
+    trend: '+18%',
+    trendValue: 18,
+    sparkline: '2,31 14,22 25,26 38,11 51,20 66,5 82,14 95,4 112,4',
   },
   {
-    title: 'One verified provider gets the slot',
-    body: 'Each trade and area is exclusive. We do not sell the same local category slot to five competitors.',
-    icon: 'verified',
-  },
-  {
-    title: 'You get calls and proof',
-    body: 'Partners receive tracked calls plus a monthly proof report showing relevant opportunities and market demand.',
+    value: '9',
+    label: 'Calls / leads routed',
+    detail: 'Tracked & recorded where applicable',
     icon: 'call',
+    trend: '+12%',
+    trendValue: 12,
+    sparkline: '2,32 16,25 28,29 42,15 56,18 70,7 84,14 98,4 112,4',
   },
+  {
+    value: '3',
+    label: 'Reviews flagged',
+    detail: 'With response drafts ready',
+    icon: 'star',
+    trend: '+7%',
+    trendValue: 7,
+    sparkline: '2,30 15,24 27,27 39,16 52,21 65,9 79,13 93,5 112,5',
+  },
+  {
+    value: '5',
+    label: 'Competitor mentions',
+    detail: 'Where rivals were recommended',
+    icon: 'alternate_email',
+    trend: '+9%',
+    trendValue: 9,
+    sparkline: '2,31 14,26 26,28 40,17 53,22 67,10 81,15 96,5 112,5',
+  },
+];
+
+const economics = [
+  ['/partners/economics/booked-jobs.webp', '1-3 jobs', 'Can cover the month', 'For many urgent-service trades, a few booked calls can offset the founding price.'],
+  ['/partners/economics/protected-lane.webp', '1 partner', 'Protected by trade', 'Where approved, your local category is not sold to a direct competitor.'],
+  ['/partners/economics/flat-fee.webp', 'No auction', 'Flat monthly fee', 'No shared-lead bidding. You get monitoring, alerts, and reporting.'],
+  ['/partners/economics/fast-signals.webp', 'Fast signals', 'Timing wins work', 'Hot threads, missed calls, bad reviews, and competitor mentions are worth catching early.'],
 ];
 
 const faqs = [
-  {
-    q: 'Is this pay-per-lead?',
-    a: 'No. This is a local sponsorship slot with monitored demand, recommendation routing, call tracking, and monthly proof reporting. We may use fallback lead partners where no direct sponsor exists.',
-  },
-  {
-    q: 'Can any contractor buy a slot instantly?',
-    a: 'No. Applications are reviewed first. The program depends on trust, territory fit, and a credible local reputation.',
-  },
-  {
-    q: 'What does exclusive mean?',
-    a: 'One provider per trade per approved local territory. Example: one Warrington plumber, one Doylestown HVAC provider, one Naperville electrician.',
-  },
-  {
-    q: 'What happens after I apply?',
-    a: 'We review your business, service area, reviews, and slot availability. If it fits, we confirm territory, set up call tracking, and send payment/onboarding details.',
-  },
+  ['Is this pay-per-lead?', 'No. This is a flat monthly market-watch service, not a per-lead marketplace. You are not bidding against other contractors or paying for each contact — you get monitoring, alerts, call tracking, and a weekly report for one predictable price.'],
+  ['Can this pay for itself?', 'For many home-service trades, yes, it can. A small number of booked jobs can cover the founding price, especially in higher-value categories like plumbing, HVAC, electrical, appliance repair, and similar urgent services. We still do not guarantee booked jobs or revenue.'],
+  ['Do you guarantee booked jobs?', 'No, and we will never promise that. We surface local opportunities, demand signals, and reputation alerts, and we route and track calls where applicable. What you do with that timing and information is what turns it into booked work.'],
+  ['Is my territory exclusive?', 'Where approved, yes. We limit enrollment by trade and territory and protect approved partners from having a direct competitor signed up in the same area. Availability depends on your specific category and ZIPs, which is why we review before confirming.'],
+  ['Can the messaging sound like my company?', 'Yes. During onboarding we learn your tone, service standards, offers, and do-not-say rules, then prepare response drafts, review requests, and follow-up wording that fit your company. You approve or edit before anything is sent.'],
+  ['Do you post on social platforms as my business?', 'We can support both approaches. With your approval and within agreed guidelines, we can help publish or respond through your business profiles. FindALocalPro can also participate as its own entity to surface and recommend your business in relevant local conversations. You stay in control of the messaging, platforms, and level of involvement.'],
+  ['What happens after I apply?', 'We review availability and fit for your trade and territory before any payment. If approved, we email you a private Stripe checkout link for the $500 founding rate. Declined applications are closed without a charge.'],
+  ['Why is the founding price lower?', 'Founding partners help us calibrate the service in their local market, so the first three monthly billing cycles are $500 before the ongoing $750/mo standard rate. It is a genuine launch rate for a high-touch service, not a discount gimmick.'],
 ];
 
-const fieldClass = 'w-full rounded-2xl border border-slate-200 bg-white px-4 py-3 text-slate-900 outline-none transition focus:border-brand-purple focus:ring-4 focus:ring-brand-purple/10';
-const labelClass = 'text-sm font-black text-slate-700';
+type PartnersPageProps = {
+  searchParams?: Promise<{ checkout?: string; session_id?: string }>;
+};
 
-export default async function PartnersPage({ searchParams }: { searchParams?: Promise<{ applied?: string }> }) {
-  const params = searchParams ? await searchParams : {};
-  const applied = params?.applied === '1';
+export default async function PartnersPage({ searchParams }: PartnersPageProps) {
+  const params = await searchParams;
+  const checkoutStatus = params?.checkout;
+  let checkoutConfirmed = false;
+  if (checkoutStatus === 'success' && params?.session_id && process.env.STRIPE_SECRET_KEY) {
+    try {
+      const session = await getStripe().checkout.sessions.retrieve(params.session_id);
+      checkoutConfirmed = session.payment_status === 'paid' && session.metadata?.applicationId != null;
+    } catch (error) {
+      console.error('Could not verify partner checkout redirect:', error);
+    }
+  }
 
   return (
-    <div className="min-h-screen flex flex-col bg-slate-50">
-      <Header step={0} totalSteps={0} />
+    <PartnerDesignReviewProvider>
+      <div className="partner-page partner-standalone">
+      <PartnerScrollAnimator />
+      <header className="partner-site-nav">
+        <Link href="/" className="partner-brand" aria-label="FindALocalPro home">
+          <span>F</span>
+          <span className="partner-brand-copy">
+            <b>FindA<em>Local</em>Pro</b>
+            <small>Neighborhood Demand Engine</small>
+          </span>
+        </Link>
+        <nav aria-label="Partner page navigation">
+          <a href="#how">How it works</a>
+          <a href="#report">Weekly report</a>
+          <a href="#pricing">Pricing</a>
+          <a href="#apply">Apply</a>
+        </nav>
+      </header>
 
-      <main className="flex-1">
-        <section className="relative overflow-hidden bg-gradient-to-br from-brand-purple/10 via-white to-brand-teal/10 py-20 md:py-28">
-          <div className="absolute -top-24 -right-24 h-72 w-72 rounded-full bg-brand-pink/20 blur-3xl" />
-          <div className="absolute -bottom-28 -left-24 h-80 w-80 rounded-full bg-brand-purple/20 blur-3xl" />
-          <div className="relative mx-auto max-w-6xl px-6">
-            <div className="grid gap-12 lg:grid-cols-[1.05fr_0.95fr] lg:items-center">
-              <div>
-                <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-brand-purple/20 bg-white/80 px-4 py-2 text-sm font-black text-brand-purple shadow-sm">
-                  <span className="material-symbols-outlined text-base text-brand-teal">workspace_premium</span>
-                  Founding partner slots now open
-                </div>
-                <h1 className="max-w-3xl text-5xl font-black leading-[0.95] tracking-tight text-slate-900 md:text-7xl">
-                  Get recommended when local homeowners ask for your service.
-                </h1>
-                <p className="mt-6 max-w-2xl text-xl leading-8 text-slate-600">
-                  Exclusive local sponsor slots for plumbers, HVAC companies, and electricians. One verified provider per trade per area.
+      {checkoutStatus === 'success' && (
+        <div className="partner-checkout-banner is-success" role="status">
+          <span className="material-symbols-outlined">verified</span>
+          {checkoutConfirmed
+            ? 'Payment received — your approved founding partner spot is active. We will follow up with onboarding details.'
+            : 'Checkout returned successfully. We are securely confirming payment for your approved application.'}
+        </div>
+      )}
+
+      {checkoutStatus === 'cancelled' && (
+        <div className="partner-checkout-banner" role="status">
+          <span className="material-symbols-outlined">info</span>
+          Checkout was cancelled and no payment was taken. Use the private link in your approval email when you are ready.
+        </div>
+      )}
+
+      <main>
+        <div className="partner-intro-stage">
+          <section className="partner-standalone-hero">
+            <span className="partner-neighborhood-bg" aria-hidden="true" />
+            <PartnerHeroVisual />
+            <div className="partner-shell partner-hero-grid">
+              <div className="partner-hero-panel">
+                <p className="partner-kicker">
+                  <span className="partner-live-dot"><i /></span>
+                  Founding Partner enrollment — limited by trade & territory
                 </p>
-                <div className="mt-8 flex flex-col gap-3 sm:flex-row">
-                  <a href="#apply" className="inline-flex items-center justify-center gap-2 rounded-2xl bg-brand-purple px-7 py-4 text-lg font-black text-white shadow-xl transition hover:-translate-y-0.5 hover:shadow-2xl">
-                    Apply for your local slot
-                    <span className="material-symbols-outlined">arrow_forward</span>
-                  </a>
-                  <a href="#pricing" className="inline-flex items-center justify-center gap-2 rounded-2xl border-2 border-slate-200 bg-white px-7 py-4 text-lg font-black text-slate-800 shadow-sm transition hover:border-brand-purple/40">
-                    See pricing
-                  </a>
+                <PartnerHeroTitle />
+                <p className="partner-hero-lede" data-copy-key="heroLede">
+                  We monitor local conversations, review signals, and tracked calls for your trade and territory — then send you the opportunities, alerts, and weekly reports that help turn local demand into booked work.
+                </p>
+                <div className="partner-hero-actions">
+                  <a href="#apply" className="partner-primary-button"><span data-copy-key="primaryCta">Apply for a Founding Partner Spot</span> <span>→</span></a>
+                  <a href="#report" className="partner-secondary-button" data-copy-key="secondaryCta">See the Weekly Report</a>
                 </div>
-                <p className="mt-4 text-sm font-bold text-slate-500">$99 setup. $99/month founding rate for 6 months. Cancel anytime.</p>
-              </div>
-
-              <div className="rounded-[2rem] border border-white/70 bg-white/85 p-6 shadow-2xl backdrop-blur">
-                <div className="rounded-3xl bg-slate-900 p-6 text-white">
-                  <p className="text-sm font-black uppercase tracking-widest text-brand-teal">Monthly proof report preview</p>
-                  <div className="mt-6 grid grid-cols-2 gap-4">
-                    {[
-                      ['Requests monitored', '2325'],
-                      ['Relevant calls tracked', '72'],
-                      ['Top direct category', 'Plumbing'],
-                      ['Slot model', 'Exclusive'],
-                    ].map(([label, value]) => (
-                      <div key={label} className="rounded-2xl bg-white/10 p-4">
-                        <p className="text-2xl font-black">{value}</p>
-                        <p className="mt-1 text-sm text-white/65">{label}</p>
-                      </div>
-                    ))}
-                  </div>
-                  <div className="mt-5 rounded-2xl bg-white p-4 text-slate-900">
-                    <p className="font-black">Example territory</p>
-                    <p className="mt-1 text-sm text-slate-600">Warrington Plumbing, Doylestown HVAC, Naperville Electrical</p>
-                  </div>
+                <div className="partner-trust-row">
+                  <span>✓ No payment until your territory is approved</span>
+                  <span>✓ Territory & category exclusivity where approved</span>
                 </div>
               </div>
             </div>
-          </div>
-        </section>
+          </section>
 
-        <section className="bg-white py-16">
-          <div className="mx-auto max-w-6xl px-6">
-            <div className="grid gap-6 md:grid-cols-3">
-              {howItWorks.map((item) => (
-                <div key={item.title} className="rounded-3xl border border-slate-200 bg-white p-7 shadow-sm">
-                  <span className="material-symbols-outlined rounded-2xl bg-brand-purple/10 p-3 text-3xl text-brand-purple">{item.icon}</span>
-                  <h2 className="mt-5 text-2xl font-black text-slate-900">{item.title}</h2>
-                  <p className="mt-3 leading-7 text-slate-600">{item.body}</p>
+          <section className="partner-stats-section" aria-label="Recent territory example">
+            <div className="partner-shell">
+              <div className="partner-stats-heading">
+                <div className="partner-stats-heading-title">
+                  <span className="partner-stats-heading-icon material-symbols-outlined" aria-hidden="true">monitoring</span>
+                  <span>A recent week in one territory</span>
                 </div>
-              ))}
-            </div>
-          </div>
-        </section>
-
-        <section id="pricing" className="py-16">
-          <div className="mx-auto max-w-6xl px-6">
-            <div className="grid gap-8 lg:grid-cols-[0.9fr_1.1fr] lg:items-start">
-              <div>
-                <p className="text-sm font-black uppercase tracking-wider text-brand-purple">Founding offer</p>
-                <h2 className="mt-2 text-4xl font-black text-slate-900 md:text-5xl">Simple enough to test. Useful enough to keep.</h2>
-                <p className="mt-4 text-lg leading-8 text-slate-600">
-                  The first version is intentionally manual: application review, exclusive territory approval, call tracking, and monthly proof reporting before heavy software automation.
-                </p>
+                <small data-copy-key="recentWeekHelper">Illustrative example · signals found, not guaranteed jobs</small>
               </div>
-              <div className="rounded-[2rem] border-2 border-brand-purple bg-white p-8 shadow-xl">
-                <div className="flex flex-col gap-6 sm:flex-row sm:items-end sm:justify-between">
-                  <div>
-                    <p className="text-sm font-black uppercase tracking-widest text-brand-purple">Founding partner</p>
-                    <div className="mt-3 flex items-end gap-2">
-                      <span className="text-6xl font-black text-slate-900">$99</span>
-                      <span className="pb-2 text-xl font-bold text-slate-500">/month</span>
+              <div className="partner-stats-grid">
+                {stats.map((stat) => (
+                  <article className="partner-stat-card" key={stat.label}>
+                    <span className="partner-stat-icon" data-stat-icon={stat.icon} aria-hidden="true">
+                      <span className="partner-stat-icon-glyph material-symbols-outlined">{stat.icon}</span>
+                    </span>
+                    <div className="partner-stat-copy">
+                      <b className="partner-stat-value">{stat.value}</b>
+                      <span className="partner-stat-label">{stat.label}</span>
+                      <small className="partner-stat-detail">{stat.detail}</small>
                     </div>
-                    <p className="mt-2 font-bold text-slate-600">Locked for 6 months for early partners.</p>
-                  </div>
-                  <div className="rounded-2xl bg-slate-50 p-4 text-sm font-bold text-slate-600">
-                    <p>$99 setup fee</p>
-                    <p>Standard starts at $149/mo</p>
-                    <p>Cancel anytime</p>
-                  </div>
-                </div>
-                <ul className="mt-8 grid gap-3 text-slate-700 sm:grid-cols-2">
-                  {['Exclusive category placement', 'Tracked phone number', 'Monthly proof report', 'Manual approval workflow', 'Territory availability check', 'Fallback coverage where needed'].map((item) => (
-                    <li key={item} className="flex items-center gap-3 font-bold">
-                      <span className="material-symbols-outlined text-brand-teal">check_circle</span>
-                      {item}
-                    </li>
-                  ))}
-                </ul>
+                    <div className="partner-stat-trend" aria-label={`${stat.trend} illustrative weekly trend`}>
+                      <svg viewBox="0 0 114 36" aria-hidden="true" focusable="false">
+                        <polyline points={stat.sparkline} pathLength="1" />
+                      </svg>
+                      <span
+                        className="partner-stat-trend-value"
+                        aria-hidden="true"
+                        style={{
+                          '--partner-trend-target': stat.trendValue,
+                          '--partner-trend-number': stat.trendValue,
+                        } as CSSProperties}
+                      >
+                        {stat.trend}
+                      </span>
+                    </div>
+                  </article>
+                ))}
               </div>
             </div>
-          </div>
-        </section>
+          </section>
+        </div>
 
-        <section className="bg-white py-16">
-          <div className="mx-auto max-w-6xl px-6">
-            <div className="mb-8 flex flex-col gap-3 md:flex-row md:items-end md:justify-between">
-              <div>
-                <p className="text-sm font-black uppercase tracking-wider text-brand-purple">Initial categories</p>
-                <h2 className="mt-2 text-4xl font-black text-slate-900">Start where homeowner demand is already visible.</h2>
-              </div>
-              <p className="max-w-xl text-slate-600">Demand counts are internal tracked service requests, used to prioritize partner inventory and outreach.</p>
+        <section className="partner-section partner-economics-section" aria-labelledby="partner-economics-heading">
+          <div className="partner-shell">
+            <div className="partner-section-heading">
+              <span>Why the math can work</span>
+              <h2 id="partner-economics-heading">A few good calls can justify the whole month.</h2>
+              <p>
+                This is built for trades where one timely homeowner call matters. You are not buying random shared leads — you are buying a protected monitoring lane with weekly proof of work.
+              </p>
             </div>
-            <div className="grid gap-5 md:grid-cols-3">
-              {verticals.map((v) => (
-                <div key={v.name} className="rounded-3xl border border-slate-200 bg-slate-50 p-6">
-                  <p className="text-3xl font-black text-slate-900">{v.name}</p>
-                  <p className="mt-3 inline-flex rounded-full bg-brand-teal/15 px-3 py-1 text-sm font-black text-teal-700">{v.demand}</p>
-                  <p className="mt-4 text-slate-600">{v.note}</p>
-                </div>
+            <div className="partner-economics-grid">
+              {economics.map(([image, value, title, body], index) => (
+                <article key={title}>
+                  <span className="partner-economics-image" data-economics-visual={index + 1} aria-hidden="true">
+                    <img src={image} alt="" />
+                  </span>
+                  <b>{value}</b>
+                  <h3>{title}</h3>
+                  <p>{body}</p>
+                </article>
               ))}
             </div>
-            <div className="mt-8 rounded-3xl border border-dashed border-slate-300 bg-white p-6">
-              <p className="font-black text-slate-900">Future expansion categories</p>
-              <div className="mt-4 flex flex-wrap gap-2">
-                {futureVerticals.map((v) => <span key={v} className="rounded-full bg-slate-100 px-4 py-2 text-sm font-bold text-slate-600">{v}</span>)}
+            <p className="partner-economics-note">
+              No booked-job guarantee. The value is earlier visibility, category protection where approved, and a clear report showing what happened locally every week.
+            </p>
+          </div>
+        </section>
+
+        <section id="how" className="partner-section partner-how-section">
+          <div className="partner-shell">
+            <div className="partner-section-heading">
+              <span>How it works</span>
+              <h2 data-copy-key="howHeading">A local market watch that runs while you're on the job.</h2>
+              <p data-copy-key="howBody">No dashboard to babysit. We do the watching and bring you what's worth your time.</p>
+            </div>
+            <div className="partner-how-stage">
+              <div className="partner-how-illustration" aria-hidden="true" />
+              <div className="partner-how-focus-shade" aria-hidden="true" />
+              <div className="partner-how-hotspots" aria-hidden="true">
+                <span /><span /><span /><span />
               </div>
+              <div className="partner-flow-grid">
+                {flow.map(({ number, icon, kicker, title, body }, index) => (
+                  <article
+                    key={title}
+                    tabIndex={0}
+                    style={{ '--partner-flow-index': index } as CSSProperties}
+                  >
+                    <div className="partner-flow-card-top">
+                      <span>{number}</span>
+                      <i className="material-symbols-outlined" aria-hidden="true">{icon}</i>
+                    </div>
+                    <small>{kicker}</small>
+                    <h3>{title}</h3>
+                    <p>{body}</p>
+                  </article>
+                ))}
+              </div>
+              <p className="partner-how-stage-note">
+                <span className="material-symbols-outlined" aria-hidden="true">bolt</span>
+                One connected loop — from signal found to action taken.
+              </p>
             </div>
           </div>
         </section>
 
-        <section id="apply" className="py-16">
-          <div className="mx-auto max-w-6xl px-6">
-            <div className="grid gap-10 lg:grid-cols-[0.85fr_1.15fr]">
-              <div>
-                <p className="text-sm font-black uppercase tracking-wider text-brand-purple">Apply first, pay later</p>
-                <h2 className="mt-2 text-4xl font-black text-slate-900 md:text-5xl">Claiming a slot starts with verification.</h2>
-                <p className="mt-4 text-lg leading-8 text-slate-600">
-                  Tell us about your business and preferred service area. If the category and territory are open, we will review your reputation, confirm fit, and send onboarding details.
-                </p>
-                {applied && (
-                  <div className="mt-6 rounded-2xl border border-brand-teal/30 bg-brand-teal/10 p-5 font-bold text-teal-800">
-                    Application received. We will review the slot and follow up shortly.
+        <section id="report" className="partner-section partner-report-section">
+          <div className="partner-shell partner-split">
+            <div className="partner-sticky-copy">
+              <span className="partner-section-label">The weekly Neighborhood Demand Report</span>
+              <h2 data-copy-key="reportHeading">One clear read on your local market — every Monday.</h2>
+              <p data-copy-key="reportBody">
+                A done-for-you briefing, not a dashboard you have to log into. Seven sections, written for a busy owner who has five minutes between jobs.
+              </p>
+              <div className="partner-report-bullets">
+                {['Executive snapshot', 'New local opportunities', 'Actions taken', 'Calls & lead outcomes', 'Reputation alerts', 'Competitor watch', 'Recommended next moves'].map((item) => (
+                  <span key={item}><i />{item}</span>
+                ))}
+              </div>
+            </div>
+            <PartnerReportDisplay />
+          </div>
+        </section>
+
+        <section id="pricing" className="partner-section partner-pricing-section">
+          <div className="partner-shell partner-split">
+            <div>
+              <span className="partner-section-label">Founding Partner Plan</span>
+              <h2 data-copy-key="pricingHeading">Founding pricing — locked in while we open your territory.</h2>
+              <p data-copy-key="pricingBody">
+                We're enrolling a first wave of partners by trade and territory. Founding partners help us calibrate the service in their market — so the price reflects that, and it's lower than the standard rate.
+              </p>
+              <ul className="partner-pricing-points">
+                <li>Apply first; no payment until we approve your trade and territory</li>
+                <li>One approved partner per trade and territory where available</li>
+                <li>Founding price designed to be covered by a small number of booked jobs</li>
+                <li>Flat monthly service, not shared-lead bidding</li>
+              </ul>
+            </div>
+            <div className="partner-pricing-card-column">
+              <aside className="partner-pricing-box is-price-intro">
+                <svg className="partner-pricing-rim" viewBox="0 0 1000 1300" preserveAspectRatio="none" aria-hidden="true" focusable="false">
+                  <defs>
+                    <linearGradient id="partnerPricingBaseRim" x1="0" y1="0" x2="1" y2="1">
+                      <stop offset="0%" stopColor="#a7cfff" stopOpacity="0.32" />
+                      <stop offset="35%" stopColor="#4777b4" stopOpacity="0.2" />
+                      <stop offset="70%" stopColor="#244b82" stopOpacity="0.16" />
+                      <stop offset="100%" stopColor="#168eea" stopOpacity="0.38" />
+                    </linearGradient>
+                    <linearGradient id="partnerPricingHotRim" x1="0" y1="0" x2="1" y2="1">
+                      <stop offset="0%" stopColor="#2f76bd" stopOpacity="0" />
+                      <stop offset="35%" stopColor="#179cff" stopOpacity="0.65" />
+                      <stop offset="62%" stopColor="#8fe7ff" stopOpacity="1" />
+                      <stop offset="78%" stopColor="#dff8ff" stopOpacity="1" />
+                      <stop offset="100%" stopColor="#1b91ff" stopOpacity="0.15" />
+                    </linearGradient>
+                    <filter id="partnerPricingRimGlow" x="-20%" y="-20%" width="140%" height="140%">
+                      <feGaussianBlur stdDeviation="5" result="blur" />
+                      <feMerge>
+                        <feMergeNode in="blur" />
+                        <feMergeNode in="SourceGraphic" />
+                      </feMerge>
+                    </filter>
+                  </defs>
+                  <rect x="2" y="2" width="996" height="1296" rx="48" fill="none" stroke="url(#partnerPricingBaseRim)" strokeWidth="2" />
+                  <path d="M 735 2 H 952 Q 998 2 998 48 V 250" fill="none" stroke="url(#partnerPricingHotRim)" strokeWidth="3" strokeLinecap="round" filter="url(#partnerPricingRimGlow)" />
+                  <path d="M 835 2 H 955 Q 998 2 998 45" fill="none" stroke="#dff8ff" strokeOpacity="0.85" strokeWidth="0.8" strokeLinecap="round" />
+                </svg>
+                <div className="partner-pricing-surface">
+                  <div className="partner-pricing-badge-row">
+                    <span>Founding Partner</span>
+                    <small><i aria-hidden="true" />Limited spots</small>
                   </div>
-                )}
-              </div>
-
-              <form action="/api/partners/apply" method="post" className="rounded-[2rem] border border-slate-200 bg-white p-6 shadow-xl md:p-8">
-                <div className="grid gap-5 md:grid-cols-2">
-                  <label className="space-y-2">
-                    <span className={labelClass}>Business name</span>
-                    <input className={fieldClass} name="businessName" required />
-                  </label>
-                  <label className="space-y-2">
-                    <span className={labelClass}>Contact name</span>
-                    <input className={fieldClass} name="contactName" required />
-                  </label>
-                  <label className="space-y-2">
-                    <span className={labelClass}>Email</span>
-                    <input className={fieldClass} name="email" type="email" required />
-                  </label>
-                  <label className="space-y-2">
-                    <span className={labelClass}>Phone</span>
-                    <input className={fieldClass} name="phone" type="tel" required />
-                  </label>
-                  <label className="space-y-2">
-                    <span className={labelClass}>Website</span>
-                    <input className={fieldClass} name="website" type="url" placeholder="https://" />
-                  </label>
-                  <label className="space-y-2">
-                    <span className={labelClass}>Service category</span>
-                    <select className={fieldClass} name="serviceCategory" required defaultValue="">
-                      <option value="" disabled>Select one</option>
-                      <option>Plumbing</option>
-                      <option>HVAC</option>
-                      <option>Electrical</option>
-                      <option>Pest control</option>
-                      <option>Appliance repair</option>
-                      <option>Handyman</option>
-                      <option>Roofing / gutters</option>
-                      <option>Lawn / landscaping / trees</option>
-                      <option>Concrete / masonry</option>
-                    </select>
-                  </label>
-                  <label className="space-y-2 md:col-span-2">
-                    <span className={labelClass}>Primary service areas / ZIPs</span>
-                    <input className={fieldClass} name="serviceAreas" required placeholder="Example: Warrington, Doylestown, 18976" />
-                  </label>
-                  <label className="space-y-2">
-                    <span className={labelClass}>Years in business</span>
-                    <input className={fieldClass} name="yearsInBusiness" />
-                  </label>
-                  <label className="space-y-2">
-                    <span className={labelClass}>Google Business Profile URL</span>
-                    <input className={fieldClass} name="googleBusinessProfile" type="url" placeholder="https://" />
-                  </label>
-                  <label className="space-y-2 md:col-span-2">
-                    <span className={labelClass}>Preferred territory</span>
-                    <input className={fieldClass} name="preferredTerritory" required placeholder="Example: Warrington Plumbing" />
-                  </label>
-                  <label className="space-y-2 md:col-span-2">
-                    <span className={labelClass}>Notes / special services</span>
-                    <textarea className={fieldClass} name="notes" rows={4} placeholder="Emergency availability, response time, licensing, insurance, specialties..." />
-                  </label>
+                  <div className="partner-pricing-anchor" aria-label="Founding partner discount">
+                    <div className="partner-pricing-anchor-head">
+                      <span data-copy-key="priceAnchorLabel">Full-service pilot value</span>
+                      <div className="partner-pricing-anchor-value">
+                        <b className="partner-pricing-old">
+                          <span className="sr-only">$1,000 per month</span>
+                          <span className="partner-pricing-old-text" aria-hidden="true">
+                            <span className="partner-pricing-old-amount">$1,000</span>
+                            <span className="partner-pricing-old-unit">/ month</span>
+                          </span>
+                        </b>
+                      </div>
+                    </div>
+                  </div>
+                  <p className="partner-pricing-drop-label" data-copy-key="priceDropLabel">founding price drops to</p>
+                  <div className="partner-pricing-price">
+                    <b>
+                      <PartnerPriceCounter />
+                    </b>
+                    <small>/ month</small>
+                    <span className="partner-price-sparkles" aria-hidden="true">
+                      <i />
+                      <i />
+                      <i />
+                      <i />
+                      <i />
+                      <i />
+                      <i />
+                    </span>
+                  </div>
+                  <p className="partner-pricing-duration"><span aria-hidden="true">✓</span>first 3 monthly billing cycles</p>
+                  <div className="partner-pricing-standard"><img src="/partners/pricing-shield.png" alt="" aria-hidden="true" /><p>Then <strong>$750 / mo</strong> standard</p></div>
+                  <a href="#apply" className="partner-primary-button"><span className="partner-pricing-cta-icon" aria-hidden="true">›</span><span data-copy-key="primaryCta">Apply for a Founding Partner Spot</span></a>
+                  <p className="partner-pricing-note"><img src="/partners/pricing-no-payment.png" alt="" aria-hidden="true" />No payment with your application. Approved partners receive a private Stripe checkout link for the $500 founding rate.</p>
                 </div>
-                <label className="mt-5 flex gap-3 rounded-2xl bg-slate-50 p-4 text-sm font-bold text-slate-600">
-                  <input className="mt-1 h-4 w-4 accent-brand-purple" type="checkbox" name="licenseConfirmed" required />
-                  <span>I confirm this business is properly licensed/insured where required and can be reviewed before approval.</span>
-                </label>
-                <button className="mt-6 inline-flex w-full items-center justify-center gap-2 rounded-2xl bg-brand-purple px-7 py-4 text-lg font-black text-white shadow-xl transition hover:-translate-y-0.5" type="submit">
-                  Submit partner application
-                  <span className="material-symbols-outlined">send</span>
-                </button>
-              </form>
+              </aside>
             </div>
           </div>
         </section>
 
-        <section className="bg-slate-900 py-16 text-white">
-          <div className="mx-auto max-w-4xl px-6">
-            <div className="text-center">
-              <p className="text-sm font-black uppercase tracking-wider text-brand-teal">FAQ</p>
-              <h2 className="mt-2 text-4xl font-black">Built for trust, not lead spam.</h2>
+        <section className="partner-included">
+          <div className="partner-shell">
+            <div className="partner-section-heading is-light">
+              <span>What's included</span>
+              <h2 data-copy-key="includedHeading">Everything in one done-for-you service.</h2>
             </div>
-            <div className="mt-10 space-y-4">
-              {faqs.map((faq) => (
-                <details key={faq.q} className="rounded-2xl bg-white/10 p-6 open:bg-white open:text-slate-900">
-                  <summary className="cursor-pointer text-lg font-black">{faq.q}</summary>
-                  <p className="mt-4 leading-7 text-slate-300 open:text-slate-600">{faq.a}</p>
+            <div className="partner-included-grid">
+              {included.map(([title, body]) => (
+                <article key={title}>
+                  <h3>{title}</h3>
+                  <p>{body}</p>
+                </article>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        <section id="apply" className="partner-section partner-apply-section">
+          <div className="partner-shell partner-apply-grid">
+            <div>
+              <span className="partner-section-label">Apply</span>
+              <h2 data-copy-key="applyHeading">Claim your trade & territory.</h2>
+              <p data-copy-key="applyBody">
+                Apply for your trade and territory with no payment. We review availability first, and approved applicants receive a private $500 Stripe checkout link by email.
+              </p>
+              <ol className="partner-apply-steps">
+                <li><b>1</b><span><strong>Apply</strong> — tell us your trade and service area.</span></li>
+                <li><b>2</b><span><strong>Review</strong> — we confirm trade, territory, and category availability before any charge.</span></li>
+                <li><b>3</b><span><strong>Checkout & onboard</strong> — approved partners receive a private Stripe checkout link, then onboarding begins.</span></li>
+              </ol>
+            </div>
+            <PartnerApplicationForm />
+          </div>
+        </section>
+
+        <section className="partner-section">
+          <div className="partner-shell partner-faq-shell">
+            <div className="partner-section-heading">
+              <span>Questions</span>
+              <h2>Straight answers for busy owners.</h2>
+            </div>
+            <div className="partner-faq-list">
+              {faqs.map(([question, answer]) => (
+                <details key={question}>
+                  <summary>{question}<span>+</span></summary>
+                  <p>{answer}</p>
                 </details>
               ))}
             </div>
-            <div className="mt-10 text-center">
-              <Link href="/" className="font-bold text-brand-teal hover:underline">Back to FindALocalPro homeowner site</Link>
-            </div>
+          </div>
+        </section>
+
+        <section className="partner-final-cta">
+          <div className="partner-shell">
+            <h2>A founding spot in your territory won't stay open long.</h2>
+            <p>Apply with no payment. If your trade and territory are approved, we email your private $500 Stripe checkout link.</p>
+            <a href="#apply" className="partner-primary-button"><span data-copy-key="primaryCta">Apply for a Founding Partner Spot</span> <span>→</span></a>
           </div>
         </section>
       </main>
 
-      <Footer />
-    </div>
+      <footer className="partner-footer">
+        <div className="partner-shell">
+          <div><span>F</span> FindALocalPro · Neighborhood Demand Engine</div>
+          <p>A local market-watch service. We surface opportunities, signals, and reputation alerts — we do not guarantee booked jobs or revenue. partners.findalocalpro.com</p>
+        </div>
+      </footer>
+      </div>
+    </PartnerDesignReviewProvider>
   );
 }
