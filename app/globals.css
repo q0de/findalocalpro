@@ -10273,6 +10273,11 @@ details[open] > p {
   margin-bottom: 12px;
 }
 
+.partner-standalone .partner-how-section .partner-flow-card-button > .partner-flow-card-top {
+  display: block;
+  text-align: left;
+}
+
 .partner-standalone .partner-how-section .partner-flow-card-top span {
   display: inline-flex;
   align-items: center;
