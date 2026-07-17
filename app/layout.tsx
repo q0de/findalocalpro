@@ -1,8 +1,34 @@
+/* eslint-disable react-refresh/only-export-components */
 import type { Metadata } from 'next';
 import Script from 'next/script';
+import { Archivo, Fredoka, Outfit, Public_Sans } from 'next/font/google';
 import { StickyMobileCTA } from '@/components/StickyMobileCTA';
 import { ScrollProgress } from '@/components/ScrollProgress';
 import './globals.css';
+
+const archivo = Archivo({
+  subsets: ['latin'],
+  variable: '--font-archivo',
+  display: 'swap',
+});
+
+const fredoka = Fredoka({
+  subsets: ['latin'],
+  variable: '--font-fredoka',
+  display: 'swap',
+});
+
+const outfit = Outfit({
+  subsets: ['latin'],
+  variable: '--font-outfit',
+  display: 'swap',
+});
+
+const publicSans = Public_Sans({
+  subsets: ['latin'],
+  variable: '--font-public-sans',
+  display: 'swap',
+});
 
 export const metadata: Metadata = {
   title: 'Verified Home Pros in DuPage County, IL | FindALocalPro',
@@ -103,7 +129,7 @@ const faqJsonLd = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en">
+    <html lang="en" data-scroll-behavior="smooth">
       <head>
         <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
         <Script defer data-domain="findalocalpro.com" src="https://plausible.io/js/script.js" />
@@ -123,12 +149,11 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }} />
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
-        <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700;800;900&family=Fredoka:wght@400;500;600;700&family=Outfit:wght@400;500;600;700;800&family=Public+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
         <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0..1,0&display=swap" rel="stylesheet" />
         <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@24,400,0..1,0&display=swap" rel="stylesheet" />
         <Script src="/webmcp.js" defer />
       </head>
-      <body className="text-slate-900 min-h-screen flex flex-col">
+      <body className={`text-slate-900 min-h-screen flex flex-col ${archivo.variable} ${fredoka.variable} ${outfit.variable} ${publicSans.variable}`}>
         <ScrollProgress />
         {children}
         <StickyMobileCTA />

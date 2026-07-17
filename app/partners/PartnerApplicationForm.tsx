@@ -72,6 +72,7 @@ export function PartnerApplicationForm() {
   const firstFieldRef = useRef<HTMLInputElement>(null);
   const transitionTimer = useRef<number | null>(null);
   const reviewGlowTimer = useRef<number | null>(null);
+  const submissionStatusRef = useRef<HTMLElement>(null);
   const previousStep = useRef(step);
   const hasReachedReview = useRef(false);
   const editedReviewSection = useRef<0 | 1 | 2 | null>(null);
@@ -99,6 +100,20 @@ export function PartnerApplicationForm() {
     if (reviewGlowTimer.current) window.clearTimeout(reviewGlowTimer.current);
     reviewGlowTimer.current = window.setTimeout(() => setReviewGlowScope(null), 1800);
   }, [step]);
+
+  useEffect(() => {
+    if (!submitting && !submitted) return;
+
+    const frame = window.requestAnimationFrame(() => {
+      const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      submissionStatusRef.current?.scrollIntoView({
+        behavior: reduceMotion ? 'auto' : 'smooth',
+        block: 'center',
+      });
+    });
+
+    return () => window.cancelAnimationFrame(frame);
+  }, [submitting, submitted]);
 
   const setField = <K extends keyof PartnerForm>(key: K, value: PartnerForm[K]) => {
     setError('');
@@ -274,22 +289,44 @@ export function PartnerApplicationForm() {
     );
   }
 
-  if (submitted) {
-    return (
-      <section className="partner-form-shell partner-form-shell--review" aria-live="polite">
+  return (
+    <section ref={submissionStatusRef} className="partner-form-shell partner-form-shell--review">
+      <div className="sr-only" role="status" aria-atomic="true">
+        {submitting && 'Submitting your application. Please keep this page open.'}
+        {submitted && 'Application received. Your territory review is pending.'}
+      </div>
+
+      {submitting ? (
+        <div className="partner-submission-processing" aria-hidden="true">
+          <div className="partner-submission-signal">
+            <i />
+            <i />
+            <i />
+            <span className="material-symbols-outlined">outgoing_mail</span>
+          </div>
+          <p className="partner-intake-eyebrow">Sending securely</p>
+          <h3>Submitting your application…</h3>
+          <p>Saving your details and preparing your territory review.</p>
+          <span className="partner-submission-progress"><i />Please keep this page open</span>
+        </div>
+      ) : submitted ? (
         <div className="partner-intake-card partner-application-success">
-          <span className="material-symbols-outlined" aria-hidden="true">mark_email_read</span>
+          <div className="partner-success-orbit" aria-hidden="true">
+            <i />
+            <i />
+            <span className="material-symbols-outlined">mark_email_read</span>
+          </div>
           <p className="partner-intake-eyebrow">Application received</p>
           <h3>Your territory review is pending.</h3>
           <p>No payment was taken. We will review your trade and service area, and approved applicants receive a private Stripe checkout link by email.</p>
+          <div className="partner-success-steps" aria-label="Application status">
+            <span><b>✓</b> Application saved</span>
+            <span><b>✓</b> Territory review queued</span>
+            <span><b>→</b> Approval email comes next</span>
+          </div>
           <p className="partner-intake-helper">Check your inbox after approval. The founding rate is $500 for the first three monthly billing cycles, then $750 per month.</p>
         </div>
-      </section>
-    );
-  }
-
-  return (
-    <section className="partner-form-shell partner-form-shell--review">
+      ) : (
       <form className="partner-application-card partner-application-card--review" onSubmit={handleSubmit}>
         <div className="partner-review-heading">
           <div><p className="partner-intake-eyebrow">Application review</p><h3>Ready when you are.</h3><p>Review the details below, add anything helpful, then apply.</p></div>
@@ -331,11 +368,23 @@ export function PartnerApplicationForm() {
           <label className="field-block"><span>Notes / specialties</span><textarea className="lead-input" rows={4} value={form.notes} onChange={(event) => setField('notes', event.target.value)} /></label>
         </fieldset>
 
-        <label className="consent-check"><input type="checkbox" checked={form.confirmed} onChange={(event) => setField('confirmed', event.target.checked)} required /><span>I confirm my business is licensed and insured where required for my trade and territory.</span></label>
+        <label className="consent-check">
+          <input
+            type="checkbox"
+            checked={form.confirmed}
+            onChange={(event) => setField('confirmed', event.target.checked)}
+            required
+          />
+          <span>
+            I confirm my business is licensed and insured where required for my trade and territory.
+            <strong className="consent-required">Required</strong>
+          </span>
+        </label>
         {error && <p className="form-error" role="alert">{error}</p>}
         <button className={`form-submit partner-submit ${submitting ? 'is-submitting' : ''}`} disabled={submitting || !form.confirmed}>{submitting ? 'Submitting application...' : 'Submit for territory review'}</button>
         <p className="partner-form-note">No payment today. If approved, we email you a private Stripe checkout link for the $500 founding rate.</p>
       </form>
+      )}
     </section>
   );
 }

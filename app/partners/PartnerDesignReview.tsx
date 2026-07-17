@@ -284,7 +284,6 @@ export function PartnerDesignReviewProvider({ children }: PropsWithChildren) {
   }, [howHotspotPositions, howHotspotPreview]);
 
   useEffect(() => {
-    if (!isDevelopment) return undefined;
     const page = document.querySelector<HTMLElement>('.partner-standalone');
     if (!page) return undefined;
     page.classList.toggle('partner-how-focus-spotlight', howFocusMode === 'spotlight');

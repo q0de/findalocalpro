@@ -262,18 +262,6 @@ export function PartnerReportDisplay() {
   }, []);
 
   useEffect(() => {
-    Object.values(deviceFrames).forEach(({ path }) => {
-      const image = new window.Image();
-      image.src = path;
-    });
-
-    ['/partners/devices/generated-iphone-screen-mask.png'].forEach((path) => {
-      const image = new window.Image();
-      image.src = path;
-    });
-  }, []);
-
-  useEffect(() => {
     const root = rootRef.current;
     if (!root) return undefined;
 
@@ -458,14 +446,18 @@ export function PartnerReportDisplay() {
       className={`partner-report-display is-${mode}${isDevice ? ' is-device' : ''} is-stage-${stagePhase} is-screen-startup-${screenStartupMode}`}
     >
       <div className="partner-report-stage">
-        <div className="partner-report-stage-backdrop" aria-hidden="true">
-          <span
-            className={`partner-report-stage-backdrop-layer is-map${reportBackdropMode === 'map' ? ' is-active' : ''}`}
-          />
-          <span
-            className={`partner-report-stage-backdrop-layer is-abstract${reportBackdropMode === 'abstract' ? ' is-active' : ''}`}
-          />
-        </div>
+        {stagePhase !== 'pending' && (
+          <div className="partner-report-stage-backdrop" aria-hidden="true">
+            <span
+              className={`partner-report-stage-backdrop-layer is-map${reportBackdropMode === 'map' ? ' is-active' : ''}`}
+            />
+            {process.env.NODE_ENV === 'development' && (
+              <span
+                className={`partner-report-stage-backdrop-layer is-abstract${reportBackdropMode === 'abstract' ? ' is-active' : ''}`}
+              />
+            )}
+          </div>
+        )}
 
         <div className="partner-report-display-control">
           <div className="partner-report-view-control">
@@ -523,7 +515,7 @@ export function PartnerReportDisplay() {
                         width={frame.width}
                         height={frame.height}
                         sizes="(max-width: 760px) 100vw, (max-width: 1200px) 72vw, 900px"
-                        loading="eager"
+                        loading="lazy"
                         unoptimized
                       />
                       <div className="partner-device-screen">

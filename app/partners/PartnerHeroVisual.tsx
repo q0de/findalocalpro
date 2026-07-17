@@ -156,7 +156,12 @@ export function PartnerHeroVisual() {
         return;
       }
 
+      const mobileViewport = window.matchMedia('(max-width: 760px)').matches;
       hero?.classList.add('is-neighborhood-ready');
+      if (mobileViewport) {
+        hero?.classList.add('is-neighborhood-settled');
+        setNeighborhoodFinal('important');
+      }
       schedule(() => setIntroPhase('targeting'), 700);
       schedule(() => setIntroPhase('entering'), 1100);
       schedule(() => setIntroPhase('landed'), 1950);
