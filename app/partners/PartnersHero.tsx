@@ -38,7 +38,7 @@ export function PartnersHero() {
               </Link>
             </div>
             <p className="text-sm font-bold text-slate-400 mt-4">
-              $497/month for the first 3 months. Then $750/month standard. Apply first, pay after approval.
+              Apply with no payment. After approval: $500/mo for 3 billing cycles, then $750/mo.
             </p>
           </div>
 

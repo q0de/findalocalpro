@@ -6,13 +6,7 @@ type PartnerCheckoutButtonProps = {
   className?: string;
   label?: string;
   payload?: {
-    businessName?: string;
-    contactName?: string;
-    email?: string;
-    phone?: string;
-    category?: string;
-    serviceAreas?: string;
-    preferredTerritory?: string;
+    token?: string;
   };
 };
 

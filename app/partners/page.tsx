@@ -1,12 +1,17 @@
 import type { Metadata } from 'next';
+import type { CSSProperties } from 'react';
 import Link from 'next/link';
 import { PartnerApplicationForm } from './PartnerApplicationForm';
-import { PartnerCopyVersionControl } from './PartnerCopyVersionControl';
+import { PartnerDesignReviewProvider } from './PartnerDesignReview';
 import { PartnerHeroTitle } from './PartnerHeroTitle';
 import { PartnerHeroVisual } from './PartnerHeroVisual';
+import { PartnerPriceCounter } from './PartnerPriceCounter';
+import { PartnerReportDisplay } from './PartnerReportDisplay';
 import { PartnerScrollAnimator } from './PartnerScrollAnimator';
-import { PartnerStatsBackgroundControl } from './PartnerStatsBackgroundControl';
+import { getStripe } from '@/lib/stripe';
 
+// Next.js route metadata intentionally lives beside the page component.
+// eslint-disable-next-line react-refresh/only-export-components
 export const metadata: Metadata = {
   title: 'Neighborhood Demand Engine | FindALocalPro Partners',
   description: 'A done-for-you local market watch service for contractors: opportunity monitoring, hot alerts, call tracking, reputation watch, and weekly reports.',
@@ -21,10 +26,34 @@ export const metadata: Metadata = {
 };
 
 const flow = [
-  ['01', 'Monitor local demand', 'We watch neighborhood conversations, search & call activity, and review signals for your trade and territory.'],
-  ['02', 'Alert you when timing matters', 'Hot alerts hit your phone the moment a real opportunity appears — before the thread fills with other names.'],
-  ['03', 'Route & track calls', 'Dedicated call tracking captures and records inbound demand where applicable, so nothing slips.'],
-  ['04', 'Send the weekly report', 'Every week: opportunities found, actions taken, calls routed, reputation alerts, and recommended next moves.'],
+  {
+    number: '01',
+    icon: 'radar',
+    kicker: 'Always watching',
+    title: 'Monitor local demand',
+    body: 'We watch neighborhood conversations, search and call activity, and review signals for your trade and territory.',
+  },
+  {
+    number: '02',
+    icon: 'notifications_active',
+    kicker: 'Right-time alerts',
+    title: 'Alert you when timing matters',
+    body: 'A hot opportunity reaches you while it is still actionable — before the thread fills with other names.',
+  },
+  {
+    number: '03',
+    icon: 'phone_in_talk',
+    kicker: 'Demand captured',
+    title: 'Route & track calls',
+    body: 'Dedicated call tracking captures and records inbound demand where applicable, so nothing slips.',
+  },
+  {
+    number: '04',
+    icon: 'description',
+    kicker: 'Every Monday',
+    title: 'Send the weekly report',
+    body: 'See what surfaced, what we acted on, which calls came in, and the next moves worth making.',
+  },
 ];
 
 const included = [
@@ -35,15 +64,47 @@ const included = [
   ['Weekly Neighborhood Demand Report', 'Your seven-section briefing on opportunities, actions, calls, and next moves.'],
   ['Google review monitoring', 'We flag new reviews and prepare professional response drafts for your approval.'],
   ['Competitor mention watch', 'Know when and where rivals get recommended in your local channels.'],
-  ['Review request templates', 'Ready-to-send templates to turn happy customers into 5-star reviews.'],
+  ['Company-fit messaging', 'Reply drafts, review requests, and follow-up wording matched to your brand voice and service style.'],
   ['Territory & category exclusivity', "Where approved, we won't enroll a direct competitor in your protected area."],
 ];
 
 const stats = [
-  ['14', 'Opportunities found', 'Neighborhood posts & search signals'],
-  ['9', 'Calls / leads routed', 'Tracked & recorded where applicable'],
-  ['3', 'Reviews flagged', 'With response drafts ready'],
-  ['5', 'Competitor mentions', 'Where rivals were recommended'],
+  {
+    value: '14',
+    label: 'Opportunities found',
+    detail: 'Neighborhood posts & search signals',
+    icon: 'priority_high',
+    trend: '+18%',
+    trendValue: 18,
+    sparkline: '2,31 14,22 25,26 38,11 51,20 66,5 82,14 95,4 112,4',
+  },
+  {
+    value: '9',
+    label: 'Calls / leads routed',
+    detail: 'Tracked & recorded where applicable',
+    icon: 'call',
+    trend: '+12%',
+    trendValue: 12,
+    sparkline: '2,32 16,25 28,29 42,15 56,18 70,7 84,14 98,4 112,4',
+  },
+  {
+    value: '3',
+    label: 'Reviews flagged',
+    detail: 'With response drafts ready',
+    icon: 'star',
+    trend: '+7%',
+    trendValue: 7,
+    sparkline: '2,30 15,24 27,27 39,16 52,21 65,9 79,13 93,5 112,5',
+  },
+  {
+    value: '5',
+    label: 'Competitor mentions',
+    detail: 'Where rivals were recommended',
+    icon: 'alternate_email',
+    trend: '+9%',
+    trendValue: 9,
+    sparkline: '2,31 14,26 26,28 40,17 53,22 67,10 81,15 96,5 112,5',
+  },
 ];
 
 const economics = [
@@ -58,20 +119,32 @@ const faqs = [
   ['Can this pay for itself?', 'For many home-service trades, yes, it can. A small number of booked jobs can cover the founding price, especially in higher-value categories like plumbing, HVAC, electrical, appliance repair, and similar urgent services. We still do not guarantee booked jobs or revenue.'],
   ['Do you guarantee booked jobs?', 'No, and we will never promise that. We surface local opportunities, demand signals, and reputation alerts, and we route and track calls where applicable. What you do with that timing and information is what turns it into booked work.'],
   ['Is my territory exclusive?', 'Where approved, yes. We limit enrollment by trade and territory and protect approved partners from having a direct competitor signed up in the same area. Availability depends on your specific category and ZIPs, which is why we review before confirming.'],
-  ['Do you post on social platforms as my business?', 'No. We monitor public local conversations and signals and tell you where the opportunities are. We never post or message as your business — you stay in control of how and when you respond.'],
-  ['What happens after I apply?', 'We review availability and fit for your trade and territory, usually within one business day. If your area is open and it is a good match, we confirm your founding spot and onboard you. No payment is charged until you are approved.'],
-  ['Why is the founding price lower?', 'Founding partners help us calibrate the service in their local market, so we lock in a lower rate of $497/month for the first 3 months before the standard $750/month rate. It is a genuine trial of a high-touch service, not a discount gimmick.'],
+  ['Can the messaging sound like my company?', 'Yes. During onboarding we learn your tone, service standards, offers, and do-not-say rules, then prepare response drafts, review requests, and follow-up wording that fit your company. You approve or edit before anything is sent.'],
+  ['Do you post on social platforms as my business?', 'We can support both approaches. With your approval and within agreed guidelines, we can help publish or respond through your business profiles. FindALocalPro can also participate as its own entity to surface and recommend your business in relevant local conversations. You stay in control of the messaging, platforms, and level of involvement.'],
+  ['What happens after I apply?', 'We review availability and fit for your trade and territory before any payment. If approved, we email you a private Stripe checkout link for the $500 founding rate. Declined applications are closed without a charge.'],
+  ['Why is the founding price lower?', 'Founding partners help us calibrate the service in their local market, so the first three monthly billing cycles are $500 before the ongoing $750/mo standard rate. It is a genuine launch rate for a high-touch service, not a discount gimmick.'],
 ];
 
 type PartnersPageProps = {
-  searchParams?: Promise<{ checkout?: string }>;
+  searchParams?: Promise<{ checkout?: string; session_id?: string }>;
 };
 
 export default async function PartnersPage({ searchParams }: PartnersPageProps) {
-  const checkoutStatus = (await searchParams)?.checkout;
+  const params = await searchParams;
+  const checkoutStatus = params?.checkout;
+  let checkoutConfirmed = false;
+  if (checkoutStatus === 'success' && params?.session_id && process.env.STRIPE_SECRET_KEY) {
+    try {
+      const session = await getStripe().checkout.sessions.retrieve(params.session_id);
+      checkoutConfirmed = session.payment_status === 'paid' && session.metadata?.applicationId != null;
+    } catch (error) {
+      console.error('Could not verify partner checkout redirect:', error);
+    }
+  }
 
   return (
-    <div className="partner-page partner-standalone">
+    <PartnerDesignReviewProvider>
+      <div className="partner-page partner-standalone">
       <PartnerScrollAnimator />
       <header className="partner-site-nav">
         <Link href="/" className="partner-brand" aria-label="FindALocalPro home">
@@ -92,64 +165,87 @@ export default async function PartnersPage({ searchParams }: PartnersPageProps) 
       {checkoutStatus === 'success' && (
         <div className="partner-checkout-banner is-success" role="status">
           <span className="material-symbols-outlined">verified</span>
-          Checkout complete. We will match it to your Neighborhood Demand Engine onboarding.
+          {checkoutConfirmed
+            ? 'Payment received — your approved founding partner spot is active. We will follow up with onboarding details.'
+            : 'Checkout returned successfully. We are securely confirming payment for your approved application.'}
         </div>
       )}
 
       {checkoutStatus === 'cancelled' && (
         <div className="partner-checkout-banner" role="status">
           <span className="material-symbols-outlined">info</span>
-          Checkout was cancelled. Your founding partner application can still be reviewed first.
+          Checkout was cancelled and no payment was taken. Use the private link in your approval email when you are ready.
         </div>
       )}
 
       <main>
-        <section className="partner-standalone-hero">
-          <span className="partner-neighborhood-bg" aria-hidden="true" />
-          <PartnerCopyVersionControl />
-          <PartnerHeroVisual />
-          <div className="partner-shell partner-hero-grid">
-            <div className="partner-hero-panel">
-              <p className="partner-kicker">
-                <span className="partner-live-dot"><i /></span>
-                Founding Partner enrollment — limited by trade & territory
-              </p>
-              <PartnerHeroTitle />
-              <p className="partner-hero-lede" data-copy-key="heroLede">
-                We monitor local conversations, review signals, and tracked calls for your trade and territory — then send you the opportunities, alerts, and weekly reports that help turn local demand into booked work.
-              </p>
-              <div className="partner-hero-actions">
-                <a href="#apply" className="partner-primary-button"><span data-copy-key="primaryCta">Apply for a Founding Partner Spot</span> <span>→</span></a>
-                <a href="#report" className="partner-secondary-button" data-copy-key="secondaryCta">See the Weekly Report</a>
-              </div>
-              <div className="partner-trust-row">
-                <span>✓ Apply first, pay after approval</span>
-                <span>✓ Territory & category exclusivity where approved</span>
+        <div className="partner-intro-stage">
+          <section className="partner-standalone-hero">
+            <span className="partner-neighborhood-bg" aria-hidden="true" />
+            <PartnerHeroVisual />
+            <div className="partner-shell partner-hero-grid">
+              <div className="partner-hero-panel">
+                <p className="partner-kicker">
+                  <span className="partner-live-dot"><i /></span>
+                  Founding Partner enrollment — limited by trade & territory
+                </p>
+                <PartnerHeroTitle />
+                <p className="partner-hero-lede" data-copy-key="heroLede">
+                  We monitor local conversations, review signals, and tracked calls for your trade and territory — then send you the opportunities, alerts, and weekly reports that help turn local demand into booked work.
+                </p>
+                <div className="partner-hero-actions">
+                  <a href="#apply" className="partner-primary-button"><span data-copy-key="primaryCta">Apply for a Founding Partner Spot</span> <span>→</span></a>
+                  <a href="#report" className="partner-secondary-button" data-copy-key="secondaryCta">See the Weekly Report</a>
+                </div>
+                <div className="partner-trust-row">
+                  <span>✓ No payment until your territory is approved</span>
+                  <span>✓ Territory & category exclusivity where approved</span>
+                </div>
               </div>
             </div>
-          </div>
-        </section>
+          </section>
 
-        <section className="partner-stats-section" aria-label="Recent territory example">
-          <div className="partner-shell">
-            <div className="partner-stats-heading">
-              <span>A recent week in one territory</span>
-              <div className="partner-stats-heading-tools">
+          <section className="partner-stats-section" aria-label="Recent territory example">
+            <div className="partner-shell">
+              <div className="partner-stats-heading">
+                <div className="partner-stats-heading-title">
+                  <span className="partner-stats-heading-icon material-symbols-outlined" aria-hidden="true">monitoring</span>
+                  <span>A recent week in one territory</span>
+                </div>
                 <small data-copy-key="recentWeekHelper">Illustrative example · signals found, not guaranteed jobs</small>
-                <PartnerStatsBackgroundControl placement="inline" />
+              </div>
+              <div className="partner-stats-grid">
+                {stats.map((stat) => (
+                  <article className="partner-stat-card" key={stat.label}>
+                    <span className="partner-stat-icon" data-stat-icon={stat.icon} aria-hidden="true">
+                      <span className="partner-stat-icon-glyph material-symbols-outlined">{stat.icon}</span>
+                    </span>
+                    <div className="partner-stat-copy">
+                      <b className="partner-stat-value">{stat.value}</b>
+                      <span className="partner-stat-label">{stat.label}</span>
+                      <small className="partner-stat-detail">{stat.detail}</small>
+                    </div>
+                    <div className="partner-stat-trend" aria-label={`${stat.trend} illustrative weekly trend`}>
+                      <svg viewBox="0 0 114 36" aria-hidden="true" focusable="false">
+                        <polyline points={stat.sparkline} pathLength="1" />
+                      </svg>
+                      <span
+                        className="partner-stat-trend-value"
+                        aria-hidden="true"
+                        style={{
+                          '--partner-trend-target': stat.trendValue,
+                          '--partner-trend-number': stat.trendValue,
+                        } as CSSProperties}
+                      >
+                        {stat.trend}
+                      </span>
+                    </div>
+                  </article>
+                ))}
               </div>
             </div>
-            <div className="partner-stats-grid">
-              {stats.map(([value, label, detail]) => (
-                <article key={label}>
-                  <b>{value}</b>
-                  <span>{label}</span>
-                  <small>{detail}</small>
-                </article>
-              ))}
-            </div>
-          </div>
-        </section>
+          </section>
+        </div>
 
         <section className="partner-section partner-economics-section" aria-labelledby="partner-economics-heading">
           <div className="partner-shell">
@@ -178,21 +274,40 @@ export default async function PartnersPage({ searchParams }: PartnersPageProps) 
           </div>
         </section>
 
-        <section id="how" className="partner-section">
+        <section id="how" className="partner-section partner-how-section">
           <div className="partner-shell">
             <div className="partner-section-heading">
               <span>How it works</span>
               <h2 data-copy-key="howHeading">A local market watch that runs while you're on the job.</h2>
               <p data-copy-key="howBody">No dashboard to babysit. We do the watching and bring you what's worth your time.</p>
             </div>
-            <div className="partner-flow-grid">
-              {flow.map(([number, title, body]) => (
-                <article key={title}>
-                  <span>{number}</span>
-                  <h3>{title}</h3>
-                  <p>{body}</p>
-                </article>
-              ))}
+            <div className="partner-how-stage">
+              <div className="partner-how-illustration" aria-hidden="true" />
+              <div className="partner-how-focus-shade" aria-hidden="true" />
+              <div className="partner-how-hotspots" aria-hidden="true">
+                <span /><span /><span /><span />
+              </div>
+              <div className="partner-flow-grid">
+                {flow.map(({ number, icon, kicker, title, body }, index) => (
+                  <article
+                    key={title}
+                    tabIndex={0}
+                    style={{ '--partner-flow-index': index } as CSSProperties}
+                  >
+                    <div className="partner-flow-card-top">
+                      <span>{number}</span>
+                      <i className="material-symbols-outlined" aria-hidden="true">{icon}</i>
+                    </div>
+                    <small>{kicker}</small>
+                    <h3>{title}</h3>
+                    <p>{body}</p>
+                  </article>
+                ))}
+              </div>
+              <p className="partner-how-stage-note">
+                <span className="material-symbols-outlined" aria-hidden="true">bolt</span>
+                One connected loop — from signal found to action taken.
+              </p>
             </div>
           </div>
         </section>
@@ -211,81 +326,7 @@ export default async function PartnersPage({ searchParams }: PartnersPageProps) 
                 ))}
               </div>
             </div>
-            <div className="partner-report-document">
-              <header>
-                <div>
-                  <span>Neighborhood Demand Report</span>
-                  <b>Rivertown Plumbing & Drain</b>
-                </div>
-                <p>Week of Jun 22-28<br />Territory · 78704 + 4 ZIPs</p>
-              </header>
-
-              <div className="partner-report-body">
-                <section>
-                  <span>Executive snapshot</span>
-                  <p>Demand was up week-over-week, driven by heat-wave plumbing and water-heater chatter. Nine inbound calls were tracked and one reputation issue needs your sign-off.</p>
-                  <div className="partner-report-metrics">
-                    {[
-                      ['14', 'Opportunities'],
-                      ['9', 'Calls routed'],
-                      ['3', 'Reviews flagged'],
-                      ['5', 'Competitor refs'],
-                    ].map(([value, label]) => (
-                      <article key={label}><b>{value}</b><small>{label}</small></article>
-                    ))}
-                  </div>
-                </section>
-
-                <section>
-                  <span>New local opportunities</span>
-                  <div className="partner-opportunity-list">
-                    <p><em className="is-hot">Hot</em><strong>Travis Heights</strong> — water heater leaking, wants same-day. 6 replies, no provider booked. <small>Nextdoor</small></p>
-                    <p><em>Warm</em><strong>Bouldin Creek</strong> — repeated "low water pressure" search activity in cluster. <small>Search signal</small></p>
-                    <p><em>Warm</em><strong>Zilker</strong> — homeowner asking for repipe recommendations after slab leak. <small>Nextdoor</small></p>
-                  </div>
-                </section>
-
-                <section>
-                  <span>Actions taken</span>
-                  <div className="partner-check-list">
-                    <p><b>✓</b> Sent 6 hot alerts; you responded to 4 within the hour.</p>
-                    <p><b>✓</b> Drafted 2 review responses for your approval.</p>
-                    <p><b>✓</b> Sent 3 review-request templates to recent completed jobs.</p>
-                  </div>
-                </section>
-
-                <section>
-                  <span>Calls & lead outcomes</span>
-                  <div className="partner-call-table">
-                    <div><b>Tracked call</b><b>Length</b><b>Status</b></div>
-                    <div><span>Bouldin Creek — "no hot water"</span><span>4:12</span><strong>Qualified</strong></div>
-                    <div><span>South Lamar — quote request</span><span>2:48</span><strong>Booked</strong></div>
-                    <div><span>Missed — voicemail left</span><span>0:38</span><strong className="is-warn">Follow up</strong></div>
-                  </div>
-                </section>
-
-                <section>
-                  <span className="is-alert">Reputation alerts</span>
-                  <div className="partner-reputation-alert">
-                    <strong>New 3★ Google review</strong> mentioning a scheduling mix-up. A calm, professional response draft is ready — approve or edit in one tap.
-                  </div>
-                </section>
-
-                <section>
-                  <span>Competitor watch</span>
-                  <p>A nearby competitor was recommended in 5 threads this week, mostly for emergency response speed. Two of those threads are still open — see recommended moves.</p>
-                </section>
-
-                <section>
-                  <span>Recommended next moves</span>
-                  <div className="partner-check-list">
-                    <p><b>→</b> Reply to the 2 open Zilker repipe threads while they're warm.</p>
-                    <p><b>→</b> Approve the 3★ response draft to protect your rating.</p>
-                    <p><b>→</b> Consider a same-day emergency line — competitors are winning on speed.</p>
-                  </div>
-                </section>
-              </div>
-            </div>
+            <PartnerReportDisplay />
           </div>
         </section>
 
@@ -298,40 +339,83 @@ export default async function PartnersPage({ searchParams }: PartnersPageProps) 
                 We're enrolling a first wave of partners by trade and territory. Founding partners help us calibrate the service in their market — so the price reflects that, and it's lower than the standard rate.
               </p>
               <ul className="partner-pricing-points">
-                <li>Apply first — no payment until your category and territory are approved</li>
+                <li>Apply first; no payment until we approve your trade and territory</li>
                 <li>One approved partner per trade and territory where available</li>
                 <li>Founding price designed to be covered by a small number of booked jobs</li>
                 <li>Flat monthly service, not shared-lead bidding</li>
               </ul>
             </div>
-            <aside className="partner-pricing-box">
-              <div className="partner-pricing-badge-row">
-                <span>Founding Partner</span>
-                <small>Limited spots</small>
-              </div>
-              <div className="partner-pricing-anchor" aria-label="Founding partner discount">
-                <span data-copy-key="priceAnchorLabel">Full-service pilot value</span>
-                <b className="partner-pricing-old">
-                  <span className="sr-only">$1,000 per month</span>
-                  <span className="partner-pricing-old-text" aria-hidden="true">$1,000 / month</span>
-                </b>
-                <span className="partner-pricing-ticker" aria-hidden="true">
-                  <span>$1,000</span>
-                  <span>$850</span>
-                  <span>$650</span>
-                  <span>$497</span>
-                </span>
-                <i data-copy-key="priceDropLabel">founding price drops to</i>
-              </div>
-              <div className="partner-pricing-price">
-                <b>$497</b>
-                <small>/ month</small>
-              </div>
-              <p>for your first 3 months</p>
-              <div className="partner-pricing-standard">Then <strong>$750 / month</strong> standard rate</div>
-              <a href="#apply" className="partner-primary-button" data-copy-key="primaryCta">Apply for a Founding Partner Spot</a>
-              <p className="partner-pricing-note">No payment due today. We review your trade & territory, then confirm availability before anything is charged.</p>
-            </aside>
+            <div className="partner-pricing-card-column">
+              <aside className="partner-pricing-box is-price-intro">
+                <svg className="partner-pricing-rim" viewBox="0 0 1000 1300" preserveAspectRatio="none" aria-hidden="true" focusable="false">
+                  <defs>
+                    <linearGradient id="partnerPricingBaseRim" x1="0" y1="0" x2="1" y2="1">
+                      <stop offset="0%" stopColor="#a7cfff" stopOpacity="0.32" />
+                      <stop offset="35%" stopColor="#4777b4" stopOpacity="0.2" />
+                      <stop offset="70%" stopColor="#244b82" stopOpacity="0.16" />
+                      <stop offset="100%" stopColor="#168eea" stopOpacity="0.38" />
+                    </linearGradient>
+                    <linearGradient id="partnerPricingHotRim" x1="0" y1="0" x2="1" y2="1">
+                      <stop offset="0%" stopColor="#2f76bd" stopOpacity="0" />
+                      <stop offset="35%" stopColor="#179cff" stopOpacity="0.65" />
+                      <stop offset="62%" stopColor="#8fe7ff" stopOpacity="1" />
+                      <stop offset="78%" stopColor="#dff8ff" stopOpacity="1" />
+                      <stop offset="100%" stopColor="#1b91ff" stopOpacity="0.15" />
+                    </linearGradient>
+                    <filter id="partnerPricingRimGlow" x="-20%" y="-20%" width="140%" height="140%">
+                      <feGaussianBlur stdDeviation="5" result="blur" />
+                      <feMerge>
+                        <feMergeNode in="blur" />
+                        <feMergeNode in="SourceGraphic" />
+                      </feMerge>
+                    </filter>
+                  </defs>
+                  <rect x="2" y="2" width="996" height="1296" rx="48" fill="none" stroke="url(#partnerPricingBaseRim)" strokeWidth="2" />
+                  <path d="M 735 2 H 952 Q 998 2 998 48 V 250" fill="none" stroke="url(#partnerPricingHotRim)" strokeWidth="3" strokeLinecap="round" filter="url(#partnerPricingRimGlow)" />
+                  <path d="M 835 2 H 955 Q 998 2 998 45" fill="none" stroke="#dff8ff" strokeOpacity="0.85" strokeWidth="0.8" strokeLinecap="round" />
+                </svg>
+                <div className="partner-pricing-surface">
+                  <div className="partner-pricing-badge-row">
+                    <span>Founding Partner</span>
+                    <small><i aria-hidden="true" />Limited spots</small>
+                  </div>
+                  <div className="partner-pricing-anchor" aria-label="Founding partner discount">
+                    <div className="partner-pricing-anchor-head">
+                      <span data-copy-key="priceAnchorLabel">Full-service pilot value</span>
+                      <div className="partner-pricing-anchor-value">
+                        <b className="partner-pricing-old">
+                          <span className="sr-only">$1,000 per month</span>
+                          <span className="partner-pricing-old-text" aria-hidden="true">
+                            <span className="partner-pricing-old-amount">$1,000</span>
+                            <span className="partner-pricing-old-unit">/ month</span>
+                          </span>
+                        </b>
+                      </div>
+                    </div>
+                  </div>
+                  <p className="partner-pricing-drop-label" data-copy-key="priceDropLabel">founding price drops to</p>
+                  <div className="partner-pricing-price">
+                    <b>
+                      <PartnerPriceCounter />
+                    </b>
+                    <small>/ month</small>
+                    <span className="partner-price-sparkles" aria-hidden="true">
+                      <i />
+                      <i />
+                      <i />
+                      <i />
+                      <i />
+                      <i />
+                      <i />
+                    </span>
+                  </div>
+                  <p className="partner-pricing-duration"><span aria-hidden="true">✓</span>first 3 monthly billing cycles</p>
+                  <div className="partner-pricing-standard"><img src="/partners/pricing-shield.png" alt="" aria-hidden="true" /><p>Then <strong>$750 / mo</strong> standard</p></div>
+                  <a href="#apply" className="partner-primary-button"><span className="partner-pricing-cta-icon" aria-hidden="true">›</span><span data-copy-key="primaryCta">Apply for a Founding Partner Spot</span></a>
+                  <p className="partner-pricing-note"><img src="/partners/pricing-no-payment.png" alt="" aria-hidden="true" />No payment with your application. Approved partners receive a private Stripe checkout link for the $500 founding rate.</p>
+                </div>
+              </aside>
+            </div>
           </div>
         </section>
 
@@ -358,12 +442,12 @@ export default async function PartnersPage({ searchParams }: PartnersPageProps) 
               <span className="partner-section-label">Apply</span>
               <h2 data-copy-key="applyHeading">Claim your trade & territory.</h2>
               <p data-copy-key="applyBody">
-                Apply first — there's no payment today. We review availability in your area and confirm before anything is charged.
+                Apply for your trade and territory with no payment. We review availability first, and approved applicants receive a private $500 Stripe checkout link by email.
               </p>
               <ol className="partner-apply-steps">
                 <li><b>1</b><span><strong>Apply</strong> — tell us your trade and service area.</span></li>
-                <li><b>2</b><span><strong>Review</strong> — we check territory availability & fit.</span></li>
-                <li><b>3</b><span><strong>Onboard</strong> — approved partners go live; first charge after approval.</span></li>
+                <li><b>2</b><span><strong>Review</strong> — we confirm trade, territory, and category availability before any charge.</span></li>
+                <li><b>3</b><span><strong>Checkout & onboard</strong> — approved partners receive a private Stripe checkout link, then onboarding begins.</span></li>
               </ol>
             </div>
             <PartnerApplicationForm />
@@ -390,7 +474,7 @@ export default async function PartnersPage({ searchParams }: PartnersPageProps) 
         <section className="partner-final-cta">
           <div className="partner-shell">
             <h2>A founding spot in your territory won't stay open long.</h2>
-            <p>Apply now — no payment today. We'll confirm availability for your trade and area.</p>
+            <p>Apply with no payment. If your trade and territory are approved, we email your private $500 Stripe checkout link.</p>
             <a href="#apply" className="partner-primary-button"><span data-copy-key="primaryCta">Apply for a Founding Partner Spot</span> <span>→</span></a>
           </div>
         </section>
@@ -402,6 +486,7 @@ export default async function PartnersPage({ searchParams }: PartnersPageProps) 
           <p>A local market-watch service. We surface opportunities, signals, and reputation alerts — we do not guarantee booked jobs or revenue. partners.findalocalpro.com</p>
         </div>
       </footer>
-    </div>
+      </div>
+    </PartnerDesignReviewProvider>
   );
 }

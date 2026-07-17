@@ -1,94 +1,72 @@
-import { NextRequest, NextResponse } from 'next/server';
+import { NextResponse } from 'next/server';
+import { createPartnerApplication, updatePartnerApplication } from '@/lib/partner-store';
+import { issuePartnerReviewToken } from '@/lib/partner-review-tokens';
+import { sendPartnerApplicationForReview } from '@/lib/partner-telegram';
+import type { PartnerApplicationInput } from '@/lib/partner-types';
 
-const TELEGRAM_BOT_TOKEN = process.env.TELEGRAM_BOT_TOKEN;
-const TELEGRAM_CHAT_ID = process.env.TELEGRAM_CHAT_ID;
-
-type PartnerPayload = {
-  businessName?: string;
-  contactName?: string;
-  email?: string;
-  phone?: string;
-  website?: string;
-  category?: string;
-  serviceAreas?: string;
-  yearsInBusiness?: string;
-  googleProfile?: string;
-  preferredTerritory?: string;
-  notes?: string;
-  confirmed?: boolean;
-};
-
-function clean(value: unknown) {
-  return typeof value === 'string' ? value.trim().slice(0, 600) : '';
+function clean(value: unknown, maxLength = 600) {
+  return typeof value === 'string' ? value.trim().slice(0, maxLength) : '';
 }
 
-function buildMessage(payload: PartnerPayload) {
-  const lines = [
-    '*New Neighborhood Demand Engine Application*',
-    '',
-    `*Business:* ${clean(payload.businessName) || 'Unknown'}`,
-    `*Contact:* ${clean(payload.contactName) || 'Unknown'}`,
-    `*Email:* ${clean(payload.email) || 'Unknown'}`,
-    `*Phone:* ${clean(payload.phone) || 'Unknown'}`,
-    `*Category:* ${clean(payload.category) || 'Unknown'}`,
-    `*Territory:* ${clean(payload.preferredTerritory) || 'Recommend best open territory'}`,
-    `*Areas:* ${clean(payload.serviceAreas) || 'Unknown'}`,
-    '*Offer:* Founding Partner Plan - $497/mo for first 3 months, then $750/mo standard',
-  ];
-
-  if (payload.website) lines.push(`*Website:* ${clean(payload.website)}`);
-  if (payload.googleProfile) lines.push(`*GBP:* ${clean(payload.googleProfile)}`);
-  if (payload.yearsInBusiness) lines.push(`*Years:* ${clean(payload.yearsInBusiness)}`);
-  if (payload.notes) lines.push('', `*Notes:* ${clean(payload.notes)}`);
-
-  return lines.join('\n');
+function normalizedPayload(raw: Partial<PartnerApplicationInput>): PartnerApplicationInput {
+  return {
+    businessName: clean(raw.businessName, 160),
+    contactName: clean(raw.contactName, 160),
+    email: clean(raw.email, 254).toLowerCase(),
+    phone: clean(raw.phone, 40),
+    website: clean(raw.website, 500),
+    category: clean(raw.category, 120),
+    serviceAreas: clean(raw.serviceAreas, 600),
+    preferredTerritory: clean(raw.preferredTerritory, 600),
+    yearsInBusiness: clean(raw.yearsInBusiness, 20),
+    googleProfile: clean(raw.googleProfile, 500),
+    notes: clean(raw.notes, 1200),
+    confirmed: raw.confirmed === true,
+  };
 }
 
-async function sendTelegram(message: string) {
-  if (!TELEGRAM_BOT_TOKEN || !TELEGRAM_CHAT_ID) {
-    return { skipped: true };
-  }
-
+export async function POST(request: Request) {
   try {
-    const response = await fetch(`https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage`, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        chat_id: TELEGRAM_CHAT_ID,
-        text: message,
-        disable_web_page_preview: true,
-      }),
-    });
+    const payload = normalizedPayload(await request.json() as Partial<PartnerApplicationInput>);
+    const phoneDigits = payload.phone.replace(/\D/g, '');
 
-    if (!response.ok) {
-      return { skipped: false, ok: false, status: response.status };
+    if (!payload.businessName || !payload.contactName || !payload.email.includes('@') || phoneDigits.length !== 10) {
+      return NextResponse.json({ error: 'Missing required contact details.' }, { status: 400 });
+    }
+    if (!payload.category || !payload.serviceAreas || !payload.confirmed) {
+      return NextResponse.json({ error: 'Missing required partner details.' }, { status: 400 });
     }
 
-    return { skipped: false, ok: true };
-  } catch (error) {
-    console.error('Partner Telegram send failed:', error);
-    return { skipped: false, ok: false };
-  }
-}
+    const application = await createPartnerApplication(payload);
+    let reviewNotification: 'sent' | 'pending' = 'sent';
 
-export async function POST(request: NextRequest) {
-  try {
-    const payload = (await request.json()) as PartnerPayload;
-    const email = clean(payload.email);
-    const phoneDigits = clean(payload.phone).replace(/\D/g, '');
-
-    if (!clean(payload.businessName) || !clean(payload.contactName) || !email.includes('@') || phoneDigits.length !== 10) {
-      return NextResponse.json({ error: 'Missing required fields' }, { status: 400 });
+    try {
+      const [approveToken, declineToken] = await Promise.all([
+        issuePartnerReviewToken(application.id, 'approve'),
+        issuePartnerReviewToken(application.id, 'decline'),
+      ]);
+      const baseUrl = (process.env.NEXT_PUBLIC_SITE_URL || process.env.NEXT_PUBLIC_APP_URL || new URL(request.url).origin).replace(/\/$/, '');
+      await sendPartnerApplicationForReview(application, {
+        approve: `${baseUrl}/partners/review?token=${encodeURIComponent(approveToken)}`,
+        decline: `${baseUrl}/partners/review?token=${encodeURIComponent(declineToken)}`,
+      });
+      await updatePartnerApplication(application.id, {
+        telegram_notified_at: new Date().toISOString(),
+        failure_reason: null,
+      }, ['pending_review']);
+    } catch (notificationError) {
+      reviewNotification = 'pending';
+      const message = notificationError instanceof Error ? notificationError.message : 'Unknown Telegram review notification failure';
+      await updatePartnerApplication(application.id, { failure_reason: `Review notification pending: ${message}` }, ['pending_review']);
+      console.error('Partner review notification error:', notificationError);
     }
 
-    if (!clean(payload.category) || !clean(payload.serviceAreas) || !payload.confirmed) {
-      return NextResponse.json({ error: 'Missing partner details' }, { status: 400 });
-    }
-
-    const telegram = await sendTelegram(buildMessage(payload));
-    return NextResponse.json({ ok: true, telegram });
+    return NextResponse.json(
+      { applicationId: application.id, status: application.status, reviewNotification },
+      { status: 201 },
+    );
   } catch (error) {
     console.error('Partner application error:', error);
-    return NextResponse.json({ error: 'Could not submit application' }, { status: 500 });
+    return NextResponse.json({ error: 'Could not save the application.' }, { status: 500 });
   }
 }
