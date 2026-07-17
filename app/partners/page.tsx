@@ -5,6 +5,7 @@ import { PartnerApplicationForm } from './PartnerApplicationForm';
 import { PartnerDesignReviewProvider } from './PartnerDesignReview';
 import { PartnerHeroTitle } from './PartnerHeroTitle';
 import { PartnerHeroVisual } from './PartnerHeroVisual';
+import { PartnerHowStage } from './PartnerHowStage';
 import { PartnerPriceCounter } from './PartnerPriceCounter';
 import { PartnerReportDisplay } from './PartnerReportDisplay';
 import { PartnerScrollAnimator } from './PartnerScrollAnimator';
@@ -281,34 +282,7 @@ export default async function PartnersPage({ searchParams }: PartnersPageProps) 
               <h2 data-copy-key="howHeading">A local market watch that runs while you're on the job.</h2>
               <p data-copy-key="howBody">No dashboard to babysit. We do the watching and bring you what's worth your time.</p>
             </div>
-            <div className="partner-how-stage">
-              <div className="partner-how-illustration" aria-hidden="true" />
-              <div className="partner-how-focus-shade" aria-hidden="true" />
-              <div className="partner-how-hotspots" aria-hidden="true">
-                <span /><span /><span /><span />
-              </div>
-              <div className="partner-flow-grid">
-                {flow.map(({ number, icon, kicker, title, body }, index) => (
-                  <article
-                    key={title}
-                    tabIndex={0}
-                    style={{ '--partner-flow-index': index } as CSSProperties}
-                  >
-                    <div className="partner-flow-card-top">
-                      <span>{number}</span>
-                      <i className="material-symbols-outlined" aria-hidden="true">{icon}</i>
-                    </div>
-                    <small>{kicker}</small>
-                    <h3>{title}</h3>
-                    <p>{body}</p>
-                  </article>
-                ))}
-              </div>
-              <p className="partner-how-stage-note">
-                <span className="material-symbols-outlined" aria-hidden="true">bolt</span>
-                One connected loop — from signal found to action taken.
-              </p>
-            </div>
+            <PartnerHowStage flow={flow} />
           </div>
         </section>
 

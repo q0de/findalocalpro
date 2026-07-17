@@ -9635,14 +9635,14 @@ details[open] > p {
   opacity: 0;
   background: rgba(1, 8, 23, 0.66);
   -webkit-mask-image: radial-gradient(
-    ellipse 190px 112px at var(--partner-how-focus-x) var(--partner-how-focus-y),
+    ellipse var(--partner-how-focus-width, 190px) var(--partner-how-focus-height, 112px) at var(--partner-how-focus-x) var(--partner-how-focus-y),
     transparent 0 44%,
     rgba(0, 0, 0, 0.22) 60%,
     rgba(0, 0, 0, 0.78) 78%,
     #000 100%
   );
   mask-image: radial-gradient(
-    ellipse 190px 112px at var(--partner-how-focus-x) var(--partner-how-focus-y),
+    ellipse var(--partner-how-focus-width, 190px) var(--partner-how-focus-height, 112px) at var(--partner-how-focus-x) var(--partner-how-focus-y),
     transparent 0 44%,
     rgba(0, 0, 0, 0.22) 60%,
     rgba(0, 0, 0, 0.78) 78%,
@@ -9656,30 +9656,35 @@ details[open] > p {
 .partner-how-focus-spotlight[data-how-hotspot-preview="1"] .partner-how-focus-shade,
 .partner-how-focus-spotlight[data-how-hotspot-preview="2"] .partner-how-focus-shade,
 .partner-how-focus-spotlight[data-how-hotspot-preview="3"] .partner-how-focus-shade,
-.partner-how-focus-spotlight[data-how-hotspot-preview="4"] .partner-how-focus-shade {
+.partner-how-focus-spotlight[data-how-hotspot-preview="4"] .partner-how-focus-shade,
+.partner-how-focus-spotlight .partner-how-stage[data-how-active-step] .partner-how-focus-shade {
   opacity: 1;
 }
 
 .partner-how-stage:has(.partner-flow-grid article:nth-child(1):is(:hover, :focus-visible)) .partner-how-focus-shade,
-.partner-how-focus-spotlight[data-how-hotspot-preview="1"] .partner-how-focus-shade {
+.partner-how-focus-spotlight[data-how-hotspot-preview="1"] .partner-how-focus-shade,
+.partner-how-stage[data-how-active-step="1"] .partner-how-focus-shade {
   --partner-how-focus-x: var(--partner-hotspot-1-x, 18.65%);
   --partner-how-focus-y: var(--partner-hotspot-1-y, 26.4cqw);
 }
 
 .partner-how-stage:has(.partner-flow-grid article:nth-child(2):is(:hover, :focus-visible)) .partner-how-focus-shade,
-.partner-how-focus-spotlight[data-how-hotspot-preview="2"] .partner-how-focus-shade {
+.partner-how-focus-spotlight[data-how-hotspot-preview="2"] .partner-how-focus-shade,
+.partner-how-stage[data-how-active-step="2"] .partner-how-focus-shade {
   --partner-how-focus-x: var(--partner-hotspot-2-x, 44.62%);
   --partner-how-focus-y: var(--partner-hotspot-2-y, 23cqw);
 }
 
 .partner-how-stage:has(.partner-flow-grid article:nth-child(3):is(:hover, :focus-visible)) .partner-how-focus-shade,
-.partner-how-focus-spotlight[data-how-hotspot-preview="3"] .partner-how-focus-shade {
+.partner-how-focus-spotlight[data-how-hotspot-preview="3"] .partner-how-focus-shade,
+.partner-how-stage[data-how-active-step="3"] .partner-how-focus-shade {
   --partner-how-focus-x: var(--partner-hotspot-3-x, 71.62%);
   --partner-how-focus-y: var(--partner-hotspot-3-y, 24.1cqw);
 }
 
 .partner-how-stage:has(.partner-flow-grid article:nth-child(4):is(:hover, :focus-visible)) .partner-how-focus-shade,
-.partner-how-focus-spotlight[data-how-hotspot-preview="4"] .partner-how-focus-shade {
+.partner-how-focus-spotlight[data-how-hotspot-preview="4"] .partner-how-focus-shade,
+.partner-how-stage[data-how-active-step="4"] .partner-how-focus-shade {
   --partner-how-focus-x: var(--partner-hotspot-4-x, 92.5%);
   --partner-how-focus-y: var(--partner-hotspot-4-y, 24.35cqw);
 }
@@ -9751,7 +9756,8 @@ details[open] > p {
 }
 
 .partner-standalone .partner-how-section .partner-flow-grid article:hover,
-.partner-standalone .partner-how-section .partner-flow-grid article:focus-visible {
+.partner-standalone .partner-how-section .partner-flow-grid article:focus-visible,
+.partner-standalone .partner-how-section .partner-flow-grid article.is-touch-active {
   border-color: rgba(126, 193, 61, 0.72);
   box-shadow:
     0 26px 46px -28px rgba(0, 0, 0, 0.92),
@@ -9814,7 +9820,8 @@ details[open] > p {
 }
 
 .partner-standalone .partner-how-section .partner-flow-grid article:hover .partner-flow-card-top > i,
-.partner-standalone .partner-how-section .partner-flow-grid article:focus-visible .partner-flow-card-top > i {
+.partner-standalone .partner-how-section .partner-flow-grid article:focus-visible .partner-flow-card-top > i,
+.partner-standalone .partner-how-section .partner-flow-grid article.is-touch-active .partner-flow-card-top > i {
   color: #9fea50;
   opacity: 0.3;
 }
@@ -9946,7 +9953,11 @@ details[open] > p {
 .partner-how-stage:has(.partner-flow-grid article:nth-child(1):is(:hover, :focus-visible)) .partner-how-hotspots span:nth-child(1),
 .partner-how-stage:has(.partner-flow-grid article:nth-child(2):is(:hover, :focus-visible)) .partner-how-hotspots span:nth-child(2),
 .partner-how-stage:has(.partner-flow-grid article:nth-child(3):is(:hover, :focus-visible)) .partner-how-hotspots span:nth-child(3),
-.partner-how-stage:has(.partner-flow-grid article:nth-child(4):is(:hover, :focus-visible)) .partner-how-hotspots span:nth-child(4) {
+.partner-how-stage:has(.partner-flow-grid article:nth-child(4):is(:hover, :focus-visible)) .partner-how-hotspots span:nth-child(4),
+.partner-how-stage[data-how-active-step="1"] .partner-how-hotspots span:nth-child(1),
+.partner-how-stage[data-how-active-step="2"] .partner-how-hotspots span:nth-child(2),
+.partner-how-stage[data-how-active-step="3"] .partner-how-hotspots span:nth-child(3),
+.partner-how-stage[data-how-active-step="4"] .partner-how-hotspots span:nth-child(4) {
   opacity: 1;
   transform: translate(-50%, -50%) scale(1);
 }
@@ -9963,6 +9974,10 @@ details[open] > p {
 .partner-how-stage:has(.partner-flow-grid article:nth-child(2):is(:hover, :focus-visible)) .partner-how-hotspots span:nth-child(2)::before,
 .partner-how-stage:has(.partner-flow-grid article:nth-child(3):is(:hover, :focus-visible)) .partner-how-hotspots span:nth-child(3)::before,
 .partner-how-stage:has(.partner-flow-grid article:nth-child(4):is(:hover, :focus-visible)) .partner-how-hotspots span:nth-child(4)::before,
+.partner-how-stage[data-how-active-step="1"] .partner-how-hotspots span:nth-child(1)::before,
+.partner-how-stage[data-how-active-step="2"] .partner-how-hotspots span:nth-child(2)::before,
+.partner-how-stage[data-how-active-step="3"] .partner-how-hotspots span:nth-child(3)::before,
+.partner-how-stage[data-how-active-step="4"] .partner-how-hotspots span:nth-child(4)::before,
 .partner-standalone[data-how-hotspot-preview="1"] .partner-how-hotspots span:nth-child(1)::before,
 .partner-standalone[data-how-hotspot-preview="2"] .partner-how-hotspots span:nth-child(2)::before,
 .partner-standalone[data-how-hotspot-preview="3"] .partner-how-hotspots span:nth-child(3)::before,
@@ -9974,6 +9989,10 @@ details[open] > p {
 .partner-how-stage:has(.partner-flow-grid article:nth-child(2):is(:hover, :focus-visible)) .partner-how-hotspots span:nth-child(2)::after,
 .partner-how-stage:has(.partner-flow-grid article:nth-child(3):is(:hover, :focus-visible)) .partner-how-hotspots span:nth-child(3)::after,
 .partner-how-stage:has(.partner-flow-grid article:nth-child(4):is(:hover, :focus-visible)) .partner-how-hotspots span:nth-child(4)::after,
+.partner-how-stage[data-how-active-step="1"] .partner-how-hotspots span:nth-child(1)::after,
+.partner-how-stage[data-how-active-step="2"] .partner-how-hotspots span:nth-child(2)::after,
+.partner-how-stage[data-how-active-step="3"] .partner-how-hotspots span:nth-child(3)::after,
+.partner-how-stage[data-how-active-step="4"] .partner-how-hotspots span:nth-child(4)::after,
 .partner-standalone[data-how-hotspot-preview="1"] .partner-how-hotspots span:nth-child(1)::after,
 .partner-standalone[data-how-hotspot-preview="2"] .partner-how-hotspots span:nth-child(2)::after,
 .partner-standalone[data-how-hotspot-preview="3"] .partner-how-hotspots span:nth-child(3)::after,
@@ -10086,7 +10105,15 @@ details[open] > p {
   animation: partnerHowRadar 1.25s ease-in-out infinite;
 }
 
+.partner-standalone .partner-how-section .partner-flow-grid article:nth-child(1).is-touch-active .partner-flow-card-top > i {
+  animation: partnerHowRadar 1.25s ease-in-out infinite;
+}
+
 .partner-standalone .partner-how-section .partner-flow-grid article:nth-child(2):hover .partner-flow-card-top > i {
+  animation: partnerHowBell 720ms ease-in-out infinite;
+}
+
+.partner-standalone .partner-how-section .partner-flow-grid article:nth-child(2).is-touch-active .partner-flow-card-top > i {
   animation: partnerHowBell 720ms ease-in-out infinite;
 }
 
@@ -10094,7 +10121,15 @@ details[open] > p {
   animation: partnerHowPhone 820ms ease-in-out infinite;
 }
 
+.partner-standalone .partner-how-section .partner-flow-grid article:nth-child(3).is-touch-active .partner-flow-card-top > i {
+  animation: partnerHowPhone 820ms ease-in-out infinite;
+}
+
 .partner-standalone .partner-how-section .partner-flow-grid article:nth-child(4):hover .partner-flow-card-top > i {
+  animation: partnerHowReport 900ms ease-in-out infinite;
+}
+
+.partner-standalone .partner-how-section .partner-flow-grid article:nth-child(4).is-touch-active .partner-flow-card-top > i {
   animation: partnerHowReport 900ms ease-in-out infinite;
 }
 
@@ -10144,6 +10179,16 @@ details[open] > p {
 
 @media (max-width: 1050px) {
   .partner-how-stage {
+    --partner-hotspot-1-x: 24%;
+    --partner-hotspot-1-y: 178px;
+    --partner-hotspot-2-x: 46%;
+    --partner-hotspot-2-y: 150px;
+    --partner-hotspot-3-x: 68%;
+    --partner-hotspot-3-y: 160px;
+    --partner-hotspot-4-x: 85%;
+    --partner-hotspot-4-y: 164px;
+    --partner-how-focus-width: 124px;
+    --partner-how-focus-height: 72px;
     min-height: 780px;
     padding-top: clamp(270px, 42vw, 360px);
   }
@@ -10156,12 +10201,9 @@ details[open] > p {
     display: none;
   }
 
-  .partner-how-hotspots {
-    display: none;
-  }
-
-  .partner-how-focus-shade {
-    display: none;
+  .partner-how-hotspots span {
+    width: calc(132px * var(--partner-hotspot-size, 1));
+    height: calc(132px * var(--partner-hotspot-size, 1));
   }
 
   .partner-standalone .partner-how-section .partner-flow-grid {
@@ -10187,6 +10229,16 @@ details[open] > p {
   }
 
   .partner-how-stage {
+    --partner-hotspot-1-x: 18%;
+    --partner-hotspot-1-y: 128px;
+    --partner-hotspot-2-x: 44%;
+    --partner-hotspot-2-y: 104px;
+    --partner-hotspot-3-x: 72%;
+    --partner-hotspot-3-y: 112px;
+    --partner-hotspot-4-x: 94%;
+    --partner-hotspot-4-y: 116px;
+    --partner-how-focus-width: 88px;
+    --partner-how-focus-height: 52px;
     min-height: 0;
     padding: 220px 14px 22px;
     border-radius: 22px;
@@ -10195,6 +10247,11 @@ details[open] > p {
   .partner-how-illustration {
     background-position: center top;
     background-size: auto 255px;
+  }
+
+  .partner-how-hotspots span {
+    width: calc(92px * var(--partner-hotspot-size, 1));
+    height: calc(92px * var(--partner-hotspot-size, 1));
   }
 
   .partner-standalone .partner-how-section .partner-flow-grid {
