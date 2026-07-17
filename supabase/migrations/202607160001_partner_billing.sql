@@ -16,7 +16,12 @@ create table if not exists public.partner_applications (
   google_profile text,
   notes text,
   confirmed boolean not null default false,
-  status text not null default 'checkout_pending' check (status in (
+  status text not null default 'pending_review' check (status in (
+    'pending_review',
+    'approval_delivery_failed',
+    'approved_pending_checkout',
+    'declined',
+    'active',
     'checkout_pending',
     'paid_pending_review',
     'approved',
@@ -39,6 +44,9 @@ create table if not exists public.partner_applications (
   declined_at timestamptz,
   refunded_at timestamptz,
   telegram_notified_at timestamptz,
+  approval_email_sent_at timestamptz,
+  checkout_token_hash text,
+  checkout_token_expires_at timestamptz,
   failure_reason text
 );
 
@@ -94,6 +102,6 @@ alter table public.partner_applications enable row level security;
 alter table public.partner_stripe_events enable row level security;
 alter table public.partner_review_tokens enable row level security;
 
-comment on table public.partner_applications is 'Paid founding-partner applications and their review/billing lifecycle.';
+comment on table public.partner_applications is 'Approval-first founding-partner applications and their billing lifecycle.';
 comment on table public.partner_stripe_events is 'Idempotency ledger for Stripe partner webhooks.';
 comment on table public.partner_review_tokens is 'Hashed, expiring, one-use Telegram review links.';

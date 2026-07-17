@@ -20,13 +20,13 @@ async function sendTelegram(payload: Record<string, unknown>) {
   return { ok: true };
 }
 
-export async function sendPaidPartnerApplication(
+export async function sendPartnerApplicationForReview(
   application: PartnerApplication,
   links: { approve: string; decline: string },
 ) {
   const territory = application.preferred_territory || 'Recommend best open territory';
   const text = [
-    'New paid Neighborhood Demand Engine application',
+    'New Neighborhood Demand Engine application',
     '',
     `Business: ${application.business_name}`,
     `Contact: ${application.contact_name}`,
@@ -35,7 +35,8 @@ export async function sendPaidPartnerApplication(
     `Category: ${application.category}`,
     `Territory: ${territory}`,
     `Areas: ${application.service_areas}`,
-    'Billing: $500 paid now · $500 for 3 monthly cycles · then $750/mo',
+    'Payment: none collected · approval required before checkout',
+    'Approved plan: $500 for 3 monthly cycles · then $750/mo',
     '',
     'Review within seven days. Each action can be used once.',
   ].join('\n');
@@ -45,12 +46,12 @@ export async function sendPaidPartnerApplication(
     reply_markup: {
       inline_keyboard: [[
         { text: '✅ Review approval', url: links.approve },
-        { text: '↩️ Review decline/refund', url: links.decline },
+        { text: '✕ Review decline', url: links.decline },
       ]],
     },
   });
 }
 
 export async function sendPartnerOperationsAlert(message: string) {
-  return sendTelegram({ text: `⚠️ Partner billing action required\n\n${message}` });
+  return sendTelegram({ text: `⚠️ Partner action required\n\n${message}` });
 }

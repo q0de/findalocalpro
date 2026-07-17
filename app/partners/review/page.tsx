@@ -18,26 +18,26 @@ type ReviewPageProps = {
 const results: Record<string, { icon: string; title: string; body: string; tone?: string }> = {
   approved: {
     icon: 'check_circle',
-    title: 'Partner approved',
-    body: 'The application is approved and the scheduled subscription remains active. You can begin onboarding.',
+    title: 'Partner approved — checkout sent',
+    body: 'The applicant has been approved and their private Stripe checkout link was emailed. No payment existed before this approval.',
     tone: 'is-success',
   },
-  declined_refunded: {
-    icon: 'currency_exchange',
-    title: 'Declined and refunded',
-    body: 'The subscription was cancelled and all captured pre-approval payments were refunded through Stripe.',
+  declined: {
+    icon: 'block',
+    title: 'Application declined',
+    body: 'The application was declined. No checkout was created and no payment was collected.',
     tone: 'is-success',
   },
-  refund_failed: {
-    icon: 'error',
-    title: 'The refund needs attention',
-    body: 'The application is marked for manual review and an urgent Telegram alert was sent. You may retry the same decline link.',
+  delivery_failed: {
+    icon: 'mark_email_unread',
+    title: 'Approved, but email needs attention',
+    body: 'No payment was taken. The approval is saved, but the checkout email could not be delivered. Fix the email configuration and retry this approval link.',
     tone: 'is-error',
   },
   processing: {
     icon: 'pending',
     title: 'Action already processing',
-    body: 'Another request is handling this application. Check Stripe and the application record before trying again.',
+    body: 'Another request is handling this application. Check the application record before trying again.',
   },
   resolved: {
     icon: 'lock',
@@ -98,8 +98,8 @@ export default async function PartnerReviewPage({ searchParams }: ReviewPageProp
   return (
     <main className="partner-review-page">
       <section className={`partner-review-confirmation ${isApprove ? 'is-success' : 'is-warning'}`}>
-        <span className="material-symbols-outlined" aria-hidden="true">{isApprove ? 'verified' : 'currency_exchange'}</span>
-        <p>Confirm {isApprove ? 'approval' : 'decline and refund'}</p>
+        <span className="material-symbols-outlined" aria-hidden="true">{isApprove ? 'verified' : 'block'}</span>
+        <p>Confirm {isApprove ? 'approval' : 'decline'}</p>
         <h1>{application.business_name}</h1>
         <dl>
           <div><dt>Trade</dt><dd>{application.category}</dd></div>
@@ -109,13 +109,13 @@ export default async function PartnerReviewPage({ searchParams }: ReviewPageProp
         </dl>
         <p className="partner-review-warning">
           {isApprove
-            ? 'Approval keeps the subscription active and confirms this partner for onboarding.'
-            : 'Declining cancels the subscription and refunds every payment captured before approval.'}
+            ? 'Approval emails this applicant a private Stripe checkout link. No charge happens until they complete it.'
+            : 'Declining closes the application. No checkout is created and no payment is collected.'}
         </p>
         <form method="post" action="/api/partners/review">
           <input type="hidden" name="token" value={token} />
           <button className={isApprove ? '' : 'is-decline'}>
-            {isApprove ? 'Approve this partner' : 'Decline, cancel, and refund'}
+            {isApprove ? 'Approve and email checkout' : 'Decline this application'}
           </button>
         </form>
         <Link href="/partners">Cancel without making a change</Link>

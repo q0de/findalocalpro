@@ -121,7 +121,7 @@ const faqs = [
   ['Is my territory exclusive?', 'Where approved, yes. We limit enrollment by trade and territory and protect approved partners from having a direct competitor signed up in the same area. Availability depends on your specific category and ZIPs, which is why we review before confirming.'],
   ['Can the messaging sound like my company?', 'Yes. During onboarding we learn your tone, service standards, offers, and do-not-say rules, then prepare response drafts, review requests, and follow-up wording that fit your company. You approve or edit before anything is sent.'],
   ['Do you post on social platforms as my business?', 'We can support both approaches. With your approval and within agreed guidelines, we can help publish or respond through your business profiles. FindALocalPro can also participate as its own entity to surface and recommend your business in relevant local conversations. You stay in control of the messaging, platforms, and level of involvement.'],
-  ['What happens after I apply?', 'You complete secure checkout for $500, then we review availability and fit for your trade and territory, usually within one business day. If your area is open, we confirm your founding spot and begin onboarding. If we cannot approve it, we cancel the subscription and issue a full refund.'],
+  ['What happens after I apply?', 'We review availability and fit for your trade and territory before any payment. If approved, we email you a private Stripe checkout link for the $500 founding rate. Declined applications are closed without a charge.'],
   ['Why is the founding price lower?', 'Founding partners help us calibrate the service in their local market, so the first three monthly billing cycles are $500 before the ongoing $750/mo standard rate. It is a genuine launch rate for a high-touch service, not a discount gimmick.'],
 ];
 
@@ -166,15 +166,15 @@ export default async function PartnersPage({ searchParams }: PartnersPageProps) 
         <div className="partner-checkout-banner is-success" role="status">
           <span className="material-symbols-outlined">verified</span>
           {checkoutConfirmed
-            ? 'Payment received — your territory review is now pending. We will respond within one business day.'
-            : 'Checkout returned successfully. We are securely confirming the payment and territory review.'}
+            ? 'Payment received — your approved founding partner spot is active. We will follow up with onboarding details.'
+            : 'Checkout returned successfully. We are securely confirming payment for your approved application.'}
         </div>
       )}
 
       {checkoutStatus === 'cancelled' && (
         <div className="partner-checkout-banner" role="status">
           <span className="material-symbols-outlined">info</span>
-          Checkout was cancelled. Your saved application is still available; submit the final step again when you are ready to pay.
+          Checkout was cancelled and no payment was taken. Use the private link in your approval email when you are ready.
         </div>
       )}
 
@@ -198,7 +198,7 @@ export default async function PartnersPage({ searchParams }: PartnersPageProps) 
                   <a href="#report" className="partner-secondary-button" data-copy-key="secondaryCta">See the Weekly Report</a>
                 </div>
                 <div className="partner-trust-row">
-                  <span>✓ Full refund if your territory cannot be approved</span>
+                  <span>✓ No payment until your territory is approved</span>
                   <span>✓ Territory & category exclusivity where approved</span>
                 </div>
               </div>
@@ -339,7 +339,7 @@ export default async function PartnersPage({ searchParams }: PartnersPageProps) 
                 We're enrolling a first wave of partners by trade and territory. Founding partners help us calibrate the service in their market — so the price reflects that, and it's lower than the standard rate.
               </p>
               <ul className="partner-pricing-points">
-                <li>$500 charged at secure checkout; full refund if we cannot approve your territory</li>
+                <li>Apply first; no payment until we approve your trade and territory</li>
                 <li>One approved partner per trade and territory where available</li>
                 <li>Founding price designed to be covered by a small number of booked jobs</li>
                 <li>Flat monthly service, not shared-lead bidding</li>
@@ -412,7 +412,7 @@ export default async function PartnersPage({ searchParams }: PartnersPageProps) 
                   <p className="partner-pricing-duration"><span aria-hidden="true">✓</span>first 3 monthly billing cycles</p>
                   <div className="partner-pricing-standard"><img src="/partners/pricing-shield.png" alt="" aria-hidden="true" /><p>Then <strong>$750 / mo</strong> standard</p></div>
                   <a href="#apply" className="partner-primary-button"><span className="partner-pricing-cta-icon" aria-hidden="true">›</span><span data-copy-key="primaryCta">Apply for a Founding Partner Spot</span></a>
-                  <p className="partner-pricing-note"><img src="/partners/pricing-no-payment.png" alt="" aria-hidden="true" />$500 is charged today through Stripe. If we cannot approve your trade and territory, we cancel and refund it in full.</p>
+                  <p className="partner-pricing-note"><img src="/partners/pricing-no-payment.png" alt="" aria-hidden="true" />No payment with your application. Approved partners receive a private Stripe checkout link for the $500 founding rate.</p>
                 </div>
               </aside>
             </div>
@@ -442,12 +442,12 @@ export default async function PartnersPage({ searchParams }: PartnersPageProps) 
               <span className="partner-section-label">Apply</span>
               <h2 data-copy-key="applyHeading">Claim your trade & territory.</h2>
               <p data-copy-key="applyBody">
-                Apply and complete the $500 secure checkout. We review availability immediately and refund you in full if your trade or territory cannot be approved.
+                Apply for your trade and territory with no payment. We review availability first, and approved applicants receive a private $500 Stripe checkout link by email.
               </p>
               <ol className="partner-apply-steps">
                 <li><b>1</b><span><strong>Apply</strong> — tell us your trade and service area.</span></li>
-                <li><b>2</b><span><strong>Checkout</strong> — pay the first $500 monthly charge securely through Stripe.</span></li>
-                <li><b>3</b><span><strong>Review & onboard</strong> — approved partners go live; declined applications are cancelled and fully refunded.</span></li>
+                <li><b>2</b><span><strong>Review</strong> — we confirm trade, territory, and category availability before any charge.</span></li>
+                <li><b>3</b><span><strong>Checkout & onboard</strong> — approved partners receive a private Stripe checkout link, then onboarding begins.</span></li>
               </ol>
             </div>
             <PartnerApplicationForm />
@@ -474,7 +474,7 @@ export default async function PartnersPage({ searchParams }: PartnersPageProps) 
         <section className="partner-final-cta">
           <div className="partner-shell">
             <h2>A founding spot in your territory won't stay open long.</h2>
-            <p>Apply and reserve your review with a $500 secure checkout. If the territory is unavailable, you receive a full refund.</p>
+            <p>Apply with no payment. If your trade and territory are approved, we email your private $500 Stripe checkout link.</p>
             <a href="#apply" className="partner-primary-button"><span data-copy-key="primaryCta">Apply for a Founding Partner Spot</span> <span>→</span></a>
           </div>
         </section>

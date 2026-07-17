@@ -1,7 +1,6 @@
 import Stripe from 'stripe';
 import { NextResponse } from 'next/server';
 import { configurePartnerSubscriptionSchedule } from '@/lib/partner-billing';
-import { issuePartnerReviewToken } from '@/lib/partner-review-tokens';
 import {
   claimPartnerStripeEvent,
   finishPartnerStripeEvent,
@@ -9,7 +8,7 @@ import {
   getPartnerApplicationBySubscription,
   updatePartnerApplication,
 } from '@/lib/partner-store';
-import { sendPaidPartnerApplication, sendPartnerOperationsAlert } from '@/lib/partner-telegram';
+import { sendPartnerOperationsAlert } from '@/lib/partner-telegram';
 import { getStripe } from '@/lib/stripe';
 
 function idOf(value: string | { id: string } | null | undefined) {
@@ -22,10 +21,6 @@ function getApplicationIdFromInvoice(invoice: Stripe.Invoice) {
   return idOf(subscription);
 }
 
-function getBaseUrl() {
-  return (process.env.NEXT_PUBLIC_SITE_URL || process.env.NEXT_PUBLIC_APP_URL || 'https://findalocalpro.com').replace(/\/$/, '');
-}
-
 async function handleCheckoutCompleted(session: Stripe.Checkout.Session) {
   const applicationId = session.metadata?.applicationId;
   const subscriptionId = idOf(session.subscription);
@@ -34,6 +29,10 @@ async function handleCheckoutCompleted(session: Stripe.Checkout.Session) {
 
   const application = await getPartnerApplication(applicationId);
   if (!application) throw new Error(`Partner application ${applicationId} was not found`);
+  if (application.status === 'active') return;
+  if (application.status !== 'approved_pending_checkout') {
+    throw new Error(`Partner application ${applicationId} was not approved for checkout`);
+  }
 
   let billing;
   try {
@@ -53,7 +52,7 @@ async function handleCheckoutCompleted(session: Stripe.Checkout.Session) {
   }
 
   const updated = await updatePartnerApplication(applicationId, {
-    status: 'paid_pending_review',
+    status: 'active',
     billing_status: billing.subscription.status,
     stripe_checkout_session_id: session.id,
     stripe_customer_id: idOf(session.customer),
@@ -62,29 +61,12 @@ async function handleCheckoutCompleted(session: Stripe.Checkout.Session) {
     amount_paid_cents: session.amount_total ?? 50000,
     currency: session.currency ?? 'usd',
     failure_reason: null,
-  });
+  }, ['approved_pending_checkout']);
   if (!updated) throw new Error(`Partner application ${applicationId} could not be updated after checkout`);
-
-  if (!updated.telegram_notified_at) {
-    try {
-      const [approveToken, declineToken] = await Promise.all([
-        issuePartnerReviewToken(applicationId, 'approve'),
-        issuePartnerReviewToken(applicationId, 'decline'),
-      ]);
-      const baseUrl = getBaseUrl();
-      await sendPaidPartnerApplication(updated, {
-        approve: `${baseUrl}/partners/review?token=${encodeURIComponent(approveToken)}`,
-        decline: `${baseUrl}/partners/review?token=${encodeURIComponent(declineToken)}`,
-      });
-      await updatePartnerApplication(applicationId, {
-        telegram_notified_at: new Date().toISOString(),
-        failure_reason: null,
-      });
-    } catch (error) {
-      const message = error instanceof Error ? error.message : 'Unknown Telegram notification failure';
-      await updatePartnerApplication(applicationId, { failure_reason: `Telegram review alert pending: ${message}` });
-      throw error;
-    }
+  try {
+    await sendPartnerOperationsAlert(`Payment completed for approved partner ${updated.business_name} (${updated.id}). Onboarding can begin.`);
+  } catch (alertError) {
+    console.error('Partner payment notification failed:', alertError);
   }
 }
 
@@ -110,7 +92,7 @@ async function handleSubscription(subscription: Stripe.Subscription, deleted: bo
     : await getPartnerApplicationBySubscription(subscription.id);
   if (!application) return;
 
-  const shouldCancelApplication = deleted && ['checkout_pending', 'paid_pending_review'].includes(application.status);
+  const shouldCancelApplication = deleted && ['approved_pending_checkout', 'active', 'billing_setup_failed'].includes(application.status);
   await updatePartnerApplication(application.id, {
     billing_status: deleted ? 'cancelled' : subscription.status,
     ...(shouldCancelApplication ? { status: 'cancelled' as const } : {}),
@@ -124,7 +106,7 @@ async function processEvent(event: Stripe.Event) {
       break;
     case 'checkout.session.expired': {
       const applicationId = event.data.object.metadata?.applicationId;
-      if (applicationId) await updatePartnerApplication(applicationId, { billing_status: 'checkout_expired' }, ['checkout_pending']);
+      if (applicationId) await updatePartnerApplication(applicationId, { billing_status: 'checkout_expired' }, ['approved_pending_checkout']);
       break;
     }
     case 'invoice.payment_succeeded':

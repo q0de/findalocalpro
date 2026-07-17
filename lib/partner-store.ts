@@ -61,8 +61,8 @@ export async function createPartnerApplication(input: PartnerApplicationInput) {
       google_profile: nullable(input.googleProfile),
       notes: nullable(input.notes),
       confirmed: input.confirmed,
-      status: 'checkout_pending',
-      billing_status: 'unpaid',
+      status: 'pending_review',
+      billing_status: 'not_started',
     }),
   });
 

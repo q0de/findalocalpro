@@ -1,4 +1,10 @@
 export type PartnerApplicationStatus =
+  | 'pending_review'
+  | 'approval_delivery_failed'
+  | 'approved_pending_checkout'
+  | 'declined'
+  | 'active'
+  // Legacy states retained so an existing record can still be resolved safely.
   | 'checkout_pending'
   | 'paid_pending_review'
   | 'approved'
@@ -53,6 +59,9 @@ export type PartnerApplication = {
   declined_at: string | null;
   refunded_at: string | null;
   telegram_notified_at: string | null;
+  approval_email_sent_at: string | null;
+  checkout_token_hash: string | null;
+  checkout_token_expires_at: string | null;
   failure_reason: string | null;
 };
 

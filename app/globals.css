@@ -6775,6 +6775,40 @@ details[open] > p {
     0 0 34px rgba(38, 144, 234, 0.08);
 }
 
+.partner-standalone .partner-application-success {
+  align-content: center;
+  gap: 14px;
+  min-height: 430px;
+  text-align: center;
+}
+
+.partner-standalone .partner-application-success > .material-symbols-outlined {
+  display: grid;
+  width: 68px;
+  height: 68px;
+  margin: 0 auto 8px;
+  place-items: center;
+  color: #a9ed65;
+  background: rgba(126, 193, 61, 0.12);
+  border: 1px solid rgba(169, 237, 101, 0.42);
+  border-radius: 50%;
+  box-shadow: 0 0 32px rgba(126, 193, 61, 0.22);
+  font-size: 34px;
+}
+
+.partner-standalone .partner-application-success h3 {
+  margin: 0;
+  color: #ffffff;
+  font-size: clamp(26px, 3vw, 36px);
+}
+
+.partner-standalone .partner-application-success > p:not(.partner-intake-eyebrow) {
+  max-width: 500px;
+  margin: 0 auto;
+  color: #bed0e4;
+  line-height: 1.65;
+}
+
 .partner-standalone .partner-intake-progress {
   align-self: start;
 }

@@ -66,7 +66,7 @@ const copyVariants: Record<CopyVariant, Record<CopyKey, string>> = {
     priceDropLabel: 'founding price drops to',
     includedHeading: 'One done-for-you local demand service.',
     applyHeading: 'Apply to protect your trade & territory.',
-    applyBody: 'Apply and complete secure $500 checkout. We review your category, service area, and exclusivity immediately, with a full refund if we cannot approve it.',
+    applyBody: 'Apply with no payment. We review your category, service area, and exclusivity first, then email approved applicants a private $500 Stripe checkout link.',
   },
   current: {
     heroTitle: renderHeroTitle(heroTitleCurrent),
@@ -84,7 +84,7 @@ const copyVariants: Record<CopyVariant, Record<CopyKey, string>> = {
     priceDropLabel: 'founding price drops to',
     includedHeading: 'Everything in one done-for-you service.',
     applyHeading: 'Claim your trade & territory.',
-    applyBody: 'Apply and complete secure $500 checkout. We review availability in your area and refund the payment in full if we cannot approve it.',
+    applyBody: 'Apply with no payment. We review availability first, then email approved applicants a private $500 Stripe checkout link.',
   },
 };
 

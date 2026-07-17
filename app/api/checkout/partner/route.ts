@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { getPartnerApplication, updatePartnerApplication } from '@/lib/partner-store';
+import { verifyPartnerCheckoutToken } from '@/lib/partner-checkout-tokens';
+import { updatePartnerApplication } from '@/lib/partner-store';
 import { validatePartnerPriceConfiguration } from '@/lib/partner-billing';
 import { getStripe } from '@/lib/stripe';
 
@@ -11,14 +12,11 @@ function getBaseUrl(request: NextRequest) {
 
 export async function POST(request: NextRequest) {
   try {
-    const { applicationId } = await request.json() as { applicationId?: string };
-    if (!applicationId) return NextResponse.json({ error: 'Application ID is required.' }, { status: 400 });
+    const { token } = await request.json() as { token?: string };
+    if (!token) return NextResponse.json({ error: 'Approved checkout token is required.' }, { status: 400 });
 
-    const application = await getPartnerApplication(applicationId);
-    if (!application) return NextResponse.json({ error: 'Application not found.' }, { status: 404 });
-    if (application.status !== 'checkout_pending') {
-      return NextResponse.json({ error: 'This application is no longer awaiting checkout.' }, { status: 409 });
-    }
+    const application = await verifyPartnerCheckoutToken(token);
+    if (!application) return NextResponse.json({ error: 'This approved checkout link is invalid or expired.' }, { status: 403 });
 
     const stripe = getStripe();
     const prices = await validatePartnerPriceConfiguration();
@@ -33,7 +31,7 @@ export async function POST(request: NextRequest) {
       payment_method_types: ['card'],
       line_items: [{ price: prices.founding, quantity: 1 }],
       success_url: `${baseUrl}/partners?checkout=success&session_id={CHECKOUT_SESSION_ID}#apply`,
-      cancel_url: `${baseUrl}/partners?checkout=cancelled&application_id=${application.id}#apply`,
+      cancel_url: `${baseUrl}/partners/checkout?checkout=cancelled&token=${encodeURIComponent(token)}`,
       customer_email: application.email,
       client_reference_id: application.id,
       metadata: { applicationId: application.id },
@@ -45,7 +43,7 @@ export async function POST(request: NextRequest) {
     await updatePartnerApplication(application.id, {
       stripe_checkout_session_id: session.id,
       billing_status: 'checkout_open',
-    }, ['checkout_pending']);
+    }, ['approved_pending_checkout']);
 
     return NextResponse.json({ url: session.url });
   } catch (error) {

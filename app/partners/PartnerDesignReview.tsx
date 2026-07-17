@@ -144,7 +144,7 @@ const copyVariants: Record<CopyVariant, Record<CopyKey, string>> = {
     priceDropLabel: 'founding price drops to',
     includedHeading: 'One done-for-you local demand service.',
     applyHeading: 'Apply to protect your trade & territory.',
-    applyBody: 'Apply and complete secure $500 checkout. We review your category, service area, and exclusivity immediately, with a full refund if we cannot approve it.',
+    applyBody: 'Apply with no payment. We review your category, service area, and exclusivity first, then email approved applicants a private $500 Stripe checkout link.',
   },
   current: {
     heroTitle: renderHeroTitle(heroTitleCurrent),
@@ -162,7 +162,7 @@ const copyVariants: Record<CopyVariant, Record<CopyKey, string>> = {
     priceDropLabel: 'founding price drops to',
     includedHeading: 'Everything in one done-for-you service.',
     applyHeading: 'Claim your trade & territory.',
-    applyBody: 'Apply and complete secure $500 checkout. We review availability in your area and refund the payment in full if we cannot approve it.',
+    applyBody: 'Apply with no payment. We review availability first, then email approved applicants a private $500 Stripe checkout link.',
   },
 };
 
@@ -196,7 +196,9 @@ export function PartnerDesignReviewProvider({ children }: PropsWithChildren) {
   const [screenStartupMode, setScreenStartupMode] = useState<ScreenStartupMode>('fade');
   const [reportReplayCycle, setReportReplayCycle] = useState(0);
   const [howHotspotPreview, setHowHotspotPreview] = useState<HowHotspotPreview>(0);
-  const [howHotspotPositions, setHowHotspotPositions] = useState<HowHotspotPosition[]>(loadHowHotspotPositions);
+  const [howHotspotPositions, setHowHotspotPositions] = useState<HowHotspotPosition[]>(
+    () => defaultHowHotspotPositions.map((position) => ({ ...position })),
+  );
   const [howFocusMode, setHowFocusMode] = useState<HowFocusMode>('spotlight');
 
   const replayHero = useCallback(() => setHeroReplayCycle((cycle) => cycle + 1), []);
@@ -208,6 +210,11 @@ export function PartnerDesignReviewProvider({ children }: PropsWithChildren) {
   const resetHowHotspotPositions = useCallback(() => {
     setHowHotspotPositions(defaultHowHotspotPositions.map((position) => ({ ...position })));
     if (isDevelopment) window.localStorage.removeItem(howHotspotStorageKey);
+  }, []);
+
+  useEffect(() => {
+    const frame = window.requestAnimationFrame(() => setHowHotspotPositions(loadHowHotspotPositions()));
+    return () => window.cancelAnimationFrame(frame);
   }, []);
 
   useEffect(() => {
@@ -340,7 +347,7 @@ export function PartnerDesignReviewProvider({ children }: PropsWithChildren) {
 
 function PartnerDesignReviewDrawer() {
   const [open, setOpen] = useState(false);
-  const [drawerPosition, setDrawerPosition] = useState<DesignReviewPosition>(loadDesignReviewPosition);
+  const [drawerPosition, setDrawerPosition] = useState<DesignReviewPosition>({ x: 0, y: 0 });
   const toggleRef = useRef<HTMLButtonElement>(null);
   const panelRef = useRef<HTMLDivElement>(null);
   const drawerPositionRef = useRef(drawerPosition);
@@ -422,6 +429,11 @@ function PartnerDesignReviewDrawer() {
   const resetDrawerPosition = useCallback(() => {
     updateDrawerPosition({ x: 0, y: 0 });
     window.localStorage.removeItem(designReviewPositionStorageKey);
+  }, [updateDrawerPosition]);
+
+  useEffect(() => {
+    const frame = window.requestAnimationFrame(() => updateDrawerPosition(loadDesignReviewPosition()));
+    return () => window.cancelAnimationFrame(frame);
   }, [updateDrawerPosition]);
 
   useEffect(() => {

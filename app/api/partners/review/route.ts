@@ -1,5 +1,6 @@
 import { NextResponse } from 'next/server';
-import { cancelAndRefundPartnerApplication } from '@/lib/partner-billing';
+import { issuePartnerCheckoutToken } from '@/lib/partner-checkout-tokens';
+import { sendApprovedPartnerCheckout } from '@/lib/partner-email';
 import { verifyPartnerReviewToken } from '@/lib/partner-review-tokens';
 import {
   consumePartnerReviewToken,
@@ -24,59 +25,64 @@ export async function POST(request: Request) {
     if (!application) return resultRedirect(request, 'invalid');
 
     if (verified.action === 'approve') {
-      if (application.status === 'approved') {
+      if (application.status === 'approved_pending_checkout' && application.approval_email_sent_at) {
         await consumePartnerReviewToken(verified.record.id);
         return resultRedirect(request, 'approved');
       }
-      if (application.status !== 'paid_pending_review') return resultRedirect(request, 'resolved');
+      if (!['pending_review', 'approval_delivery_failed', 'approved_pending_checkout'].includes(application.status)) {
+        return resultRedirect(request, 'resolved');
+      }
 
-      const approved = await updatePartnerApplication(application.id, {
-        status: 'approved',
-        approved_at: new Date().toISOString(),
-        failure_reason: null,
-      }, ['paid_pending_review']);
+      const approved = application.status === 'approved_pending_checkout'
+        ? application
+        : await updatePartnerApplication(application.id, {
+            status: 'approved_pending_checkout',
+            approved_at: application.approved_at || new Date().toISOString(),
+            failure_reason: null,
+          }, ['pending_review', 'approval_delivery_failed']);
       if (!approved) return resultRedirect(request, 'resolved');
 
-      await consumePartnerReviewToken(verified.record.id);
-      return resultRedirect(request, 'approved');
+      try {
+        const checkoutToken = await issuePartnerCheckoutToken(approved.id);
+        const baseUrl = (process.env.NEXT_PUBLIC_SITE_URL || process.env.NEXT_PUBLIC_APP_URL || new URL(request.url).origin).replace(/\/$/, '');
+        await sendApprovedPartnerCheckout(approved, `${baseUrl}/partners/checkout?token=${encodeURIComponent(checkoutToken)}`);
+        await updatePartnerApplication(approved.id, {
+          approval_email_sent_at: new Date().toISOString(),
+          failure_reason: null,
+        }, ['approved_pending_checkout']);
+        await consumePartnerReviewToken(verified.record.id);
+        return resultRedirect(request, 'approved');
+      } catch (error) {
+        const message = error instanceof Error ? error.message : 'Unknown checkout email failure';
+        await updatePartnerApplication(approved.id, {
+          status: 'approval_delivery_failed',
+          failure_reason: message,
+        }, ['approved_pending_checkout']);
+        try {
+          await sendPartnerOperationsAlert(`Approval email failed for ${approved.business_name} (${approved.id}). ${message}`);
+        } catch (alertError) {
+          console.error('Partner approval delivery alert failed:', alertError);
+        }
+        return resultRedirect(request, 'delivery_failed');
+      }
     }
 
-    if (application.status === 'declined_refunded') {
+    if (application.status === 'declined') {
       await consumePartnerReviewToken(verified.record.id);
-      return resultRedirect(request, 'declined_refunded');
+      return resultRedirect(request, 'declined');
     }
-    if (!['paid_pending_review', 'refund_failed', 'billing_setup_failed'].includes(application.status)) {
-      return resultRedirect(request, application.status === 'decline_processing' ? 'processing' : 'resolved');
-    }
+    if (application.status !== 'pending_review') return resultRedirect(request, 'resolved');
 
-    const claimed = await updatePartnerApplication(application.id, {
-      status: 'decline_processing',
+    const declined = await updatePartnerApplication(application.id, {
+      status: 'declined',
       declined_at: new Date().toISOString(),
+      billing_status: 'not_started',
       failure_reason: null,
-    }, ['paid_pending_review', 'refund_failed', 'billing_setup_failed']);
-    if (!claimed) return resultRedirect(request, 'processing');
+    }, ['pending_review']);
+    if (!declined) return resultRedirect(request, 'resolved');
 
-    try {
-      const refund = await cancelAndRefundPartnerApplication(claimed);
-      await updatePartnerApplication(claimed.id, {
-        status: 'declined_refunded',
-        billing_status: 'refunded',
-        stripe_refund_ids: refund.refundIds,
-        refunded_at: new Date().toISOString(),
-        failure_reason: null,
-      }, ['decline_processing']);
-      await consumePartnerReviewToken(verified.record.id);
-      return resultRedirect(request, 'declined_refunded');
-    } catch (error) {
-      const message = error instanceof Error ? error.message : 'Unknown cancellation or refund failure';
-      await updatePartnerApplication(claimed.id, {
-        status: 'refund_failed',
-        billing_status: 'refund_failed',
-        failure_reason: message,
-      }, ['decline_processing']);
-      await sendPartnerOperationsAlert(`Refund failed for ${claimed.business_name} (${claimed.id}). ${message}`);
-      return resultRedirect(request, 'refund_failed');
-    }
+    await consumePartnerReviewToken(verified.record.id);
+    return resultRedirect(request, 'declined');
   } catch (error) {
     console.error('Partner review action failed:', error);
     return resultRedirect(request, 'error');

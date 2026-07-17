@@ -66,7 +66,7 @@ export function PartnerApplicationForm() {
   const [captured, setCaptured] = useState('');
   const [justCompleted, setJustCompleted] = useState<number | null>(null);
   const [submitting, setSubmitting] = useState(false);
-  const [applicationId, setApplicationId] = useState('');
+  const [submitted, setSubmitted] = useState(false);
   const [error, setError] = useState('');
   const [reviewGlowScope, setReviewGlowScope] = useState<'all' | 0 | 1 | 2 | null>(null);
   const firstFieldRef = useRef<HTMLInputElement>(null);
@@ -102,7 +102,6 @@ export function PartnerApplicationForm() {
 
   const setField = <K extends keyof PartnerForm>(key: K, value: PartnerForm[K]) => {
     setError('');
-    setApplicationId('');
     setForm((current) => ({ ...current, [key]: value }));
   };
 
@@ -173,31 +172,16 @@ export function PartnerApplicationForm() {
     setError('');
 
     try {
-      let savedApplicationId = applicationId;
-      if (!savedApplicationId) {
-        const applicationResponse = await fetch('/api/partners', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify(form),
-        });
-        const applicationResult = await applicationResponse.json() as { applicationId?: string; error?: string };
-        if (!applicationResponse.ok || !applicationResult.applicationId) {
-          throw new Error(applicationResult.error || 'Application could not be saved.');
-        }
-        savedApplicationId = applicationResult.applicationId;
-        setApplicationId(savedApplicationId);
-      }
-
-      const checkoutResponse = await fetch('/api/checkout/partner', {
+      const applicationResponse = await fetch('/api/partners', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ applicationId: savedApplicationId }),
+        body: JSON.stringify(form),
       });
-      const checkoutResult = await checkoutResponse.json() as { url?: string; error?: string };
-      if (!checkoutResponse.ok || !checkoutResult.url) {
-        throw new Error(checkoutResult.error || 'Secure checkout could not be opened.');
+      const applicationResult = await applicationResponse.json() as { applicationId?: string; error?: string };
+      if (!applicationResponse.ok || !applicationResult.applicationId) {
+        throw new Error(applicationResult.error || 'Application could not be saved.');
       }
-      window.location.assign(checkoutResult.url);
+      setSubmitted(true);
     } catch (submitError) {
       setError(submitError instanceof Error
         ? submitError.message
@@ -284,8 +268,22 @@ export function PartnerApplicationForm() {
             {step > 0 && <button type="button" className="partner-intake-back" onClick={goBack} disabled={phase !== 'idle'}>← Back</button>}
             <button className="partner-intake-next" disabled={!canAdvance[step] || phase !== 'idle'}>Save & continue <span>→</span></button>
           </div>
-          <p className="partner-intake-footnote">Your answers stay editable. Payment happens only after the final review step.</p>
+          <p className="partner-intake-footnote">Your answers stay editable. No payment is collected with this application.</p>
         </form>
+      </section>
+    );
+  }
+
+  if (submitted) {
+    return (
+      <section className="partner-form-shell partner-form-shell--review" aria-live="polite">
+        <div className="partner-intake-card partner-application-success">
+          <span className="material-symbols-outlined" aria-hidden="true">mark_email_read</span>
+          <p className="partner-intake-eyebrow">Application received</p>
+          <h3>Your territory review is pending.</h3>
+          <p>No payment was taken. We will review your trade and service area, and approved applicants receive a private Stripe checkout link by email.</p>
+          <p className="partner-intake-helper">Check your inbox after approval. The founding rate is $500 for the first three monthly billing cycles, then $750 per month.</p>
+        </div>
       </section>
     );
   }
@@ -335,8 +333,8 @@ export function PartnerApplicationForm() {
 
         <label className="consent-check"><input type="checkbox" checked={form.confirmed} onChange={(event) => setField('confirmed', event.target.checked)} required /><span>I confirm my business is licensed and insured where required for my trade and territory.</span></label>
         {error && <p className="form-error" role="alert">{error}</p>}
-        <button className={`form-submit partner-submit ${submitting ? 'is-submitting' : ''}`} disabled={submitting || !form.confirmed}>{submitting ? 'Opening secure checkout...' : 'Continue to secure checkout — $500'}</button>
-        <p className="partner-form-note">Stripe charges $500 today. If your trade or territory cannot be approved, we cancel the subscription and issue a full refund.</p>
+        <button className={`form-submit partner-submit ${submitting ? 'is-submitting' : ''}`} disabled={submitting || !form.confirmed}>{submitting ? 'Submitting application...' : 'Submit for territory review'}</button>
+        <p className="partner-form-note">No payment today. If approved, we email you a private Stripe checkout link for the $500 founding rate.</p>
       </form>
     </section>
   );

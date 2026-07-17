@@ -1,5 +1,7 @@
 import { NextResponse } from 'next/server';
-import { createPartnerApplication } from '@/lib/partner-store';
+import { createPartnerApplication, updatePartnerApplication } from '@/lib/partner-store';
+import { issuePartnerReviewToken } from '@/lib/partner-review-tokens';
+import { sendPartnerApplicationForReview } from '@/lib/partner-telegram';
 import type { PartnerApplicationInput } from '@/lib/partner-types';
 
 function clean(value: unknown, maxLength = 600) {
@@ -36,8 +38,31 @@ export async function POST(request: Request) {
     }
 
     const application = await createPartnerApplication(payload);
+    let reviewNotification: 'sent' | 'pending' = 'sent';
+
+    try {
+      const [approveToken, declineToken] = await Promise.all([
+        issuePartnerReviewToken(application.id, 'approve'),
+        issuePartnerReviewToken(application.id, 'decline'),
+      ]);
+      const baseUrl = (process.env.NEXT_PUBLIC_SITE_URL || process.env.NEXT_PUBLIC_APP_URL || new URL(request.url).origin).replace(/\/$/, '');
+      await sendPartnerApplicationForReview(application, {
+        approve: `${baseUrl}/partners/review?token=${encodeURIComponent(approveToken)}`,
+        decline: `${baseUrl}/partners/review?token=${encodeURIComponent(declineToken)}`,
+      });
+      await updatePartnerApplication(application.id, {
+        telegram_notified_at: new Date().toISOString(),
+        failure_reason: null,
+      }, ['pending_review']);
+    } catch (notificationError) {
+      reviewNotification = 'pending';
+      const message = notificationError instanceof Error ? notificationError.message : 'Unknown Telegram review notification failure';
+      await updatePartnerApplication(application.id, { failure_reason: `Review notification pending: ${message}` }, ['pending_review']);
+      console.error('Partner review notification error:', notificationError);
+    }
+
     return NextResponse.json(
-      { applicationId: application.id, status: application.status },
+      { applicationId: application.id, status: application.status, reviewNotification },
       { status: 201 },
     );
   } catch (error) {
