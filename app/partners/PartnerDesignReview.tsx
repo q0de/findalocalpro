@@ -347,7 +347,7 @@ export function PartnerDesignReviewProvider({ children }: PropsWithChildren) {
 function PartnerDesignReviewDrawer() {
   const [open, setOpen] = useState(false);
   const [drawerPosition, setDrawerPosition] = useState<DesignReviewPosition>({ x: 0, y: 0 });
-  const toggleRef = useRef<HTMLButtonElement>(null);
+  const returnFocusRef = useRef<HTMLElement | null>(null);
   const panelRef = useRef<HTMLDivElement>(null);
   const drawerPositionRef = useRef(drawerPosition);
   const dragStateRef = useRef<{
@@ -375,7 +375,17 @@ function PartnerDesignReviewDrawer() {
 
   const closeAndRestoreFocus = useCallback(() => {
     setOpen(false);
-    window.requestAnimationFrame(() => toggleRef.current?.focus());
+    window.requestAnimationFrame(() => returnFocusRef.current?.focus());
+  }, []);
+
+  const toggleFromShortcut = useCallback(() => {
+    setOpen((current) => {
+      if (!current && document.activeElement instanceof HTMLElement) {
+        returnFocusRef.current = document.activeElement;
+      }
+      if (current) window.requestAnimationFrame(() => returnFocusRef.current?.focus());
+      return !current;
+    });
   }, []);
 
   const updateDrawerPosition = useCallback((position: DesignReviewPosition) => {
@@ -436,6 +446,17 @@ function PartnerDesignReviewDrawer() {
   }, [updateDrawerPosition]);
 
   useEffect(() => {
+    const handleShortcut = (event: KeyboardEvent) => {
+      if (!event.altKey || !event.shiftKey || event.ctrlKey || event.metaKey || event.code !== 'KeyD') return;
+      event.preventDefault();
+      toggleFromShortcut();
+    };
+
+    window.addEventListener('keydown', handleShortcut);
+    return () => window.removeEventListener('keydown', handleShortcut);
+  }, [toggleFromShortcut]);
+
+  useEffect(() => {
     if (!open) return undefined;
     const firstControl = panelRef.current?.querySelector<HTMLElement>('select, button');
     firstControl?.focus();
@@ -453,6 +474,7 @@ function PartnerDesignReviewDrawer() {
     <aside
       className={`partner-design-review${open ? ' is-open' : ''}`}
       aria-label="Design review controls"
+      hidden={!open}
       style={{ transform: `translate3d(${drawerPosition.x}px, ${drawerPosition.y}px, 0)` }}
     >
       <div className="partner-design-review-toolbar">
@@ -469,17 +491,6 @@ function PartnerDesignReviewDrawer() {
         >
           <span className="material-symbols-outlined" aria-hidden="true">drag_indicator</span>
         </button>
-        <button
-          ref={toggleRef}
-          className="partner-design-review-toggle"
-          type="button"
-          aria-expanded={open}
-          aria-controls="partner-design-review-panel"
-          onClick={() => setOpen((current) => !current)}
-        >
-          <span className="material-symbols-outlined" aria-hidden="true">tune</span>
-          <span>Design review</span>
-        </button>
       </div>
 
       <div
@@ -490,7 +501,7 @@ function PartnerDesignReviewDrawer() {
       >
         <div className="partner-design-review-heading">
           <div>
-            <span>Local preview tools</span>
+            <span>Local preview tools · Option/Alt + Shift + D</span>
             <strong>Design review</strong>
           </div>
           <button type="button" onClick={closeAndRestoreFocus} aria-label="Close design review controls">
