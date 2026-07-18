@@ -12,6 +12,7 @@ export type ReportBackdropMode = 'map' | 'abstract';
 export type ScreenStartupMode = 'signal-line' | 'wipe-down' | 'fade';
 export type HowHotspotPreview = 0 | 1 | 2 | 3 | 4;
 export type HowFocusMode = 'off' | 'spotlight';
+export type HowIllustrationMode = 'integrated' | 'layered';
 export type HowHotspotPosition = {
   x: number;
   y: number;
@@ -48,6 +49,8 @@ export type PartnerDesignReviewValue = {
   resetHowHotspotPositions: () => void;
   howFocusMode: HowFocusMode;
   setHowFocusMode: Dispatch<SetStateAction<HowFocusMode>>;
+  howIllustrationMode: HowIllustrationMode;
+  setHowIllustrationMode: Dispatch<SetStateAction<HowIllustrationMode>>;
 };
 
 export const PartnerDesignReviewContext = createContext<PartnerDesignReviewValue | null>(null);

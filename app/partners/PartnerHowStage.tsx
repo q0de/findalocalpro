@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import type { CSSProperties } from 'react';
+import { usePartnerDesignReview } from './PartnerDesignReviewContext';
 
 type FlowItem = {
   number: string;
@@ -15,17 +16,31 @@ type ActiveStep = 0 | 1 | 2 | 3 | 4;
 
 export function PartnerHowStage({ flow }: { flow: FlowItem[] }) {
   const [activeStep, setActiveStep] = useState<ActiveStep>(0);
+  const { howIllustrationMode } = usePartnerDesignReview();
 
   const toggleStep = (step: ActiveStep) => {
     setActiveStep((current) => current === step ? 0 : step);
   };
 
   return (
-    <div className="partner-how-stage" data-how-active-step={activeStep || undefined}>
-      <div className="partner-how-illustration" aria-hidden="true" />
-      <div className="partner-how-focus-shade" aria-hidden="true" />
-      <div className="partner-how-hotspots" aria-hidden="true">
-        <span /><span /><span /><span />
+    <div
+      className={`partner-how-stage${howIllustrationMode === 'layered' ? ' is-layered-illustration' : ''}`}
+      data-how-active-step={activeStep || undefined}
+    >
+      <div className="partner-how-scene-plane" aria-hidden="true">
+        <div className="partner-how-illustration" />
+        <div className="partner-how-focus-shade" />
+        <div className="partner-how-platforms">
+          {flow.map(({ icon, title }, index) => (
+            <span key={title} style={{ '--partner-platform-index': index } as CSSProperties}>
+              <i className="partner-how-platform-base" />
+              <i className="partner-how-platform-icon material-symbols-outlined">{icon}</i>
+            </span>
+          ))}
+        </div>
+        <div className="partner-how-hotspots">
+          <span /><span /><span /><span />
+        </div>
       </div>
       <div className="partner-flow-grid">
         {flow.map(({ number, icon, kicker, title, body }, index) => {

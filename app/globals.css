@@ -3201,18 +3201,119 @@
     linear-gradient(180deg, rgba(2, 12, 30, 0.04), rgba(2, 12, 30, 0.28));
 }
 
+.partner-standalone .partner-economics-sprite,
+.partner-standalone .partner-economics-icon,
+.partner-standalone .partner-economics-base {
+  position: absolute;
+  display: block;
+  width: 100%;
+  aspect-ratio: 1;
+  background-repeat: no-repeat;
+  background-size: 400% 300%;
+  transform-origin: 50% 72%;
+}
+
+.partner-standalone .partner-economics-sprite,
+.partner-standalone .partner-economics-icon {
+  background-image: url("/partners/economics/economics-icons-v4.webp");
+  filter: drop-shadow(0 8px 14px rgba(0, 7, 20, 0.42));
+}
+
+.partner-standalone .partner-economics-base {
+  --economics-ring: 45 199 255;
+  background: none;
+  filter: none;
+}
+
+.partner-standalone .partner-economics-base::before,
+.partner-standalone .partner-economics-base::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 73%;
+  border-radius: 50%;
+  pointer-events: none;
+}
+
+.partner-standalone .partner-economics-base::before {
+  width: 76%;
+  height: 25%;
+  transform: translate(-50%, -50%);
+  background:
+    repeating-radial-gradient(
+      ellipse at center,
+      transparent 0 11%,
+      rgb(var(--economics-ring) / 0.72) 12% 13%,
+      transparent 15% 23%
+    ),
+    radial-gradient(ellipse at center, rgb(255 255 255 / 0.86), rgb(var(--economics-ring) / 0.38) 18%, transparent 58%);
+  border: 1px solid rgb(var(--economics-ring) / 0.82);
+  box-shadow:
+    0 0 5px rgb(255 255 255 / 0.55),
+    0 0 14px rgb(var(--economics-ring) / 0.7),
+    0 0 28px rgb(var(--economics-ring) / 0.26);
+}
+
+.partner-standalone .partner-economics-base::after {
+  width: 13%;
+  aspect-ratio: 1;
+  transform: translate(-50%, -50%);
+  background: #f6fff0;
+  box-shadow:
+    0 0 8px #fff,
+    0 0 18px rgb(var(--economics-ring) / 0.95),
+    0 0 34px rgb(var(--economics-ring) / 0.5);
+}
+
+.partner-standalone .partner-economics-base:is(.sprite-pin, .sprite-check, .sprite-shield, .sprite-platform) {
+  --economics-ring: 159 234 80;
+}
+
+.partner-standalone .partner-economics-base.sprite-platform::before {
+  left: 47%;
+  top: 66%;
+  width: 54%;
+  height: 54%;
+  border-radius: 15%;
+  transform: translate(-50%, -50%) rotate(45deg) skew(-5deg, -5deg);
+  background:
+    linear-gradient(145deg, rgb(16 67 111 / 0.96), rgb(4 20 49 / 0.98)) padding-box;
+  border: 2px solid rgb(var(--economics-ring) / 0.82);
+  box-shadow:
+    8px 8px 0 rgb(4 15 38 / 0.92),
+    11px 11px 0 rgb(var(--economics-ring) / 0.62),
+    14px 14px 0 rgb(6 25 55 / 0.96),
+    0 0 24px rgb(var(--economics-ring) / 0.45);
+}
+
+.partner-standalone .partner-economics-base.sprite-platform::after {
+  left: 47%;
+  top: 67%;
+}
+
 .partner-standalone .partner-economics-sprite {
+  z-index: 3;
+  width: 25%;
+  animation: partner-economics-float 4.2s ease-in-out infinite;
+}
+
+.partner-standalone .partner-economics-object {
   position: absolute;
   z-index: 3;
   display: block;
-  width: 25%;
   aspect-ratio: 1;
-  background-image: url("/partners/economics/economics-sprites-v2.webp");
-  background-repeat: no-repeat;
-  background-size: 400% 300%;
-  filter: drop-shadow(0 8px 14px rgba(0, 7, 20, 0.42));
-  transform-origin: 50% 72%;
-  animation: partner-economics-float 4.2s ease-in-out infinite;
+  font-style: normal;
+  pointer-events: none;
+}
+
+.partner-standalone .partner-economics-object .partner-economics-base {
+  z-index: 1;
+  animation: partner-economics-base-pulse 3.4s ease-in-out infinite;
+}
+
+.partner-standalone .partner-economics-object .partner-economics-icon {
+  z-index: 2;
+  animation: partner-economics-icon-float 3.8s ease-in-out infinite;
 }
 
 .partner-standalone .sprite-pin { background-position: 0% 0%; }
@@ -3253,10 +3354,14 @@
   animation: partner-economics-travel 3.2s ease-in-out infinite;
 }
 
-.partner-standalone .partner-economics-scene-1 .pin-one { top: 1%; left: 1%; width: 22%; animation-delay: -0.8s; }
-.partner-standalone .partner-economics-scene-1 .pin-two { top: 33%; left: 5%; width: 20%; animation-delay: -1.8s; }
-.partner-standalone .partner-economics-scene-1 .pin-three { bottom: -2%; left: 0; width: 23%; animation-delay: -2.6s; }
-.partner-standalone .partner-economics-scene-1 .check-main { top: 27%; right: 1%; width: 38%; animation: partner-economics-beacon 2.8s ease-in-out infinite; }
+.partner-standalone .partner-economics-scene-1 .pin-one { top: -1%; left: 1%; width: 21%; }
+.partner-standalone .partner-economics-scene-1 .pin-two { top: 31%; left: 6%; width: 20%; }
+.partner-standalone .partner-economics-scene-1 .pin-three { bottom: -3%; left: 1%; width: 22%; }
+.partner-standalone .partner-economics-scene-1 .check-main { top: 24%; right: 3%; width: 36%; }
+.partner-standalone .partner-economics-scene-1 .pin-one > * { animation-delay: -0.8s; }
+.partner-standalone .partner-economics-scene-1 .pin-two > * { animation-delay: -1.8s; }
+.partner-standalone .partner-economics-scene-1 .pin-three > * { animation-delay: -2.6s; }
+.partner-standalone .partner-economics-scene-1 .check-main .partner-economics-icon { animation: partner-economics-beacon 2.8s ease-in-out infinite; }
 .partner-standalone .partner-economics-scene-1 .route-one { top: 23%; left: 17%; width: 57%; transform: rotate(8deg); }
 .partner-standalone .partner-economics-scene-1 .route-two { top: 51%; left: 19%; width: 55%; transform: rotate(-4deg); animation-delay: 260ms; }
 .partner-standalone .partner-economics-scene-1 .route-three { top: 76%; left: 18%; width: 57%; transform: rotate(-9deg); animation-delay: 520ms; }
@@ -3276,8 +3381,9 @@
   animation: partner-economics-boundary 3.8s ease-in-out infinite;
 }
 
-.partner-standalone .partner-economics-scene-2 .target-main { bottom: 7%; left: 32%; width: 36%; opacity: 0.5; animation: partner-economics-target 3.4s ease-out infinite; }
-.partner-standalone .partner-economics-scene-2 .shield-main { top: 16%; left: 29%; width: 42%; animation: partner-economics-beacon 3.1s ease-in-out infinite; }
+.partner-standalone .partner-economics-scene-2 .shield-main { top: 10%; left: 30%; width: 40%; }
+.partner-standalone .partner-economics-scene-2 .shield-main .partner-economics-icon { animation: partner-economics-beacon 3.1s ease-in-out infinite; }
+.partner-standalone .partner-economics-scene-2 .shield-main .partner-economics-base { animation: partner-economics-shield-ground 3.1s ease-in-out infinite; }
 
 .partner-standalone .partner-economics-blocked {
   position: absolute;
@@ -3308,17 +3414,48 @@
   animation: partner-economics-rays 4s ease-in-out infinite;
 }
 
-.partner-standalone .partner-economics-scene-3 .platform-main { top: 32%; left: 27%; width: 48%; animation: partner-economics-platform 3.4s ease-in-out infinite; }
+.partner-standalone .partner-economics-scene-3 .platform-main { top: 27%; left: 26%; width: 48%; }
+.partner-standalone .partner-economics-scene-3 .platform-main .partner-economics-icon { animation: partner-economics-platform 3.4s ease-in-out infinite; }
 .partner-standalone .partner-economics-scene-3 .particles-one { top: 4%; left: 1%; width: 29%; animation: partner-economics-particles 3.6s ease-in-out infinite; }
 .partner-standalone .partner-economics-scene-3 .particles-two { top: 3%; right: 1%; width: 28%; animation: partner-economics-particles 3.6s ease-in-out -1.2s infinite; transform: scaleX(-1); }
 .partner-standalone .partner-economics-scene-3 .particles-three { bottom: -3%; left: 5%; width: 27%; animation: partner-economics-particles 3.6s ease-in-out -2.2s infinite; }
 
 .partner-standalone .partner-economics-scene-4 .signal-route { top: 61%; left: 31%; width: 51%; height: 20%; border-color: rgba(45, 199, 255, 0.95); transform: rotate(-8deg); }
-.partner-standalone .partner-economics-scene-4 .alert-main { top: 29%; left: 14%; width: 31%; animation: partner-economics-alert 2.5s ease-in-out infinite; }
-.partner-standalone .partner-economics-scene-4 .signal-pin { top: 24%; right: 2%; width: 36%; animation: partner-economics-beacon 3s ease-in-out infinite; }
-.partner-standalone .partner-economics-scene-4 .signal-phone { top: 1%; left: 1%; width: 18%; animation-delay: -0.7s; }
-.partner-standalone .partner-economics-scene-4 .signal-search { top: 0; left: 43%; width: 17%; animation-delay: -1.4s; }
-.partner-standalone .partner-economics-scene-4 .signal-star { bottom: -1%; left: 1%; width: 18%; animation-delay: -2.2s; }
+.partner-standalone .partner-economics-scene-4 .alert-main { top: 25%; left: 15%; width: 30%; }
+.partner-standalone .partner-economics-scene-4 .alert-main .partner-economics-icon { animation: partner-economics-alert 2.5s ease-in-out infinite; }
+.partner-standalone .partner-economics-scene-4 .signal-pin { top: 18%; right: 2%; width: 37%; }
+.partner-standalone .partner-economics-scene-4 .signal-pin .partner-economics-icon { animation: partner-economics-beacon 3s ease-in-out infinite; }
+.partner-standalone .partner-economics-scene-4 .signal-phone { top: 0; left: 2%; width: 17%; }
+.partner-standalone .partner-economics-scene-4 .signal-search { top: -1%; left: 42%; width: 17%; }
+.partner-standalone .partner-economics-scene-4 .signal-star { bottom: -2%; left: 2%; width: 17%; }
+.partner-standalone .partner-economics-scene-4 .signal-pin .partner-economics-base::before,
+.partner-standalone .partner-economics-scene-4 .signal-pin .partner-economics-base::after {
+  left: 59.25%;
+  top: 92%;
+}
+.partner-standalone .partner-economics-scene-4 .alert-main .partner-economics-base::before,
+.partner-standalone .partner-economics-scene-4 .alert-main .partner-economics-base::after {
+  left: 55.8%;
+  top: 78%;
+}
+.partner-standalone .partner-economics-scene-4 .signal-phone .partner-economics-base::before,
+.partner-standalone .partner-economics-scene-4 .signal-phone .partner-economics-base::after {
+  left: 51%;
+  top: 78%;
+}
+.partner-standalone .partner-economics-scene-4 .signal-search .partner-economics-base::before,
+.partner-standalone .partner-economics-scene-4 .signal-search .partner-economics-base::after {
+  left: 42.4%;
+  top: 78%;
+}
+.partner-standalone .partner-economics-scene-4 .signal-star .partner-economics-base::before,
+.partner-standalone .partner-economics-scene-4 .signal-star .partner-economics-base::after {
+  left: 48.75%;
+  top: 78%;
+}
+.partner-standalone .partner-economics-scene-4 .signal-phone > * { animation-delay: -0.7s; }
+.partner-standalone .partner-economics-scene-4 .signal-search > * { animation-delay: -1.4s; }
+.partner-standalone .partner-economics-scene-4 .signal-star > * { animation-delay: -2.2s; }
 .partner-standalone .partner-economics-scene-4 .signal-travel { top: 65%; left: 35%; animation-delay: 500ms; }
 
 .partner-standalone .partner-economics-grid article:hover .partner-economics-map {
@@ -3326,8 +3463,20 @@
   transform: scale(1.075);
 }
 
-.partner-standalone .partner-economics-grid article:hover .partner-economics-sprite {
+.partner-standalone .partner-economics-grid article:hover .partner-economics-sprite,
+.partner-standalone .partner-economics-grid article:hover .partner-economics-icon,
+.partner-standalone .partner-economics-grid article:hover .partner-economics-base {
   filter: drop-shadow(0 10px 18px rgba(0, 7, 20, 0.42)) brightness(1.08) saturate(1.08);
+}
+
+@keyframes partner-economics-icon-float {
+  0%, 100% { transform: translateY(-2px) scale(0.99); }
+  50% { transform: translateY(-9px) scale(1.04); }
+}
+
+@keyframes partner-economics-base-pulse {
+  0%, 100% { opacity: 0.72; transform: scale(0.93); filter: drop-shadow(0 5px 11px rgba(0, 7, 20, 0.28)) brightness(0.94); }
+  50% { opacity: 1; transform: scale(1.065); filter: drop-shadow(0 7px 16px rgba(45, 199, 255, 0.3)) brightness(1.18); }
 }
 
 @keyframes partner-economics-float {
@@ -3358,10 +3507,9 @@
   50% { opacity: 1; transform: scale(1.025); }
 }
 
-@keyframes partner-economics-target {
-  0% { opacity: 0; transform: scale(0.65); }
-  38%, 70% { opacity: 0.55; transform: scale(1); }
-  100% { opacity: 0; transform: scale(1.25); }
+@keyframes partner-economics-shield-ground {
+  0%, 100% { opacity: 1; transform: scale(1.04); }
+  50% { opacity: 0.68; transform: scale(0.9); }
 }
 
 @keyframes partner-economics-blocked {
@@ -3375,8 +3523,8 @@
 }
 
 @keyframes partner-economics-platform {
-  0%, 100% { transform: translateY(2px) scale(0.98); }
-  50% { transform: translateY(-4px) scale(1.025); }
+  0%, 100% { transform: translate(8.3%, 2px) scale(0.98); }
+  50% { transform: translate(8.3%, -4px) scale(1.025); }
 }
 
 @keyframes partner-economics-particles {
@@ -8351,6 +8499,9 @@ details[open] > p {
   .partner-standalone .partner-price-sparkles i,
   .partner-standalone .partner-economics-map,
   .partner-standalone .partner-economics-sprite,
+  .partner-standalone .partner-economics-object,
+  .partner-standalone .partner-economics-icon,
+  .partner-standalone .partner-economics-base,
   .partner-standalone .partner-economics-route,
   .partner-standalone .partner-economics-travel,
   .partner-standalone .partner-economics-boundary,
@@ -8388,6 +8539,9 @@ details[open] > p {
   .partner-standalone .partner-price-sparkles i,
   .partner-standalone .partner-economics-map,
   .partner-standalone .partner-economics-sprite,
+  .partner-standalone .partner-economics-object,
+  .partner-standalone .partner-economics-icon,
+  .partner-standalone .partner-economics-base,
   .partner-standalone .partner-economics-route,
   .partner-standalone .partner-economics-travel,
   .partner-standalone .partner-economics-boundary,
@@ -10085,24 +10239,198 @@ details[open] > p {
   transform: scale(0.86);
 }
 
+.partner-how-scene-plane {
+  position: absolute;
+  z-index: 0;
+  top: 0;
+  left: 50%;
+  width: 100%;
+  aspect-ratio: 1822 / 863;
+  transform: translateX(-50%);
+  pointer-events: none;
+}
+
 .partner-how-illustration {
   position: absolute;
-  z-index: -2;
+  z-index: 0;
   inset: 0;
   background-image: url("/partners/how-it-works/demand-pipeline-v2.webp");
   background-position: center top;
   background-repeat: no-repeat;
-  background-size: 100% auto;
+  background-size: 100% 100%;
   opacity: 0.96;
   transform: scale(1.035);
   transform-origin: center 42%;
+}
+
+.partner-how-platforms {
+  position: absolute;
+  z-index: 1;
+  inset: 0;
+  display: none;
+  pointer-events: none;
+}
+
+.partner-how-stage.is-layered-illustration {
+  --partner-hotspot-1-x: 25%;
+  --partner-hotspot-1-y: 59.7%;
+  --partner-hotspot-2-x: 50.8%;
+  --partner-hotspot-2-y: 55.6%;
+  --partner-hotspot-3-x: 76.6%;
+  --partner-hotspot-3-y: 51%;
+  --partner-hotspot-4-x: 90.8%;
+  --partner-hotspot-4-y: 53.2%;
+}
+
+.partner-how-stage.is-layered-illustration .partner-how-illustration {
+  background-image: url("/partners/how-it-works/demand-pipeline-clean-v3.webp");
+}
+
+.partner-how-stage.is-layered-illustration .partner-how-scene-plane {
+  top: -42px;
+}
+
+.partner-how-stage.is-layered-illustration .partner-how-platforms {
+  display: block;
+}
+
+.partner-how-platforms > span {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: clamp(116px, 10.5vw, 164px);
+  height: clamp(116px, 10.5vw, 164px);
+  transform: translate(-50%, -50%);
+}
+
+.partner-how-platform-base,
+.partner-how-platform-icon {
+  position: absolute;
+  left: 50%;
+  display: block;
+  pointer-events: none;
+}
+
+.partner-how-platform-base {
+  top: 58%;
+  width: 100%;
+  height: 40%;
+  border: 1px solid rgb(var(--partner-platform-color, 82 196 255) / 0.72);
+  border-radius: 50%;
+  background:
+    radial-gradient(ellipse at center, rgb(var(--partner-platform-color, 82 196 255) / 0.42) 0 4%, transparent 6% 25%, rgb(var(--partner-platform-color, 82 196 255) / 0.2) 27% 29%, transparent 31%),
+    radial-gradient(ellipse at center, transparent 43%, rgb(var(--partner-platform-color, 82 196 255) / 0.5) 45% 47%, transparent 49%);
+  box-shadow:
+    0 0 18px rgb(var(--partner-platform-color, 82 196 255) / 0.32),
+    inset 0 0 22px rgb(var(--partner-platform-color, 82 196 255) / 0.18);
+  opacity: 0.72;
+  transform: translate(-50%, -50%) rotate(var(--partner-platform-tilt, 0deg));
+  animation: partnerHowPlatformBreathe 3.8s ease-in-out calc(var(--partner-platform-index, 0) * -620ms) infinite;
+}
+
+.partner-how-platform-base::before,
+.partner-how-platform-base::after {
+  content: "";
+  position: absolute;
+  border: 1px solid rgb(var(--partner-platform-color, 82 196 255) / 0.34);
+  border-radius: 50%;
+  inset: 14%;
+}
+
+.partner-how-platform-base::after {
+  inset: 29%;
+  border-color: rgba(255, 255, 255, 0.5);
+  box-shadow: 0 0 13px rgb(var(--partner-platform-color, 82 196 255) / 0.74);
+}
+
+.partner-how-platform-icon {
+  bottom: 52%;
+  color: rgb(var(--partner-platform-color, 82 196 255));
+  font-size: clamp(44px, 4vw, 62px);
+  font-style: normal;
+  font-variation-settings: "FILL" 0, "wght" 500, "GRAD" 0, "opsz" 48;
+  text-shadow:
+    0 0 6px rgba(255, 255, 255, 0.82),
+    0 0 16px rgb(var(--partner-platform-color, 82 196 255) / 0.92),
+    0 0 30px rgb(var(--partner-platform-color, 82 196 255) / 0.46);
+  transform: translateX(-50%);
+  animation: partnerHowSceneIconFloat 3.1s ease-in-out calc(var(--partner-platform-index, 0) * -510ms) infinite;
+}
+
+.partner-how-platforms > span:nth-child(1) {
+  left: var(--partner-hotspot-1-x);
+  top: var(--partner-hotspot-1-y);
+  --partner-platform-tilt: 1deg;
+}
+
+.partner-how-platforms > span:nth-child(2) {
+  left: var(--partner-hotspot-2-x);
+  top: var(--partner-hotspot-2-y);
+  --partner-platform-color: 157 234 80;
+  --partner-platform-tilt: -2deg;
+}
+
+.partner-how-platforms > span:nth-child(3) {
+  left: var(--partner-hotspot-3-x);
+  top: var(--partner-hotspot-3-y);
+  --partner-platform-tilt: 2deg;
+}
+
+.partner-how-platforms > span:nth-child(4) {
+  left: var(--partner-hotspot-4-x);
+  top: var(--partner-hotspot-4-y);
+  --partner-platform-tilt: -1deg;
+}
+
+.partner-how-stage:has(.partner-flow-grid article:nth-child(1):is(:hover, :focus-within)) .partner-how-platforms > span:nth-child(1) .partner-how-platform-base,
+.partner-how-stage:has(.partner-flow-grid article:nth-child(2):is(:hover, :focus-within)) .partner-how-platforms > span:nth-child(2) .partner-how-platform-base,
+.partner-how-stage:has(.partner-flow-grid article:nth-child(3):is(:hover, :focus-within)) .partner-how-platforms > span:nth-child(3) .partner-how-platform-base,
+.partner-how-stage:has(.partner-flow-grid article:nth-child(4):is(:hover, :focus-within)) .partner-how-platforms > span:nth-child(4) .partner-how-platform-base,
+.partner-how-stage[data-how-active-step="1"] .partner-how-platforms > span:nth-child(1) .partner-how-platform-base,
+.partner-how-stage[data-how-active-step="2"] .partner-how-platforms > span:nth-child(2) .partner-how-platform-base,
+.partner-how-stage[data-how-active-step="3"] .partner-how-platforms > span:nth-child(3) .partner-how-platform-base,
+.partner-how-stage[data-how-active-step="4"] .partner-how-platforms > span:nth-child(4) .partner-how-platform-base {
+  animation: partnerHowPlatformRespond 920ms cubic-bezier(0.16, 0.9, 0.24, 1) both;
+}
+
+.partner-how-stage:has(.partner-flow-grid article:nth-child(1):is(:hover, :focus-within)) .partner-how-platforms > span:nth-child(1) .partner-how-platform-icon,
+.partner-how-stage:has(.partner-flow-grid article:nth-child(2):is(:hover, :focus-within)) .partner-how-platforms > span:nth-child(2) .partner-how-platform-icon,
+.partner-how-stage:has(.partner-flow-grid article:nth-child(3):is(:hover, :focus-within)) .partner-how-platforms > span:nth-child(3) .partner-how-platform-icon,
+.partner-how-stage:has(.partner-flow-grid article:nth-child(4):is(:hover, :focus-within)) .partner-how-platforms > span:nth-child(4) .partner-how-platform-icon,
+.partner-how-stage[data-how-active-step="1"] .partner-how-platforms > span:nth-child(1) .partner-how-platform-icon,
+.partner-how-stage[data-how-active-step="2"] .partner-how-platforms > span:nth-child(2) .partner-how-platform-icon,
+.partner-how-stage[data-how-active-step="3"] .partner-how-platforms > span:nth-child(3) .partner-how-platform-icon,
+.partner-how-stage[data-how-active-step="4"] .partner-how-platforms > span:nth-child(4) .partner-how-platform-icon {
+  animation: partnerHowSceneIconRespond 920ms cubic-bezier(0.16, 0.9, 0.24, 1) both;
+}
+
+@keyframes partnerHowPlatformBreathe {
+  0%, 100% { opacity: 0.58; transform: translate(-50%, -50%) rotate(var(--partner-platform-tilt, 0deg)) scale(0.94); }
+  50% { opacity: 0.82; transform: translate(-50%, -50%) rotate(var(--partner-platform-tilt, 0deg)) scale(1.03); }
+}
+
+@keyframes partnerHowSceneIconFloat {
+  0%, 100% { transform: translateX(-50%) translateY(0); }
+  50% { transform: translateX(-50%) translateY(-7px); }
+}
+
+@keyframes partnerHowPlatformRespond {
+  0% { opacity: 0.5; transform: translate(-50%, -50%) rotate(var(--partner-platform-tilt, 0deg)) scale(0.76); }
+  44% { opacity: 1; transform: translate(-50%, -50%) rotate(var(--partner-platform-tilt, 0deg)) scale(1.12); }
+  100% { opacity: 0.74; transform: translate(-50%, -50%) rotate(var(--partner-platform-tilt, 0deg)) scale(0.98); }
+}
+
+@keyframes partnerHowSceneIconRespond {
+  0% { opacity: 0.35; transform: translateX(-50%) translateY(10px) scale(0.82); }
+  48% { opacity: 1; transform: translateX(-50%) translateY(-14px) scale(1.12); }
+  100% { opacity: 1; transform: translateX(-50%) translateY(-7px) scale(1); }
 }
 
 .partner-how-focus-shade {
   --partner-how-focus-x: 50%;
   --partner-how-focus-y: 50%;
   position: absolute;
-  z-index: 0;
+  z-index: 2;
   inset: 0;
   opacity: 0;
   background: rgba(1, 8, 23, 0.66);
@@ -10137,28 +10465,28 @@ details[open] > p {
 .partner-how-focus-spotlight[data-how-hotspot-preview="1"] .partner-how-focus-shade,
 .partner-how-stage[data-how-active-step="1"] .partner-how-focus-shade {
   --partner-how-focus-x: var(--partner-hotspot-1-x, 18.65%);
-  --partner-how-focus-y: var(--partner-hotspot-1-y, 26.4cqw);
+  --partner-how-focus-y: var(--partner-hotspot-1-y, 55.73%);
 }
 
 .partner-how-stage:has(.partner-flow-grid article:nth-child(2):is(:hover, :focus-within)) .partner-how-focus-shade,
 .partner-how-focus-spotlight[data-how-hotspot-preview="2"] .partner-how-focus-shade,
 .partner-how-stage[data-how-active-step="2"] .partner-how-focus-shade {
   --partner-how-focus-x: var(--partner-hotspot-2-x, 44.62%);
-  --partner-how-focus-y: var(--partner-hotspot-2-y, 23cqw);
+  --partner-how-focus-y: var(--partner-hotspot-2-y, 48.55%);
 }
 
 .partner-how-stage:has(.partner-flow-grid article:nth-child(3):is(:hover, :focus-within)) .partner-how-focus-shade,
 .partner-how-focus-spotlight[data-how-hotspot-preview="3"] .partner-how-focus-shade,
 .partner-how-stage[data-how-active-step="3"] .partner-how-focus-shade {
   --partner-how-focus-x: var(--partner-hotspot-3-x, 71.62%);
-  --partner-how-focus-y: var(--partner-hotspot-3-y, 24.1cqw);
+  --partner-how-focus-y: var(--partner-hotspot-3-y, 50.88%);
 }
 
 .partner-how-stage:has(.partner-flow-grid article:nth-child(4):is(:hover, :focus-within)) .partner-how-focus-shade,
 .partner-how-focus-spotlight[data-how-hotspot-preview="4"] .partner-how-focus-shade,
 .partner-how-stage[data-how-active-step="4"] .partner-how-focus-shade {
   --partner-how-focus-x: var(--partner-hotspot-4-x, 92.5%);
-  --partner-how-focus-y: var(--partner-hotspot-4-y, 24.35cqw);
+  --partner-how-focus-y: var(--partner-hotspot-4-y, 51.4%);
 }
 
 .partner-how-route {
@@ -10235,7 +10563,7 @@ details[open] > p {
     0 26px 46px -28px rgba(0, 0, 0, 0.92),
     0 0 24px rgba(45, 199, 255, 0.12),
     inset 0 1px 0 rgba(255, 255, 255, 0.12);
-  transform: translateY(-7px);
+  transform: translateY(-10px) scale(1.006);
 }
 
 .partner-standalone .partner-how-section .partner-flow-grid article:focus-within {
@@ -10339,7 +10667,7 @@ details[open] > p {
 
 .partner-how-hotspots {
   position: absolute;
-  z-index: 1;
+  z-index: 3;
   inset: 0;
   pointer-events: none;
 }
@@ -10409,7 +10737,7 @@ details[open] > p {
 
 .partner-how-hotspots span:nth-child(1) {
   left: var(--partner-hotspot-1-x, 18.65%);
-  top: var(--partner-hotspot-1-y, 26.4cqw);
+  top: var(--partner-hotspot-1-y, 55.73%);
   --partner-hotspot-size: var(--partner-hotspot-1-size, 1);
   --partner-hotspot-ring-height: var(--partner-hotspot-1-ring-height, 60%);
   --partner-hotspot-ring-top: var(--partner-hotspot-1-ring-top, 20%);
@@ -10420,7 +10748,7 @@ details[open] > p {
 
 .partner-how-hotspots span:nth-child(2) {
   left: var(--partner-hotspot-2-x, 44.62%);
-  top: var(--partner-hotspot-2-y, 23cqw);
+  top: var(--partner-hotspot-2-y, 48.55%);
   --partner-hotspot-size: var(--partner-hotspot-2-size, 1);
   --partner-hotspot-ring-height: var(--partner-hotspot-2-ring-height, 60%);
   --partner-hotspot-ring-top: var(--partner-hotspot-2-ring-top, 20%);
@@ -10431,7 +10759,7 @@ details[open] > p {
 
 .partner-how-hotspots span:nth-child(3) {
   left: var(--partner-hotspot-3-x, 71.62%);
-  top: var(--partner-hotspot-3-y, 24.1cqw);
+  top: var(--partner-hotspot-3-y, 50.88%);
   --partner-hotspot-size: var(--partner-hotspot-3-size, 1);
   --partner-hotspot-ring-height: var(--partner-hotspot-3-ring-height, 60%);
   --partner-hotspot-ring-top: var(--partner-hotspot-3-ring-top, 20%);
@@ -10442,7 +10770,7 @@ details[open] > p {
 
 .partner-how-hotspots span:nth-child(4) {
   left: var(--partner-hotspot-4-x, 92.5%);
-  top: var(--partner-hotspot-4-y, 24.35cqw);
+  top: var(--partner-hotspot-4-y, 51.4%);
   --partner-hotspot-size: var(--partner-hotspot-4-size, 1);
   --partner-hotspot-ring-height: var(--partner-hotspot-4-ring-height, 60%);
   --partner-hotspot-ring-top: var(--partner-hotspot-4-ring-top, 20%);
@@ -10682,22 +11010,24 @@ details[open] > p {
 
 @media (max-width: 1050px) {
   .partner-how-stage {
-    --partner-hotspot-1-x: 24%;
-    --partner-hotspot-1-y: 178px;
-    --partner-hotspot-2-x: 46%;
-    --partner-hotspot-2-y: 150px;
-    --partner-hotspot-3-x: 68%;
-    --partner-hotspot-3-y: 160px;
-    --partner-hotspot-4-x: 85%;
-    --partner-hotspot-4-y: 164px;
     --partner-how-focus-width: 124px;
     --partner-how-focus-height: 72px;
     min-height: 780px;
     padding-top: clamp(270px, 42vw, 360px);
   }
 
-  .partner-how-illustration {
-    background-size: auto 420px;
+  .partner-how-scene-plane {
+    width: auto;
+    height: 420px;
+  }
+
+  .partner-how-stage.is-layered-illustration .partner-how-scene-plane {
+    top: -30px;
+  }
+
+  .partner-how-platforms > span {
+    width: 118px;
+    height: 118px;
   }
 
   .partner-how-route {
@@ -10732,14 +11062,6 @@ details[open] > p {
   }
 
   .partner-how-stage {
-    --partner-hotspot-1-x: 18%;
-    --partner-hotspot-1-y: 128px;
-    --partner-hotspot-2-x: 44%;
-    --partner-hotspot-2-y: 104px;
-    --partner-hotspot-3-x: 72%;
-    --partner-hotspot-3-y: 112px;
-    --partner-hotspot-4-x: 94%;
-    --partner-hotspot-4-y: 116px;
     --partner-how-focus-width: 88px;
     --partner-how-focus-height: 52px;
     min-height: 0;
@@ -10747,9 +11069,22 @@ details[open] > p {
     border-radius: 22px;
   }
 
-  .partner-how-illustration {
-    background-position: center top;
-    background-size: auto 255px;
+  .partner-how-scene-plane {
+    width: auto;
+    height: 255px;
+  }
+
+  .partner-how-stage.is-layered-illustration .partner-how-scene-plane {
+    top: -18px;
+  }
+
+  .partner-how-platforms > span {
+    width: 82px;
+    height: 82px;
+  }
+
+  .partner-how-platform-icon {
+    font-size: 34px;
   }
 
   .partner-how-hotspots span {
@@ -10779,6 +11114,8 @@ details[open] > p {
   .partner-standalone .partner-how-section .partner-how-hotspots span,
   .partner-standalone .partner-how-section .partner-how-hotspots span::before,
   .partner-standalone .partner-how-section .partner-how-hotspots span::after,
+  .partner-standalone .partner-how-section .partner-how-platform-base,
+  .partner-standalone .partner-how-section .partner-how-platform-icon,
   .partner-standalone .partner-how-section .partner-how-focus-shade,
   .partner-standalone .partner-how-section .partner-flow-card-top > i,
   .partner-standalone .partner-how-section .partner-flow-grid article:hover .partner-flow-card-top > i {

@@ -127,10 +127,10 @@ function EconomicsVisual({ index }: { index: number }) {
           <i className="partner-economics-route route-one" />
           <i className="partner-economics-route route-two" />
           <i className="partner-economics-route route-three" />
-          <i className="partner-economics-sprite sprite-pin pin-one" />
-          <i className="partner-economics-sprite sprite-pin pin-two" />
-          <i className="partner-economics-sprite sprite-pin pin-three" />
-          <i className="partner-economics-sprite sprite-check check-main" />
+          <EconomicsObject sprite="pin" className="pin-one" />
+          <EconomicsObject sprite="pin" className="pin-two" />
+          <EconomicsObject sprite="pin" className="pin-three" />
+          <EconomicsObject sprite="check" className="check-main" />
           <i className="partner-economics-travel travel-one" />
           <i className="partner-economics-travel travel-two" />
         </>
@@ -139,8 +139,7 @@ function EconomicsVisual({ index }: { index: number }) {
       {index === 1 && (
         <>
           <i className="partner-economics-boundary" />
-          <i className="partner-economics-sprite sprite-target target-main" />
-          <i className="partner-economics-sprite sprite-shield shield-main" />
+          <EconomicsObject sprite="shield" className="shield-main" />
           <i className="partner-economics-blocked blocked-one">×</i>
           <i className="partner-economics-blocked blocked-two">×</i>
           <i className="partner-economics-blocked blocked-three">×</i>
@@ -150,7 +149,7 @@ function EconomicsVisual({ index }: { index: number }) {
       {index === 2 && (
         <>
           <i className="partner-economics-rays" />
-          <i className="partner-economics-sprite sprite-platform platform-main" />
+          <EconomicsObject sprite="platform" className="platform-main" />
           <i className="partner-economics-sprite sprite-particles particles-one" />
           <i className="partner-economics-sprite sprite-particles particles-two" />
           <i className="partner-economics-sprite sprite-particles particles-three" />
@@ -160,15 +159,24 @@ function EconomicsVisual({ index }: { index: number }) {
       {index === 3 && (
         <>
           <i className="partner-economics-route signal-route" />
-          <i className="partner-economics-sprite sprite-alert alert-main" />
-          <i className="partner-economics-sprite sprite-pin signal-pin" />
-          <i className="partner-economics-sprite sprite-phone signal-phone" />
-          <i className="partner-economics-sprite sprite-search signal-search" />
-          <i className="partner-economics-sprite sprite-star signal-star" />
+          <EconomicsObject sprite="alert" className="alert-main" />
+          <EconomicsObject sprite="pin" className="signal-pin" />
+          <EconomicsObject sprite="phone" className="signal-phone" />
+          <EconomicsObject sprite="search" className="signal-search" />
+          <EconomicsObject sprite="star" className="signal-star" />
           <i className="partner-economics-travel signal-travel" />
         </>
       )}
     </span>
+  );
+}
+
+function EconomicsObject({ sprite, className }: { sprite: string; className: string }) {
+  return (
+    <i className={`partner-economics-object ${className}`}>
+      <span className={`partner-economics-base sprite-${sprite}`} />
+      <span className={`partner-economics-icon sprite-${sprite}`} />
+    </i>
   );
 }
 

@@ -17,6 +17,7 @@ import type {
   CopyVariant,
   HeroVisualMode,
   HowFocusMode,
+  HowIllustrationMode,
   HowHotspotPosition,
   HowHotspotPreview,
   PartnerDesignReviewValue,
@@ -46,14 +47,14 @@ type CopyKey =
   | 'applyBody';
 
 const isDevelopment = process.env.NODE_ENV === 'development';
-const howHotspotStorageKey = 'partner-how-hotspot-calibration-v1';
+const howHotspotStorageKey = 'partner-how-hotspot-calibration-v2';
 const designReviewPositionStorageKey = 'partner-design-review-position-v1';
 type DesignReviewPosition = { x: number; y: number };
 const defaultHowHotspotPositions: HowHotspotPosition[] = [
-  { x: 18.65, y: 26.4, size: 100, perspective: 100, tilt: 1, skew: -8 },
-  { x: 44.62, y: 23, size: 100, perspective: 100, tilt: -2, skew: -8 },
-  { x: 71.62, y: 24.1, size: 100, perspective: 100, tilt: 2, skew: -8 },
-  { x: 92.5, y: 24.35, size: 100, perspective: 100, tilt: -1, skew: -8 },
+  { x: 18.65, y: 55.73, size: 100, perspective: 100, tilt: 1, skew: -8 },
+  { x: 44.62, y: 48.55, size: 100, perspective: 100, tilt: -2, skew: -8 },
+  { x: 71.62, y: 50.88, size: 100, perspective: 100, tilt: 2, skew: -8 },
+  { x: 92.5, y: 51.4, size: 100, perspective: 100, tilt: -1, skew: -8 },
 ];
 
 const loadHowHotspotPositions = () => {
@@ -200,6 +201,7 @@ export function PartnerDesignReviewProvider({ children }: PropsWithChildren) {
     () => defaultHowHotspotPositions.map((position) => ({ ...position })),
   );
   const [howFocusMode, setHowFocusMode] = useState<HowFocusMode>('spotlight');
+  const [howIllustrationMode, setHowIllustrationMode] = useState<HowIllustrationMode>('integrated');
 
   const replayHero = useCallback(() => setHeroReplayCycle((cycle) => cycle + 1), []);
   const replayReport = useCallback(() => setReportReplayCycle((cycle) => cycle + 1), []);
@@ -258,7 +260,7 @@ export function PartnerDesignReviewProvider({ children }: PropsWithChildren) {
     howHotspotPositions.forEach((position, index) => {
       const step = index + 1;
       page.style.setProperty(`--partner-hotspot-${step}-x`, `${position.x}%`);
-      page.style.setProperty(`--partner-hotspot-${step}-y`, `${position.y}cqw`);
+      page.style.setProperty(`--partner-hotspot-${step}-y`, `${position.y}%`);
       page.style.setProperty(`--partner-hotspot-${step}-size`, `${position.size / 100}`);
       const ringHeight = 60 * (position.perspective / 100);
       page.style.setProperty(`--partner-hotspot-${step}-ring-height`, `${ringHeight}%`);
@@ -317,6 +319,8 @@ export function PartnerDesignReviewProvider({ children }: PropsWithChildren) {
     resetHowHotspotPositions,
     howFocusMode,
     setHowFocusMode,
+    howIllustrationMode,
+    setHowIllustrationMode,
   }), [
     copyVariant,
     heroReplayCycle,
@@ -324,6 +328,7 @@ export function PartnerDesignReviewProvider({ children }: PropsWithChildren) {
     howHotspotPositions,
     howHotspotPreview,
     howFocusMode,
+    howIllustrationMode,
     pricingBorderMode,
     pricingUnitMode,
     pricingWidthMode,
@@ -589,6 +594,16 @@ function PartnerDesignReviewDrawer() {
           <fieldset className="partner-design-review-calibration">
             <legend>How it works targets</legend>
             <label>
+              <span>Illustration style</span>
+              <select
+                value={preview.howIllustrationMode}
+                onChange={(event) => preview.setHowIllustrationMode(event.target.value as HowIllustrationMode)}
+              >
+                <option value="integrated">Integrated original</option>
+                <option value="layered">Separate animated layers</option>
+              </select>
+            </label>
+            <label>
               <span>Focus lighting</span>
               <select
                 value={preview.howFocusMode}
@@ -629,8 +644,8 @@ function PartnerDesignReviewDrawer() {
                   <span>Y position <output>{selectedHotspot.y.toFixed(2)}</output></span>
                   <input
                     type="range"
-                    min="10"
-                    max="40"
+                    min="20"
+                    max="80"
                     step="0.1"
                     value={selectedHotspot.y}
                     onChange={(event) => updateSelectedHotspot('y', Number(event.target.value))}
