@@ -1,0 +1,124 @@
+name: Vercel Production
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: vercel-production
+  cancel-in-progress: false
+
+jobs:
+  production:
+    name: Build and deploy Production
+    runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/main'
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Install Vercel CLI
+        run: npm install --global vercel@50.9.6
+
+      - name: Pull Vercel Production environment
+        run: vercel pull --yes --environment=production --token=${{ secrets.VERCEL_TOKEN }}
+        env:
+          VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
+          VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
+
+      - name: Verify Production configuration
+        run: |
+          node <<'NODE'
+          const fs = require('node:fs');
+          const path = '.vercel/.env.production.local';
+          if (!fs.existsSync(path)) {
+            console.error('Vercel did not provide a Production environment file.');
+            process.exit(1);
+          }
+
+          const values = {};
+          for (const line of fs.readFileSync(path, 'utf8').split(/\r?\n/)) {
+            const match = line.match(/^([A-Z0-9_]+)=(.*)$/);
+            if (!match) continue;
+            let value = match[2].trim();
+            if (value.startsWith('"') && value.endsWith('"')) {
+              try { value = JSON.parse(value); } catch { value = value.slice(1, -1); }
+            } else if (value.startsWith("'") && value.endsWith("'")) {
+              value = value.slice(1, -1);
+            }
+            values[match[1]] = value;
+          }
+
+          const required = [
+            'NEXT_PUBLIC_SITE_URL',
+            'SUPABASE_URL',
+            'SUPABASE_SERVICE_ROLE_KEY',
+            'TELEGRAM_BOT_TOKEN',
+            'TELEGRAM_CHAT_ID',
+            'PARTNER_REVIEW_TOKEN_SECRET',
+            'RESEND_API_KEY',
+            'PARTNER_FROM_EMAIL',
+            'STRIPE_SECRET_KEY',
+            'STRIPE_WEBHOOK_SECRET',
+            'STRIPE_PARTNER_FOUNDING_PRICE_ID',
+            'STRIPE_PARTNER_STANDARD_PRICE_ID',
+          ];
+          const missing = required.filter((name) => !values[name]);
+          if (missing.length) {
+            console.error(`Missing Production variables: ${missing.join(', ')}`);
+            process.exit(1);
+          }
+          if (values.NEXT_PUBLIC_SITE_URL !== 'https://findalocalpro.com') {
+            console.error('NEXT_PUBLIC_SITE_URL must be https://findalocalpro.com in Production.');
+            process.exit(1);
+          }
+          if (!values.STRIPE_SECRET_KEY.startsWith('sk_live_')) {
+            console.error('Production requires a live Stripe secret key.');
+            process.exit(1);
+          }
+          if (values.PARTNER_REVIEW_TOKEN_SECRET.length < 32) {
+            console.error('PARTNER_REVIEW_TOKEN_SECRET must be at least 32 characters.');
+            process.exit(1);
+          }
+          console.log('Production configuration preflight passed.');
+          NODE
+
+      - name: Build Production
+        run: vercel build --prod --token=${{ secrets.VERCEL_TOKEN }}
+        env:
+          VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
+          VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
+
+      - name: Deploy Production
+        id: deploy
+        run: |
+          url=$(vercel deploy --prebuilt --prod --archive=tgz --token=${{ secrets.VERCEL_TOKEN }})
+          echo "url=$url" >> "$GITHUB_OUTPUT"
+          echo "Production URL: $url" >> "$GITHUB_STEP_SUMMARY"
+        env:
+          VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
+          VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
+
+      - name: Verify redesigned Partners page
+        run: |
+          for attempt in 1 2 3 4 5 6; do
+            html=$(curl --fail --location --silent --show-error --compressed https://findalocalpro.com/partners) || true
+            if grep -q 'Catch homeowner' <<< "$html" && ! grep -q '\$99' <<< "$html"; then
+              echo 'Production Partners page verification passed.'
+              exit 0
+            fi
+            sleep 5
+          done
+          echo 'Production URL did not serve the redesigned Partners page.' >&2
+          exit 1
