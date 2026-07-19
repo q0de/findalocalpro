@@ -20,7 +20,47 @@ const revealSelectors = [
   '.partner-final-cta',
 ];
 
+const deferredMediaSelectors = [
+  '.partner-economics-section',
+  '.partner-how-section',
+  '.partner-report-section',
+  '.partner-pricing-section',
+];
+
 export function PartnerScrollAnimator() {
+  useEffect(() => {
+    const sections = Array.from(document.querySelectorAll<HTMLElement>(deferredMediaSelectors.join(',')));
+    if (!sections.length) return undefined;
+
+    const markReady = (section: HTMLElement) => section.classList.add('is-media-ready');
+
+    if (!('IntersectionObserver' in window)) {
+      sections.forEach(markReady);
+      return () => sections.forEach((section) => section.classList.remove('is-media-ready'));
+    }
+
+    const mediaObserver = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (!entry.isIntersecting) return;
+          markReady(entry.target as HTMLElement);
+          mediaObserver.unobserve(entry.target);
+        });
+      },
+      {
+        rootMargin: '240px 0px',
+        threshold: 0,
+      },
+    );
+
+    sections.forEach((section) => mediaObserver.observe(section));
+
+    return () => {
+      mediaObserver.disconnect();
+      sections.forEach((section) => section.classList.remove('is-media-ready'));
+    };
+  }, []);
+
   useEffect(() => {
     const page = document.querySelector<HTMLElement>('.partner-standalone');
     if (!page) return undefined;
