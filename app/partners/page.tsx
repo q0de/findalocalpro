@@ -456,9 +456,15 @@ export default async function PartnersPage({ searchParams }: PartnersPageProps) 
                     </span>
                   </div>
                   <p className="partner-pricing-duration"><span aria-hidden="true">✓</span>first 3 monthly billing cycles</p>
-                  <div className="partner-pricing-standard"><img src="/partners/pricing-shield.png" alt="" aria-hidden="true" /><p>Then <strong>$750 / mo</strong> standard</p></div>
+                  <div className="partner-pricing-standard">
+                    <Image src="/partners/pricing-shield.png" alt="" aria-hidden="true" width={256} height={256} sizes="34px" loading="lazy" />
+                    <p>Then <strong>$750 / mo</strong> standard</p>
+                  </div>
                   <a href="#apply" className="partner-primary-button"><span className="partner-pricing-cta-icon" aria-hidden="true">›</span><span data-copy-key="primaryCta">Apply for a Founding Partner Spot</span></a>
-                  <p className="partner-pricing-note"><img src="/partners/pricing-no-payment.png" alt="" aria-hidden="true" />No payment with your application. Approved partners receive a private Stripe checkout link for the $500 founding rate.</p>
+                  <p className="partner-pricing-note">
+                    <Image src="/partners/pricing-no-payment.png" alt="" aria-hidden="true" width={256} height={256} sizes="32px" loading="lazy" />
+                    No payment with your application. Approved partners receive a private Stripe checkout link for the $500 founding rate.
+                  </p>
                 </div>
               </aside>
             </div>

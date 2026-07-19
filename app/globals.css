@@ -2532,7 +2532,6 @@
   background:
     linear-gradient(100deg, rgba(7, 18, 40, 0.98) 0%, rgba(7, 18, 40, 0.9) 34%, rgba(8, 22, 46, 0.58) 62%, rgba(8, 22, 46, 0.18) 100%),
     linear-gradient(180deg, rgba(7, 18, 40, 0.18), rgba(7, 18, 40, 0.48)),
-    url("/partners/neighborhood-demand-hero.webp") center center / cover no-repeat,
     #08142a;
   border-top: 0;
   border-bottom: 0;
@@ -3188,7 +3187,10 @@
 .partner-standalone .partner-economics-map {
   z-index: -2;
   inset: -4%;
-  background: #041229 url("/partners/economics/economics-map-bg-v2.webp") center / cover no-repeat;
+  background-color: #041229;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
   filter: saturate(0.9) brightness(0.76);
   transform: scale(1.02);
   transition: transform 760ms cubic-bezier(0.2, 0.85, 0.2, 1), filter 520ms ease;
@@ -3215,8 +3217,16 @@
 
 .partner-standalone .partner-economics-sprite,
 .partner-standalone .partner-economics-icon {
-  background-image: url("/partners/economics/economics-icons-v4.webp");
   filter: drop-shadow(0 8px 14px rgba(0, 7, 20, 0.42));
+}
+
+.partner-standalone .partner-economics-section.is-media-ready .partner-economics-map {
+  background-image: url("/partners/economics/economics-map-bg-v2.webp");
+}
+
+.partner-standalone .partner-economics-section.is-media-ready .partner-economics-sprite,
+.partner-standalone .partner-economics-section.is-media-ready .partner-economics-icon {
+  background-image: url("/partners/economics/economics-icons-v4.webp");
 }
 
 .partner-standalone .partner-economics-base {
@@ -3956,7 +3966,7 @@
   pointer-events: none;
 }
 
-.partner-report-display.is-iphone .partner-device-screen {
+.partner-report-section.is-media-ready .partner-report-display.is-iphone .partner-device-screen {
   -webkit-mask-image: url("/partners/devices/generated-iphone-screen-mask.png");
   mask-image: url("/partners/devices/generated-iphone-screen-mask.png");
 }
@@ -6060,10 +6070,20 @@ details[open] > p {
   inset: 0;
   z-index: 0;
   pointer-events: none;
-  background:
-    linear-gradient(90deg, rgba(232, 238, 246, 0.82) 0%, rgba(232, 238, 246, 0.32) 36%, rgba(232, 238, 246, 0) 72%),
-    url("/partners/pricing-grid-bg.webp") 68% center / 132% auto no-repeat;
+  background-image:
+    linear-gradient(90deg, rgba(232, 238, 246, 0.82) 0%, rgba(232, 238, 246, 0.32) 36%, rgba(232, 238, 246, 0) 72%);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
   opacity: 1;
+}
+
+.partner-standalone .partner-pricing-section.is-media-ready::before {
+  background-image:
+    linear-gradient(90deg, rgba(232, 238, 246, 0.82) 0%, rgba(232, 238, 246, 0.32) 36%, rgba(232, 238, 246, 0) 72%),
+    url("/partners/pricing-grid-bg.webp");
+  background-position: center, 68% center;
+  background-size: cover, 132% auto;
 }
 
 .partner-standalone .partner-pricing-section h2 {
@@ -10254,7 +10274,6 @@ details[open] > p {
   position: absolute;
   z-index: 0;
   inset: 0;
-  background-image: url("/partners/how-it-works/demand-pipeline-v2.webp");
   background-position: center top;
   background-repeat: no-repeat;
   background-size: 100% 100%;
@@ -10282,7 +10301,11 @@ details[open] > p {
   --partner-hotspot-4-y: 53.2%;
 }
 
-.partner-how-stage.is-layered-illustration .partner-how-illustration {
+.partner-how-section.is-media-ready .partner-how-illustration {
+  background-image: url("/partners/how-it-works/demand-pipeline-v2.webp");
+}
+
+.partner-how-section.is-media-ready .partner-how-stage.is-layered-illustration .partner-how-illustration {
   background-image: url("/partners/how-it-works/demand-pipeline-clean-v3.webp");
 }
 
