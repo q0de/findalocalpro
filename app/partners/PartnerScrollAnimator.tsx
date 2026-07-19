@@ -40,35 +40,17 @@ export function PartnerScrollAnimator() {
 
     page.classList.add('is-reveal-ready');
 
-    let revealTimer = 0;
-    let revealInterval = 0;
     const revealVisibleElements = () => {
-      revealTimer = 0;
       const revealLine = window.innerHeight * 0.88;
-      let visibleCount = 0;
 
       elements.forEach((element) => {
-        if (element.classList.contains('is-visible')) {
-          visibleCount += 1;
-          return;
-        }
+        if (element.classList.contains('is-visible')) return;
 
         const rect = element.getBoundingClientRect();
         if (rect.top < revealLine && rect.bottom > window.innerHeight * 0.08) {
           element.classList.add('is-visible');
-          visibleCount += 1;
         }
       });
-
-      if (visibleCount >= elements.length && revealInterval) {
-        window.clearInterval(revealInterval);
-        revealInterval = 0;
-      }
-    };
-
-    const scheduleRevealCheck = () => {
-      if (revealTimer) return;
-      revealTimer = window.setTimeout(revealVisibleElements, 40);
     };
 
     const observer = new IntersectionObserver(
@@ -87,17 +69,11 @@ export function PartnerScrollAnimator() {
     );
 
     elements.forEach((element) => observer.observe(element));
-    window.addEventListener('scroll', scheduleRevealCheck, { passive: true });
-    window.addEventListener('resize', scheduleRevealCheck);
-    window.setTimeout(revealVisibleElements, 80);
-    revealInterval = window.setInterval(revealVisibleElements, 300);
+    const initialFrame = window.requestAnimationFrame(revealVisibleElements);
 
     return () => {
-      window.clearTimeout(revealTimer);
-      window.clearInterval(revealInterval);
+      window.cancelAnimationFrame(initialFrame);
       observer.disconnect();
-      window.removeEventListener('scroll', scheduleRevealCheck);
-      window.removeEventListener('resize', scheduleRevealCheck);
       page.classList.remove('is-reveal-ready', 'is-reveal-reduced');
       elements.forEach((element) => {
         element.classList.remove('partner-reveal', 'is-visible');

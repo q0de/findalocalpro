@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import type { CSSProperties } from 'react';
+import Image from 'next/image';
 import Link from 'next/link';
 import { PartnerApplicationForm } from './PartnerApplicationForm';
 import { PartnerDesignReviewProvider } from './PartnerDesignReview';
@@ -109,11 +110,75 @@ const stats = [
 ];
 
 const economics = [
-  ['/partners/economics/booked-jobs.webp', '1-3 jobs', 'Can cover the month', 'For many urgent-service trades, a few booked calls can offset the founding price.'],
-  ['/partners/economics/protected-lane.webp', '1 partner', 'Protected by trade', 'Where approved, your local category is not sold to a direct competitor.'],
-  ['/partners/economics/flat-fee.webp', 'No auction', 'Flat monthly fee', 'No shared-lead bidding. You get monitoring, alerts, and reporting.'],
-  ['/partners/economics/fast-signals.webp', 'Fast signals', 'Timing wins work', 'Hot threads, missed calls, bad reviews, and competitor mentions are worth catching early.'],
+  ['1-3 jobs', 'Can cover the month', 'For many urgent-service trades, a few booked calls can offset the founding price.'],
+  ['1 partner', 'Protected by trade', 'Where approved, your local category is not sold to a direct competitor.'],
+  ['No auction', 'Flat monthly fee', 'No shared-lead bidding. You get monitoring, alerts, and reporting.'],
+  ['Fast signals', 'Timing wins work', 'Hot threads, missed calls, bad reviews, and competitor mentions are worth catching early.'],
 ];
+
+function EconomicsVisual({ index }: { index: number }) {
+  return (
+    <span className={`partner-economics-image partner-economics-scene-${index + 1}`} data-economics-visual={index + 1} aria-hidden="true">
+      <span className="partner-economics-map" />
+      <span className="partner-economics-vignette" />
+
+      {index === 0 && (
+        <>
+          <i className="partner-economics-route route-one" />
+          <i className="partner-economics-route route-two" />
+          <i className="partner-economics-route route-three" />
+          <EconomicsObject sprite="pin" className="pin-one" />
+          <EconomicsObject sprite="pin" className="pin-two" />
+          <EconomicsObject sprite="pin" className="pin-three" />
+          <EconomicsObject sprite="check" className="check-main" />
+          <i className="partner-economics-travel travel-one" />
+          <i className="partner-economics-travel travel-two" />
+        </>
+      )}
+
+      {index === 1 && (
+        <>
+          <i className="partner-economics-boundary" />
+          <EconomicsObject sprite="shield" className="shield-main" />
+          <i className="partner-economics-blocked blocked-one">×</i>
+          <i className="partner-economics-blocked blocked-two">×</i>
+          <i className="partner-economics-blocked blocked-three">×</i>
+        </>
+      )}
+
+      {index === 2 && (
+        <>
+          <i className="partner-economics-rays" />
+          <EconomicsObject sprite="platform" className="platform-main" />
+          <i className="partner-economics-sprite sprite-particles particles-one" />
+          <i className="partner-economics-sprite sprite-particles particles-two" />
+          <i className="partner-economics-sprite sprite-particles particles-three" />
+        </>
+      )}
+
+      {index === 3 && (
+        <>
+          <i className="partner-economics-route signal-route" />
+          <EconomicsObject sprite="alert" className="alert-main" />
+          <EconomicsObject sprite="pin" className="signal-pin" />
+          <EconomicsObject sprite="phone" className="signal-phone" />
+          <EconomicsObject sprite="search" className="signal-search" />
+          <EconomicsObject sprite="star" className="signal-star" />
+          <i className="partner-economics-travel signal-travel" />
+        </>
+      )}
+    </span>
+  );
+}
+
+function EconomicsObject({ sprite, className }: { sprite: string; className: string }) {
+  return (
+    <i className={`partner-economics-object ${className}`}>
+      <span className={`partner-economics-base sprite-${sprite}`} />
+      <span className={`partner-economics-icon sprite-${sprite}`} />
+    </i>
+  );
+}
 
 const faqs = [
   ['Is this pay-per-lead?', 'No. This is a flat monthly market-watch service, not a per-lead marketplace. You are not bidding against other contractors or paying for each contact — you get monitoring, alerts, call tracking, and a weekly report for one predictable price.'],
@@ -148,7 +213,7 @@ export default async function PartnersPage({ searchParams }: PartnersPageProps) 
       <div className="partner-page partner-standalone">
       <PartnerScrollAnimator />
       <header className="partner-site-nav">
-        <Link href="/" className="partner-brand" aria-label="FindALocalPro home">
+        <Link href="/" className="partner-brand">
           <span>F</span>
           <span className="partner-brand-copy">
             <b>FindA<em>Local</em>Pro</b>
@@ -182,7 +247,16 @@ export default async function PartnersPage({ searchParams }: PartnersPageProps) 
       <main>
         <div className="partner-intro-stage">
           <section className="partner-standalone-hero">
-            <span className="partner-neighborhood-bg" aria-hidden="true" />
+            <Image
+              className="partner-neighborhood-bg"
+              src="/partners/neighborhood-demand-hero.webp"
+              alt=""
+              aria-hidden="true"
+              fill
+              priority
+              fetchPriority="high"
+              sizes="100vw"
+            />
             <PartnerHeroVisual />
             <div className="partner-shell partner-hero-grid">
               <div className="partner-hero-panel">
@@ -226,7 +300,7 @@ export default async function PartnersPage({ searchParams }: PartnersPageProps) 
                       <span className="partner-stat-label">{stat.label}</span>
                       <small className="partner-stat-detail">{stat.detail}</small>
                     </div>
-                    <div className="partner-stat-trend" aria-label={`${stat.trend} illustrative weekly trend`}>
+                    <div className="partner-stat-trend" role="img" aria-label={`${stat.trend} illustrative weekly trend`}>
                       <svg viewBox="0 0 114 36" aria-hidden="true" focusable="false">
                         <polyline points={stat.sparkline} pathLength="1" />
                       </svg>
@@ -258,11 +332,9 @@ export default async function PartnersPage({ searchParams }: PartnersPageProps) 
               </p>
             </div>
             <div className="partner-economics-grid">
-              {economics.map(([image, value, title, body], index) => (
+              {economics.map(([value, title, body], index) => (
                 <article key={title}>
-                  <span className="partner-economics-image" data-economics-visual={index + 1} aria-hidden="true">
-                    <img src={image} alt="" />
-                  </span>
+                  <EconomicsVisual index={index} />
                   <b>{value}</b>
                   <h3>{title}</h3>
                   <p>{body}</p>
