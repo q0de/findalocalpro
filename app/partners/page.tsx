@@ -31,28 +31,24 @@ const flow = [
   {
     number: '01',
     icon: 'radar',
-    kicker: 'Always watching',
     title: 'Monitor local demand',
     body: 'We watch neighborhood conversations, search and call activity, and review signals for your trade and territory.',
   },
   {
     number: '02',
     icon: 'notifications_active',
-    kicker: 'Right-time alerts',
     title: 'Alert you when timing matters',
     body: 'A hot opportunity reaches you while it is still actionable — before the thread fills with other names.',
   },
   {
     number: '03',
     icon: 'phone_in_talk',
-    kicker: 'Demand captured',
     title: 'Route & track calls',
     body: 'Dedicated call tracking captures and records inbound demand where applicable, so nothing slips.',
   },
   {
     number: '04',
     icon: 'description',
-    kicker: 'Every Monday',
     title: 'Send the weekly report',
     body: 'See what surfaced, what we acted on, which calls came in, and the next moves worth making.',
   },

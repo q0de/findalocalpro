@@ -122,5 +122,84 @@ export function PartnerScrollAnimator() {
     };
   }, []);
 
+  useEffect(() => {
+    const cards = Array.from(document.querySelectorAll<HTMLElement>('.partner-stats-grid .partner-stat-card'));
+    if (!cards.length || !('IntersectionObserver' in window)) return undefined;
+
+    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+    const narrowViewport = window.matchMedia('(max-width: 900px)');
+    if (reduceMotion.matches) return undefined;
+
+    const activationTimers = new Map<HTMLElement, number>();
+    const resetTimers = new Map<HTMLElement, number>();
+    const playedCards = new WeakSet<HTMLElement>();
+
+    const clearCardTimers = (card: HTMLElement) => {
+      const activationTimer = activationTimers.get(card);
+      const resetTimer = resetTimers.get(card);
+
+      if (activationTimer !== undefined) window.clearTimeout(activationTimer);
+      if (resetTimer !== undefined) window.clearTimeout(resetTimer);
+      activationTimers.delete(card);
+      resetTimers.delete(card);
+    };
+
+    const playCard = (card: HTMLElement) => {
+      if (playedCards.has(card)) return;
+
+      const activationTimer = window.setTimeout(() => {
+        playedCards.add(card);
+        card.classList.add('is-mobile-scroll-active');
+        activationTimers.delete(card);
+
+        const resetTimer = window.setTimeout(() => {
+          card.classList.remove('is-mobile-scroll-active');
+          resetTimers.delete(card);
+        }, 1180);
+
+        resetTimers.set(card, resetTimer);
+      }, 220);
+
+      activationTimers.set(card, activationTimer);
+    };
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        if (!narrowViewport.matches) return;
+
+        entries.forEach((entry) => {
+          if (!entry.isIntersecting || entry.intersectionRatio < 0.52) return;
+          playCard(entry.target as HTMLElement);
+          observer.unobserve(entry.target);
+        });
+      },
+      {
+        rootMargin: '0px 0px -10% 0px',
+        threshold: [0.52],
+      },
+    );
+
+    const updateObservation = () => {
+      observer.disconnect();
+      cards.forEach((card) => {
+        clearCardTimers(card);
+        card.classList.remove('is-mobile-scroll-active');
+        if (narrowViewport.matches && !playedCards.has(card)) observer.observe(card);
+      });
+    };
+
+    updateObservation();
+    narrowViewport.addEventListener('change', updateObservation);
+
+    return () => {
+      observer.disconnect();
+      narrowViewport.removeEventListener('change', updateObservation);
+      cards.forEach((card) => {
+        clearCardTimers(card);
+        card.classList.remove('is-mobile-scroll-active');
+      });
+    };
+  }, []);
+
   return null;
 }

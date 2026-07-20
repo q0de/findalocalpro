@@ -7,7 +7,6 @@ import { usePartnerDesignReview } from './PartnerDesignReviewContext';
 type FlowItem = {
   number: string;
   icon: string;
-  kicker: string;
   title: string;
   body: string;
 };
@@ -43,7 +42,7 @@ export function PartnerHowStage({ flow }: { flow: FlowItem[] }) {
         </div>
       </div>
       <div className="partner-flow-grid">
-        {flow.map(({ number, icon, kicker, title, body }, index) => {
+        {flow.map(({ number, icon, title, body }, index) => {
           const step = (index + 1) as ActiveStep;
           const isActive = activeStep === step;
           return (
@@ -65,7 +64,6 @@ export function PartnerHowStage({ flow }: { flow: FlowItem[] }) {
                   <span>{number}</span>
                   <i className="material-symbols-outlined" aria-hidden="true">{icon}</i>
                 </span>
-                <span className="partner-flow-kicker">{kicker}</span>
                 <span className="partner-flow-title">{title}</span>
                 <span className="partner-flow-body">{body}</span>
               </button>

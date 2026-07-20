@@ -139,6 +139,7 @@ export function PartnerPriceCounter() {
     '--partner-price-scale-x': countdownScaleX.toFixed(3),
     '--partner-price-scale-y': countdownScaleY.toFixed(3),
   } as CSSProperties;
+  const formattedPrice = price.toLocaleString('en-US');
 
   return (
     <button
@@ -149,7 +150,12 @@ export function PartnerPriceCounter() {
       aria-label="Replay founding price countdown to $500"
       onClick={play}
     >
-      ${price.toLocaleString('en-US')}
+      $
+      {formattedPrice.split('').map((character, index) => (
+        character === ','
+          ? <span key={`price-comma-${index}`} className="partner-price-comma">{character}</span>
+          : character
+      ))}
     </button>
   );
 }

@@ -2868,6 +2868,7 @@
     border-color 180ms ease,
     box-shadow 220ms ease,
     transform 220ms ease,
+    translate 220ms ease,
     background 220ms ease;
 }
 
@@ -6775,6 +6776,7 @@ details[open] > p {
   background-clip: text;
   -webkit-background-clip: text;
   font: inherit;
+  font-variant-numeric: tabular-nums lining-nums;
   letter-spacing: inherit;
   line-height: inherit;
   paint-order: stroke fill;
@@ -6787,6 +6789,12 @@ details[open] > p {
     0 0 34px rgba(126, 193, 61, 0.34);
   -webkit-text-fill-color: transparent;
   cursor: pointer;
+}
+
+.partner-standalone .partner-price-count .partner-price-comma {
+  display: inline-block;
+  color: #baff4d;
+  -webkit-text-fill-color: #baff4d;
 }
 
 .partner-standalone .partner-price-count.is-popping {
@@ -8581,10 +8589,10 @@ details[open] > p {
   }
 
   .partner-standalone .partner-hero-visual {
-    top: 64%;
+    top: 54%;
     right: -34%;
     width: 108vw;
-    opacity: 0.48;
+    opacity: 0.8;
     transform: translateY(-50%) scale(0.82);
   }
 
@@ -9316,6 +9324,23 @@ details[open] > p {
     0 1px 0 rgba(238, 250, 255, 0.15) inset;
 }
 
+@media (max-width: 900px) {
+  .partner-standalone .partner-stats-grid .partner-stat-card.is-mobile-scroll-active {
+    translate: 0 -3px;
+    border-color: rgba(119, 216, 162, 0.76);
+    background:
+      radial-gradient(circle at 13% 17%, rgba(50, 183, 255, 0.27), transparent 32%),
+      radial-gradient(circle at 86% 112%, rgba(142, 227, 48, 0.15), transparent 48%),
+      linear-gradient(145deg, rgba(7, 31, 68, 0.99), rgba(2, 12, 31, 0.99));
+    box-shadow:
+      0 0 0 1px rgba(1, 8, 22, 0.72),
+      0 26px 54px rgba(1, 7, 21, 0.38),
+      0 0 36px rgba(38, 176, 255, 0.2),
+      0 0 24px rgba(142, 227, 48, 0.13),
+      0 1px 0 rgba(238, 250, 255, 0.15) inset;
+  }
+}
+
 .partner-standalone .partner-stats-grid .partner-stat-card::after {
   inset: -18% -34%;
   background: linear-gradient(
@@ -9392,7 +9417,8 @@ details[open] > p {
   will-change: filter, transform;
 }
 
-.partner-standalone .partner-stats-grid .partner-stat-card:hover .partner-stat-icon {
+.partner-standalone .partner-stats-grid .partner-stat-card:hover .partner-stat-icon,
+.partner-standalone .partner-stats-grid .partner-stat-card.is-mobile-scroll-active .partner-stat-icon {
   color: #f7fff1;
   background:
     radial-gradient(circle at 40% 34%, rgba(155, 240, 68, 0.34), transparent 40%),
@@ -9423,6 +9449,7 @@ details[open] > p {
   font-family: var(--font-archivo), system-ui, sans-serif;
   font-size: 48px;
   font-weight: 820;
+  font-variant-numeric: tabular-nums lining-nums;
   letter-spacing: -2px;
   line-height: 0.9;
 }
@@ -9433,7 +9460,7 @@ details[open] > p {
   margin: 3px 0 0;
   color: #f1f7ff;
   font-size: 14px;
-  font-weight: 850;
+  font-weight: 800;
   line-height: 1.16;
 }
 
@@ -9534,6 +9561,40 @@ details[open] > p {
   }
 
   .partner-standalone .partner-stats-grid .partner-stat-card:hover .partner-stat-trend-value {
+    animation: partnerStatTrendCount 900ms linear 110ms both;
+  }
+}
+
+@media (max-width: 900px) {
+  .partner-standalone .partner-stats-grid .partner-stat-card.is-mobile-scroll-active::after {
+    animation: partnerStatHologramSweep 900ms cubic-bezier(0.18, 0.78, 0.22, 1) both;
+  }
+
+  .partner-standalone .partner-stats-grid .partner-stat-card.is-mobile-scroll-active .partner-stat-icon::before {
+    animation: partnerStatRingPulse 760ms cubic-bezier(0.18, 0.78, 0.22, 1) both;
+  }
+
+  .partner-standalone .partner-stat-card.is-mobile-scroll-active .partner-stat-icon[data-stat-icon="priority_high"] .partner-stat-icon-glyph {
+    animation: partnerStatAlertPop 720ms cubic-bezier(0.2, 0.82, 0.2, 1) both;
+  }
+
+  .partner-standalone .partner-stat-card.is-mobile-scroll-active .partner-stat-icon[data-stat-icon="call"] .partner-stat-icon-glyph {
+    animation: partnerStatPhoneRing 760ms ease-in-out both;
+  }
+
+  .partner-standalone .partner-stat-card.is-mobile-scroll-active .partner-stat-icon[data-stat-icon="star"] .partner-stat-icon-glyph {
+    animation: partnerStatStarTwinkle 780ms cubic-bezier(0.2, 0.82, 0.2, 1) both;
+  }
+
+  .partner-standalone .partner-stat-card.is-mobile-scroll-active .partner-stat-icon[data-stat-icon="alternate_email"] .partner-stat-icon-glyph {
+    animation: partnerStatMentionOrbit 820ms cubic-bezier(0.22, 0.72, 0.2, 1) both;
+  }
+
+  .partner-standalone .partner-stats-grid .partner-stat-card.is-mobile-scroll-active .partner-stat-trend polyline {
+    animation: partnerStatSparkDraw 900ms linear 90ms both;
+  }
+
+  .partner-standalone .partner-stats-grid .partner-stat-card.is-mobile-scroll-active .partner-stat-trend-value {
     animation: partnerStatTrendCount 900ms linear 110ms both;
   }
 }
@@ -9642,10 +9703,15 @@ details[open] > p {
 
 @media (prefers-reduced-motion: reduce) {
   .partner-standalone .partner-stats-grid .partner-stat-card:hover::after,
+  .partner-standalone .partner-stats-grid .partner-stat-card.is-mobile-scroll-active::after,
   .partner-standalone .partner-stats-grid .partner-stat-card:hover .partner-stat-icon::before,
+  .partner-standalone .partner-stats-grid .partner-stat-card.is-mobile-scroll-active .partner-stat-icon::before,
   .partner-standalone .partner-stats-grid .partner-stat-card:hover .partner-stat-icon-glyph,
+  .partner-standalone .partner-stats-grid .partner-stat-card.is-mobile-scroll-active .partner-stat-icon-glyph,
   .partner-standalone .partner-stats-grid .partner-stat-card:hover .partner-stat-trend polyline,
-  .partner-standalone .partner-stats-grid .partner-stat-card:hover .partner-stat-trend-value {
+  .partner-standalone .partner-stats-grid .partner-stat-card.is-mobile-scroll-active .partner-stat-trend polyline,
+  .partner-standalone .partner-stats-grid .partner-stat-card:hover .partner-stat-trend-value,
+  .partner-standalone .partner-stats-grid .partner-stat-card.is-mobile-scroll-active .partner-stat-trend-value {
     animation: none !important;
   }
 
@@ -10071,6 +10137,11 @@ details[open] > p {
     top: 52%;
   }
 
+  .partner-standalone .partner-signal-hub {
+    left: 48%;
+    top: 52%;
+  }
+
   .partner-standalone .partner-map-pin-stage {
     top: calc(52% - 8px);
   }
@@ -10379,7 +10450,7 @@ details[open] > p {
 }
 
 .partner-standalone .partner-how-section .partner-section-heading p {
-  max-width: 760px;
+  max-width: 65ch;
   margin-top: 14px;
   font-size: 16.5px;
   line-height: 1.55;
@@ -10804,7 +10875,7 @@ details[open] > p {
   color: #9fea50;
   border: 0;
   font-size: 14px;
-  font-weight: 800;
+  font-weight: 750;
   line-height: 1.45;
   letter-spacing: 0.08em;
 }
@@ -10842,16 +10913,6 @@ details[open] > p {
 .partner-standalone .partner-how-section .partner-flow-grid article.is-touch-active .partner-flow-card-top > i {
   color: #9fea50;
   opacity: 0.3;
-}
-
-.partner-standalone .partner-how-section .partner-flow-kicker {
-  display: block;
-  color: #7ec13d;
-  font-size: 14px;
-  font-weight: 850;
-  line-height: 1.45;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
 }
 
 .partner-how-hotspots {
@@ -11071,14 +11132,32 @@ details[open] > p {
   font-size: clamp(18px, 1.45vw, 22px);
   font-weight: 800;
   letter-spacing: -0.025em;
+  transition: color 220ms ease, text-shadow 220ms ease;
+}
+
+.partner-standalone .partner-how-section .partner-flow-grid article:hover .partner-flow-title,
+.partner-standalone .partner-how-section .partner-flow-grid article:focus-within .partner-flow-title,
+.partner-standalone .partner-how-section .partner-flow-grid article.is-touch-active .partner-flow-title {
+  color: #b5f56c;
+  text-shadow: 0 0 18px rgba(159, 234, 80, 0.2);
 }
 
 .partner-standalone .partner-how-section .partner-flow-body {
   display: block;
   margin-top: 10px;
   color: #adc0d8;
+  font-family: var(--font-public-sans), system-ui, sans-serif;
   font-size: 14px;
+  font-weight: 400;
+  letter-spacing: 0;
   line-height: 1.55;
+}
+
+@media (max-width: 640px) {
+  .partner-standalone .partner-stats-grid .partner-stat-detail {
+    font-size: 13px;
+    line-height: 1.4;
+  }
 }
 
 .partner-how-stage-note {
