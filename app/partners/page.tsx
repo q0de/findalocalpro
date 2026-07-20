@@ -149,10 +149,17 @@ function EconomicsVisual({ index }: { index: number }) {
       {index === 2 && (
         <>
           <i className="partner-economics-rays" />
-          <EconomicsObject sprite="platform" className="platform-main" />
-          <i className="partner-economics-sprite sprite-particles particles-one" />
-          <i className="partner-economics-sprite sprite-particles particles-two" />
-          <i className="partner-economics-sprite sprite-particles particles-three" />
+          <span className="partner-flat-fee-visual">
+            <span className="partner-flat-fee-card">
+              <span className="partner-flat-fee-eyebrow">Fixed rate</span>
+              <span className="partner-flat-fee-value">
+                <span>$</span>
+                <small>/ month</small>
+              </span>
+              <span className="partner-flat-fee-line"><i /></span>
+            </span>
+            <span className="partner-flat-fee-check" />
+          </span>
         </>
       )}
 
