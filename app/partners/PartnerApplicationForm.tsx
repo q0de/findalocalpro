@@ -59,6 +59,13 @@ function formatPhone(value: string) {
   return `(${digits.slice(0, 3)}) ${digits.slice(3, 6)}-${digits.slice(6)}`;
 }
 
+function normalizeOptionalUrl(value: string) {
+  const trimmed = value.trim();
+  if (!trimmed) return '';
+  if (/^[a-z][a-z0-9+.-]*:\/\//i.test(trimmed)) return trimmed;
+  return `https://${trimmed}`;
+}
+
 export function PartnerApplicationForm() {
   const [form, setForm] = useState<PartnerForm>(initialForm);
   const [step, setStep] = useState(0);
@@ -187,10 +194,16 @@ export function PartnerApplicationForm() {
     setError('');
 
     try {
+      const normalizedForm = {
+        ...form,
+        website: normalizeOptionalUrl(form.website),
+        googleProfile: normalizeOptionalUrl(form.googleProfile),
+      };
+      setForm(normalizedForm);
       const applicationResponse = await fetch('/api/partners', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(form),
+        body: JSON.stringify(normalizedForm),
       });
       const applicationResult = await applicationResponse.json() as { applicationId?: string; error?: string };
       if (!applicationResponse.ok || !applicationResult.applicationId) {
@@ -347,7 +360,7 @@ export function PartnerApplicationForm() {
             <label className={reviewFieldClass(1, form.businessName)} style={reviewFieldStyle(1, 2, 0)}><span>Business name</span><input className="lead-input" value={form.businessName} onChange={(event) => setField('businessName', event.target.value)} required /></label>
             <label className={reviewFieldClass(1, form.contactName)} style={reviewFieldStyle(1, 3, 1)}><span>Contact name</span><input className="lead-input" value={form.contactName} onChange={(event) => setField('contactName', event.target.value)} autoComplete="name" required /></label>
           </div>
-          <label className="field-block"><span>Website <small>optional</small></span><input className="lead-input" type="url" value={form.website} onChange={(event) => setField('website', event.target.value)} placeholder="https://" /></label>
+          <label className="field-block"><span>Website <small>optional</small></span><input className="lead-input" type="text" inputMode="url" value={form.website} onBlur={(event) => setField('website', normalizeOptionalUrl(event.target.value))} onChange={(event) => setField('website', event.target.value)} placeholder="grandysux.com" /></label>
         </fieldset>
 
         <fieldset className="partner-review-group">
@@ -363,7 +376,7 @@ export function PartnerApplicationForm() {
           <legend>Helpful context <span>Optional</span></legend>
           <div className="partner-field-grid">
             <label className="field-block"><span>Years in business</span><input className="lead-input" inputMode="numeric" value={form.yearsInBusiness} onChange={(event) => setField('yearsInBusiness', event.target.value.replace(/[^\d+]/g, '').slice(0, 4))} /></label>
-            <label className="field-block"><span>Google Business Profile URL</span><input className="lead-input" type="url" value={form.googleProfile} onChange={(event) => setField('googleProfile', event.target.value)} placeholder="https://" /></label>
+            <label className="field-block"><span>Google Business Profile URL</span><input className="lead-input" type="text" inputMode="url" value={form.googleProfile} onBlur={(event) => setField('googleProfile', normalizeOptionalUrl(event.target.value))} onChange={(event) => setField('googleProfile', event.target.value)} placeholder="maps.google.com/..." /></label>
           </div>
           <label className="field-block"><span>Notes / specialties</span><textarea className="lead-input" rows={4} value={form.notes} onChange={(event) => setField('notes', event.target.value)} /></label>
         </fieldset>

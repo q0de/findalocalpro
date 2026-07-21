@@ -6992,6 +6992,10 @@ details[open] > p {
   border-bottom: 1px solid rgba(20, 18, 10, 0.09);
 }
 
+.partner-standalone .partner-included--supporting {
+  background: #102848;
+}
+
 .partner-standalone .partner-included .partner-shell {
   padding-block: 84px;
 }
@@ -7084,6 +7088,37 @@ details[open] > p {
 
 .partner-standalone .partner-apply-steps span {
   padding-top: 3px;
+}
+
+.partner-standalone .partner-apply-reassurance {
+  grid-column: 1 / -1;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+  margin-top: -18px;
+}
+
+.partner-standalone .partner-apply-reassurance span {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  min-height: 72px;
+  padding: 16px 18px;
+  color: #3f3c35;
+  background: rgba(255, 255, 255, 0.74);
+  border: 1px solid rgba(91, 118, 154, 0.16);
+  border-radius: 18px;
+  box-shadow: 0 18px 38px rgba(24, 39, 60, 0.07);
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 1.45;
+}
+
+.partner-standalone .partner-apply-reassurance b {
+  flex: none;
+  color: #3f8f1c;
+  font-size: 15px;
+  line-height: 1.3;
 }
 
 .partner-standalone .partner-form-shell {
@@ -8065,6 +8100,7 @@ details[open] > p {
   .partner-standalone .partner-split,
   .partner-standalone .partner-pricing-section .partner-split,
   .partner-standalone .partner-apply-grid,
+  .partner-standalone .partner-apply-reassurance,
   .partner-standalone .partner-economics-grid,
   .partner-standalone .partner-included-grid,
   .partner-standalone .partner-field-grid,

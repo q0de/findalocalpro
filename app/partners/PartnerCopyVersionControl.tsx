@@ -64,9 +64,9 @@ const copyVariants: Record<CopyVariant, Record<CopyKey, string>> = {
     pricingBody: 'Founding partners help us tune the service by trade and territory. The first three monthly billing cycles are $500 before the ongoing $750/mo standard rate.',
     priceAnchorLabel: 'Premium service value',
     priceDropLabel: 'founding price drops to',
-    includedHeading: 'One done-for-you local demand service.',
-    applyHeading: 'Apply to protect your trade & territory.',
-    applyBody: 'Apply with no payment. We review your category, service area, and exclusivity first, then email approved applicants a private $500 Stripe checkout link.',
+    includedHeading: 'Monitoring, alerts, calls, and proof of work.',
+    applyHeading: 'Apply for a protected local lead lane.',
+    applyBody: 'We review one provider per trade and territory. If approved, you receive a private checkout link for the $500 founding rate.',
   },
   current: {
     heroTitle: renderHeroTitle(heroTitleCurrent),
@@ -82,9 +82,9 @@ const copyVariants: Record<CopyVariant, Record<CopyKey, string>> = {
     pricingBody: "We're enrolling a first wave of partners by trade and territory. Founding partners help us calibrate the service in their market — so the price reflects that, and it's lower than the standard rate.",
     priceAnchorLabel: 'Full-service pilot value',
     priceDropLabel: 'founding price drops to',
-    includedHeading: 'Everything in one done-for-you service.',
-    applyHeading: 'Claim your trade & territory.',
-    applyBody: 'Apply with no payment. We review availability first, then email approved applicants a private $500 Stripe checkout link.',
+    includedHeading: 'Monitoring, alerts, calls, and proof of work.',
+    applyHeading: 'Apply for a protected local lead lane.',
+    applyBody: 'We review one provider per trade and territory. If approved, you receive a private checkout link for the $500 founding rate.',
   },
 };
 
