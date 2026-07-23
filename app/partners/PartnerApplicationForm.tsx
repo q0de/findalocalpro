@@ -1,6 +1,7 @@
 'use client';
 
 import { FormEvent, useEffect, useRef, useState, type CSSProperties } from 'react';
+import { getPartnerCampaignProperties, trackPlausible } from '@/lib/plausible';
 
 const categories = [
   'Plumbing',
@@ -59,6 +60,13 @@ function formatPhone(value: string) {
   return `(${digits.slice(0, 3)}) ${digits.slice(3, 6)}-${digits.slice(6)}`;
 }
 
+function normalizeOptionalUrl(value: string) {
+  const trimmed = value.trim();
+  if (!trimmed) return '';
+  if (/^[a-z][a-z0-9+.-]*:\/\//i.test(trimmed)) return trimmed;
+  return `https://${trimmed}`;
+}
+
 export function PartnerApplicationForm() {
   const [form, setForm] = useState<PartnerForm>(initialForm);
   const [step, setStep] = useState(0);
@@ -76,6 +84,7 @@ export function PartnerApplicationForm() {
   const previousStep = useRef(step);
   const hasReachedReview = useRef(false);
   const editedReviewSection = useRef<0 | 1 | 2 | null>(null);
+  const hasStarted = useRef(false);
 
   useEffect(() => () => {
     if (transitionTimer.current) window.clearTimeout(transitionTimer.current);
@@ -93,6 +102,12 @@ export function PartnerApplicationForm() {
 
     const scope = hasReachedReview.current ? editedReviewSection.current : 'all';
     hasReachedReview.current = true;
+    if (scope === 'all') {
+      trackPlausible('Partner Application Review Viewed', {
+        ...getPartnerCampaignProperties(),
+        trade: form.category,
+      });
+    }
     editedReviewSection.current = null;
 
     if (scope === null) return;
@@ -114,6 +129,16 @@ export function PartnerApplicationForm() {
 
     return () => window.cancelAnimationFrame(frame);
   }, [submitting, submitted]);
+
+  const trackApplicationStart = () => {
+    if (hasStarted.current) return;
+    hasStarted.current = true;
+    trackPlausible('Partner Application Started', {
+      ...getPartnerCampaignProperties(),
+      step: steps[step].label.toLowerCase(),
+      step_number: step + 1,
+    });
+  };
 
   const setField = <K extends keyof PartnerForm>(key: K, value: PartnerForm[K]) => {
     setError('');
@@ -137,6 +162,12 @@ export function PartnerApplicationForm() {
 
   const advance = () => {
     if (!canAdvance[step] || phase !== 'idle' || step >= steps.length - 1) return;
+    trackPlausible('Partner Application Step Completed', {
+      ...getPartnerCampaignProperties(),
+      step: steps[step].label.toLowerCase(),
+      step_number: step + 1,
+      trade: step >= 2 ? form.category : undefined,
+    });
     setCaptured(capturedSummary());
     setJustCompleted(step);
     setPhase('exit');
@@ -185,19 +216,43 @@ export function PartnerApplicationForm() {
     if (submitting) return;
     setSubmitting(true);
     setError('');
+    trackPlausible('Partner Application Submit Attempt', {
+      ...getPartnerCampaignProperties(),
+      trade: form.category,
+      has_website: Boolean(form.website.trim()),
+      has_google_profile: Boolean(form.googleProfile.trim()),
+    });
 
     try {
+      const normalizedForm = {
+        ...form,
+        website: normalizeOptionalUrl(form.website),
+        googleProfile: normalizeOptionalUrl(form.googleProfile),
+      };
+      setForm(normalizedForm);
       const applicationResponse = await fetch('/api/partners', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(form),
+        body: JSON.stringify(normalizedForm),
       });
       const applicationResult = await applicationResponse.json() as { applicationId?: string; error?: string };
       if (!applicationResponse.ok || !applicationResult.applicationId) {
         throw new Error(applicationResult.error || 'Application could not be saved.');
       }
       setSubmitted(true);
+      trackPlausible('Partner Application Submitted', {
+        ...getPartnerCampaignProperties(),
+        trade: normalizedForm.category,
+        has_website: Boolean(normalizedForm.website),
+        has_google_profile: Boolean(normalizedForm.googleProfile),
+        has_notes: Boolean(normalizedForm.notes.trim()),
+      });
     } catch (submitError) {
+      trackPlausible('Partner Application Error', {
+        ...getPartnerCampaignProperties(),
+        trade: form.category,
+        error_type: submitError instanceof TypeError ? 'network' : 'application_rejected',
+      });
       setError(submitError instanceof Error
         ? submitError.message
         : 'That did not send cleanly. Please try again or email hello@findalocalpro.com.');
@@ -209,7 +264,7 @@ export function PartnerApplicationForm() {
   if (step < steps.length - 1) {
     return (
       <section className="partner-form-shell partner-form-shell--staged">
-        <form className="partner-intake-card" onSubmit={handleStageSubmit}>
+        <form className="partner-intake-card" onSubmit={handleStageSubmit} onFocusCapture={trackApplicationStart}>
           <div className="partner-intake-progress" aria-label={`Step ${step + 1} of ${steps.length - 1}`}>
             <div className="partner-intake-progress-copy"><span>Application</span><b>{step + 1} of {steps.length - 1}</b></div>
             <div className="partner-intake-progress-rail" aria-hidden="true">
@@ -327,7 +382,7 @@ export function PartnerApplicationForm() {
           <p className="partner-intake-helper">Check your inbox after approval. The founding rate is $500 for the first three monthly billing cycles, then $750 per month.</p>
         </div>
       ) : (
-      <form className="partner-application-card partner-application-card--review" onSubmit={handleSubmit}>
+      <form className="partner-application-card partner-application-card--review" onSubmit={handleSubmit} onFocusCapture={trackApplicationStart}>
         <div className="partner-review-heading">
           <div><p className="partner-intake-eyebrow">Application review</p><h3>Ready when you are.</h3><p>Review the details below, add anything helpful, then apply.</p></div>
           <span className="partner-review-ready">✓ All required details captured</span>
@@ -347,7 +402,7 @@ export function PartnerApplicationForm() {
             <label className={reviewFieldClass(1, form.businessName)} style={reviewFieldStyle(1, 2, 0)}><span>Business name</span><input className="lead-input" value={form.businessName} onChange={(event) => setField('businessName', event.target.value)} required /></label>
             <label className={reviewFieldClass(1, form.contactName)} style={reviewFieldStyle(1, 3, 1)}><span>Contact name</span><input className="lead-input" value={form.contactName} onChange={(event) => setField('contactName', event.target.value)} autoComplete="name" required /></label>
           </div>
-          <label className="field-block"><span>Website <small>optional</small></span><input className="lead-input" type="url" value={form.website} onChange={(event) => setField('website', event.target.value)} placeholder="https://" /></label>
+          <label className="field-block"><span>Website <small>optional</small></span><input className="lead-input" type="text" inputMode="url" value={form.website} onBlur={(event) => setField('website', normalizeOptionalUrl(event.target.value))} onChange={(event) => setField('website', event.target.value)} placeholder="grandysux.com" /></label>
         </fieldset>
 
         <fieldset className="partner-review-group">
@@ -363,7 +418,7 @@ export function PartnerApplicationForm() {
           <legend>Helpful context <span>Optional</span></legend>
           <div className="partner-field-grid">
             <label className="field-block"><span>Years in business</span><input className="lead-input" inputMode="numeric" value={form.yearsInBusiness} onChange={(event) => setField('yearsInBusiness', event.target.value.replace(/[^\d+]/g, '').slice(0, 4))} /></label>
-            <label className="field-block"><span>Google Business Profile URL</span><input className="lead-input" type="url" value={form.googleProfile} onChange={(event) => setField('googleProfile', event.target.value)} placeholder="https://" /></label>
+            <label className="field-block"><span>Google Business Profile URL</span><input className="lead-input" type="text" inputMode="url" value={form.googleProfile} onBlur={(event) => setField('googleProfile', normalizeOptionalUrl(event.target.value))} onChange={(event) => setField('googleProfile', event.target.value)} placeholder="maps.google.com/..." /></label>
           </div>
           <label className="field-block"><span>Notes / specialties</span><textarea className="lead-input" rows={4} value={form.notes} onChange={(event) => setField('notes', event.target.value)} /></label>
         </fieldset>

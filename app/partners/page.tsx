@@ -5,6 +5,7 @@ import Link from 'next/link';
 import { PartnerApplicationForm } from './PartnerApplicationForm';
 import { PartnerDesignReviewProvider } from './PartnerDesignReview';
 import { PartnerHeroTitle } from './PartnerHeroTitle';
+import { PartnerPageTracking } from './PartnerPageTracking';
 import { PartnerHeroVisual } from './PartnerHeroVisual';
 import { PartnerHowStage } from './PartnerHowStage';
 import { PartnerPriceCounter } from './PartnerPriceCounter';
@@ -219,6 +220,7 @@ export default async function PartnersPage({ searchParams }: PartnersPageProps) 
     <PartnerDesignReviewProvider>
       <div className="partner-page partner-standalone">
       <PartnerScrollAnimator />
+      <PartnerPageTracking checkoutStatus={checkoutStatus} checkoutConfirmed={checkoutConfirmed} />
       <header className="partner-site-nav">
         <Link href="/" className="partner-brand">
           <span>F</span>
@@ -231,7 +233,7 @@ export default async function PartnersPage({ searchParams }: PartnersPageProps) 
           <a href="#how">How it works</a>
           <a href="#report">Weekly report</a>
           <a href="#pricing">Pricing</a>
-          <a href="#apply">Apply</a>
+          <a href="#apply" data-partner-cta data-partner-placement="nav_apply">Apply</a>
         </nav>
       </header>
 
@@ -276,7 +278,7 @@ export default async function PartnersPage({ searchParams }: PartnersPageProps) 
                   We monitor local conversations, review signals, and tracked calls for your trade and territory — then send you the opportunities, alerts, and weekly reports that help turn local demand into booked work.
                 </p>
                 <div className="partner-hero-actions">
-                  <a href="#apply" className="partner-primary-button"><span data-copy-key="primaryCta">Apply for a Founding Partner Spot</span> <span>→</span></a>
+                  <a href="#apply" className="partner-primary-button" data-partner-cta data-partner-placement="hero_primary"><span data-copy-key="primaryCta">Apply for a Founding Partner Spot</span> <span>→</span></a>
                   <a href="#report" className="partner-secondary-button" data-copy-key="secondaryCta">See the Weekly Report</a>
                 </div>
                 <div className="partner-trust-row">
@@ -467,7 +469,7 @@ export default async function PartnersPage({ searchParams }: PartnersPageProps) 
                     <Image src="/partners/pricing-shield.png" alt="" aria-hidden="true" width={256} height={256} sizes="34px" loading="lazy" />
                     <p>Then <strong>$750 / mo</strong> standard</p>
                   </div>
-                  <a href="#apply" className="partner-primary-button"><span className="partner-pricing-cta-icon" aria-hidden="true">›</span><span data-copy-key="primaryCta">Apply for a Founding Partner Spot</span></a>
+                  <a href="#apply" className="partner-primary-button" data-partner-cta data-partner-placement="pricing_primary"><span className="partner-pricing-cta-icon" aria-hidden="true">›</span><span data-copy-key="primaryCta">Apply for a Founding Partner Spot</span></a>
                   <p className="partner-pricing-note">
                     <Image src="/partners/pricing-no-payment.png" alt="" aria-hidden="true" width={256} height={256} sizes="32px" loading="lazy" />
                     No payment with your application. Approved partners receive a private Stripe checkout link for the $500 founding rate.
@@ -478,38 +480,43 @@ export default async function PartnersPage({ searchParams }: PartnersPageProps) 
           </div>
         </section>
 
-        <section className="partner-included">
+        <section id="apply" className="partner-section partner-apply-section">
+          <div className="partner-shell partner-apply-grid">
+            <div>
+              <span className="partner-section-label">Apply</span>
+              <h2 data-copy-key="applyHeading">Apply for a protected local lead lane.</h2>
+              <p data-copy-key="applyBody">
+                We review one provider per trade and territory. If approved, you receive a private checkout link for the $500 founding rate.
+              </p>
+              <ol className="partner-apply-steps">
+                <li><b>1</b><span><strong>Apply</strong> — tell us your trade, business, and service area.</span></li>
+                <li><b>2</b><span><strong>Review</strong> — we check fit, reputation, and territory availability.</span></li>
+                <li><b>3</b><span><strong>Approve</strong> — approved applicants receive a private Stripe checkout link.</span></li>
+              </ol>
+            </div>
+            <PartnerApplicationForm />
+            <div className="partner-apply-reassurance" aria-label="What happens after applying">
+              <span><b>✓</b> No payment today</span>
+              <span><b>✓</b> One approved partner per trade and territory where available</span>
+              <span><b>✓</b> If approved, we help drive local homeowner demand with alerts, calls, and weekly proof</span>
+            </div>
+          </div>
+        </section>
+
+        <section className="partner-included partner-included--supporting">
           <div className="partner-shell">
             <div className="partner-section-heading is-light">
-              <span>What's included</span>
-              <h2 data-copy-key="includedHeading">Everything in one done-for-you service.</h2>
+              <span>What approved partners get</span>
+              <h2 data-copy-key="includedHeading">Monitoring, alerts, calls, and proof of work.</h2>
             </div>
             <div className="partner-included-grid">
-              {included.map(([title, body]) => (
+              {included.slice(0, 6).map(([title, body]) => (
                 <article key={title}>
                   <h3>{title}</h3>
                   <p>{body}</p>
                 </article>
               ))}
             </div>
-          </div>
-        </section>
-
-        <section id="apply" className="partner-section partner-apply-section">
-          <div className="partner-shell partner-apply-grid">
-            <div>
-              <span className="partner-section-label">Apply</span>
-              <h2 data-copy-key="applyHeading">Claim your trade & territory.</h2>
-              <p data-copy-key="applyBody">
-                Apply for your trade and territory with no payment. We review availability first, and approved applicants receive a private $500 Stripe checkout link by email.
-              </p>
-              <ol className="partner-apply-steps">
-                <li><b>1</b><span><strong>Apply</strong> — tell us your trade and service area.</span></li>
-                <li><b>2</b><span><strong>Review</strong> — we confirm trade, territory, and category availability before any charge.</span></li>
-                <li><b>3</b><span><strong>Checkout & onboard</strong> — approved partners receive a private Stripe checkout link, then onboarding begins.</span></li>
-              </ol>
-            </div>
-            <PartnerApplicationForm />
           </div>
         </section>
 
@@ -534,7 +541,7 @@ export default async function PartnersPage({ searchParams }: PartnersPageProps) 
           <div className="partner-shell">
             <h2>A founding spot in your territory won't stay open long.</h2>
             <p>Apply with no payment. If your trade and territory are approved, we email your private $500 Stripe checkout link.</p>
-            <a href="#apply" className="partner-primary-button"><span data-copy-key="primaryCta">Apply for a Founding Partner Spot</span> <span>→</span></a>
+            <a href="#apply" className="partner-primary-button" data-partner-cta data-partner-placement="closing_primary"><span data-copy-key="primaryCta">Apply for a Founding Partner Spot</span> <span>→</span></a>
           </div>
         </section>
       </main>

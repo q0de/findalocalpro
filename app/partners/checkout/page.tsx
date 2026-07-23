@@ -50,7 +50,12 @@ export default async function PartnerCheckoutPage({ searchParams }: PartnerCheck
         {params?.checkout === 'cancelled' && (
           <p className="partner-review-warning">Checkout was cancelled and no payment was taken. You can reopen it when ready.</p>
         )}
-        <PartnerCheckoutButton label="Continue to secure Stripe checkout — $500" payload={{ token }} />
+        <PartnerCheckoutButton
+          label="Continue to secure Stripe checkout — $500"
+          payload={{ token }}
+          checkoutStatus={params?.checkout}
+          trade={application.category}
+        />
         <Link href="/partners">Return without paying</Link>
       </section>
     </main>
