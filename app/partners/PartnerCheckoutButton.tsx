@@ -1,6 +1,7 @@
 'use client';
 
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
+import { getPartnerCampaignProperties, trackPlausible, trackPlausibleBeforeNavigation } from '@/lib/plausible';
 
 type PartnerCheckoutButtonProps = {
   className?: string;
@@ -8,21 +9,40 @@ type PartnerCheckoutButtonProps = {
   payload?: {
     token?: string;
   };
+  checkoutStatus?: string;
+  trade?: string;
 };
 
 export function PartnerCheckoutButton({
   className = 'form-submit partner-checkout-button',
   label = 'Start Stripe checkout',
   payload = {},
+  checkoutStatus,
+  trade,
 }: PartnerCheckoutButtonProps) {
   const [status, setStatus] = useState<'idle' | 'loading'>('idle');
   const [error, setError] = useState('');
+  const viewed = useRef(false);
+
+  useEffect(() => {
+    if (viewed.current) return;
+    viewed.current = true;
+    trackPlausible('Partner Checkout Viewed', {
+      ...getPartnerCampaignProperties(),
+      checkout_status: checkoutStatus === 'cancelled' ? 'returned_cancelled' : 'ready',
+      trade,
+    });
+  }, [checkoutStatus, trade]);
 
   const startCheckout = async () => {
     if (status === 'loading') return;
 
     setStatus('loading');
     setError('');
+    trackPlausible('Partner Checkout Clicked', {
+      ...getPartnerCampaignProperties(),
+      trade,
+    });
 
     try {
       const response = await fetch('/api/checkout/partner', {
@@ -36,8 +56,17 @@ export function PartnerCheckoutButton({
         throw new Error(data.error || 'Checkout is not available yet.');
       }
 
+      await trackPlausibleBeforeNavigation('Partner Checkout Started', {
+        ...getPartnerCampaignProperties(),
+        trade,
+      });
       window.location.assign(data.url);
     } catch (checkoutError) {
+      trackPlausible('Partner Checkout Error', {
+        ...getPartnerCampaignProperties(),
+        trade,
+        error_type: checkoutError instanceof TypeError ? 'network' : 'checkout_unavailable',
+      });
       setError(checkoutError instanceof Error ? checkoutError.message : 'Checkout is not available yet.');
       setStatus('idle');
     }

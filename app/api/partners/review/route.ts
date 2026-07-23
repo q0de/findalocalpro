@@ -45,7 +45,13 @@ export async function POST(request: Request) {
       try {
         const checkoutToken = await issuePartnerCheckoutToken(approved.id);
         const baseUrl = (process.env.NEXT_PUBLIC_SITE_URL || process.env.NEXT_PUBLIC_APP_URL || new URL(request.url).origin).replace(/\/$/, '');
-        await sendApprovedPartnerCheckout(approved, `${baseUrl}/partners/checkout?token=${encodeURIComponent(checkoutToken)}`);
+        const checkoutUrl = new URL('/partners/checkout', baseUrl);
+        checkoutUrl.searchParams.set('token', checkoutToken);
+        checkoutUrl.searchParams.set('utm_source', 'partner_approval');
+        checkoutUrl.searchParams.set('utm_medium', 'email');
+        checkoutUrl.searchParams.set('utm_campaign', 'partner_activation');
+        checkoutUrl.searchParams.set('utm_content', 'checkout_link');
+        await sendApprovedPartnerCheckout(approved, checkoutUrl.toString());
         await updatePartnerApplication(approved.id, {
           approval_email_sent_at: new Date().toISOString(),
           failure_reason: null,

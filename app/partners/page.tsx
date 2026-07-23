@@ -5,6 +5,7 @@ import Link from 'next/link';
 import { PartnerApplicationForm } from './PartnerApplicationForm';
 import { PartnerDesignReviewProvider } from './PartnerDesignReview';
 import { PartnerHeroTitle } from './PartnerHeroTitle';
+import { PartnerPageTracking } from './PartnerPageTracking';
 import { PartnerHeroVisual } from './PartnerHeroVisual';
 import { PartnerHowStage } from './PartnerHowStage';
 import { PartnerPriceCounter } from './PartnerPriceCounter';
@@ -212,6 +213,7 @@ export default async function PartnersPage({ searchParams }: PartnersPageProps) 
     <PartnerDesignReviewProvider>
       <div className="partner-page partner-standalone">
       <PartnerScrollAnimator />
+      <PartnerPageTracking checkoutStatus={checkoutStatus} checkoutConfirmed={checkoutConfirmed} />
       <header className="partner-site-nav">
         <Link href="/" className="partner-brand">
           <span>F</span>
@@ -224,7 +226,7 @@ export default async function PartnersPage({ searchParams }: PartnersPageProps) 
           <a href="#how">How it works</a>
           <a href="#report">Weekly report</a>
           <a href="#pricing">Pricing</a>
-          <a href="#apply">Apply</a>
+          <a href="#apply" data-partner-cta data-partner-placement="nav_apply">Apply</a>
         </nav>
       </header>
 
@@ -269,7 +271,7 @@ export default async function PartnersPage({ searchParams }: PartnersPageProps) 
                   We monitor local conversations, review signals, and tracked calls for your trade and territory — then send you the opportunities, alerts, and weekly reports that help turn local demand into booked work.
                 </p>
                 <div className="partner-hero-actions">
-                  <a href="#apply" className="partner-primary-button"><span data-copy-key="primaryCta">Apply for a Founding Partner Spot</span> <span>→</span></a>
+                  <a href="#apply" className="partner-primary-button" data-partner-cta data-partner-placement="hero_primary"><span data-copy-key="primaryCta">Apply for a Founding Partner Spot</span> <span>→</span></a>
                   <a href="#report" className="partner-secondary-button" data-copy-key="secondaryCta">See the Weekly Report</a>
                 </div>
                 <div className="partner-trust-row">
@@ -457,7 +459,7 @@ export default async function PartnersPage({ searchParams }: PartnersPageProps) 
                   </div>
                   <p className="partner-pricing-duration"><span aria-hidden="true">✓</span>first 3 monthly billing cycles</p>
                   <div className="partner-pricing-standard"><img src="/partners/pricing-shield.png" alt="" aria-hidden="true" /><p>Then <strong>$750 / mo</strong> standard</p></div>
-                  <a href="#apply" className="partner-primary-button"><span className="partner-pricing-cta-icon" aria-hidden="true">›</span><span data-copy-key="primaryCta">Apply for a Founding Partner Spot</span></a>
+                  <a href="#apply" className="partner-primary-button" data-partner-cta data-partner-placement="pricing_primary"><span className="partner-pricing-cta-icon" aria-hidden="true">›</span><span data-copy-key="primaryCta">Apply for a Founding Partner Spot</span></a>
                   <p className="partner-pricing-note"><img src="/partners/pricing-no-payment.png" alt="" aria-hidden="true" />No payment with your application. Approved partners receive a private Stripe checkout link for the $500 founding rate.</p>
                 </div>
               </aside>
@@ -526,7 +528,7 @@ export default async function PartnersPage({ searchParams }: PartnersPageProps) 
           <div className="partner-shell">
             <h2>A founding spot in your territory won't stay open long.</h2>
             <p>Apply with no payment. If your trade and territory are approved, we email your private $500 Stripe checkout link.</p>
-            <a href="#apply" className="partner-primary-button"><span data-copy-key="primaryCta">Apply for a Founding Partner Spot</span> <span>→</span></a>
+            <a href="#apply" className="partner-primary-button" data-partner-cta data-partner-placement="closing_primary"><span data-copy-key="primaryCta">Apply for a Founding Partner Spot</span> <span>→</span></a>
           </div>
         </section>
       </main>
